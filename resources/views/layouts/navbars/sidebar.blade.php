@@ -194,7 +194,7 @@
                 <!-- Hospital Pharmacy routes start  -->
                 @can('isHPharmacy')
                 <li class="nav-item">
-                    <a href="">
+                    <a href="{{route('hospital-registration-form')}}">
                         <i class="nav-icon i-Notepad"></i>
                         <span class="item-name">Registration</span>
                     </a>

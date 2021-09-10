@@ -1,54 +1,40 @@
 @extends('layouts.app')
 
 @section('content')
-@include('layouts.navbars.breadcrumb', ['page' => 'Registration', 'route' => 'hospital-registration'])
+@include('layouts.navbars.breadcrumb', ['page' => 'Registration', 'route' => 'hospital-registration-form'])
 <div class="row">
     <div class="col-lg-12 col-md-12">
         <div class="card-body">
-            <form method="POST" action="{{ route('meptp-application-submit') }}" enctype="multipart/form-data" novalidate>
+            <form method="POST" action="{{ route('hospital-registration-submit') }}" enctype="multipart/form-data" novalidate>
             @csrf
-                <h4>Vendor Details</h4>
                 <div class="row">
-                    <div class="form-group col-md-6">
-                        <img style="width: 25%;" src="{{Auth::user()->photo ? asset('images/' . Auth::user()->photo) : asset('admin/dist-assets/images/avatar.jpg') }}" alt="">
-                    </div>
-                    <div class="form-group col-md-6">
-                        <h3>Batch Details: {{app('App\Http\Services\BasicInformation')->activeBatch()->batch_no . '/' . app('App\Http\Services\BasicInformation')->activeBatch()->year}}<h3>
+                    <div class="form-group col-md-12">
+                        <h3>Registration Year: {{date('Y')}}<h3>
                     </div>
 
-                    <div class="col-md-4 form-group mb-3">
-                        <label for="firstName1">First name</label>
-                        <input name="firstname" class="form-control @error('firstname') is-invalid @enderror"
-                            id="firstName1" type="text" placeholder="Enter your first name"
-                            value="{{Auth::user()->firstname}}" readonly />
-                        @error('firstname')
+                    <div class="col-md-6 form-group mb-3">
+                        <label for="hospital_name1">Hospital name</label>
+                        <input name="hospital_name" class="form-control @error('hospital_name') is-invalid @enderror"
+                            id="hospital_name1" type="text" placeholder="Enter your first name"
+                            value="{{Auth::user()->hospital_name}}" readonly />
+                        @error('hospital_name')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
                         </span>
                         @enderror
                     </div>
-                    <div class="col-md-4 form-group mb-3">
-                        <label for="middleName1">Last name</label>
-                        <input name="lastname" class="form-control @error('lastname') is-invalid @enderror"
-                            id="middleName1" type="text" placeholder="Enter your middle name"
-                            value="{{Auth::user()->lastname}}" readonly />
-                        @error('lastname')
+                    <div class="col-md-6 form-group mb-3">
+                        <label for="hospital_address1">Hospital name</label>
+                        <input name="hospital_address" class="form-control @error('hospital_address') is-invalid @enderror"
+                            id="hospital_address1" type="text" placeholder="Enter your middle name"
+                            value="{{Auth::user()->hospital_address}}" readonly />
+                        @error('hospital_address')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
                         </span>
                         @enderror
                     </div>
-                    <div class="col-md-4 form-group mb-3">
-                        <label for="haddress">Address:</label>
-                        <input name="address" class="form-control @error('address') is-invalid @enderror"
-                            value="{{Auth::user()->address}}" id="address" placeholder="Address"  readonly />
-                        @error('address')
-                        <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                        @enderror
-                    </div>
-                    <div class="col-md-4 form-group mb-3">
+                    <div class="col-md-6 form-group mb-3">
                         <label for="huser_state">State:</label>
                         <input name="user_state" class="form-control @error('user_state') is-invalid @enderror"
                             value="{{Auth::user()->user_state->name}}" id="user_state" placeholder="user_state"  readonly />
@@ -58,7 +44,7 @@
                         </span>
                         @enderror
                     </div>
-                    <div class="col-md-4 form-group mb-3">
+                    <div class="col-md-6 form-group mb-3">
                         <label for="huser_lga">LGA:</label>
                         <input name="user_lga" class="form-control @error('user_lga') is-invalid @enderror"
                             value="{{Auth::user()->user_lga->name}}" id="user_lga" placeholder="user_lga"  readonly />
@@ -71,20 +57,81 @@
                 </div>
 
                 <div class="custom-separator"></div>
-                <h4>Documents Upload</h4>
+                <h4>Select Appropriate Bed Capacity</h4>
+                <div class="table-responsive">
+                    <table id="" class="display table table-striped table-bordered" style="width:100%">
+                        <thead>
+                            <tr>
+                                <th scope="col">&nbsp;</th>
+                                <th scope="col">Bed Capacity</th>
+                                <!--th scope="col">New</th>
+                                <th scope="col">Renewal</th-->
+                                <th scope="col">Registration Fee</th>
+                                <th scope="col">Inspection Fee</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                                                                            <tr>
+                                <td><input name="bed_capacity" type="radio" value="1"></td>
+                                <td>&lt; 10 beds</td>
+                                <td>  NGN 10,000.00 </td>
+                                <td>  NGN 10,000.00 </td>
+                            </tr>
+                                                                            <tr>
+                                <td><input name="bed_capacity" type="radio" value="2"></td>
+                                <td>11 &lt; 29 beds</td>
+                                <td>  NGN 20,000.00 </td>
+                                <td>  NGN 15,000.00 </td>
+                            </tr>
+                                                                            <tr>
+                                <td><input name="bed_capacity" type="radio" value="3"></td>
+                                <td>30 &lt; 59 beds</td>
+                                <td>  NGN 30,000.00 </td>
+                                <td>  NGN 20,000.00 </td>
+                            </tr>
+                                                                            <tr>
+                                <td><input name="bed_capacity" type="radio" value="4"></td>
+                                <td>60 &lt; 99 beds</td>
+                                <td>  NGN 40,000.00 </td>
+                                <td>  NGN 30,000.00 </td>
+                            </tr>
+                                                                            <tr>
+                                <td><input name="bed_capacity" type="radio" value="5"></td>
+                                <td>100 &lt; 199 beds</td>
+                                <td>  NGN 50,000.00 </td>
+                                <td>  NGN 40,000.00 </td>
+                            </tr>
+                                                                            <tr>
+                                <td><input name="bed_capacity" type="radio" value="6"></td>
+                                <td>200 &lt; 400 beds</td>
+                                <td>  NGN 60,000.00 </td>
+                                <td>  NGN 100,000.00 </td>
+                            </tr>
+                                                                            <tr>
+                                <td><input name="bed_capacity" type="radio" value="7"></td>
+                                <td>500 &lt; above beds</td>
+                                <td>  NGN 100,000.00 </td>
+                                <td>  NGN 100,000.00 </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <h6>Every Retention fee must be before January 31st of each year.</h6>
 
+
+                <div class="custom-separator"></div>
 
                 <div class="custom-separator"></div>
                 <div class="form-row">
                     <div class="form-group col-md-6">
-                        <label for="picker1">Birth Certificate or Declaration of Age:</label>
+                        <label for="picker1">Upload Passport Photo of Supritendent Pharmacist:</label>
                         <div class="custom-file mb-3">
-                            <input name="birth_certificate" type="file" name="color_passportsize" class="custom-file-input
-                            @error('birth_certificate') is-invalid @enderror" accept="application/pdf"
+                            <input name="passport" type="file" name="color_passportsize" class="custom-file-input
+                            @error('passport') is-invalid @enderror" accept="application/pdf"
                                 id="inputGroupFile01">
                             <label class="custom-file-label " for="inputGroupFile01"
                                 aria-describedby="inputGroupFileAddon02" id="inputGroupFile01previewLabel">Choose file</label>
-                            @error('birth_certificate')
+                            @error('passport')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
                             </span>
@@ -95,238 +142,80 @@
                         <img id="inputGroupFile01preview" src="" alt="" class="w-100">
                     </div>
                 </div>
+                
                 <div class="form-row">
-                    <div class="form-group col-md-6">
-                        <label for="picker1">Educational Credentials:</label>
-                        <div class="custom-file mb-3">
-                            <input name="educational_certificate" type="file" name="color_passportsize" class="custom-file-input
-                            @error('educational_certificate') is-invalid @enderror" accept="application/pdf"
-                                id="inputGroupFile02">
-                            <label class="custom-file-label " for="inputGroupFile02"
-                                aria-describedby="inputGroupFileAddon02" id="inputGroupFile02previewLabel">Choose file</label>
-                            @error('educational_certificate')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                            @enderror
-                        </div>
-                    </div>
-                    <div class="form-group col-md-2 d-flex align-items-center">
-                        <img id="inputGroupFile02preview" src="" alt="" class="w-100">
-                    </div>
-                </div>
-
-
-                <div class="form-row">
-                    <div class="form-group col-md-6">
-                        <label for="picker1">Health Related Academic Training:</label>
-                        <div class="custom-file mb-3">
-                            <input name="academic_certificate" type="file" name="color_passportsize" class="custom-file-input
-                            @error('academic_certificate') is-invalid @enderror" accept="application/pdf"
-                                id="inputGroupFile03">
-                            <label class="custom-file-label " for="inputGroupFile03"
-                                aria-describedby="inputGroupFileAddon02" id="inputGroupFile03previewLabel">Choose file</label>
-                            @error('academic_certificate')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                            @enderror
-                        </div>
-                    </div>
-                    <div class="form-group col-md-2 d-flex align-items-center">
-                        <img id="inputGroupFile03preview" src="" alt="" class="w-100">
-                    </div>
-                </div>
-                <div class="custom-separator"></div>
-                <h4>Patent Medicine Vendor Shop</h4>
-                <div class="form-row">
-                    <div class="form-group col-md-6">
-                        <label for="inputEmail3" class="ul-form__label">Shop Name:</label>
-                        <input name="shop_name" class="form-control @error('shop_name') is-invalid @enderror"
-                        value="{{ old('shop_name') }}"
-                        id="shop_name" placeholder="Enter shop name" />
-                        @error('shop_name')
-                        <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                        @enderror
-                    </div>
-                    <div class="form-group col-md-3">
-                        <label for="inputEmail3" class="ul-form__label">Shop Phone:</label>
-                        <input name="shop_phone" class="form-control @error('shop_phone') is-invalid @enderror"
-                        value="{{ old('shop_phone') }}"
-                        id="shop_phone" placeholder="Enter shop phone" />
-                        @error('shop_phone')
-                        <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                        @enderror
-                    </div>
-
-                    <div class="form-group col-md-3">
-                        <label for="inputEmail3" class="ul-form__label">Shop Email:</label>
-                        <input type="email" name="shop_email" class="form-control @error('shop_email') is-invalid @enderror"
-                        value="{{ old('shop_email') }}"
-                        id="shop_email" placeholder="Enter shop email" />
-                        @error('shop_email')
-                        <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                        @enderror
-                    </div>
-                    <div class="form-group col-md-3">
-                        <label for="inputEmail3" class="ul-form__label">Shop Address:</label>
-                        <input name="shop_address" class="form-control @error('shop_address') is-invalid @enderror"
-                        value="{{ old('shop_address') }}"
-                        id="shop_address" placeholder="Enter shop address" />
-                        @error('shop_address')
-                        <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                        @enderror
-                    </div>
-
-                    <div class="form-group col-md-3">
-                        <label for="inputEmail3" class="ul-form__label">Town/City:</label>
-                        <input name="city" class="form-control @error('city') is-invalid @enderror"
-                        value="{{ old('city') }}"
-                        id="city" placeholder="Enter Town/City" />
-                        @error('city')
-                        <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                        @enderror
-                    </div>
-
-                    <!-- <div class="form-group col-md-3">
-                        <label for="inputEmail3" class="ul-form__label">State:</label>
-                        @php
-                        $states = app('App\Http\Services\BasicInformation')->states();
-                        @endphp
-                        @foreach($states as $state)
-                            @if(old('state') == $state->id)
-                            @php $old_state = $state; @endphp
-                            @endif
-                        @endforeach
-                        <select id="stateField" required name="state"
-                            class="form-control @error('state') is-invalid @enderror">
-                            @if(isset($old_state))
-                            <option seleted hidden value="{{ $old_state->id }}">{{ $old_state->name }}</option>
-                            @endif
-                            <option {{ !isset($old_state) ? 'seleted' : '' }} hidden value="">Select State</option>
-                            @foreach($states as $state)
-                            <option value="{{$state->id}}">{{$state->name}}</option>
-                            @endforeach
-                        </select>
-                        @error('state')
-                        <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                        @enderror
-                    </div> -->
-                    
-
-                    <!-- @if(isset($old_state))
-                    <div class="form-group col-md-3">
-                        <label for="lgaField" class="ul-form__label">LGA: </label>
-                        @php
-                        $lgas = app('App\Http\Services\BasicInformation')->lgas();
-                        @endphp
-                        @foreach($lgas as $lga)
-                            @if(old('lga') == $lga->id)
-                            @php $old_lga = $lga; @endphp
-                            @endif
-                        @endforeach
-                        <select id="lgaField" required name="lga"
-                            class="form-control @error('lga') is-invalid @enderror">
-                            @if(isset($old_lga))
-                            <option seleted hidden value="{{ $old_lga->id }}">{{ $old_lga->name }}</option>
-                            @endif
-                            <option {{ !isset($old_lga) ? 'seleted' : '' }} hidden value="">Select Lga</option>
-                            @foreach($lgas as $lga)
-                            @if($old_state->id == $lga->state_id)
-                            <option value="{{$lga->id}}">{{$lga->name}}</option>
-                            @endif
-                            @endforeach
-                        </select>
-                        @error('lga')
-                        <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                        @enderror
-                    </div>
-                    @else
-                    <div class="form-group col-md-3">
-                        <label for="lgaField" class="ul-form__label">LGA: </label>
-                        @php
-                        $lgas = app('App\Http\Services\BasicInformation')->lgas();
-                        @endphp
-                        <select {{old('lga') ? '' : 'disabled'}} id="lgaField" required name="lga"
-                            class="form-control @error('lga') is-invalid @enderror">
-                            <option selected value="">Select LGA</option>
-                            @foreach($lgas as $lga)
-                                @if(old('lga') == $lga->id)
-                                <option {{ old('lga') ? 'seleted' : '' }} hidden value="{{ $lga->id }}">{{ $lga->name }}</option>
-                                @endif
-                            <option value="{{$lga->id}}">{{$lga->name}}</option>
-                            @endforeach
-                        </select>
-                        @error('lga')
-                        <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                        @enderror
-                    </div>
-                    @endif -->
-
-                    <div class="col-md-3 form-group d-flex flex-column justify-content-between">
-                        <label for="huser_state">State:</label>
-                        <input name="state" class="form-control @error('user_state') is-invalid @enderror"
-                            value="{{Auth::user()->user_state->name}}" id="user_state" placeholder="user_state"  readonly />
-                        @error('user_state')
-                        <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                        @enderror
-                    </div>
-                    <div class="col-md-3 form-group d-flex flex-column justify-content-between">
-                        <label for="huser_lga">LGA:</label>
-                        <input name="lga" class="form-control @error('user_lga') is-invalid @enderror"
-                            value="{{Auth::user()->user_lga->name}}" id="user_lga" placeholder="user_lga"  readonly />
-                        @error('user_lga')
-                        <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                        @enderror
-                    </div>
-
-
                     <div class="form-group col-md-4">
-                        <label for="inputEmail3" class="ul-form__label">Are you registered? </label>
-                        <select id="is_registeredField" required name="is_registered"
-                            class="form-control @error('is_registered') is-invalid @enderror">
-                            <option selected hidden value="">Select</option>
-                            @if(old('is_registered') == 'yes')
-                            <option selected hidden value="yes">Yes</option>
-                            @elseif(old('is_registered') == 'no')
-                            <option selected hidden value="no">No</option>
-                            @endif
-                            <option value="yes">Yes</option>
-                            <option value="no">No</option>
-                        </select>
-                        @error('is_registered')
+                        <label for="inputEmail3" class="ul-form__label">Supritendent Pharmacist Name:</label>
+                        <input name="pharmacist_name" class="form-control @error('pharmacist_name') is-invalid @enderror"
+                        value="{{ old('pharmacist_name') }}"
+                        id="pharmacist_name" placeholder="Enter Supritendent Pharmacist Name" />
+                        @error('pharmacist_name')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
                         </span>
                         @enderror
                     </div>
-
-                    <div id="ppmvl_noField" style="{{old('is_registered') == 'yes' ? 'display: block;' : 'display: none;'}}" class="form-group col-md-4">
-                        <label for="inputEmail3" class="ul-form__label">PPMVL Number :</label>
-                        <input name="ppmvl_no" class="form-control @error('ppmvl_no') is-invalid @enderror"
-                        value="{{old('ppmvl_no')}}"
-                        id="ppmvl_no" placeholder="Enter Town/ppmvl_no" />
-                        @error('ppmvl_no')
+                    <div class="form-group col-md-4">
+                        <label for="inputEmail3" class="ul-form__label">Supritendent Pharmacist Email:</label>
+                        <input type="email" name="pharmacist_email" class="form-control @error('pharmacist_email') is-invalid @enderror"
+                        value="{{ old('pharmacist_email') }}"
+                        id="pharmacist_email" placeholder="Enter Pharmacist Email" />
+                        @error('pharmacist_email')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                        @enderror
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label for="inputEmail3" class="ul-form__label">Supritendent Pharmacist Phone:</label>
+                        <input name="pharmacist_phone" class="form-control @error('pharmacist_phone') is-invalid @enderror"
+                        value="{{ old('pharmacist_phone') }}"
+                        id="pharmacist_phone" placeholder="Enter Supritendent Pharmacist Phone" />
+                        @error('pharmacist_phone')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                        @enderror
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label for="inputEmail3" class="ul-form__label">Year of Qualification.:</label>
+                        <select class="form-control @error('qualification_year') is-invalid @enderror" name="qualification_year">
+                            <option selected="selected" value="">Select</option><option value="1950">1950</option><option value="1951">1951</option><option value="1952">1952</option><option value="1953">1953</option><option value="1954">1954</option><option value="1955">1955</option><option value="1956">1956</option><option value="1957">1957</option><option value="1958">1958</option><option value="1959">1959</option><option value="1960">1960</option><option value="1961">1961</option><option value="1962">1962</option><option value="1963">1963</option><option value="1964">1964</option><option value="1965">1965</option><option value="1966">1966</option><option value="1967">1967</option><option value="1968">1968</option><option value="1969">1969</option><option value="1970">1970</option><option value="1971">1971</option><option value="1972">1972</option><option value="1973">1973</option><option value="1974">1974</option><option value="1975">1975</option><option value="1976">1976</option><option value="1977">1977</option><option value="1978">1978</option><option value="1979">1979</option><option value="1980">1980</option><option value="1981">1981</option><option value="1982">1982</option><option value="1983">1983</option><option value="1984">1984</option><option value="1985">1985</option><option value="1986">1986</option><option value="1987">1987</option><option value="1988">1988</option><option value="1989">1989</option><option value="1990">1990</option><option value="1991">1991</option><option value="1992">1992</option><option value="1993">1993</option><option value="1994">1994</option><option value="1995">1995</option><option value="1996">1996</option><option value="1997">1997</option><option value="1998">1998</option><option value="1999">1999</option><option value="2000">2000</option><option value="2001">2001</option><option value="2002">2002</option><option value="2003">2003</option><option value="2004">2004</option><option value="2005">2005</option><option value="2006">2006</option><option value="2007">2007</option><option value="2008">2008</option><option value="2009">2009</option><option value="2010">2010</option><option value="2011">2011</option><option value="2012">2012</option><option value="2013">2013</option><option value="2014">2014</option><option value="2015">2015</option><option value="2016">2016</option><option value="2017">2017</option><option value="2018">2018</option><option value="2019">2019</option><option value="2020">2020</option><option value="2021">2021</option>
+                        </select>
+                        @error('qualification_year')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label for="inputEmail3" class="ul-form__label">Registration No.:</label>
+                        <input name="registration_no" class="form-control @error('registration_no') is-invalid @enderror"
+                        value="{{ old('registration_no') }}"
+                        id="registration_no" placeholder="Enter Registration No" />
+                        @error('registration_no')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                        @enderror
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label for="inputEmail3" class="ul-form__label">Last Year Annual License No.:</label>
+                        <input name="last_year_licence_no" class="form-control @error('last_year_licence_no') is-invalid @enderror"
+                        value="{{ old('last_year_licence_no') }}"
+                        id="last_year_licence_no" placeholder="Enter Last Year Annual License No" />
+                        @error('last_year_licence_no')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                        @enderror
+                    </div>
+                    <div class="form-group col-md-12">
+                        <label for="inputEmail3" class="ul-form__label">Residential Address:</label>
+                        <input name="residential_address" class="form-control @error('residential_address') is-invalid @enderror"
+                        value="{{ old('residential_address') }}"
+                        id="residential_address" placeholder="Enter Last Year Annual License No" />
+                        @error('residential_address')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
                         </span>
@@ -334,47 +223,11 @@
                     </div>
                 </div>
 
-
-                <div class="custom-separator"></div>
-
-
-                <h4>Training Centre</h4>
-                <div class="form-row">
-                    <div class="form-group col-md-6">
-                        <label for="inputEmail3" class="ul-form__label">Preferred Training Centre</label>
-                        @php
-                        $schools = app('App\Http\Services\BasicInformation')->schools();
-                        @endphp
-                        @foreach($schools as $school)
-                            @if(old('school') == $school->id)
-                            @php $old_school = $school; @endphp
-                            @endif
-                        @endforeach
-                        <select id="schoolField" required name="school"
-                            class="form-control @error('school') is-invalid @enderror">
-                            @if(isset($old_school))
-                            <option seleted hidden value="{{ $old_school->id }}">{{ $old_school->name }}</option>
-                            @endif
-                            <option {{ !isset($old_school) ? 'seleted' : '' }} hidden value="">Select School</option>
-                            @foreach($schools as $school)
-                            <option value="{{$school->id}}">{{$school->name}}</option>
-                            @endforeach
-                        </select>
-                        @error('school')
-                        <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                        @enderror
-                    </div>
-                </div>
                 <div class="card-footer">
                     <div class="mc-footer">
                         <div class="row">
                             <div class="col-lg-12">
-                                <button type="submit" class="btn  btn-primary m-1" id="save" name="save">Submit MEPTP
-                                    Application</button>
-                                <!-- <button type="button" onclick="makePayment()" class="btn  btn-primary m-1" id="save" name="save">Submit MEPTP
-                                Application</button> -->
+                                <button type="submit" class="btn  btn-primary m-1" id="save" name="save">Submit Application</button>
                             </div>
                         </div>
                     </div>
@@ -383,7 +236,7 @@
     </div>
 </div>
 <script>
-// Birth Certificate Photo on upload preview 
+// passport on upload preview 
 inputGroupFile01.onchange = evt => {
     const [file] = inputGroupFile01.files
     if (file) {
@@ -392,51 +245,5 @@ inputGroupFile01.onchange = evt => {
     }
 }
 
-// Educational Certificate Photo on upload preview 
-inputGroupFile02.onchange = evt => {
-    const [file] = inputGroupFile02.files
-    if (file) {
-        $('#inputGroupFile02preview').attr('src', URL.createObjectURL(file));
-        $('#inputGroupFile02previewLabel').html(file.name);
-    }
-}
-
-// Academic Certificate Photo on upload preview 
-inputGroupFile03.onchange = evt => {
-    const [file] = inputGroupFile03.files
-    if (file) {
-        $('#inputGroupFile03preview').attr('src', URL.createObjectURL(file));
-        $('#inputGroupFile03previewLabel').html(file.name);
-    }
-}
-
-// State Selection 
-$('#stateField').on('change', function() {
-    var value = this.value;
-    if (value && value.length != null) {
-        $('#lgaField').removeAttr('disabled');
-        var lgas = <?php if(isset($lgas)){echo $lgas;} ?>;
-        var optionsHTML = '<option selected value="">Select LGA</option>';
-        lgas.forEach(lga => {
-            if (lga.state_id == value) {
-                optionsHTML += '<option value="' + lga.id + '">' + lga.name + '</option>'
-            }
-        });
-        $('#lgaField').html(optionsHTML);
-    } else {
-        $('#lgaField').html('<option selected value="">Select LGA</option>');
-        $('#lgaField').attr('disabled');
-    }
-});
-
-// Check Is Register Selection 
-$('#is_registeredField').on('change', function() {
-    var value = this.value;
-    if (value && value == 'yes') {
-        $("#ppmvl_noField").show();
-    } else {
-        $("#ppmvl_noField").hide();
-    }
-});
 </script>
 @endsection

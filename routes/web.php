@@ -85,7 +85,8 @@ Route::group(['middleware' => ['auth','verified', 'can:isRLicencing']], function
 ////////////////////////////  FRONTEND USERS ROUTE   /////////////////////////////////
 // HOSPITAL PHARMACY ROUTES 
 Route::group(['middleware' => ['auth','verified', 'can:isHPharmacy', 'CheckProfileStatus']], function () {
-  
+    Route::get('/hospital-registration-form', 'App\Http\Controllers\HospitalPharmacy\RegistrationController@registrationForm')->name('hospital-registration-form');
+    Route::get('/hospital-registration-submit', 'App\Http\Controllers\HospitalPharmacy\RegistrationController@registrationSubmit')->name('hospital-registration-submit');
 });
 
 // COMMUNITY PHARMACY ROUTES 
