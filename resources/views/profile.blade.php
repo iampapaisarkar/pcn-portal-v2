@@ -68,10 +68,20 @@
                 </div>
                 @can('isHPharmacy', 'isCPharmacy', 'isDPremisis', 'isMPremisis', 'isPPMV')
                 <div class="col-md-4 form-group mb-3">
-                    <label for="haddress">Address:</label>
-                    <input name="address" class="form-control @error('address') is-invalid @enderror"
-                        value="{{Auth::user()->address}}" id="address" placeholder="Address" required />
-                    @error('address')
+                    <label for="hname">Hospital Name:</label>
+                    <input name="hospital_name" class="form-control @error('hospital_name') is-invalid @enderror"
+                        value="{{Auth::user()->hospital_name}}" id="hospital_name" placeholder="Hospital Name" required />
+                    @error('hospital_name')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                    @enderror
+                </div>
+                <div class="col-md-4 form-group mb-3">
+                    <label for="haddress">Hospital Address:</label>
+                    <input name="hospital_address" class="form-control @error('hospital_address') is-invalid @enderror"
+                        value="{{Auth::user()->hospital_address}}" id="hospital_address" placeholder="Hospital Address" required />
+                    @error('hospital_address')
                     <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>
                     </span>
@@ -123,7 +133,7 @@
                     </span>
                     @enderror
                 </div>
-                <div class="col-md-4 form-group mb-3">
+                <!-- <div class="col-md-4 form-group mb-3">
                     <label for="datepicker">Date of Birth</label>
                     <input readonly name="dob" class="form-control @error('dob') is-invalid @enderror" id="datepicker"
                         value="{{Auth::user()->dob}}" placeholder="dd-mm-yyyy" name="dp" required />
@@ -132,8 +142,8 @@
                         <strong>{{ $message }}</strong>
                     </span>
                     @enderror
-                </div>
-                <div class="col-md-4 form-group mb-3">
+                </div> -->
+                <!-- <div class="col-md-4 form-group mb-3">
                     <label for="picker1">Passport Photo</label>
                     <div class="custom-file mb-3">
                         <input name="photo" type="file" name="color_passportsize" class="custom-file-input"
@@ -145,11 +155,11 @@
                         <img id="profile-pic-new-preview" src="" alt="" class="w-25">
                         <img id="profile-pic-old-preview" src="{{asset('images/' . Auth::user()->photo)}}" alt=""
                             class="w-25">
-                        <!-- @if(Auth::user()->photo)
+                         @if(Auth::user()->photo)
                             <a href="#">Remove photo</a>
-                        @endif -->
+                        @endif
                     </div>
-                </div>
+                </div> -->
                 @endcan
                 <div class="col-md-12">
                     <button type="submit" class="btn btn-primary">Submit</button>

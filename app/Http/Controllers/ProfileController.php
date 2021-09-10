@@ -20,14 +20,16 @@ class ProfileController extends Controller
     }
 
     public function update(Request $request){
-
         try {
             DB::beginTransaction();
 
-            if(Auth::user()->hasRole(['vendor'])){
+            if(Auth::user()->hasRole(['hospital_pharmacy', 'community_pharmacy', 'distribution_premisis', 'manufacturing_premisis', 'ppmv'])){
 
                 $this->validate($request, [
-                    'address' => [
+                    'hospital_name' => [
+                        'required', 'min:3', 'max:255'
+                    ],
+                    'hospital_address' => [
                         'required', 'min:3', 'max:255'
                     ],
                     'state' => [
@@ -36,9 +38,6 @@ class ProfileController extends Controller
                     'lga' => [
                         'required'
                     ],
-                    'dob' => [
-                        'required'
-                    ]
                 ]);
 
                 $authUser = Auth::user();
@@ -70,13 +69,13 @@ class ProfileController extends Controller
                 }
 
                 auth()->user()->update([
-                    'address' => $request->address,
+                    'hospital_name' => $request->hospital_name,
+                    'hospital_address' => $request->hospital_address,
                     'state' => $request->state,
                     'lga' => $request->lga,
-                    'dob' => $request->dob,
                     'photo' => $fileName
                 ]);
-               
+
             }
 
             DB::commit();

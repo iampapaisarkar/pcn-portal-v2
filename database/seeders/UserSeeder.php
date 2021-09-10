@@ -45,7 +45,7 @@ class UserSeeder extends Seeder
             'email' => 'registry@test.com',
             'email_verified_at' => now(),
             'password' => Hash::make('123456'),
-            'state' => 2,
+            'state' => null,
             'created_at' => now(),
             'updated_at' => now(),
             ],

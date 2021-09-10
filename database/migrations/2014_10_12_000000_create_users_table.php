@@ -21,10 +21,11 @@ class CreateUsersTable extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password')->nullable();
-            $table->string('address')->nullable();
+            $table->string('hospital_name')->nullable();
+            $table->string('hospital_address')->nullable();
             $table->integer('state')->nullable();
             $table->integer('lga')->nullable();
-            $table->string('dob')->nullable();
+            // $table->string('dob')->nullable();
             $table->string('photo')->nullable();
             $table->boolean('status')->default(true);
             $table->longtext('activation_token')->nullable();

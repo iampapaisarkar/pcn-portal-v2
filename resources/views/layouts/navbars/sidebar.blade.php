@@ -53,7 +53,7 @@
                 <li class="nav-item">
                     <a href="{{route('profile')}}">
                         <i class="nav-icon i-Security-Settings"></i>
-                        <span class="item-name">Profile</span>
+                        <span class="item-name">Manage Profile</span>
                     </a>
                 </li>
                 

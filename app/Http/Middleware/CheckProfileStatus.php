@@ -16,13 +16,8 @@ class CheckProfileStatus
      */
     public function handle(Request $request, Closure $next)
     {   
-        if (auth()->user()->hasRole(['hospital_pharmacy'])
-        || auth()->user()->hasRole(['community_pharmacy'])
-        || auth()->user()->hasRole(['distribution_premisis'])
-        || auth()->user()->hasRole(['manufacturing_premisis'])
-        || auth()->user()->hasRole(['ppmv'])
-        ) {
-            if(auth()->user()->address && auth()->user()->state && auth()->user()->lga && auth()->user()->dob){
+        if (auth()->user()->hasRole(['hospital_pharmacy', 'community_pharmacy', 'distribution_premisis', 'manufacturing_premisis', 'ppmv'])) {
+            if(auth()->user()->hospital_name && auth()->user()->hospital_address && auth()->user()->state && auth()->user()->lga){
                 return $next($request);
             }
             return redirect('profile')->with('status','Please update your profile to perform further action');
