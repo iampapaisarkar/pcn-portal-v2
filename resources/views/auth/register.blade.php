@@ -53,7 +53,10 @@
 							<div class="form-group">
                                 <label for="picker1">{{ __('User Type') }}</label>
                                 <select class="form-control @error('type') is-invalid @enderror" name="type">
-                                    <option value="vendor" selected="selected">Tiered Patent Medicine Shop</option>
+                                    <!-- <option value="vendor" selected="selected">Tiered Patent Medicine Shop</option> -->
+                                    <option value="hospital_pharmacy">Hospital Pharmacy</option>		
+                                    <option value="manufacturing_premisis">CP/Manufacturing/Warehouse/Distribution</option>
+                                    <option value="ppmv">Patent Medicine Shop</option>
                                 </select>
                                 @error('type')
                                     <span class="invalid-feedback" role="alert">
