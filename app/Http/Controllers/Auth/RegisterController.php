@@ -72,7 +72,11 @@ class RegisterController extends Controller
         try {
             DB::beginTransaction();
 
-            if($data['type'] == 'hospital_pharmacy' || $data['type'] == 'manufacturing_premisis' || $data['type'] == 'ppmv'){
+            if($data['type'] == 'hospital_pharmacy'
+            || $data['type'] == 'community_pharmacy'
+            || $data['type'] == 'distribution_premisis'
+            || $data['type'] == 'manufacturing_premisis'
+            || $data['type'] == 'ppmv'){
                 $role = Role::where('code', $data['type'])->first();
 
                 $user = User::create([
