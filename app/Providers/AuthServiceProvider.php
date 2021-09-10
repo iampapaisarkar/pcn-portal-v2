@@ -41,8 +41,24 @@ class AuthServiceProvider extends ServiceProvider
             }
         });
 
+        Gate::define('isRegistry', function($user){
+            if($user->role->code == 'registry'){
+                return true;
+            }else{
+                return false;
+            }
+        });
+
         Gate::define('isPPractice', function($user){
             if($user->role->code == 'pharmacy_practice'){
+                return true;
+            }else{
+                return false;
+            }
+        });
+
+        Gate::define('isIMonitoring', function($user){
+            if($user->role->code == 'inspection_monitoring'){
                 return true;
             }else{
                 return false;
@@ -57,8 +73,40 @@ class AuthServiceProvider extends ServiceProvider
             }
         });
         
-        Gate::define('isVendor', function($user){
-            if($user->role->code == 'vendor'){
+        Gate::define('isHPharmacy', function($user){
+            if($user->role->code == 'hospital_pharmacy'){
+                return true;
+            }else{
+                return false;
+            }
+        });
+
+        Gate::define('isCPharmacy', function($user){
+            if($user->role->code == 'community_pharmacy'){
+                return true;
+            }else{
+                return false;
+            }
+        });
+
+        Gate::define('isDPremisis', function($user){
+            if($user->role->code == 'distribution_premisis'){
+                return true;
+            }else{
+                return false;
+            }
+        });
+
+        Gate::define('isMPremisis', function($user){
+            if($user->role->code == 'manufacturing_premisis'){
+                return true;
+            }else{
+                return false;
+            }
+        });
+
+        Gate::define('isPPMV', function($user){
+            if($user->role->code == 'ppmv'){
                 return true;
             }else{
                 return false;

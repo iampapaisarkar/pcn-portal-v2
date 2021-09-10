@@ -16,7 +16,12 @@ class CheckProfileStatus
      */
     public function handle(Request $request, Closure $next)
     {   
-        if (auth()->user()->hasRole(['vendor'])) {
+        if (auth()->user()->hasRole(['hospital_pharmacy'])
+        || auth()->user()->hasRole(['community_pharmacy'])
+        || auth()->user()->hasRole(['distribution_premisis'])
+        || auth()->user()->hasRole(['manufacturing_premisis'])
+        || auth()->user()->hasRole(['ppmv'])
+        ) {
             if(auth()->user()->address && auth()->user()->state && auth()->user()->lga && auth()->user()->dob){
                 return $next($request);
             }
