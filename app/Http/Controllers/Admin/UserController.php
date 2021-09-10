@@ -31,7 +31,13 @@ class UserController extends Controller
         ->with('role', 'user_state')
         ->join('user_roles', 'users.id', 'user_roles.user_id')
         ->join('roles', 'user_roles.role_id', 'roles.id')
-        ->where('roles.code', '!=', 'vendor')
+        ->where(function($q){
+            $q->where('code', '!=', 'hospital_pharmacy');
+            $q->where('code', '!=', 'community_pharmacy');
+            $q->where('code', '!=', 'distribution_premisis');
+            $q->where('code', '!=', 'manufacturing_premisis');
+            $q->where('code', '!=', 'ppmv');
+        })
         ->where('users.id', '!=', Auth::user()->id);
 
         if($request->per_page){
@@ -61,7 +67,13 @@ class UserController extends Controller
      */
     public function create()
     {
-        $roles = Role::where('code', '!=', 'vendor')->get();
+        $roles = Role::where(function($q){
+            $q->where('code', '!=', 'hospital_pharmacy');
+            $q->where('code', '!=', 'community_pharmacy');
+            $q->where('code', '!=', 'distribution_premisis');
+            $q->where('code', '!=', 'manufacturing_premisis');
+            $q->where('code', '!=', 'ppmv');
+        })->get();
 
         return view('admin.users.create', compact('roles'));
     }
@@ -139,7 +151,13 @@ class UserController extends Controller
         ->where('id', $id)
         ->first();
 
-        $roles = Role::where('code', '!=', 'vendor')->get();
+        $roles = Role::where(function($q){
+            $q->where('code', '!=', 'hospital_pharmacy');
+            $q->where('code', '!=', 'community_pharmacy');
+            $q->where('code', '!=', 'distribution_premisis');
+            $q->where('code', '!=', 'manufacturing_premisis');
+            $q->where('code', '!=', 'ppmv');
+        })->get();
 
         if($user){
             return view('admin.users.show', compact('user', 'roles'));
