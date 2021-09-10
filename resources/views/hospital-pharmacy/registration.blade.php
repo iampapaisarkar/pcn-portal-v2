@@ -58,7 +58,7 @@
 
                 <div class="custom-separator"></div>
                 <h4>Select Appropriate Bed Capacity</h4>
-                <div class="table-responsive">
+                <div class="table-responsive @error('bed_capacity') is-invalid @enderror">
                     <table id="" class="display table table-striped table-bordered" style="width:100%">
                         <thead>
                             <tr>
@@ -116,6 +116,11 @@
                         </tbody>
                     </table>
                 </div>
+                @error('bed_capacity')
+                <span class="invalid-feedback" role="alert">
+                    <strong>{{ $message }}</strong>
+                </span>
+                @enderror
                 <h6>Every Retention fee must be before January 31st of each year.</h6>
 
 
