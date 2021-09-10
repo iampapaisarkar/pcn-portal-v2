@@ -19,13 +19,6 @@ if(Auth::check()){
 }else{
 	Route::get('/', function () { return view('auth.login'); });
 }
-// Route::get('/', function () {
-//     if(Auth::check()){
-//         return view('index');
-//     }else{
-//         return view('auth.login');
-//     }
-// });
 
 // ADMIN USER'S ACTICATION ROUTE
 Route::get('/active-account', 'App\Http\Controllers\ProfileController@activeAccount')->name('active-account');
@@ -48,7 +41,7 @@ Route::group(['middleware' => ['auth','verified', 'CheckProfileStatus']], functi
 });
 
 
-
+////////////////////////////  BACKEND USERS ROUTE   /////////////////////////////////
 // SUPER ADMIN ROUTE 
 Route::group(['middleware' => ['auth','verified', 'can:isAdmin']], function () {
     Route::resource('users', 'App\Http\Controllers\Admin\UserController');
@@ -57,12 +50,39 @@ Route::group(['middleware' => ['auth','verified', 'can:isAdmin']], function () {
     Route::resource('batches', 'App\Http\Controllers\Admin\BatchController');
     Route::resource('services', 'App\Http\Controllers\Admin\Service\ServiceController');
     Route::resource('services-fee', 'App\Http\Controllers\Admin\Service\ServiceFeeController');
-
     Route::get('/payments', 'App\Http\Controllers\InvoiceController@index')->name('payments.index');
 	Route::get('/payments/{id}', 'App\Http\Controllers\InvoiceController@show')->name('payments.show');
 });
 
+// STATE OFFICE ROUTES 
+Route::group(['middleware' => ['auth','verified', 'can:isSOffice']], function () {
+  
+});
 
+// REFISTRY ROUTES 
+Route::group(['middleware' => ['auth','verified', 'can:isRegistry']], function () {
+  
+});
+
+// PHARMACY PRACTICE ROUTES 
+Route::group(['middleware' => ['auth','verified', 'can:isPPractice']], function () {
+  
+});
+
+// INSPECTION & MONITORING ROUTES 
+Route::group(['middleware' => ['auth','verified', 'can:isIMonitoring']], function () {
+  
+});
+
+// REGISTERING & LECENCING ROUTES 
+Route::group(['middleware' => ['auth','verified', 'can:isRLicencing']], function () {
+  
+});
+
+
+
+
+////////////////////////////  FRONTEND USERS ROUTE   /////////////////////////////////
 // HOSPITAL PHARMACY ROUTES 
 Route::group(['middleware' => ['auth','verified', 'can:isHPharmacy', 'CheckProfileStatus']], function () {
   
@@ -73,18 +93,15 @@ Route::group(['middleware' => ['auth','verified', 'can:isCPharmacy', 'CheckProfi
   
 });
 
-
 // DISTRIBUTION PREMISIS ROUTES 
 Route::group(['middleware' => ['auth','verified', 'can:isDPremisis', 'CheckProfileStatus']], function () {
   
 });
 
-
 // MANUFACTURING PREMISIS ROUTES 
 Route::group(['middleware' => ['auth','verified', 'can:isMPremisis', 'CheckProfileStatus']], function () {
   
 });
-
 
 // PPMV ROUTES 
 Route::group(['middleware' => ['auth','verified', 'can:isPPMV', 'CheckProfileStatus']], function () {
