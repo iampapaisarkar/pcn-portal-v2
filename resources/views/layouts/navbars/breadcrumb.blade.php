@@ -1,12 +1,12 @@
 <div class="breadcrumb">
     @if(Auth::user()->hasRole(['sadmin']))
-        <h1 class="mr-2">PCN Pharmacy Practice | HQ Abuja</h1>
+        <h1 class="mr-2">PCN | HQ Abuja</h1>
     @endif
     @if(Auth::user()->hasRole(['state_office']))
         <h1 class="mr-2">PCN State Office | State Office</h1>
     @endif
     @if(Auth::user()->hasRole(['pharmacy_practice']))
-        <h1 class="mr-2">PCN Pharmacy Practice | HQ Abuja</h1>
+        <h1 class="mr-2">PCN | HQ Abuja</h1>
     @endif
     @if(Auth::user()->hasRole(['registration_licencing']))
         <h1 class="mr-2">PCN Registration and Licencing | HQ Abuja</h1>
