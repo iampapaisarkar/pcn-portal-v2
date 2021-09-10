@@ -191,40 +191,28 @@
                 @endcan
                 <!-- Registration licencing routes end  -->
 
-                <!-- Vendor routes start  -->
-                @can('isVendor')
+                <!-- Hospital Pharmacy routes start  -->
+                @can('isHPharmacy')
                 <li class="nav-item">
-                    <a href="{{route('meptp-application')}}">
-                        <i class="nav-icon i-Receipt-4"></i>
-                        <span class="item-name">MEPTP Application</span>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="{{route('meptp-application-status')}}">
-                        <i class="nav-icon i-Receipt-4"></i>
-                        <span class="item-name">MEPTP Application Status</span>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="{{route('meptp-application-result')}}">
-                        <i class="nav-icon i-Receipt-4"></i>
-                        <span class="item-name">MEPTP Result</span>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="{{route('ppmv-application')}}">
-                        <i class="nav-icon i-Receipt-4"></i>
+                    <a href="">
+                        <i class="nav-icon i-Notepad"></i>
                         <span class="item-name">Registration</span>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="{{route('ppmv-renewal')}}">
-                        <i class="nav-icon i-Receipt-4"></i>
-                        <span class="item-name">Renewal</span>
+                    <a href="">
+                        <i class="nav-icon i-Notepad"></i>
+                        <span class="item-name">Registration Status</span>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="{{route('invoices.index')}}">
+                    <a href="">
+                        <i class="nav-icon i-Notepad"></i>
+                        <span class="item-name">Retention (Annual Renewal)</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="">
                         <i class="nav-icon i-Receipt-4"></i>
                         <span class="item-name">Invoices</span>
                     </a>
