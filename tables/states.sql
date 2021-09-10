@@ -1,0 +1,104 @@
+-- phpMyAdmin SQL Dump
+-- version 4.9.7
+-- https://www.phpmyadmin.net/
+--
+-- Host: localhost:3306
+-- Generation Time: Jul 09, 2021 at 04:20 PM
+-- Server version: 5.7.34-cll-lve
+-- PHP Version: 7.3.28
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
+START TRANSACTION;
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
+--
+-- Database: `bellotan_pcnedu_db`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `states`
+--
+
+CREATE TABLE `states` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `states`
+--
+
+INSERT INTO `states` (`id`, `name`, `created_at`, `updated_at`) VALUES
+(2, 'ABIA', '2019-11-04 06:17:00', '2020-09-16 16:22:00'),
+(3, 'ADAMAWA', '2019-11-04 06:32:00', '2019-11-04 11:30:00'),
+(4, 'ANAMBRA', '2019-11-06 06:17:00', '2019-11-06 06:17:00'),
+(5, 'AKWA IBOM', '2019-11-07 06:17:00', '2019-11-07 06:17:00'),
+(6, 'BAUCHI', '2019-11-08 06:17:00', '2019-11-08 06:17:00'),
+(7, 'BAYELSA', '2019-11-09 06:17:00', '2019-11-09 06:17:00'),
+(8, 'BENUE', '2019-11-10 06:17:00', '2019-11-10 06:17:00'),
+(9, 'BORNO', '2019-11-11 06:17:00', '2019-11-11 06:17:00'),
+(10, 'CROSS RIVER', '2019-11-12 06:17:00', '2019-11-12 06:17:00'),
+(11, 'DELTA', '2019-11-13 06:17:00', '2019-11-13 06:17:00'),
+(12, 'EBONYI', '2019-11-14 06:17:00', '2019-11-14 06:17:00'),
+(13, 'ENUGU', '2019-11-15 06:17:00', '2019-11-15 06:17:00'),
+(14, 'EDO', '2019-11-16 06:17:00', '2019-11-16 06:17:00'),
+(15, 'EKITI', '2019-11-17 06:17:00', '2019-11-17 06:17:00'),
+(16, 'GOMBE', '2019-11-18 06:17:00', '2019-11-18 06:17:00'),
+(17, 'IMO', '2019-11-19 06:17:00', '2019-11-19 06:17:00'),
+(18, 'JIGAWA', '2019-11-20 06:17:00', '2019-11-20 06:17:00'),
+(19, 'KADUNA', '2019-11-21 06:17:00', '2019-11-21 06:17:00'),
+(20, 'KANO', '2019-11-22 06:17:00', '2019-11-22 06:17:00'),
+(21, 'KATSINA', '2019-11-23 06:17:00', '2019-11-23 06:17:00'),
+(22, 'KEBBI', '2019-11-24 06:17:00', '2019-11-24 06:17:00'),
+(23, 'KOGI', '2019-11-25 06:17:00', '2019-11-25 06:17:00'),
+(24, 'KWARA', '2019-11-26 06:17:00', '2019-11-26 06:17:00'),
+(25, 'LAGOS', '2019-11-27 06:17:00', '2019-11-27 06:17:00'),
+(26, 'NASARAWA', '2019-11-28 06:17:00', '2019-11-28 06:17:00'),
+(27, 'NIGER', '2019-11-29 06:17:00', '2019-11-29 06:17:00'),
+(28, 'OGUN', '2019-11-30 06:17:00', '2019-11-30 06:17:00'),
+(29, 'ONDO', '2019-12-01 06:17:00', '2019-12-01 06:17:00'),
+(30, 'OSUN', '2019-12-02 06:17:00', '2019-12-02 06:17:00'),
+(31, 'OYO', '2019-12-03 06:17:00', '2019-12-03 06:17:00'),
+(32, 'PLATEAU', '2019-12-04 06:17:00', '2019-12-04 06:17:00'),
+(33, 'RIVERS', '2019-12-05 06:17:00', '2019-12-05 06:17:00'),
+(34, 'SOKOTO', '2019-12-06 06:17:00', '2019-12-06 06:17:00'),
+(35, 'TARABA', '2019-12-07 06:17:00', '2019-12-07 06:17:00'),
+(36, 'YOBE', '2019-12-08 06:17:00', '2019-12-08 06:17:00'),
+(37, 'ZAMFARA', '2019-12-09 06:17:00', '2019-12-09 06:17:00'),
+(38, 'FEDERAL CAPITAL TERRITORY (FCT)', '2019-12-10 06:17:00', '2019-12-10 06:17:00');
+
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `states`
+--
+ALTER TABLE `states`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `states`
+--
+ALTER TABLE `states`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
+COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
