@@ -66,7 +66,7 @@
                     </span>
                     @enderror
                 </div>
-                @can('isVendor')
+                @can('isHPharmacy', 'isCPharmacy', 'isDPremisis', 'isMPremisis', 'isPPMV')
                 <div class="col-md-4 form-group mb-3">
                     <label for="haddress">Address:</label>
                     <input name="address" class="form-control @error('address') is-invalid @enderror"
