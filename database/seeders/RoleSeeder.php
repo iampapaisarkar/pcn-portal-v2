@@ -24,17 +24,41 @@ class RoleSeeder extends Seeder
             'code' => 'state_office',
             ],
             [
+            'role' => 'Registry',
+            'code' => 'registry',
+            ],
+            [
             'role' => 'Pharmacy Practice',
             'code' => 'pharmacy_practice',
+            ],
+            [
+            'role' => 'Inspection & Monitoring',
+            'code' => 'inspection_monitoring',
             ],
             [
             'role' => 'Registration Licencing',
             'code' => 'registration_licencing',
             ],
             [
-            'role' => 'Vendor',
-            'code' => 'vendor',
+            'role' => 'Hospital & Pharmacy',
+            'code' => 'hospital_pharmacy',
             ],
+            [
+            'role' => 'Community Pharmacy',
+            'code' => 'community_pharmacy',
+            ],
+            [
+            'role' => 'Distribution Premisis',
+            'code' => 'distribution_premisis',
+            ],
+            [
+            'role' => 'Manufacturing Premisis',
+            'code' => 'manufacturing_premisis',
+            ],
+            [
+            'role' => 'PPMV',
+            'code' => 'ppmv',
+            ]
         ];
 
         Role::insert($roles);
