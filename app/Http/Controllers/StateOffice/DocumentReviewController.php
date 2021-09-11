@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Registration;
 use App\Models\HospitalRegistration;
+use Illuminate\Support\Facades\Auth;
 
 class DocumentReviewController extends Controller
 {
@@ -19,6 +20,9 @@ class DocumentReviewController extends Controller
 
         $documents = Registration::where(['payment' => true])
         ->with('hospital_pharmacy', 'user')
+        ->whereHas('user', function($q){
+            $q->where('state', Auth::user()->state);
+        })
         ->where('status', 'send_to_state_office');
         
         if($request->per_page){
@@ -111,6 +115,9 @@ class DocumentReviewController extends Controller
 
         $registration = Registration::where(['payment' => true, 'id' => $request['registration_id'], 'user_id' => $request['user_id'], 'type' => 'hospital_pharmacy'])
         ->with('hospital_pharmacy', 'user')
+        ->whereHas('user', function($q){
+            $q->where('state', Auth::user()->state);
+        })
         ->where('status', 'send_to_state_office')
         ->first();
 
@@ -125,6 +132,9 @@ class DocumentReviewController extends Controller
 
         $registration = Registration::where(['payment' => true, 'id' => $request['registration_id'], 'user_id' => $request['user_id'], 'type' => 'hospital_pharmacy'])
         ->where('status', 'send_to_state_office')
+        ->whereHas('user', function($q){
+            $q->where('state', Auth::user()->state);
+        })
         ->first();
 
         if($registration){
@@ -144,11 +154,17 @@ class DocumentReviewController extends Controller
 
         $registration = Registration::where(['payment' => true, 'id' => $request['registration_id'], 'user_id' => $request['user_id'], 'type' => 'hospital_pharmacy'])
         ->where('status', 'send_to_state_office')
+        ->whereHas('user', function($q){
+            $q->where('state', Auth::user()->state);
+        })
         ->first();
 
         if($registration){
             Registration::where(['payment' => true, 'id' => $request['registration_id'], 'user_id' => $request['user_id'], 'type' => 'hospital_pharmacy'])
             ->where('status', 'send_to_state_office')
+            ->whereHas('user', function($q){
+                $q->where('state', Auth::user()->state);
+            })
             ->update([
                 'status' => 'queried_by_state_office',
                 'query' => $request['query'],

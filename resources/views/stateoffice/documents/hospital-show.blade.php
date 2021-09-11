@@ -162,7 +162,7 @@
                         btnClass: 'btn-primary',
                         keys: ['enter'],
                         action: function(){
-                            document.getElementById('quriedForm').submit();
+                            document.getElementById('approveForm').submit();
                         }
                     },
                     cancel: function(){

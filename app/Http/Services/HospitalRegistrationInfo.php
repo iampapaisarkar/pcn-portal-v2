@@ -41,7 +41,15 @@ class HospitalRegistrationInfo
                     'success' => true,
                     'message' => 'Document Verification Queried',
                     'color' => 'danger',
-                    'reason' => $HospitalRegistration->query
+                    'reason' => $HospitalRegistration->query,
+                    'link' => route('hospital-registration-edit', $HospitalRegistration->id)
+                ];
+            }
+            if($HospitalRegistration->status == 'send_to_registry'){
+                return $response = [
+                    'success' => true,
+                    'message' => 'Inspection Pending',
+                    'color' => 'warning',
                 ];
             }
             

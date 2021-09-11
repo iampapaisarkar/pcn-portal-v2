@@ -18,7 +18,7 @@
                                 <br>
                                 <p>{{app('App\Http\Services\HospitalRegistrationInfo')->status()['reason']}}</p>
                             </div>
-                            <a href="" class="btn btn-danger text-white btn-rounded ">Update & Re-submit Registration</a>
+                            <a href="{{app('App\Http\Services\HospitalRegistrationInfo')->status()['link']}}" class="btn btn-danger text-white btn-rounded ">Update & Re-submit Registration</a>
                             @endif
                         </div>
                     </div>

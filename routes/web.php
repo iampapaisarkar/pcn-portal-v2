@@ -95,6 +95,8 @@ Route::group(['middleware' => ['auth','verified', 'can:isRLicencing']], function
 Route::group(['middleware' => ['auth','verified', 'can:isHPharmacy', 'CheckProfileStatus']], function () {
     Route::get('/hospital-registration-form', 'App\Http\Controllers\HospitalPharmacy\RegistrationController@registrationForm')->name('hospital-registration-form');
     Route::post('/hospital-registration-submit', 'App\Http\Controllers\HospitalPharmacy\RegistrationController@registrationSubmit')->name('hospital-registration-submit');
+    Route::get('/hospital-registration-edit/{id}', 'App\Http\Controllers\HospitalPharmacy\RegistrationController@registrationEdit')->name('hospital-registration-edit');
+    Route::post('/hospital-registration-update/{id}', 'App\Http\Controllers\HospitalPharmacy\RegistrationController@registrationUpdate')->name('hospital-registration-update');
 
     Route::get('/hospital-registration-status', 'App\Http\Controllers\HospitalPharmacy\RegistrationController@registrationStatus')->name('hospital-registration-status');
     
