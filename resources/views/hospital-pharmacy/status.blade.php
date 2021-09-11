@@ -4,13 +4,14 @@
 @include('layouts.navbars.breadcrumb', ['page' => 'Registration Status', 'route' => 'hospital-registration-status'])
     <div class="row">
         <div class="col-lg-12 col-md-12">
-                    
+            @if(app('App\Http\Services\HospitalRegistrationInfo')->status()['success'] == true)
             <div class="card-body">
                 <div class="form-row">
                     <div class="col-md-12">
-                        <div class="alert alert-card alert-warning" role="alert">REGISTRATION STATUS:  Document Verification Pending</div></div>
+                        <div class="alert alert-card alert-warning" role="alert">REGISTRATION STATUS:  {{app('App\Http\Services\HospitalRegistrationInfo')->status()['message']}}</div>
+                    </div>
             
-                        <div class="col-md-12">
+                        <!-- <div class="col-md-12">
                             <div class="alert alert-card alert-danger" role="alert">
                                 <p>REGISTRATION STATUS: Document Verification Queried</p>
                                 <p><strong>REASONS: </strong></p>
@@ -36,7 +37,7 @@
                             <div class="alert alert-card alert-success" role="alert">REGISTRATION STATUS: Licence Issued
                                 <button class="btn btn-rounded btn-success ml-3">DOWNLOAD LICENCE</button>
                             </div>
-                        </div>
+                        </div> -->
 
                         <div class="form-group col-md-3">
                             <label for="inputEmail1" class="ul-form__label"><strong>Hospital Name:</strong></label>
@@ -135,6 +136,9 @@
                     </div>
                 <div class="custom-separator"></div>
             </div>
+            @else
+                <small>no status found!</small>
+            @endif
         </div>
     </div>
 @endsection

@@ -5,6 +5,7 @@
 <div class="row">
     <div class="col-lg-12 col-md-12">
         <div class="card-body">
+            @if(app('App\Http\Services\HospitalRegistrationInfo')->canSubmitHospitalRegistration()['success'] == true)
             <form method="POST" action="{{ route('hospital-registration-submit') }}" enctype="multipart/form-data" novalidate>
             @csrf
                 <div class="row">
@@ -203,6 +204,12 @@
                         </div>
                     </div>
                 </div>
+            </form>
+            @else
+                <div class="alert alert-card alert-warning" role="alert">
+                    {{app('App\Http\Services\HospitalRegistrationInfo')->canSubmitHospitalRegistration()['message']}}
+                </div>
+            @endif
         </div>
     </div>
 </div>
