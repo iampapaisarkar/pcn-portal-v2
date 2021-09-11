@@ -37,6 +37,12 @@ Route::post('/profile-password-update', 'App\Http\Controllers\ProfileController@
 Route::group(['middleware' => ['auth','verified', 'CheckProfileStatus']], function () {
     Route::get('/', 'App\Http\Controllers\HomeController@index')->name('dashboard');
     Route::get('/download-invoice/{id}', 'App\Http\Controllers\InvoiceController@downloadInvoice')->name('download-invoice');
+
+    Route::get('/invoices', 'App\Http\Controllers\InvoiceController@index')->name('invoices.index');
+	Route::get('/invoices/{id}', 'App\Http\Controllers\InvoiceController@show')->name('invoices.show');
+
+    Route::get('/payment-failed/{token}', 'App\Http\Controllers\CheckoutController@paymentError')->name('payment-failed');
+    Route::get('/payment-success/{token}', 'App\Http\Controllers\CheckoutController@paymentSuccess')->name('payment-success');
 });
 
 
@@ -88,12 +94,7 @@ Route::group(['middleware' => ['auth','verified', 'can:isHPharmacy', 'CheckProfi
     Route::post('/hospital-registration-submit', 'App\Http\Controllers\HospitalPharmacy\RegistrationController@registrationSubmit')->name('hospital-registration-submit');
 
     Route::get('/hospital-registration-status', 'App\Http\Controllers\HospitalPharmacy\RegistrationController@registrationStatus')->name('hospital-registration-status');
-
-    Route::get('/invoices', 'App\Http\Controllers\InvoiceController@index')->name('invoices.index');
-	Route::get('/invoices/{id}', 'App\Http\Controllers\InvoiceController@show')->name('invoices.show');
-
-    Route::get('/payment-failed/{token}', 'App\Http\Controllers\CheckoutController@paymentError')->name('payment-failed');
-    Route::get('/payment-success/{token}', 'App\Http\Controllers\CheckoutController@paymentSuccess')->name('payment-success');
+    
 });
 
 // COMMUNITY PHARMACY ROUTES 
