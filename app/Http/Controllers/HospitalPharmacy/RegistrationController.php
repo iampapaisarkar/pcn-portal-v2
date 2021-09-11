@@ -59,4 +59,10 @@ class RegistrationController extends Controller
             return back()->with('error','There is something error, please try after some time');
         }  
     }
+
+    public function registrationStatus(){
+
+        $registration = HospitalRegistration::where('user_id', Auth::user()->id)->latest()->first();
+        return view('hospital-pharmacy.status', compact('registration'));
+    }
 }
