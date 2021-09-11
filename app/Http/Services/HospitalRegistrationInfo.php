@@ -29,11 +29,22 @@ class HospitalRegistrationInfo
         ->with('hospital_pharmacy')->latest()->first();
 
         if($HospitalRegistration){
-            if($HospitalRegistration->status == 'send_to_state_office')
-            return $response = [
-                'success' => true,
-                'message' => 'Document Verification Pending',
-            ];
+            if($HospitalRegistration->status == 'send_to_state_office'){
+                return $response = [
+                    'success' => true,
+                    'message' => 'Document Verification Pending',
+                    'color' => 'warning',
+                ];
+            }
+            if($HospitalRegistration->status == 'queried_by_state_office'){
+                return $response = [
+                    'success' => true,
+                    'message' => 'Document Verification Queried',
+                    'color' => 'danger',
+                    'reason' => $HospitalRegistration->query
+                ];
+            }
+            
         }else{
             return $response = [
                 'success' => false,

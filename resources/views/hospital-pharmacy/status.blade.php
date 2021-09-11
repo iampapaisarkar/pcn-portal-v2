@@ -8,7 +8,19 @@
             <div class="card-body">
                 <div class="form-row">
                     <div class="col-md-12">
-                        <div class="alert alert-card alert-warning" role="alert">REGISTRATION STATUS:  {{app('App\Http\Services\HospitalRegistrationInfo')->status()['message']}}</div>
+                        <div class="alert alert-card alert-{{app('App\Http\Services\HospitalRegistrationInfo')->status()['color']}}" role="alert">
+                            REGISTRATION STATUS:  {{app('App\Http\Services\HospitalRegistrationInfo')->status()['message']}}
+                            @if(isset(app('App\Http\Services\HospitalRegistrationInfo')->status()['reason']))
+                            <br>
+                            <br>
+                            <div>
+                                <strong class="text-danger">REASON:</strong>
+                                <br>
+                                <p>{{app('App\Http\Services\HospitalRegistrationInfo')->status()['reason']}}</p>
+                            </div>
+                            <a href="" class="btn btn-danger text-white btn-rounded ">Update & Re-submit Registration</a>
+                            @endif
+                        </div>
                     </div>
             
                         <!-- <div class="col-md-12">
