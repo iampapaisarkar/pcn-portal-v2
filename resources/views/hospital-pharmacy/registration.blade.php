@@ -71,48 +71,14 @@
                             </tr>
                         </thead>
                         <tbody>
-                                                                            <tr>
-                                <td><input name="bed_capacity" type="radio" value="1"></td>
-                                <td>&lt; 10 beds</td>
-                                <td>  NGN 10,000.00 </td>
-                                <td>  NGN 10,000.00 </td>
+                            @foreach(config('custom.beds') as $bed)
+                            <tr>
+                                <td><input name="bed_capacity" type="radio" value="{{$bed['id']}}"></td>
+                                <td>{{$bed['bed_capacity']}}</td>
+                                <td>NGN {{number_format($bed['registration_fee'])}}</td>
+                                <td>NGN {{number_format($bed['inspection_fee'])}}</td>
                             </tr>
-                                                                            <tr>
-                                <td><input name="bed_capacity" type="radio" value="2"></td>
-                                <td>11 &lt; 29 beds</td>
-                                <td>  NGN 20,000.00 </td>
-                                <td>  NGN 15,000.00 </td>
-                            </tr>
-                                                                            <tr>
-                                <td><input name="bed_capacity" type="radio" value="3"></td>
-                                <td>30 &lt; 59 beds</td>
-                                <td>  NGN 30,000.00 </td>
-                                <td>  NGN 20,000.00 </td>
-                            </tr>
-                                                                            <tr>
-                                <td><input name="bed_capacity" type="radio" value="4"></td>
-                                <td>60 &lt; 99 beds</td>
-                                <td>  NGN 40,000.00 </td>
-                                <td>  NGN 30,000.00 </td>
-                            </tr>
-                                                                            <tr>
-                                <td><input name="bed_capacity" type="radio" value="5"></td>
-                                <td>100 &lt; 199 beds</td>
-                                <td>  NGN 50,000.00 </td>
-                                <td>  NGN 40,000.00 </td>
-                            </tr>
-                                                                            <tr>
-                                <td><input name="bed_capacity" type="radio" value="6"></td>
-                                <td>200 &lt; 400 beds</td>
-                                <td>  NGN 60,000.00 </td>
-                                <td>  NGN 100,000.00 </td>
-                            </tr>
-                                                                            <tr>
-                                <td><input name="bed_capacity" type="radio" value="7"></td>
-                                <td>500 &lt; above beds</td>
-                                <td>  NGN 100,000.00 </td>
-                                <td>  NGN 100,000.00 </td>
-                            </tr>
+                            @endforeach
                         </tbody>
                     </table>
                 </div>
