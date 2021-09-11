@@ -114,6 +114,49 @@ class DocumentReviewController extends Controller
         ->where('status', 'send_to_state_office')
         ->first();
 
-        return view('stateoffice.documents.hospital-show', compact('registration'));
+        if($registration){
+            return view('stateoffice.documents.hospital-show', compact('registration'));
+        }else{
+            return abort(404);
+        }
+    }
+
+    public function hospitalPharmacyApprove(Request $request){
+
+        $registration = Registration::where(['payment' => true, 'id' => $request['registration_id'], 'user_id' => $request['user_id'], 'type' => 'hospital_pharmacy'])
+        ->where('status', 'send_to_state_office')
+        ->first();
+
+        if($registration){
+            Registration::where(['payment' => true, 'id' => $request['registration_id'], 'user_id' => $request['user_id'], 'type' => 'hospital_pharmacy'])
+            ->where('status', 'send_to_state_office')
+            ->update([
+                'status' => 'send_to_registry'
+            ]);
+
+            return redirect()->route('state-office-documents')->with('success', 'Registration Approved successfully done');
+        }else{
+            return abort(404);
+        }
+    }
+
+    public function hospitalPharmacyReject(Request $request){
+
+        $registration = Registration::where(['payment' => true, 'id' => $request['registration_id'], 'user_id' => $request['user_id'], 'type' => 'hospital_pharmacy'])
+        ->where('status', 'send_to_state_office')
+        ->first();
+
+        if($registration){
+            Registration::where(['payment' => true, 'id' => $request['registration_id'], 'user_id' => $request['user_id'], 'type' => 'hospital_pharmacy'])
+            ->where('status', 'send_to_state_office')
+            ->update([
+                'status' => 'queried_by_state_office',
+                'query' => $request['query'],
+            ]);
+
+            return redirect()->route('state-office-documents.index')->with('success', 'Registration Queried successfully done');
+        }else{
+            return abort(404);
+        }
     }
 }
