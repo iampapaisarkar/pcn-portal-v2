@@ -35,9 +35,6 @@
                             </div>
                         </div>
 
-                        <div class="d-flex justify-content-center">
-                            <a href="{{ route('invoices.index') }}" class="btn btn-primary btn-rounded w-100">Go to Invoice & Re-try</a>
-                        </div>
                     </div>
                 </div>
             </div>
