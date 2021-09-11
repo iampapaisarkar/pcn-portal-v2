@@ -101,7 +101,7 @@
                 <!-- State office routes start  -->
                 @can('isSOffice')
                 <li class="nav-item">
-                    <a href="">
+                    <a href="{{route('state-office-documents.index')}}">
                         <i class="nav-icon i-Receipt-4"></i>
                         <span class="item-name">Documents Review </span>
                     </a>
