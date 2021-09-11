@@ -10,6 +10,7 @@ use DB;
 use PDF;
 use File;
 use Storage;
+use App\Models\Registration;
 use App\Models\HospitalRegistration;
 use App\Http\Services\Checkout;
 use App\Http\Services\FileUpload;
@@ -28,9 +29,17 @@ class RegistrationController extends Controller
             $passport = FileUpload::upload($request->file('passport'), $private = true, 'hospital_pharmacy', 'passport');
 
             // Store MEPTP application 
-            $application = HospitalRegistration::create([
+            $Registration = Registration::create([
                 'user_id' => Auth::user()->id,
+                'type' => 'hospital_pharmacy',
+                'category' => 'Hospital',
                 'registration_year' => date('Y'),
+                'status' => 'send_to_state_office',
+            ]);
+
+            HospitalRegistration::create([
+                'registration_id' => $Registration->id,
+                'user_id' => Auth::user()->id,
                 'bed_capacity' =>$request->bed_capacity,
                 'passport' => $passport,
                 'pharmacist_name' => $request->pharmacist_name,
@@ -40,10 +49,9 @@ class RegistrationController extends Controller
                 'registration_no' => $request->registration_no,
                 'last_year_licence_no' => $request->last_year_licence_no,
                 'residential_address' => $request->residential_address,
-                'status' => 'send_to_state_office',
             ]);
 
-            $response = Checkout::checkoutHospitalPharmacy($application = ['id' => $application->id], 'hospital_pharmacy');
+            $response = Checkout::checkoutHospitalPharmacy($application = ['id' => $Registration->id], 'hospital_pharmacy');
 
             DB::commit();
 

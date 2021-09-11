@@ -5,16 +5,19 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class HospitalRegistration extends Model
+class Registration extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'registration_id', 'user_id', 'bed_capacity', 'passport', 'pharmacist_name', 'pharmacist_email',
-        'pharmacist_phone', 'qualification_year', 'registration_no', 'last_year_licence_no', 'residential_address'
+        'user_id', 'registration_year', 'type', 'category', 'status', 'query', 'payment'
     ];
 
     public function user() {
         return $this->hasOne(User::class,'id', 'user_id');
+    }
+
+    public function hospital_pharmacy() {
+        return $this->hasOne(HospitalRegistration::class,'registration_id', 'id');
     }
 }

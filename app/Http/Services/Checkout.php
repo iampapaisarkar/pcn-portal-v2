@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\Service;
 use App\Models\ServiceFeeMeta;
 use App\Models\Payment;
+use App\Models\Registration;
 use App\Models\HospitalRegistration;
 use DB;
 
@@ -15,7 +16,7 @@ class Checkout
         try {
             DB::beginTransaction();
 
-            $HospitalRegistration = HospitalRegistration::where(['id' => $application['id'], 'payment' => false])->first(); 
+            $HospitalRegistration = Registration::where(['id' => $application['id'], 'payment' => false, 'type' => $type])->first(); 
 
             if($HospitalRegistration){
                 $service = Service::where('id', 1)

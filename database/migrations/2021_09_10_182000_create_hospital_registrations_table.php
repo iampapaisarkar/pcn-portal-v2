@@ -15,8 +15,8 @@ class CreateHospitalRegistrationsTable extends Migration
     {
         Schema::create('hospital_registrations', function (Blueprint $table) {
             $table->id();
+            $table->integer('registration_id');
             $table->integer('user_id');
-            $table->integer('registration_year');
             $table->integer('bed_capacity');
             $table->string('passport');
             $table->string('pharmacist_name');
@@ -26,9 +26,6 @@ class CreateHospitalRegistrationsTable extends Migration
             $table->string('registration_no')->nullable();
             $table->string('last_year_licence_no')->nullable();
             $table->longtext('residential_address');
-            $table->string('status');
-            $table->longtext('query')->nullable();
-            $table->boolean('payment')->default(false);
             $table->timestamps();
         });
     }

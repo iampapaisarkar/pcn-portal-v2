@@ -2,7 +2,13 @@
 
 namespace App\Http\Services;
 use Illuminate\Support\Facades\Auth;
-use App\Models\HospitalRegistration;
+use App\Models\MEPTPApplication;
+use App\Models\Batch;
+use App\Models\State;
+use App\Models\Lga;
+use App\Models\School;
+use App\Models\MEPTPResult;
+use App\Models\Tier;
 
 class BasicInformation
 {
@@ -42,22 +48,6 @@ class BasicInformation
             return $batches;
         }else{
             return false;
-        }
-    }
-
-    public static function canSubmitHospitalRegistration(){
-        $HospitalRegistration = HospitalRegistration::where(['user_id' => Auth::user()->id])
-        ->latest()->first();
-
-        if($HospitalRegistration){
-            return $response = [
-                'success' => false,
-                'message' => 'HOSPITAL REFISTRATION ALREADY SUBMITED',
-            ];
-        }else{
-            return $response = [
-                'success' => true,
-            ];
         }
     }
 

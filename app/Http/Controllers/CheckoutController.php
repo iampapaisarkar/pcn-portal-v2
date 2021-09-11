@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Registration;
 use App\Models\HospitalRegistration;
 
 use App\Models\Service;
@@ -48,7 +49,7 @@ class CheckoutController extends Controller
             ]);
 
             if($order->service_type == 'hospital_pharmacy'){
-                HospitalRegistration::where(['id' => $order->application_id, 'user_id' => Auth::user()->id])->update([
+                Registration::where(['id' => $order->application_id, 'user_id' => Auth::user()->id, 'type' => 'hospital_pharmacy'])->update([
                     'payment' => true
                 ]);
 

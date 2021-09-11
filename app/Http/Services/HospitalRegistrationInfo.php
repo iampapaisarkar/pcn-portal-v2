@@ -2,6 +2,7 @@
 
 namespace App\Http\Services;
 use Illuminate\Support\Facades\Auth;
+use App\Models\Registration;
 use App\Models\HospitalRegistration;
 
 class HospitalRegistrationInfo
@@ -24,8 +25,8 @@ class HospitalRegistrationInfo
     }
 
     public static function status(){
-        $HospitalRegistration = HospitalRegistration::where(['user_id' => Auth::user()->id])
-        ->latest()->first();
+        $HospitalRegistration = Registration::where(['user_id' => Auth::user()->id, 'payment' => true, 'type' => 'hospital_pharmacy'])
+        ->with('hospital_pharmacy')->latest()->first();
 
         if($HospitalRegistration){
             if($HospitalRegistration->status == 'send_to_state_office')
