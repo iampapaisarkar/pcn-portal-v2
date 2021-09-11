@@ -101,39 +101,45 @@
                 <!-- State office routes start  -->
                 @can('isSOffice')
                 <li class="nav-item">
-                    <a href="{{route('meptp-pending-batches')}}">
+                    <a href="">
                         <i class="nav-icon i-Receipt-4"></i>
-                        <span class="item-name">MEPTP - Doc. Review Pending </span>
+                        <span class="item-name">Documents Review </span>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="{{route('meptp-approve-batches')}}">
+                    <a href="">
                         <i class="nav-icon i-Receipt-4"></i>
-                        <span class="item-name">MEPTP - Doc. Review Approved </span>
+                        <span class="item-name">Location Inspection - Report Upload</span>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="{{route('meptp-traning-approved-batches')}}">
+                    <a href="">
                         <i class="nav-icon i-Receipt-4"></i>
-                        <span class="item-name">MEPTP - Training Approved </span>
+                        <span class="item-name">Location Inspection - Reports</span>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="{{route('ppmv-pending-applications')}}">
+                    <a href="">
                         <i class="nav-icon i-Receipt-4"></i>
-                        <span class="item-name">PPMV Registration - Doc. Review</span>
+                        <span class="item-name">Facility Inspection - Report Upload</span>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="{{route('ppmv-inspection-applications')}}">
+                    <a href="">
                         <i class="nav-icon i-Receipt-4"></i>
-                        <span class="item-name">PPMV Registration - Inspection</span>
+                        <span class="item-name">Facility Inspection - Reports</span>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="{{route('ppmv-inspection-reports')}}">
+                    <a href="">
                         <i class="nav-icon i-Receipt-4"></i>
-                        <span class="item-name">PPMV Registration - Report</span>
+                        <span class="item-name">Renewal Inspection - Report Upload</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="">
+                        <i class="nav-icon i-Receipt-4"></i>
+                        <span class="item-name">Renewal Inspection - Reports</span>
                     </a>
                 </li>
                 @endcan

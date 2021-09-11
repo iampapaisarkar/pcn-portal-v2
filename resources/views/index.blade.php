@@ -32,40 +32,67 @@
         <!-- State office cards start  -->
         @can('isSOffice')
         <div class="row">
-            <div class="col-lg-6 col-md-6 col-sm-6">
+            <div class="col-lg-3 col-md-3 col-sm-6">
                 <div class="card card-icon mb-4">
                     <div class="card-body text-center"><i class="i-Diploma"></i>
-                        <p class="text-muted mt-2 mb-2">{{$data['meptp_pending']['type']}}</p>
-                        <p class="text-muted mt-2 mb-2">{{$data['meptp_pending']['status']}}</p>
-                        <p class="text-primary text-60 line-height-1 m-0">{{$data['meptp_pending']['total']}}</p>
+                        <h3 class="text-muted mt-2 mb-2">Doc. Verification Pending</h3>
+                        <p class="text-primary text-60 line-height-1 m-0">60</p>
                     </div>
                 </div>
             </div>
-            <div class="col-lg-6 col-md-6 col-sm-6">
+            <div class="col-lg-3 col-md-3 col-sm-6">
                 <div class="card card-icon mb-4">
                     <div class="card-body text-center"><i class="i-Diploma"></i>
-                        <p class="text-muted mt-2 mb-2">{{$data['meptp_approved']['type']}}</p>
-                        <p class="text-muted mt-2 mb-2">{{$data['meptp_approved']['status']}}</p>
-                        <p class="text-primary text-60 line-height-1 m-0">{{$data['meptp_approved']['total']}}</p>
+                        <h3 class="text-muted mt-2 mb-2">Doc. Verification Approved</h3>
+                        <p class="text-primary text-60 line-height-1 m-0">60</p>
                     </div>
                 </div>
             </div>
-            
-            <div class="col-lg-6 col-md-6 col-sm-6">
+            <div class="col-lg-3 col-md-3 col-sm-6">
                 <div class="card card-icon mb-4">
-                    <div class="card-body text-center"><i class="i-Diploma"></i>
-                        <p class="text-muted mt-2 mb-2">{{$data['ppmv_pending']['type']}}</p>
-                        <p class="text-muted mt-2 mb-2">{{$data['ppmv_pending']['status']}}</p>
-                        <p class="text-primary text-60 line-height-1 m-0">{{$data['ppmv_pending']['total']}}</p>
+                    <div class="card-body text-center"><i class="i-Diploma-2"></i>
+                        <h3 class="text-muted mt-2 mb-2">Location Inspection Pending</h3>
+                        <p class="text-primary text-60 line-height-1 m-0">60</p>
                     </div>
                 </div>
             </div>
-            <div class="col-lg-6 col-md-6 col-sm-6">
+            <div class="col-lg-3 col-md-3 col-sm-6">
                 <div class="card card-icon mb-4">
-                    <div class="card-body text-center"><i class="i-Diploma"></i>
-                        <p class="text-muted mt-2 mb-2">{{$data['ppmv_approved']['type']}}</p>
-                        <p class="text-muted mt-2 mb-2">{{$data['ppmv_approved']['status']}}</p>
-                        <p class="text-primary text-60 line-height-1 m-0">{{$data['ppmv_approved']['total']}}</p>
+                    <div class="card-body text-center"><i class="i-Diploma-2"></i>
+                        <h3 class="text-muted mt-2 mb-2">Location Inspection Uploaded</h3>
+                        <p class="text-primary text-60 line-height-1 m-0">60</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-3 col-sm-6">
+                <div class="card card-icon mb-4">
+                    <div class="card-body text-center"><i class="i-Diploma-2"></i>
+                        <h3 class="text-muted mt-2 mb-2">Facility Inspection Pending</h3>
+                        <p class="text-primary text-60 line-height-1 m-0">60</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-3 col-sm-6">
+                <div class="card card-icon mb-4">
+                    <div class="card-body text-center"><i class="i-Diploma-2"></i>
+                        <h3 class="text-muted mt-2 mb-2">Facility Inspection Uploaded</h3>
+                        <p class="text-primary text-60 line-height-1 m-0">60</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-3 col-sm-6">
+                <div class="card card-icon mb-4">
+                    <div class="card-body text-center"><i class="i-Diploma-2"></i>
+                        <h3 class="text-muted mt-2 mb-2">Renewal Inspection Pending</h3>
+                        <p class="text-primary text-60 line-height-1 m-0">60</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-3 col-sm-6">
+                <div class="card card-icon mb-4">
+                    <div class="card-body text-center"><i class="i-Diploma-2"></i>
+                        <h3 class="text-muted mt-2 mb-2">Renewal Inspection Uploaded</h3>
+                        <p class="text-primary text-60 line-height-1 m-0">60</p>
                     </div>
                 </div>
             </div>
