@@ -16,24 +16,24 @@ class FileUpload
 
         if($private === true){
 
-            if($type == 'meptp'){
+            if($type == 'hospital_pharmacy'){
                 $private_storage_path = storage_path(
-                    'app'. DIRECTORY_SEPARATOR . 'private' . DIRECTORY_SEPARATOR . Auth::user()->id . DIRECTORY_SEPARATOR . 'MEPTP'
+                    'app'. DIRECTORY_SEPARATOR . 'private' . DIRECTORY_SEPARATOR . Auth::user()->id . DIRECTORY_SEPARATOR . 'hospital_pharmacy'
                 );
 
                 if(!file_exists($private_storage_path)){
                     \mkdir($private_storage_path, intval('755',8), true);
                 }
             }
-            if($type == 'ppmv'){
-                $private_storage_path = storage_path(
-                    'app'. DIRECTORY_SEPARATOR . 'private' . DIRECTORY_SEPARATOR . Auth::user()->id . DIRECTORY_SEPARATOR . 'PPMV'
-                );
+            // if($type == 'ppmv'){
+            //     $private_storage_path = storage_path(
+            //         'app'. DIRECTORY_SEPARATOR . 'private' . DIRECTORY_SEPARATOR . Auth::user()->id . DIRECTORY_SEPARATOR . 'PPMV'
+            //     );
 
-                if(!file_exists($private_storage_path)){
-                    \mkdir($private_storage_path, intval('755',8), true);
-                }
-            }
+            //     if(!file_exists($private_storage_path)){
+            //         \mkdir($private_storage_path, intval('755',8), true);
+            //     }
+            // }
             
 
             // $file_name = $file->getClientOriginalName();

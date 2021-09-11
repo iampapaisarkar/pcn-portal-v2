@@ -17,67 +17,114 @@ class ServiceFeeMetaSeeder extends Seeder
         $services = [
             [
             'service_id' => 1,
-            'description' => 'MEPTP Training Fees 1',
+            'description' => 'MEPTP Registration Fee',
             'amount' => 50,
             'status' => true,
             'updated_at' => now()
             ],
             [
             'service_id' => 1,
-            'description' => 'MEPTP Training Fees 2',
+            'description' => 'MEPTP Traning Handbook',
             'amount' => 150,
             'status' => true,
             'updated_at' => now()
             ],
             [
             'service_id' => 1,
-            'description' => 'MEPTP Training Fees 3',
+            'description' => 'Training School Fees',
             'amount' => 50,
             'status' => false,
             'updated_at' => now()
             ],
+
             [
             'service_id' => 2,
-            'description' => 'PPMV Registration Fees 1',
+            'description' => 'MEPTP Registration Fee',
             'amount' => 50,
             'status' => true,
             'updated_at' => now()
             ],
             [
             'service_id' => 2,
-            'description' => 'PPMV Registration Fees 2',
+            'description' => 'MEPTP Traning Handbook',
             'amount' => 150,
             'status' => true,
             'updated_at' => now()
             ],
             [
             'service_id' => 2,
-            'description' => 'PPMV Registration Fees 3',
+            'description' => 'Training School Fees',
             'amount' => 50,
             'status' => false,
             'updated_at' => now()
             ],
+
             [
             'service_id' => 3,
-            'description' => 'PPMV Renewal Fees 1',
+            'description' => 'MEPTP Registration Fee',
             'amount' => 50,
             'status' => true,
             'updated_at' => now()
             ],
             [
             'service_id' => 3,
-            'description' => 'PPMV Renewal Fees 2',
+            'description' => 'MEPTP Traning Handbook',
             'amount' => 150,
             'status' => true,
             'updated_at' => now()
             ],
             [
             'service_id' => 3,
-            'description' => 'PPMV Renewal Fees 3',
+            'description' => 'Training School Fees',
             'amount' => 50,
             'status' => false,
             'updated_at' => now()
             ],
+
+            [
+            'service_id' => 4,
+            'description' => 'MEPTP Registration Fee',
+            'amount' => 50,
+            'status' => true,
+            'updated_at' => now()
+            ],
+            [
+            'service_id' => 4,
+            'description' => 'MEPTP Traning Handbook',
+            'amount' => 150,
+            'status' => true,
+            'updated_at' => now()
+            ],
+            [
+            'service_id' => 4,
+            'description' => 'Training School Fees',
+            'amount' => 50,
+            'status' => false,
+            'updated_at' => now()
+            ],
+
+            [
+            'service_id' => 5,
+            'description' => 'MEPTP Registration Fee',
+            'amount' => 50,
+            'status' => true,
+            'updated_at' => now()
+            ],
+            [
+            'service_id' => 5,
+            'description' => 'MEPTP Traning Handbook',
+            'amount' => 150,
+            'status' => true,
+            'updated_at' => now()
+            ],
+            [
+            'service_id' => 5,
+            'description' => 'Training School Fees',
+            'amount' => 50,
+            'status' => false,
+            'updated_at' => now()
+            ],
+           
         ];
 
         ServiceFeeMeta::insert($services);

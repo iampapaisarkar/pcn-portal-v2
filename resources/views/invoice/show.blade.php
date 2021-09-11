@@ -59,15 +59,8 @@
                             <tr>
                                 
                                 <td>
-                                @if($invoice->service_type == 'meptp_training')
+                                @if($invoice->service_type == 'hospital_pharmacy')
                                     APPLICATION FOR {{$invoice->service->description}} 
-                                    (Batch: {{$invoice->application->batch->batch_no .'/'. $invoice->application->batch->year}})
-                                @endif
-                                @if($invoice->service_type == 'ppmv_registration')
-                                    APPLICATION FOR {{$invoice->service->description}}
-                                @endif
-                                @if($invoice->service_type == 'ppmv_renewal')
-                                    APPLICATION FOR {{$invoice->service->description}}
                                 @endif
                                 </td>
 
@@ -104,7 +97,7 @@
         </div>
     </div>
 </div>
-@if(Auth::user()->hasRole(['vendor']) && $invoice->status == false)
+@if(Auth::user()->hasRole(['hospital_pharmacy', 'community_pharmacy', 'distribution_premisis', 'manufacturing_premisis', 'ppmv']) && $invoice->status == false)
 <script type="text/javascript" src="https://remitademo.net/payment/v1/remita-pay-inline.bundle.js"></script>
 <script>
     function makePayment() {

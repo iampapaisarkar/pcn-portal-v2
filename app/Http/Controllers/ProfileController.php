@@ -80,7 +80,7 @@ class ProfileController extends Controller
 
             DB::commit();
 
-            if(Auth::user()->hasRole(['vendor'])){
+            if(Auth::user()->hasRole(['hospital_pharmacy', 'community_pharmacy', 'distribution_premisis', 'manufacturing_premisis', 'ppmv'])){
                 return redirect()->route('dashboard')->with('success','Profile updated successfully');
             }else{
                 return back()->with('success','Profile updated successfully');

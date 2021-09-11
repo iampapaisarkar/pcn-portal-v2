@@ -36,7 +36,6 @@ Route::post('/profile-password-update', 'App\Http\Controllers\ProfileController@
 // DASHBOARD ROUTE 
 Route::group(['middleware' => ['auth','verified', 'CheckProfileStatus']], function () {
     Route::get('/', 'App\Http\Controllers\HomeController@index')->name('dashboard');
-    Route::get('/download-meptp-application-document', 'App\Http\Controllers\Vendor\MEPTPApplicationController@downloadMEPTPDocument')->name('download-meptp-application-document');
     Route::get('/download-invoice/{id}', 'App\Http\Controllers\InvoiceController@downloadInvoice')->name('download-invoice');
 });
 
@@ -45,9 +44,9 @@ Route::group(['middleware' => ['auth','verified', 'CheckProfileStatus']], functi
 // SUPER ADMIN ROUTE 
 Route::group(['middleware' => ['auth','verified', 'can:isAdmin']], function () {
     Route::resource('users', 'App\Http\Controllers\Admin\UserController');
-    Route::resource('vendor-profiles', 'App\Http\Controllers\Admin\VendorController');
-    Route::resource('schools', 'App\Http\Controllers\Admin\SchoolController');
-    Route::resource('batches', 'App\Http\Controllers\Admin\BatchController');
+    // Route::resource('vendor-profiles', 'App\Http\Controllers\Admin\VendorController');
+    // Route::resource('schools', 'App\Http\Controllers\Admin\SchoolController');
+    // Route::resource('batches', 'App\Http\Controllers\Admin\BatchController');
     Route::resource('services', 'App\Http\Controllers\Admin\Service\ServiceController');
     Route::resource('services-fee', 'App\Http\Controllers\Admin\Service\ServiceFeeController');
     Route::get('/payments', 'App\Http\Controllers\InvoiceController@index')->name('payments.index');
@@ -87,6 +86,13 @@ Route::group(['middleware' => ['auth','verified', 'can:isRLicencing']], function
 Route::group(['middleware' => ['auth','verified', 'can:isHPharmacy', 'CheckProfileStatus']], function () {
     Route::get('/hospital-registration-form', 'App\Http\Controllers\HospitalPharmacy\RegistrationController@registrationForm')->name('hospital-registration-form');
     Route::post('/hospital-registration-submit', 'App\Http\Controllers\HospitalPharmacy\RegistrationController@registrationSubmit')->name('hospital-registration-submit');
+
+    Route::get('/invoices', 'App\Http\Controllers\InvoiceController@index')->name('invoices.index');
+	Route::get('/invoices/{id}', 'App\Http\Controllers\InvoiceController@show')->name('invoices.show');
+
+    // Route::get('/checkout-meptp/{token}', 'App\Http\Controllers\Vendor\CheckoutController@checkoutMEPTP')->name('checkout-meptp');
+    Route::get('/payment-failed/{token}', 'App\Http\Controllers\CheckoutController@paymentError')->name('payment-failed');
+    Route::get('/payment-success/{token}', 'App\Http\Controllers\CheckoutController@paymentSuccess')->name('payment-success');
 });
 
 // COMMUNITY PHARMACY ROUTES 

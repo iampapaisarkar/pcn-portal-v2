@@ -4,7 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use App\Models\MEPTPApplication;
+use App\Models\HospitalRegistration;
+
 use App\Models\Service;
 use App\Models\ServiceFeeMeta;
 use App\Models\Payment;
@@ -38,7 +39,7 @@ class InvoiceController extends Controller
             }
             $invoices = $invoices->latest()->paginate($perPage);
 
-        }else if($authUser->hasRole(['vendor'])){
+        }else if($authUser->hasRole(['hospital_pharmacy', 'community_pharmacy', 'distribution_premisis', 'manufacturing_premisis', 'ppmv'])){
 
             $invoices = $invoices->latest()->where('vendor_id', $authUser->id)->get();
         }
@@ -49,13 +50,29 @@ class InvoiceController extends Controller
     public function show($id){
         $authUser = Auth::user();
 
-        $invoice = Payment::with('user', 'service.netFees', 'application.batch')->where('id', $id);
+        $invoice = Payment::with('user', 'service.netFees')->where('id', $id);
+
 
         if($authUser->hasRole(['sadmin'])){
             $invoice = $invoice->first();
-        }else if($authUser->hasRole(['vendor'])){
+        }
+        if($authUser->hasRole(['hospital_pharmacy'])){
             $invoice = $invoice->where('vendor_id', $authUser->id)->first();
         }
+        if($authUser->hasRole(['community_pharmacy'])){
+            $invoice = $invoice->where('vendor_id', $authUser->id)->first();
+        }
+        if($authUser->hasRole(['distribution_premisis'])){
+            $invoice = $invoice->where('vendor_id', $authUser->id)->first();
+        }
+        if($authUser->hasRole(['manufacturing_premisis'])){
+            $invoice = $invoice->where('vendor_id', $authUser->id)->first();
+        }
+        if($authUser->hasRole(['ppmv'])){
+            $invoice = $invoice->where('vendor_id', $authUser->id)->first();
+        }
+
+        // dd($invoice);
 
         return view('invoice.show', compact('invoice'));
     }
@@ -63,11 +80,11 @@ class InvoiceController extends Controller
     public function downloadInvoice($id){
         $authUser = Auth::user();
 
-        $data = Payment::with('user.user_state', 'user.user_lga', 'service.netFees', 'application.batch')->where('id', $id);
+        $data = Payment::with('user.user_state', 'user.user_lga', 'service.netFees')->where('id', $id);
         
         if($authUser->hasRole(['sadmin'])){
             $data = $data->first();
-        }else if($authUser->hasRole(['vendor'])){
+        }else if($authUser->hasRole(['hospital_pharmacy', 'community_pharmacy', 'distribution_premisis', 'manufacturing_premisis', 'ppmv'])){
             $data = $data->where('vendor_id', $authUser->id)->first();
         }
 
@@ -88,20 +105,15 @@ class InvoiceController extends Controller
                 ],
             ]);
 
-            if($data->service_type == 'meptp_training'){
-                $title = 'APPLICATION FOR MEPTP Training Fees (Batch: '.$data->application->batch->batch_no .'/'. $data->application->batch->year.')';
-            }
-            if($data->service_type == 'ppmv_registration'){
-                $title = 'APPLICATION FOR PPMV Registration Fees';
-            }
-            if($data->service_type == 'ppmv_renewal'){
-                $title = 'APPLICATION FOR PPMV Renewal Fees';
+            if($data->service_type == 'hospital_pharmacy'){
+                $title = 'Hospital Pharmacy Registration Fees';
             }
 
             $items = [
                 (new InvoiceItem())->title($title)->pricePerUnit($data->amount)->units($data->service->netFees),
             ];
 
+            $logoURL = env('APP_URL') . '/admin/dist-assets/images/logo.png';
 
             $invoice = Invoice::make('Invoice')
                 ->setCustomData([
@@ -115,14 +127,15 @@ class InvoiceController extends Controller
                 ->dateFormat('m/d/Y')
                 ->currencySymbol('NGN')
                 ->currencyCode('NGN')
-                ->currencyFormat('{SYMBOL}{VALUE}')
-                ->currencyThousandsSeparator('.')
+                ->currencyThousandsSeparator(',')
                 ->currencyDecimalPoint('.')
                 ->filename($title. '-' .$client->name)
                 ->addItems($items)
-                ->logo(env('APP_URL') . '/admin/dist-assets/images/logo.png');
+                ->logo($logoURL);
                 // You can additionally save generated invoice to configured disk
                 // ->save('public');
+
+                // dd($invoice);
 
             $link = $invoice->url();
             // Then send email to party with link

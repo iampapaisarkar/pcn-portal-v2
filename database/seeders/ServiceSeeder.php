@@ -16,17 +16,25 @@ class ServiceSeeder extends Seeder
     {
         $services = [
             [
-            'description' => 'MEPTP Training Fees',
+            'description' => 'Hospital Pharmacy Registration Fees',
             'updated_at' => now()
             ],
             [
-            'description' => 'Tiered PPMV Registration Fees',
+            'description' => 'Hospital Pharmacy Licence Renewal Fees',
             'updated_at' => now()
             ],
             [
-            'description' => 'Tiered PPMV Renewal Fees',
+            'description' => 'PPMV Location Approval Fees',
             'updated_at' => now()
             ],
+            [
+            'description' => 'PPMV Registration and Licencing Fees',
+            'updated_at' => now()
+            ],
+            [
+            'description' => 'PPMV Licence Renewal Fees',
+            'updated_at' => now()
+            ]
         ];
 
         Service::insert($services);

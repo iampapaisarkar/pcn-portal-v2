@@ -23,10 +23,10 @@ class Payment extends Model
         return $this->hasOne(Service::class,'id', 'service_id');
     }
 
-    public function application() {
-        $invoice = $this->hasOne(Payment::class,'id', 'id')->first();
-        if($invoice->service_type == 'meptp_training'){
-            return $this->hasOne(MEPTPApplication::class,'id', 'application_id');
-        }
-    }
+    // public function application() {
+    //     $invoice = $this->hasOne(Payment::class,'id', 'id')->first();
+    //     if($invoice->service_type == 'meptp_training'){
+    //         return $this->hasOne(MEPTPApplication::class,'id', 'application_id');
+    //     }
+    // }
 }
