@@ -110,20 +110,20 @@
             amount: '<?php echo $invoice->amount ?>',
             narration: '<?php echo env('REMITA_NARRATION') ?>',
             onSuccess: function(response) {
-                console.log('callback Successful Response', response);
+                // console.log('callback Successful Response', response);
                 var param = '?am=' + response.amount + '&ref=' + response.paymentReference;
                 window.location.href = "{{ route('payment-success', $invoice->token) }}" + param;
             },
             onError: function(response) {
-                console.log('callback Error Response', response);
+                // console.log('callback Error Response', response);
                 var param = '?am=' + response.amount + '&ref=' + response.paymentReference;
                 window.location.href = "{{ route('payment-failed', $invoice->token) }}" + param;
             },
             onClose: function(response) {
-                console.log('callback Close Response', response);
+                // console.log('callback Close Response', response);
                 setTimeout(function(){ 
                     window.location.href = "{{ route('payment-failed', $invoice->token) }}";
-                }, 3000);
+                }, 5000);
             }
         });
         paymentEngine.showPaymentWidget();

@@ -34,7 +34,9 @@
                                 </div>
                             </div>
                         </div>
-
+                        <div class="row justify-content-center">
+                            <a href="{{route('dashboard')}}" class="btn btn-primary btn-rounded">Go back to dashboard</a>
+                        </div>
                     </div>
                 </div>
             </div>
