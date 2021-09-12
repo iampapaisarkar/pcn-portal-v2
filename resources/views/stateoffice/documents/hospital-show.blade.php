@@ -10,7 +10,7 @@
                 :registrationID="$registration->id" 
                 :userID="$registration->user_id" 
                 type="hospital_pharmacy" />
-                
+
                 <div class="custom-separator"></div>
 
                 <div class="row">

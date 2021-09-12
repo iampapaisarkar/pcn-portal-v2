@@ -27,7 +27,7 @@ class HospitalPharmacyPreview extends Component
      */
     public function render()
     {
-        $registration = Registration::where(['payment' => true, 'id' => $request['registration_id'], 'user_id' => $request['user_id'], 'type' => 'hospital_pharmacy'])
+        $registration = Registration::where(['payment' => true, 'id' => $this->registration_id, 'user_id' => $this->user_id, 'type' => 'hospital_pharmacy'])
         ->with('hospital_pharmacy', 'user')
         ->first();
 

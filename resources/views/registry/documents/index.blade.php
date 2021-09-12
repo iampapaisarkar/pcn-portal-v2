@@ -80,6 +80,7 @@
                 </tbody>
                 <tfoot>
                     <tr>
+                        <th>#</th>
                         <th>Date</th>
                         <th>Vendor Name</th>
                         <th>Shop Name</th>

@@ -50,102 +50,13 @@
                                 <button class="btn btn-rounded btn-success ml-3">DOWNLOAD LICENCE</button>
                             </div>
                         </div> -->
+                </div>
 
-                        <div class="form-group col-md-3">
-                            <label for="inputEmail1" class="ul-form__label"><strong>Hospital Name:</strong></label>
-                            <div>{{Auth::user()->hospital_name}}</div>
-                        </div>
-                        <div class="form-group col-md-3">
-                            <label for="inputEmail3" class="ul-form__label"><strong>Hospital Address:</strong></label>
-                            <div>{{Auth::user()->hospital_address}}</div>
-                            
-                        </div>
-                        <div class="form-group col-md-3">
-                            <label for="inputEmail3" class="ul-form__label"><strong>State:</strong></label>
-                            <div>{{Auth::user()->user_state->name}}</div>
-                            
-                        </div>
-                        <div class="form-group col-md-3">
-                            <label for="inputEmail3" class="ul-form__label"><strong>LGA:</strong> </label>
-                            <div>{{Auth::user()->user_lga->name}}</div>
-                        </div>
-                    </div>
-                    
-                    <div class="custom-separator"></div>
-                    <h4>Bed Capacity</h4>
-                    <div class="table-responsive">
-                        <table id="" class="display table table-striped table-bordered" style="width:100%">
-                            <thead>
-                                <tr>
-                                    <th scope="col">Bed Capacity</th>
-                                    <th scope="col">Registration Fee</th>
-                                    <th scope="col">Inspection Fee</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @php
-                                    $bed = [];
-                                    foreach ( config('custom.beds') as $beds ) {
-                                    if ( $beds['id'] == $registration->bed_capacity ) {
-                                        $bed = $beds;
-                                    }
-                                }
-                                @endphp
-                                <tr>
-                                    <td>{{$bed['bed_capacity']}}</td>
-                                    <td>NGN {{number_format($bed['registration_fee'])}}</td>
-                                    <td>NGN {{number_format($bed['inspection_fee'])}}</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    
+                <x-hospital-pharmacy-preview
+                :registrationID="$registration->id" 
+                :userID="$registration->user_id" 
+                type="hospital_pharmacy" />
 
-                    <div class="custom-separator"></div>
-                    <div class="form-row">
-                        <div class="form-group col-md-6">
-                        <label  class="ul-form__label"><strong>Supritendent Pharmacist:</strong></label>
-                            <div><img class="w-25" src="{{ Auth::user()->photo ? asset('images/' . Auth::user()->photo) : asset('admin/dist-assets/images/avatar.jpg') }}" alt=""></div>
-                        </div>
-                    </div>
-                    
-                    <div class="form-row">	
-                        <div class="form-group col-md-4">
-                            <label for="inputEmail3" class="ul-form__label"><strong>Supritendent Pharmacist Name:</strong></label>
-                            <div>{{$registration->pharmacist_name}}</div>
-                        </div>
-
-                        <div class="form-group col-md-4">
-                            <label for="inputEmail3" class="ul-form__label"><strong>Supritendent Pharmacist Email:</strong></label>
-                            <div>{{$registration->pharmacist_email}}</div>
-                        </div>
-                        
-                        <div class="form-group col-md-4">
-                            <label for="inputEmail3" class="ul-form__label"><strong>Supritendent Pharmacist Phone:</strong></label>
-                            <div>{{$registration->pharmacist_phone}}</div>
-                        </div>
-
-                        <div class="form-group col-md-4">
-                            <label for="inputEmail3" class="ul-form__label"><strong>Year of Qualification:</strong></label>
-                            <div>{{$registration->qualification_year}}</div>
-                        </div>
-                        @if($registration->registration_no)
-                        <div class="form-group col-md-4">
-                            <label for="inputEmail3" class="ul-form__label"><strong>Registration No.:</strong></label>
-                            <div>{{$registration->registration_no}}</div>
-                        </div>
-                        @endif
-                        @if($registration->last_year_licence_no)
-                        <div class="form-group col-md-4">
-                            <label for="inputEmail3" class="ul-form__label"><strong>Last Year Annual License No.:</strong></label>
-                            <div>{{$registration->last_year_licence_no}}</div>
-                        </div>
-                        @endif
-                        <div class="form-group col-md-4">
-                            <label for="inputEmail3" class="ul-form__label"><strong>Residential Address:</strong></label>
-                            <div>{{$registration->residential_address}}</div>
-                        </div>
-                    </div>
                 <div class="custom-separator"></div>
             </div>
             @else
