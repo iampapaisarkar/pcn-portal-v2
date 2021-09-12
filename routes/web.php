@@ -69,7 +69,9 @@ Route::group(['middleware' => ['auth','verified', 'can:isSOffice']], function ()
 
 // REFISTRY ROUTES 
 Route::group(['middleware' => ['auth','verified', 'can:isRegistry']], function () {
-  
+    Route::resource('registry-documents', 'App\Http\Controllers\Registry\DocumentInspectionController');
+    Route::get('registry-documents-hospital-show', 'App\Http\Controllers\Registry\DocumentInspectionController@hospitalPharmacyShow')->name('registry-documents-hospital-show');
+    Route::post('registry-documents-hospital-approve', 'App\Http\Controllers\Registry\DocumentInspectionController@hospitalPharmacyApprove')->name('registry-documents-hospital-approve');
 });
 
 // PHARMACY PRACTICE ROUTES 

@@ -164,7 +164,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="">
+                    <a href="{{route('registry-documents.index')}}">
                         <i class="nav-icon i-Receipt-4"></i>
                         <span class="item-name">Facility Inspection</span>
                     </a>
