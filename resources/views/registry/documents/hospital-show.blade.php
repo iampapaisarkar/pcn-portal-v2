@@ -1,11 +1,11 @@
 @extends('layouts.app')
 
 @section('content')
-@include('layouts.navbars.breadcrumb', ['page' => 'Documents Verification', 'route' => 'state-office-documents.index'])
+@include('layouts.navbars.breadcrumb', ['page' => 'Facility Inspection', 'route' => 'registry-documents.index'])
 <div class="row">
         <div class="col-lg-12 col-md-12">
             <div class="card-body">
-                <h5>Hospital Pharmacy Registration - Documents Verification</h5>
+                <h5>Facility Inspection</h5>
                 <div class="form-row">
                     <div class="form-group col-md-3">
                         <label for="inputEmail1" class="ul-form__label"><strong>Hospital Name:</strong></label>
