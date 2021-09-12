@@ -29,6 +29,10 @@
                 <h6>PCN State Office</h6>
                 <p>{{ucfirst(Auth::user()->user_state->name)}} State</p>
                 @endif
+                @if(Auth::user()->hasRole(['registry']))
+                <h6>PCN HQ</h6>
+                <p>Registry</p>
+                @endif
                 @if(Auth::user()->hasRole(['pharmacy_practice']))
                 <h6>PCN HQ Abuja</h6>
                 <p>Pharmacy Practice</p>
@@ -144,6 +148,47 @@
                 </li>
                 @endcan
                 <!-- State office routes end  -->
+
+                <!-- Registry routes start  -->
+                @can('isRegistry')
+                <li class="nav-item">
+                    <a href="">
+                        <i class="nav-icon i-Receipt-4"></i>
+                        <span class="item-name">Location Inspection</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="">
+                        <i class="nav-icon i-Receipt-4"></i>
+                        <span class="item-name">Location Inspection Recommendation</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="">
+                        <i class="nav-icon i-Receipt-4"></i>
+                        <span class="item-name">Facility Inspection</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="">
+                        <i class="nav-icon i-Receipt-4"></i>
+                        <span class="item-name">Facility Inspection Recommendation</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="">
+                        <i class="nav-icon i-Receipt-4"></i>
+                        <span class="item-name">Renewal Inspection</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="">
+                        <i class="nav-icon i-Receipt-4"></i>
+                        <span class="item-name">Renewal Inspection Recommendation</span>
+                    </a>
+                </li>
+                @endcan
+                <!-- Registry routes end  -->
 
                 <!-- Pharmacy practice routes start  -->
                 @can('isPPractice')

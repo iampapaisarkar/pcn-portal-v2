@@ -144,7 +144,7 @@ class DocumentReviewController extends Controller
                 'status' => 'send_to_registry'
             ]);
 
-            return redirect()->route('state-office-documents')->with('success', 'Registration Approved successfully done');
+            return redirect()->route('state-office-documents.index')->with('success', 'Registration Approved successfully done');
         }else{
             return abort(404);
         }
