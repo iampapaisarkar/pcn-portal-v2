@@ -19,7 +19,7 @@ class DocumentInspectionController extends Controller
      */
     public function index(Request $request)
     {
-        $documents = Registration::where(['payment' => true])
+        $documents = Registration::where(['payment' => true, 'type' => 'hospital_pharmacy'])
         ->with('hospital_pharmacy', 'user')
         ->where('status', 'send_to_pharmacy_practice');
         

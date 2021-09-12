@@ -52,6 +52,38 @@ class HospitalRegistrationInfo
                     'color' => 'warning',
                 ];
             }
+            if($HospitalRegistration->status == 'send_to_pharmacy_practice'){
+                return $response = [
+                    'success' => true,
+                    'message' => 'Inspection Pending',
+                    'color' => 'warning',
+                ];
+            }
+            if($HospitalRegistration->status == 'no_recommendation'){
+                return $response = [
+                    'success' => true,
+                    'message' => 'Not Recommended for Licensure',
+                    'color' => 'danger',
+                    'link' => route('hospital-registration-edit', $HospitalRegistration->id),
+                    'download-link' => route('hospital-inspection-report-download', $HospitalRegistration->id),
+                ];
+            }
+            if($HospitalRegistration->status == 'partial_recommendation'){
+                return $response = [
+                    'success' => true,
+                    'message' => 'Recommended for Licensure',
+                    'color' => 'success',
+                    'download-link' => route('hospital-inspection-report-download', $HospitalRegistration->id),
+                ];
+            }
+            if($HospitalRegistration->status == 'full_recommendation'){
+                return $response = [
+                    'success' => true,
+                    'message' => 'Recommended for Licensure',
+                    'color' => 'success',
+                    'download-link' => route('hospital-inspection-report-download', $HospitalRegistration->id),
+                ];
+            }
             
         }else{
             return $response = [

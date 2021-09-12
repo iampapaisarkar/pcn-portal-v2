@@ -43,6 +43,9 @@ Route::group(['middleware' => ['auth','verified', 'CheckProfileStatus']], functi
 
     Route::get('/payment-failed/{token}', 'App\Http\Controllers\CheckoutController@paymentError')->name('payment-failed');
     Route::get('/payment-success/{token}', 'App\Http\Controllers\CheckoutController@paymentSuccess')->name('payment-success');
+
+    // Donwload routes
+    Route::get('hospital-inspection-report-download/{id}', 'App\Http\Controllers\DownloadController@downloadHospitalInspectionReport')->name('hospital-inspection-report-download');
 });
 
 
@@ -80,6 +83,10 @@ Route::group(['middleware' => ['auth','verified', 'can:isPPractice']], function 
     Route::resource('pharmacy-practice-documents', 'App\Http\Controllers\PharmacyPractice\DocumentInspectionController');
     Route::get('pharmacy-practice-documents-hospital-show', 'App\Http\Controllers\PharmacyPractice\DocumentInspectionController@hospitalPharmacyShow')->name('pharmacy-practice-documents-hospital-show');
     Route::post('pharmacy-practice-documents-hospital-inspection-update', 'App\Http\Controllers\PharmacyPractice\DocumentInspectionController@hospitalPharmacyInspectionupdate')->name('pharmacy-practice-documents-hospital-inspection-update');
+
+    Route::resource('pharmacy-practice-reports', 'App\Http\Controllers\PharmacyPractice\DocumentReportController');
+    Route::get('pharmacy-practice-reports-show', 'App\Http\Controllers\PharmacyPractice\DocumentReportController@hospitalPharmacyShow')->name('pharmacy-practice-reports-show');
+
 });
 
 // INSPECTION & MONITORING ROUTES 
