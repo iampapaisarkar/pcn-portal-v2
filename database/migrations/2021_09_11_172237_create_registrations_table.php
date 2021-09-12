@@ -19,6 +19,8 @@ class CreateRegistrationsTable extends Migration
             $table->integer('registration_year');
             $table->string('type');
             $table->string('category');
+            $table->string('token')->nullable();
+            $table->string('inspection_report')->nullable();
             $table->string('status');
             $table->longtext('query')->nullable();
             $table->boolean('payment')->default(false);

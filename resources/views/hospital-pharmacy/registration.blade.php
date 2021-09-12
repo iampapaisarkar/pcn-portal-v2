@@ -98,7 +98,7 @@
                     <div class="form-group col-md-6">
                         <label for="picker1">Upload Passport Photo of Supritendent Pharmacist:</label>
                         <div class="custom-file mb-3">
-                            <input name="passport" type="file" name="color_passportsize" class="custom-file-input
+                            <input name="passport" type="file" class="custom-file-input
                             @error('passport') is-invalid @enderror" accept="application/pdf"
                                 id="inputGroupFile01">
                             <label class="custom-file-label " for="inputGroupFile01"

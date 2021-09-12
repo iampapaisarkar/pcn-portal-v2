@@ -1,14 +1,14 @@
 @extends('layouts.app')
 
 @section('content')
-@include('layouts.navbars.breadcrumb', ['page' => 'Documents Review', 'route' => 'state-office-documents.index'])
+@include('layouts.navbars.breadcrumb', ['page' => 'Facility Inspection', 'route' => 'state-office-documents.index'])
 <div class="row">
 <div class="col-lg-12 col-md-12">
     <form id="approvedForm" class="w-100" method="POST" action="{{ route('registry-documents-approve-all') }}" enctype="multipart/form-data">
     @csrf
     <div class="card text-left">
     <div class="card-body">
-        <h4>MEPTP Applications - Documents Review Pending</h4>
+        <h4>Facility Inspection - Inspection Pending</h4>
         <div class="table-responsive">
             <div class="row m-0">
                 <div class="col-sm-12 col-md-6">

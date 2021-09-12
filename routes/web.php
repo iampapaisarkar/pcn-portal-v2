@@ -77,7 +77,9 @@ Route::group(['middleware' => ['auth','verified', 'can:isRegistry']], function (
 
 // PHARMACY PRACTICE ROUTES 
 Route::group(['middleware' => ['auth','verified', 'can:isPPractice']], function () {
-  
+    Route::resource('pharmacy-practice-documents', 'App\Http\Controllers\PharmacyPractice\DocumentInspectionController');
+    Route::get('pharmacy-practice-documents-hospital-show', 'App\Http\Controllers\PharmacyPractice\DocumentInspectionController@hospitalPharmacyShow')->name('pharmacy-practice-documents-hospital-show');
+    Route::post('pharmacy-practice-documents-hospital-inspection-update', 'App\Http\Controllers\PharmacyPractice\DocumentInspectionController@hospitalPharmacyInspectionupdate')->name('pharmacy-practice-documents-hospital-inspection-update');
 });
 
 // INSPECTION & MONITORING ROUTES 

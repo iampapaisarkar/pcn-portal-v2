@@ -193,7 +193,7 @@
                 <!-- Pharmacy practice routes start  -->
                 @can('isPPractice')
                 <li class="nav-item">
-                    <a href="">
+                    <a href="{{route('pharmacy-practice-documents.index')}}">
                         <i class="nav-icon i-Receipt-4"></i>
                         <span class="item-name">Facility Inspection - Report Upload</span>
                     </a>

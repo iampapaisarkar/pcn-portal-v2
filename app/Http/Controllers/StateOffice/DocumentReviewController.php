@@ -142,6 +142,7 @@ class DocumentReviewController extends Controller
             Registration::where(['payment' => true, 'id' => $request['registration_id'], 'user_id' => $request['user_id'], 'type' => 'hospital_pharmacy'])
             ->where('status', 'send_to_state_office')
             ->update([
+                'token' => md5(uniqid(rand(), true)),
                 'status' => 'send_to_registry'
             ]);
 
