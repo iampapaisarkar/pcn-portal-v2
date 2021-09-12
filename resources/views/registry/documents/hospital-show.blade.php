@@ -103,6 +103,7 @@
                         </div>
                     </div>
                 <div class="custom-separator"></div>
+                
 
                 <div class="row">
                     <form action="{{route('registry-documents-hospital-approve')}}" method="POST" id="approveForm">
@@ -112,7 +113,10 @@
                         <button onclick="submitApprove(event)" type="button" class="btn  btn-primary m-1" id="approve" name="approve">APPROVE FOR FACILITY INSPECTION</button>
                     </form>
                 </div>
-                
+                <div class="custom-separator"></div>
+                <x-all-activity
+                :applicationID="$registration->id" 
+                type="hospital_pharmacy" />
             </div>
         </div>
     </div>

@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Registration;
 use App\Models\HospitalRegistration;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Services\AllActivity;
 
 class DocumentReviewController extends Controller
 {
@@ -144,6 +145,10 @@ class DocumentReviewController extends Controller
                 'status' => 'send_to_registry'
             ]);
 
+            $adminName = Auth::user()->firstname .' '. Auth::user()->lastname;
+            $activity = 'State Officer Document Verification Approval';
+            AllActivity::storeActivity($request['registration_id'], $adminName, $activity, 'hospital_pharmacy');
+
             return redirect()->route('state-office-documents.index')->with('success', 'Registration Approved successfully done');
         }else{
             return abort(404);
@@ -169,6 +174,10 @@ class DocumentReviewController extends Controller
                 'status' => 'queried_by_state_office',
                 'query' => $request['query'],
             ]);
+
+            $adminName = Auth::user()->firstname .' '. Auth::user()->lastname;
+            $activity = 'State Officer Document Verification Query';
+            AllActivity::storeActivity($request['registration_id'], $adminName, $activity, 'hospital_pharmacy');
 
             return redirect()->route('state-office-documents.index')->with('success', 'Registration Queried successfully done');
         }else{

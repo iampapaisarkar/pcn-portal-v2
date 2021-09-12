@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use App\Models\Registration;
 use App\Models\HospitalRegistration;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Services\AllActivity;
+use DB;
 
 class DocumentInspectionController extends Controller
 {
@@ -120,6 +122,50 @@ class DocumentInspectionController extends Controller
         }
     }
 
+    public function ApproveAll(Request $request){
+        try {
+            DB::beginTransaction();
+
+            $checkboxes = isset($request->check_box_bulk_action) ? true : false;
+
+            if($checkboxes == true){
+                foreach($request->check_box_bulk_action as $registration_id => $registration){
+
+                    $Registration = Registration::where(['payment' => true, 'id' => $registration_id])
+                    ->where('status', 'send_to_registry')
+                    ->first();
+
+                    Registration::where(['payment' => true, 'id' => $registration_id])
+                    ->where('status', 'send_to_registry')
+                    ->update([
+                        'status' => 'send_to_pharmacy_practice'
+                    ]);
+
+                    $adminName = Auth::user()->firstname .' '. Auth::user()->lastname;
+                    $activity = 'Registry Document Facility Inspection Approval';
+                    AllActivity::storeActivity($registration_id, $adminName, $activity, $Registration->type);
+
+                }
+                $response = true;
+            }else{
+                $response = false;
+            }
+
+        DB::commit();
+
+            if($response == true){
+                return back()->with('success', 'Registration approved successfully.');
+            }else{
+                return back()->with('error', 'Please select atleast one registration.');
+            }
+
+        }catch(Exception $e) {
+            DB::rollback();
+            return back()->with('error','There is something error, please try after some time');
+        }
+
+    }
+
     public function hospitalPharmacyApprove(Request $request){
 
         $registration = Registration::where(['payment' => true, 'id' => $request['registration_id'], 'user_id' => $request['user_id'], 'type' => 'hospital_pharmacy'])
@@ -128,34 +174,18 @@ class DocumentInspectionController extends Controller
 
         if($registration){
             Registration::where(['payment' => true, 'id' => $request['registration_id'], 'user_id' => $request['user_id'], 'type' => 'hospital_pharmacy'])
-            ->where('status', 'send_to_state_office')
+            ->where('status', 'send_to_registry')
             ->update([
                 'status' => 'send_to_pharmacy_practice'
             ]);
+
+            $adminName = Auth::user()->firstname .' '. Auth::user()->lastname;
+            $activity = 'Registry Document Facility Inspection Approval';
+            AllActivity::storeActivity($request['registration_id'], $adminName, $activity, 'hospital_pharmacy');
 
             return redirect()->route('registry-documents.index')->with('success', 'Registration Approved successfully done');
         }else{
             return abort(404);
         }
     }
-
-    // public function hospitalPharmacyReject(Request $request){
-
-    //     $registration = Registration::where(['payment' => true, 'id' => $request['registration_id'], 'user_id' => $request['user_id'], 'type' => 'hospital_pharmacy'])
-    //     ->where('status', 'send_to_registry')
-    //     ->first();
-
-    //     if($registration){
-    //         Registration::where(['payment' => true, 'id' => $request['registration_id'], 'user_id' => $request['user_id'], 'type' => 'hospital_pharmacy'])
-    //         ->where('status', 'send_to_registry')
-    //         ->update([
-    //             'status' => 'queried_by_state_office',
-    //             'query' => $request['query'],
-    //         ]);
-
-    //         return redirect()->route('registry-documents.index')->with('success', 'Registration Queried successfully done');
-    //     }else{
-    //         return abort(404);
-    //     }
-    // }
 }

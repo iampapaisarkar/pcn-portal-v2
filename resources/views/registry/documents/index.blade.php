@@ -4,6 +4,8 @@
 @include('layouts.navbars.breadcrumb', ['page' => 'Documents Review', 'route' => 'state-office-documents.index'])
 <div class="row">
 <div class="col-lg-12 col-md-12">
+    <form id="approvedForm" class="w-100" method="POST" action="{{ route('registry-documents-approve-all') }}" enctype="multipart/form-data">
+    @csrf
     <div class="card text-left">
     <div class="card-body">
         <h4>MEPTP Applications - Documents Review Pending</h4>
@@ -38,6 +40,7 @@
             <table class="display table table-striped table-bordered" style="width:100%">
                 <thead>
                     <tr>
+                        <th>#</th>
                         <th>Date</th>
                         <th>Category</th>
                         <th>Name</th>
@@ -50,6 +53,11 @@
                 <tbody>
                     @foreach($documents as $document)
                     <tr>
+                        <td>
+                            <label class="checkbox checkbox-success">
+                                <input class="check_box_bulk_action" id="check_box_bulk_action-{{$document->id}}" type="checkbox" name="check_box_bulk_action[{{$document->id}}]" /><span class="checkmark"></span>
+                            </label>
+                        </td>
                         <td>{{$document->created_at->format('d/m/Y')}}</td>
                         <td>{{$document->category}}</td>
                         @if($document->type == 'hospital_pharmacy')
@@ -84,8 +92,10 @@
             </table>
             {{$documents->links('pagination')}}
         </div>
+        <button onclick="approveSelected(event)" type="button" class="btn btn-primary mt-5">APPROVE SELETECD FOR FACILITY INSPECTION</button>
     </div>
 </div>
+</form>
 </div>
 </div>
     <script type="text/javascript">
@@ -110,6 +120,29 @@
             var new_url = location.protocol + '//' + location.host + location.pathname + mParams;
             window.location.href = new_url;
         }
+    }
+
+    function approveSelected(event){
+        event.preventDefault();
+
+        $.confirm({
+            title: 'APPROVE SELETECD FOR FACILITY INSPECTION',
+            content: 'Are you sure want to approve for seleted registration?',
+            buttons: {   
+                ok: {
+                    text: "YES",
+                    btnClass: 'btn-primary',
+                    keys: ['enter'],
+                    action: function(){
+                        document.getElementById('approvedForm').submit();
+                    }
+                },
+                cancel: function(){
+                        console.log('the user clicked cancel');
+                }
+            }
+        });
+
     }
     </script>
 @endsection

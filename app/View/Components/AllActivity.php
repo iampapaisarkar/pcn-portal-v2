@@ -29,7 +29,6 @@ class AllActivity extends Component
         $activities = Activity::where('type', $this->app_type)->where('application_id', $this->application_id)
         ->latest()
         ->get();
-        // dd(0);
         return view('components.all-activity', compact('activities'));
     }
 }
