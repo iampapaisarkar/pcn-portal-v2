@@ -193,33 +193,27 @@
                 <!-- Pharmacy practice routes start  -->
                 @can('isPPractice')
                 <li class="nav-item">
-                    <a href="{{route('meptp-approval-states')}}">
+                    <a href="">
                         <i class="nav-icon i-Receipt-4"></i>
-                        <span class="item-name">MEPTP - Pending PP Approval</span>
+                        <span class="item-name">Facility Inspection - Report Upload</span>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="{{route('meptp-approved-batches')}}">
+                    <a href="">
                         <i class="nav-icon i-Receipt-4"></i>
-                        <span class="item-name">MEPTP - Training PP Approved</span>
+                        <span class="item-name">Facility Inspection - Reports</span>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="{{route('meptp-results-batches')}}">
+                    <a href="">
                         <i class="nav-icon i-Receipt-4"></i>
-                        <span class="item-name">MEPTP - Training Results</span>
+                        <span class="item-name">Renewal Inspection - Report Upload</span>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="{{route('ppmv-reports')}}">
+                    <a href="">
                         <i class="nav-icon i-Receipt-4"></i>
-                        <span class="item-name">PPMV Registration</span>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="{{route('dashboard')}}">
-                        <i class="nav-icon i-Receipt-4"></i>
-                        <span class="item-name">PPMV Status</span>
+                        <span class="item-name">Renewal Inspection - Reports</span>
                     </a>
                 </li>
                 @endcan

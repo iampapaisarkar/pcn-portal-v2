@@ -190,19 +190,35 @@
         <!-- Pharmacy practice cards start  -->
         @can('isPPractice')
         <div class="row">
-            <div class="col-lg-6 col-md-6 col-sm-6">
+            <div class="col-lg-3 col-md-3 col-sm-6">
                 <div class="card card-icon mb-4">
-                    <div class="card-body text-center"><i class="i-Diploma"></i>
-                        <p class="text-muted mt-2 mb-2">METPT</p>
-                        <p class="text-primary text-20 line-height-1 m-0">PASSED</p>
+                    <div class="card-body text-center"><i class="i-Diploma-2"></i>
+                        <h3 class="text-muted mt-2 mb-2">Facility Inspection Pending</h3>
+                        <p class="text-primary text-60 line-height-1 m-0">60</p>
                     </div>
                 </div>
             </div>
-            <div class="col-lg-6 col-md-6 col-sm-6">
+            <div class="col-lg-3 col-md-3 col-sm-6">
                 <div class="card card-icon mb-4">
                     <div class="card-body text-center"><i class="i-Diploma-2"></i>
-                        <p class="text-muted mt-2 mb-2">Tiered PPMV Registration</p>
-                        <p class="text-primary text-20 line-height-1 m-0">PENDING</p>
+                        <h3 class="text-muted mt-2 mb-2">Facility Inspection Uploaded/h3>
+                        <p class="text-primary text-60 line-height-1 m-0">60</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-3 col-sm-6">
+                <div class="card card-icon mb-4">
+                    <div class="card-body text-center"><i class="i-Diploma-2"></i>
+                        <h3 class="text-muted mt-2 mb-2">Renewal Inspection Pending</h3>
+                        <p class="text-primary text-60 line-height-1 m-0">60</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-3 col-sm-6">
+                <div class="card card-icon mb-4">
+                    <div class="card-body text-center"><i class="i-Diploma-2"></i>
+                        <h3 class="text-muted mt-2 mb-2">Renewal Inspection Uploaded</h3>
+                        <p class="text-primary text-60 line-height-1 m-0">60</p>
                     </div>
                 </div>
             </div>
