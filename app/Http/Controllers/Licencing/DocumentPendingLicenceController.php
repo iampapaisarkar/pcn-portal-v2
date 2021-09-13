@@ -157,7 +157,7 @@ class DocumentPendingLicenceController extends Controller
                             'licence' => 'TEST2021',
                             'status' => 'licence_issued',
                             // 'renewal' => true,
-                            // 'inspection' => true,
+                            'inspection' => true,
                             'payment' => true,
                         ]);
 

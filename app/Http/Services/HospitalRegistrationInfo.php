@@ -117,7 +117,7 @@ class HospitalRegistrationInfo
 
     public function canAccessRenewalPage(){
         if(Renewal::where('user_id', Auth::user()->id)
-        ->where('renewal', true)
+        // ->where('renewal', true)
         ->latest()
         ->first()){
             return $response = [
