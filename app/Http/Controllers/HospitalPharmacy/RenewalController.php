@@ -162,7 +162,7 @@ class RenewalController extends Controller
                     'renewal_year' => date('Y'),
                     'expires_at' => \Carbon\Carbon::now()->format('Y') .'-12-31',
                     // 'licence' => 'TEST2021',
-                    'status' => 'licence_issued',
+                    'status' => $previousRenwal->inspection == true ? 'send_to_registration' : 'send_to_registry',
                     // 'renewal' => true,
                     'inspection' => $previousRenwal->inspection == true ? false : true,
                     // 'payment' => true,

@@ -141,31 +141,31 @@ class HospitalRegistrationInfo
 
         $renwal = Renewal::where('user_id', Auth::user()->id)->orderBy('renewal_year', 'desc')->first();
 
-        // if($renwal && $renwal->status == 'pending'){
-        //     return [
-        //         'response' => false
-        //     ];
-        // }
-        // if($renwal && $renwal->status == 'rejected'){
-        //     return [
-        //         'response' => false
-        //     ];
-        // }
-        // if($renwal && $renwal->status == 'approved'){
-        //     return [
-        //         'response' => false
-        //     ];
-        // }
-        // if($renwal && $renwal->status == 'recommended'){
-        //     return [
-        //         'response' => false
-        //     ];
-        // }
-        // if($renwal && $renwal->status == 'unrecommended'){
-        //     return [
-        //         'response' => false
-        //     ];
-        // }
+        if($renwal && $renwal->status == 'send_to_registry'){
+            return [
+                'response' => false
+            ];
+        }
+        if($renwal && $renwal->status == 'send_to_registration'){
+            return [
+                'response' => false
+            ];
+        }
+        if($renwal && $renwal->status == 'no_recommendation'){
+            return [
+                'response' => false
+            ];
+        }
+        if($renwal && $renwal->status == 'partial_recommendation'){
+            return [
+                'response' => false
+            ];
+        }
+        if($renwal && $renwal->status == 'full_recommendation'){
+            return [
+                'response' => false
+            ];
+        }
         if(($renwal && $renwal->status == 'licence_issued') && (date('Y-m-d') < \Carbon\Carbon::createFromFormat('Y-m-d', $renwal->expires_at)->addDays(1)->format('Y-m-d'))){
             return [
                 'response' => false,
