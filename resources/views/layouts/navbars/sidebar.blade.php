@@ -110,7 +110,7 @@
                         <span class="item-name">Documents Review </span>
                     </a>
                 </li>
-                <li class="nav-item">
+                <!-- <li class="nav-item">
                     <a href="">
                         <i class="nav-icon i-Receipt-4"></i>
                         <span class="item-name">Location Inspection - Report Upload</span>
@@ -121,8 +121,8 @@
                         <i class="nav-icon i-Receipt-4"></i>
                         <span class="item-name">Location Inspection - Reports</span>
                     </a>
-                </li>
-                <li class="nav-item">
+                </li> -->
+                <!-- <li class="nav-item">
                     <a href="">
                         <i class="nav-icon i-Receipt-4"></i>
                         <span class="item-name">Facility Inspection - Report Upload</span>
@@ -133,8 +133,8 @@
                         <i class="nav-icon i-Receipt-4"></i>
                         <span class="item-name">Facility Inspection - Reports</span>
                     </a>
-                </li>
-                <li class="nav-item">
+                </li> -->
+                <!-- <li class="nav-item">
                     <a href="">
                         <i class="nav-icon i-Receipt-4"></i>
                         <span class="item-name">Renewal Inspection - Report Upload</span>
@@ -145,7 +145,7 @@
                         <i class="nav-icon i-Receipt-4"></i>
                         <span class="item-name">Renewal Inspection - Reports</span>
                     </a>
-                </li>
+                </li> -->
                 @endcan
                 <!-- State office routes end  -->
 
