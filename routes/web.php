@@ -54,8 +54,6 @@ Route::group(['middleware' => ['auth','verified', 'CheckProfileStatus']], functi
 Route::group(['middleware' => ['auth','verified', 'can:isAdmin']], function () {
     Route::resource('users', 'App\Http\Controllers\Admin\UserController');
     // Route::resource('vendor-profiles', 'App\Http\Controllers\Admin\VendorController');
-    // Route::resource('schools', 'App\Http\Controllers\Admin\SchoolController');
-    // Route::resource('batches', 'App\Http\Controllers\Admin\BatchController');
     Route::resource('services', 'App\Http\Controllers\Admin\Service\ServiceController');
     Route::resource('services-fee', 'App\Http\Controllers\Admin\Service\ServiceFeeController');
     Route::get('/payments', 'App\Http\Controllers\InvoiceController@index')->name('payments.index');
@@ -105,6 +103,9 @@ Route::group(['middleware' => ['auth','verified', 'can:isRLicencing']], function
     Route::get('licence-pending-hospital-show', 'App\Http\Controllers\Licencing\DocumentPendingLicenceController@hospitalPharmacyShow')->name('licence-pending-hospital-show');
     Route::post('licence-pending-approve-all', 'App\Http\Controllers\Licencing\DocumentPendingLicenceController@ApproveAll')->name('licence-pending-approve-all');
     Route::post('licence-pending-hospital-approve', 'App\Http\Controllers\Licencing\DocumentPendingLicenceController@hospitalPharmacyApprove')->name('licence-pending-hospital-approve');
+
+    Route::resource('licence-issued', 'App\Http\Controllers\Licencing\DocumentIssuedLicenceController');
+    Route::get('licence-issued-hospital-show', 'App\Http\Controllers\Licencing\DocumentIssuedLicenceController@hospitalPharmacyShow')->name('licence-issued-hospital-show');
 });
 
 

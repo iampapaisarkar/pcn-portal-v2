@@ -1,12 +1,12 @@
 @extends('layouts.app')
 
 @section('content')
-@include('layouts.navbars.breadcrumb', ['page' => 'Facility Inspection Report', 'route' => 'pharmacy-practice-reports.index'])
+@include('layouts.navbars.breadcrumb', ['page' => 'Facility Licence Issued', 'route' => 'licence-issued.index'])
 <div class="row">
 <div class="col-lg-12 col-md-12">
     <div class="card text-left">
     <div class="card-body">
-        <h4>Facility Inspection Report</h4>
+        <h4>Facility Licence Issued</h4>
         <div class="table-responsive">
             <div class="row m-0">
                 <div class="col-sm-12 col-md-6">
@@ -25,7 +25,7 @@
                 </div>
                 <div class="col-sm-12 col-md-6">
                     <div id="multicolumn_ordering_table_filter" class="dataTables_filter float-right">
-                    <form method="GET" action="{{ route('pharmacy-practice-reports.index') }}">
+                    <form method="GET" action="{{ route('licence-issued.index') }}">
                     @csrf
                         <label>Search:
                             <input name="search" value="{{Request::get('search')}}" type="text" class="form-control form-control-sm" placeholder="" aria-controls="multicolumn_ordering_table">
@@ -38,12 +38,10 @@
             <table class="display table table-striped table-bordered" style="width:100%">
                 <thead>
                     <tr>
-                        <th>Date</th>
                         <th>Category</th>
                         <th>Name</th>
                         <th>Type</th>
                         <th>Year</th>
-                        <th>Token</th>
                         <th>Status</th>
                         <th>Action</th>
                     </tr>
@@ -51,7 +49,6 @@
                 <tbody>
                     @foreach($documents as $document)
                     <tr>
-                        <td>{{$document->created_at->format('d/m/Y')}}</td>
                         <td>{{$document->category}}</td>
                         @if($document->type == 'hospital_pharmacy')
                         <td>{{$document->user->hospital_name}}</td>
@@ -60,19 +57,10 @@
                         <td>Hospital Pharmacy Registration</td>
                         @endif
                         <td>{{$document->registration_year}}</td>
-                        <td>{{$document->token}}</td>
-                        @if($document->status == 'no_recommendation')
-                        <td><span class="badge badge-pill m-1 badge-danger">NO RECOMMENDATION</span></td>
-                        @endif
-                        @if($document->status == 'partial_recommendation')
-                        <td><span class="badge badge-pill m-1 badge-warning">PARTIAL RECOMMENDATION</span></td>
-                        @endif
-                        @if($document->status == 'full_recommendation')
-                        <td><span class="badge badge-pill m-1 badge-success">FULL RECOMMENDATION</span></td>
-                        @endif
+                        <td><span class="badge badge-pill m-1 badge-success">LICENCE ISSUED</span></td>
                         <td>
                             @if($document->type == 'hospital_pharmacy')
-                            <a href="{{ route('pharmacy-practice-reports-show') }}?registration_id={{$document->id}}&user_id={{$document->user->id}}">
+                            <a href="{{ route('licence-issued-hospital-show') }}?registration_id={{$document->id}}&user_id={{$document->user->id}}">
                                 <button class="btn btn-success btn-sm" type="button"><i class="nav-icon i-Eye"></i></button>
                             </a>
                             @endif
@@ -82,12 +70,10 @@
                 </tbody>
                 <tfoot>
                     <tr>
-                        <th>Date</th>
                         <th>Category</th>
                         <th>Name</th>
                         <th>Type</th>
                         <th>Year</th>
-                        <th>Token</th>
                         <th>Status</th>
                         <th>Action</th>
                     </tr>

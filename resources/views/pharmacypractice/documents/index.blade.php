@@ -75,10 +75,10 @@
                 <tfoot>
                     <tr>
                         <th>Date</th>
-                        <th>Vendor Name</th>
-                        <th>Shop Name</th>
-                        <th>Batch</th>
-                        <th>State</th>
+                        <th>Category</th>
+                        <th>Name</th>
+                        <th>Type</th>
+                        <th>Year</th>
                         <th>Token</th>
                         <th>Status</th>
                         <th>Action</th>

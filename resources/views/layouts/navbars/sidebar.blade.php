@@ -228,7 +228,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="">
+                    <a href="{{route('licence-issued.index')}}">
                         <i class="nav-icon i-Receipt-4"></i>
                         <span class="item-name">Facility Registration Licence Issued</span>
                     </a>
