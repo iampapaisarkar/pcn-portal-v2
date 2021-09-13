@@ -4,6 +4,12 @@ namespace App\Http\Controllers\Licencing;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Registration;
+use App\Models\HospitalRegistration;
+use App\Models\Renewal;
+use Illuminate\Support\Facades\Auth;
+use App\Http\Services\AllActivity;
+use DB;
 
 class RenewalIssuedLicenceController extends Controller
 {
@@ -12,9 +18,29 @@ class RenewalIssuedLicenceController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $documents = Renewal::where(['payment' => true])
+        ->with('hospital_pharmacy', 'registration', 'user')
+        ->where('status', 'licence_issued');
+        
+        if($request->per_page){
+            $perPage = (integer) $request->per_page;
+        }else{
+            $perPage = 10;
+        }
+
+        if(!empty($request->search)){
+            $search = $request->search;
+            $documents = $documents->where(function($q) use ($search){
+                $q->where('documents.type', 'like', '%' .$search. '%');
+                $q->orWhere('documents.category', 'like', '%' .$search. '%');
+            });
+        }
+
+        $documents = $documents->latest()->paginate($perPage);
+
+        return view('licencing.renewal-issued.index', compact('documents'));
     }
 
     /**
@@ -81,5 +107,19 @@ class RenewalIssuedLicenceController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function hospitalPharmacyShow(Request $request){
+
+        $registration = Renewal::where(['payment' => true, 'id' => $request['renewal_id'], 'user_id' => $request['user_id'], 'type' => 'hospital_pharmacy_renewal'])
+        ->with('hospital_pharmacy', 'registration', 'user')
+        ->where('status', 'licence_issued')
+        ->first();
+
+        if($registration){
+            return view('licencing.renewal-issued.hospital-show', compact('registration'));
+        }else{
+            return abort(404);
+        }
     }
 }
