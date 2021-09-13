@@ -20,11 +20,8 @@
                     <th scope="col">{{$activity->admin_name}}</th>
                     <th scope="col">{{$activity->activity}}</th>
                     <th scope="col">
-                        @if($activity->type == 'meptp')
-                        Tiered PPMV Registration
-                        @endif
-                        @if($activity->type == 'ppmv')
-                        Tiered PPMV Registration
+                        @if($activity->type == 'hospital_pharmacy')
+                            Hospital Pharmacy
                         @endif
                     </th>
                     <th scope="col">{{$activity->created_at->format('d/M/Y')}}</th>

@@ -9,14 +9,20 @@ class HospitalRegistrationInfo
 {
 
     public static function canSubmitHospitalRegistration(){
-        $HospitalRegistration = HospitalRegistration::where(['user_id' => Auth::user()->id])
-        ->latest()->first();
+        $HospitalRegistration = Registration::where(['user_id' => Auth::user()->id, 'payment' => true, 'type' => 'hospital_pharmacy'])
+        ->with('hospital_pharmacy')->latest()->first();
 
         if($HospitalRegistration){
-            return $response = [
-                'success' => false,
-                'message' => 'HOSPITAL REFISTRATION ALREADY SUBMITED',
-            ];
+            if($HospitalRegistration->status == 'no_recommendation'){
+                return $response = [
+                    'success' => true,
+                ];
+            }else{
+                return $response = [
+                    'success' => false,
+                    'message' => 'HOSPITAL REFISTRATION ALREADY SUBMITED',
+                ];
+            }
         }else{
             return $response = [
                 'success' => true,
@@ -64,7 +70,7 @@ class HospitalRegistrationInfo
                     'success' => true,
                     'message' => 'Not Recommended for Licensure',
                     'color' => 'danger',
-                    'link' => route('hospital-registration-edit', $HospitalRegistration->id),
+                    'new-link' => route('hospital-registration-form'),
                     'download-link' => route('hospital-inspection-report-download', $HospitalRegistration->id),
                 ];
             }

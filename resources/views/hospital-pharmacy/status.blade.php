@@ -18,8 +18,20 @@
                                 <br>
                                 <p>{{app('App\Http\Services\HospitalRegistrationInfo')->status()['reason']}}</p>
                             </div>
-                            <a href="{{app('App\Http\Services\HospitalRegistrationInfo')->status()['link']}}" target="_blank" class="btn btn-danger text-white btn-rounded ">Update & Re-submit Registration</a>
                             @endif
+
+                            @if(isset(app('App\Http\Services\HospitalRegistrationInfo')->status()['link']))
+                            <br>
+                            <br>
+                            <a href="{{app('App\Http\Services\HospitalRegistrationInfo')->status()['link']}}" class="btn btn-danger text-white btn-rounded ">Update & Re-submit Registration</a>
+                            @endif
+
+                            @if(isset(app('App\Http\Services\HospitalRegistrationInfo')->status()['new-link']))
+                            <br>
+                            <br>
+                            <a href="{{app('App\Http\Services\HospitalRegistrationInfo')->status()['new-link']}}" class="btn btn-danger text-white btn-rounded ">Re-submit Registration</a>
+                            @endif
+
                             @if(isset(app('App\Http\Services\HospitalRegistrationInfo')->status()['download-link']))
                             <br>
                             <br>

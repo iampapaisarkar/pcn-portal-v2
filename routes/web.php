@@ -110,6 +110,9 @@ Route::group(['middleware' => ['auth','verified', 'can:isHPharmacy', 'CheckProfi
     Route::get('/hospital-registration-edit/{id}', 'App\Http\Controllers\HospitalPharmacy\RegistrationController@registrationEdit')->name('hospital-registration-edit');
     Route::post('/hospital-registration-update/{id}', 'App\Http\Controllers\HospitalPharmacy\RegistrationController@registrationUpdate')->name('hospital-registration-update');
 
+    // Route::get('/hospital-registration-new/{id}', 'App\Http\Controllers\HospitalPharmacy\RegistrationController@registrationNew')->name('hospital-registration-new');
+    // Route::post('/hospital-registration-post/{id}', 'App\Http\Controllers\HospitalPharmacy\RegistrationController@registrationPost')->name('hospital-registration-post');
+
     Route::get('/hospital-registration-status', 'App\Http\Controllers\HospitalPharmacy\RegistrationController@registrationStatus')->name('hospital-registration-status');
     
 });
