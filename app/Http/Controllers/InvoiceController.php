@@ -43,6 +43,7 @@ class InvoiceController extends Controller
 
             $invoices = $invoices->latest()->where('vendor_id', $authUser->id)->get();
         }
+
         
         return view('invoice.index', compact('invoices'));
     }

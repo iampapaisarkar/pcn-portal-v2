@@ -140,24 +140,21 @@ class RenewalPendingLicenceController extends Controller
 
                     if($renewal){
 
-                        Renewal::where(['payment' => true, 'id' => $request['renewal_id'], 'user_id' => $request['user_id']])
+                        Renewal::where(['payment' => true, 'id' => $renewal_id, 'user_id' => $renewal->user_id])
                         ->where('status', 'send_to_registration')
                         ->update([
                             'licence' => 'TEST2021',
                             'status' => 'licence_issued'
                         ]);
+
                         
                         $adminName = Auth::user()->firstname .' '. Auth::user()->lastname;
                         $activity = 'Registration & Licencing Licence Renewal Issued';
-                        AllActivity::storeActivity($request['registration_id'], $adminName, $activity, 'hospital_pharmacy');
+                        AllActivity::storeActivity($renewal_id, $adminName, $activity, 'hospital_pharmacy');
 
                     }else{
                         return abort(404);
                     }
-
-                    $adminName = Auth::user()->firstname .' '. Auth::user()->lastname;
-                    $activity = 'Registration & Licencing Issued Licence';
-                    AllActivity::storeActivity($request['registration_id'], $adminName, $activity, 'hospital_pharmacy');
 
                 }
                 $response = true;

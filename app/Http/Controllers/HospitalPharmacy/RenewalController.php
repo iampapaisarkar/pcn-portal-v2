@@ -105,8 +105,9 @@ class RenewalController extends Controller
         ->with('hospital_pharmacy', 'registration', 'user')
         ->latest()->first();
 
+
         if($registration){
-            if(($registration && $registration->status == 'licence_issued') && (date('Y-m-d') < \Carbon\Carbon::createFromFormat('Y-m-d', $registration->expires_at)->addDays(1)->format('Y-m-d'))){
+            if(($registration && $registration->status == 'licence_issued') && (date('Y-m-d') > \Carbon\Carbon::createFromFormat('Y-m-d', $registration->expires_at)->addDays(1)->format('Y-m-d'))){
                 return view('hospital-pharmacy.renew-form', compact('registration'));
             }else{
                 return abort(404);
@@ -118,7 +119,6 @@ class RenewalController extends Controller
     }
 
     public function renewalSubmit(RegistrationUpdateRequest $request){
-        // dd($request->all());
         try {
             DB::beginTransaction();
 
@@ -158,7 +158,7 @@ class RenewalController extends Controller
                     'user_id' => Auth::user()->id,
                     'registration_id' => $request->registration_id,
                     'form_id' => $request->hospital_registration_id,
-                    'type' => 'hospital_pharmacy',
+                    'type' => 'hospital_pharmacy_renewal',
                     'renewal_year' => date('Y'),
                     'expires_at' => \Carbon\Carbon::now()->format('Y') .'-12-31',
                     // 'licence' => 'TEST2021',

@@ -165,7 +165,7 @@ class DocumentPendingLicenceController extends Controller
 
                     $adminName = Auth::user()->firstname .' '. Auth::user()->lastname;
                     $activity = 'Registration & Licencing Issued Licence';
-                    AllActivity::storeActivity($request['registration_id'], $adminName, $activity, 'hospital_pharmacy');
+                    AllActivity::storeActivity($registration_id, $adminName, $activity, 'hospital_pharmacy');
 
                 }
                 $response = true;
