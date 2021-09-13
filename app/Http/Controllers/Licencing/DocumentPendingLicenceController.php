@@ -156,7 +156,7 @@ class DocumentPendingLicenceController extends Controller
                             'expires_at' => \Carbon\Carbon::now()->format('Y') .'-12-31',
                             'licence' => 'TEST2021',
                             'status' => 'licence_issued',
-                            // 'renewal' => true,
+                            'renewal' => false,
                             'inspection' => true,
                             'payment' => true,
                         ]);

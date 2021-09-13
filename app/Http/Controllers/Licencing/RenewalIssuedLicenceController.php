@@ -22,7 +22,8 @@ class RenewalIssuedLicenceController extends Controller
     {
         $documents = Renewal::where(['payment' => true])
         ->with('hospital_pharmacy', 'registration', 'user')
-        ->where('status', 'licence_issued');
+        ->where('status', 'licence_issued')
+        ->where('renewal', true);
         
         if($request->per_page){
             $perPage = (integer) $request->per_page;
@@ -114,6 +115,7 @@ class RenewalIssuedLicenceController extends Controller
         $registration = Renewal::where(['payment' => true, 'id' => $request['renewal_id'], 'user_id' => $request['user_id'], 'type' => 'hospital_pharmacy_renewal'])
         ->with('hospital_pharmacy', 'registration', 'user')
         ->where('status', 'licence_issued')
+        ->where('renewal', true)
         ->first();
 
         if($registration){

@@ -23,7 +23,7 @@ class CreateRenewalsTable extends Migration
             $table->date('expires_at');
             $table->string('licence')->nullable();
             $table->string('status');
-            // $table->string('renewal')->default(true);
+            $table->string('renewal')->default(true);
             $table->string('inspection')->default(false);
             $table->boolean('payment')->default(false);
             $table->longtext('query')->nullable();
