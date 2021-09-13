@@ -4,6 +4,7 @@ namespace App\Http\Services;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Registration;
 use App\Models\HospitalRegistration;
+use App\Models\Renewal;
 
 class HospitalRegistrationInfo
 {
@@ -111,5 +112,68 @@ class HospitalRegistrationInfo
                 'success' => false,
             ];
         }
+    }
+
+
+    public function canAccessRenewalPage(){
+        if(Renewal::where('user_id', Auth::user()->id)
+        ->where('renewal', true)
+        ->latest()
+        ->first()){
+            return $response = [
+                'response' => true,
+                'color' => 'warning',
+                'message' => 'You\'re already submited PPMV registration',
+            ]; 
+        
+        }else{
+            return $response = [
+                'response' => false,
+                'color' => 'warning',
+                'message' => 'You don\'t have licence or renwals yet.',
+            ];
+        }
+    }
+
+
+    public function licenceRenewalYearCheck(){
+        // $meptp = Auth::user()->passed_meptp_application()->first();
+
+        $renwal = Renewal::where('user_id', Auth::user()->id)->orderBy('renewal_year', 'desc')->first();
+
+        // if($renwal && $renwal->status == 'pending'){
+        //     return [
+        //         'response' => false
+        //     ];
+        // }
+        // if($renwal && $renwal->status == 'rejected'){
+        //     return [
+        //         'response' => false
+        //     ];
+        // }
+        // if($renwal && $renwal->status == 'approved'){
+        //     return [
+        //         'response' => false
+        //     ];
+        // }
+        // if($renwal && $renwal->status == 'recommended'){
+        //     return [
+        //         'response' => false
+        //     ];
+        // }
+        // if($renwal && $renwal->status == 'unrecommended'){
+        //     return [
+        //         'response' => false
+        //     ];
+        // }
+        if(($renwal && $renwal->status == 'licence_issued') && (date('Y-m-d') < \Carbon\Carbon::createFromFormat('Y-m-d', $renwal->expires_at)->addDays(1)->format('Y-m-d'))){
+            return [
+                'response' => false,
+                'renewal_date' => \Carbon\Carbon::createFromFormat('Y-m-d', $renwal->expires_at)->addDays(1)->format('d M, Y')
+            ];
+        }
+        return [
+            'response' => true
+        ];
     }
 }

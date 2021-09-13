@@ -263,7 +263,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="">
+                    <a href="{{route('hospital-renewals.index')}}">
                         <i class="nav-icon i-Notepad"></i>
                         <span class="item-name">Retention (Annual Renewal)</span>
                     </a>
