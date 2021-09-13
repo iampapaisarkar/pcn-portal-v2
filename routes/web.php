@@ -76,6 +76,11 @@ Route::group(['middleware' => ['auth','verified', 'can:isRegistry']], function (
     Route::get('registry-documents-hospital-show', 'App\Http\Controllers\Registry\DocumentInspectionController@hospitalPharmacyShow')->name('registry-documents-hospital-show');
     Route::post('registry-documents-approve-all', 'App\Http\Controllers\Registry\DocumentInspectionController@ApproveAll')->name('registry-documents-approve-all');
     Route::post('registry-documents-hospital-approve', 'App\Http\Controllers\Registry\DocumentInspectionController@hospitalPharmacyApprove')->name('registry-documents-hospital-approve');
+
+    Route::resource('registry-recommendation', 'App\Http\Controllers\Registry\DoumentRecommendationController');
+    Route::get('registry-recommendation-show', 'App\Http\Controllers\Registry\DoumentRecommendationController@hospitalPharmacyShow')->name('registry-recommendation-show');
+    Route::post('registry-approve-recommendation-all', 'App\Http\Controllers\Registry\DoumentRecommendationController@ApproveAll')->name('registry-approve-recommendation-all');
+    Route::post('registry-recommendation-approve', 'App\Http\Controllers\Registry\DoumentRecommendationController@hospitalPharmacyApprove')->name('registry-recommendation-approve');
 });
 
 // PHARMACY PRACTICE ROUTES 

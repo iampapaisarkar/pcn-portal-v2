@@ -1,14 +1,14 @@
 @extends('layouts.app')
 
 @section('content')
-@include('layouts.navbars.breadcrumb', ['page' => 'Facility Inspection', 'route' => 'registry-documents.index'])
+@include('layouts.navbars.breadcrumb', ['page' => 'Facility Inspection Report', 'route' => 'registry-recommendation.index'])
 <div class="row">
 <div class="col-lg-12 col-md-12">
-    <form id="approvedForm" class="w-100" method="POST" action="{{ route('registry-documents-approve-all') }}" enctype="multipart/form-data">
+    <form id="approvedForm" class="w-100" method="POST" action="{{ route('registry-approve-recommendation-all') }}" enctype="multipart/form-data">
     @csrf
     <div class="card text-left">
     <div class="card-body">
-        <h4>Facility Inspection - Inspection Pending</h4>
+        <h4>Facility Inspection Report - Inspection Recommendation</h4>
         <div class="table-responsive">
             <div class="row m-0">
                 <div class="col-sm-12 col-md-6">
@@ -27,7 +27,7 @@
                 </div>
                 <div class="col-sm-12 col-md-6">
                     <div id="multicolumn_ordering_table_filter" class="dataTables_filter float-right">
-                    <form method="GET" action="{{ route('registry-documents.index') }}">
+                    <form method="GET" action="{{ route('registry-recommendation.index') }}">
                     @csrf
                         <label>Search:
                             <input name="search" value="{{Request::get('search')}}" type="text" class="form-control form-control-sm" placeholder="" aria-controls="multicolumn_ordering_table">
@@ -41,7 +41,6 @@
                 <thead>
                     <tr>
                         <th>#</th>
-                        <th>Date</th>
                         <th>Category</th>
                         <th>Name</th>
                         <th>Type</th>
@@ -58,7 +57,6 @@
                                 <input class="check_box_bulk_action" id="check_box_bulk_action-{{$document->id}}" type="checkbox" name="check_box_bulk_action[{{$document->id}}]" /><span class="checkmark"></span>
                             </label>
                         </td>
-                        <td>{{$document->created_at->format('d/m/Y')}}</td>
                         <td>{{$document->category}}</td>
                         @if($document->type == 'hospital_pharmacy')
                         <td>{{$document->user->hospital_name}}</td>
@@ -67,10 +65,10 @@
                         <td>Hospital Pharmacy Registration</td>
                         @endif
                         <td>{{$document->registration_year}}</td>
-                        <td><span class="badge badge-pill m-1 badge-warning">Pending</span></td>
+                        <td><span class="badge badge-pill m-1 badge-success">RECOMMENDED</span></td>
                         <td>
                             @if($document->type == 'hospital_pharmacy')
-                            <a href="{{ route('registry-documents-hospital-show') }}?registration_id={{$document->id}}&user_id={{$document->user->id}}">
+                            <a href="{{ route('registry-recommendation-show') }}?registration_id={{$document->id}}&user_id={{$document->user->id}}">
                                 <button class="btn btn-success btn-sm" type="button"><i class="nav-icon i-Pen-2"></i></button>
                             </a>
                             @endif
@@ -81,7 +79,6 @@
                 <tfoot>
                     <tr>
                         <th>#</th>
-                        <th>Date</th>
                         <th>Vendor Name</th>
                         <th>Shop Name</th>
                         <th>Batch</th>

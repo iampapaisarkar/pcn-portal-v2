@@ -90,6 +90,13 @@ class HospitalRegistrationInfo
                     'download-link' => route('hospital-inspection-report-download', $HospitalRegistration->id),
                 ];
             }
+            if($HospitalRegistration->status == 'send_to_registration'){
+                return $response = [
+                    'success' => true,
+                    'message' => 'Recommended for Licensure',
+                    'color' => 'success',
+                ];
+            }
             
         }else{
             return $response = [
