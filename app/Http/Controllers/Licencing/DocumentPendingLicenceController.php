@@ -150,14 +150,14 @@ class DocumentPendingLicenceController extends Controller
                         $renewal = Renewal::create([
                             'user_id' => $Registration->user_id,
                             'registration_id' => $registration_id,
-                            'form_id' => $HospitalRegistration->type,
+                            'form_id' => $HospitalRegistration->id,
                             'type' => 'hospital_pharmacy',
                             'renewal_year' => date('Y'),
                             'expires_at' => \Carbon\Carbon::now()->format('Y') .'-12-31',
                             'licence' => 'TEST2021',
                             'status' => 'licence_issued',
-                            'renewal' => true,
-                            'inspection' => true,
+                            // 'renewal' => true,
+                            // 'inspection' => true,
                             'payment' => true,
                         ]);
 
@@ -215,8 +215,8 @@ class DocumentPendingLicenceController extends Controller
                         'expires_at' => \Carbon\Carbon::now()->format('Y') .'-12-31',
                         'licence' => 'TEST2021',
                         'status' => 'licence_issued',
-                        'renewal' => true,
-                        'inspection' => true,
+                        // 'renewal' => true,
+                        // 'inspection' => true,
                         'payment' => true,
                     ]);
 

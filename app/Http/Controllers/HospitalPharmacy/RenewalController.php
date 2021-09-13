@@ -98,4 +98,91 @@ class RenewalController extends Controller
     {
         //
     }
+
+    public function renew(){
+
+        $registration = Renewal::where('user_id', Auth::user()->id)
+        ->with('hospital_pharmacy', 'registration', 'user')
+        ->latest()->first();
+
+        if($registration){
+            if(($registration && $registration->status == 'licence_issued') && (date('Y-m-d') < \Carbon\Carbon::createFromFormat('Y-m-d', $registration->expires_at)->addDays(1)->format('Y-m-d'))){
+                return view('hospital-pharmacy.renew-form', compact('registration'));
+            }else{
+                return abort(404);
+            }
+        }else{
+            return abort(404);
+        }
+        
+    }
+
+    public function renewalSubmit(RegistrationUpdateRequest $request){
+        // dd($request->all());
+        try {
+            DB::beginTransaction();
+
+            if(Registration::where(['user_id' => Auth::user()->id, 'id' => $request->registration_id, 'type' => 'hospital_pharmacy'])->exists()){
+
+                $Registration = Registration::where(['user_id' => Auth::user()->id, 'id' => $request->registration_id, 'type' => 'hospital_pharmacy'])->first();
+
+                if($request->file('passport') != null){
+                    if($Registration->hospital_pharmacy->passport == $request->file('passport')->getClientOriginalName()){
+                        $passport = $Registration->hospital_pharmacy->passport;
+                    }else{
+                        $passport = FileUpload::upload($request->file('passport'), $private = true, 'hospital_pharmacy', 'passport');
+        
+                        $path = storage_path('app'. DIRECTORY_SEPARATOR . 'private' . 
+                        DIRECTORY_SEPARATOR . $request->user_id . DIRECTORY_SEPARATOR . 'hospital_pharmacy'. DIRECTORY_SEPARATOR . $Registration->hospital_pharmacy->passport);
+                        File::Delete($path);
+                    }
+                }else{
+                    $passport = $Registration->hospital_pharmacy->passport;
+                }
+
+                HospitalRegistration::where(['user_id' => Auth::user()->id, 'registration_id' => $request->registration_id])->update([
+                    'bed_capacity' =>$request->bed_capacity,
+                    'passport' => $passport,
+                    'pharmacist_name' => $request->pharmacist_name,
+                    'pharmacist_email' => $request->pharmacist_email,
+                    'pharmacist_phone' => $request->pharmacist_phone,
+                    'qualification_year' => $request->qualification_year,
+                    'registration_no' => $request->registration_no,
+                    'last_year_licence_no' => $request->last_year_licence_no,
+                    'residential_address' => $request->residential_address,
+                ]);
+
+                $previousRenwal = Renewal::where('user_id', Auth::user()->id)->orderBy('renewal_year', 'desc')->first();
+
+                $renewal = Renewal::create([
+                    'user_id' => Auth::user()->id,
+                    'registration_id' => $request->registration_id,
+                    'form_id' => $request->hospital_registration_id,
+                    'type' => 'hospital_pharmacy',
+                    'renewal_year' => date('Y'),
+                    'expires_at' => \Carbon\Carbon::now()->format('Y') .'-12-31',
+                    // 'licence' => 'TEST2021',
+                    'status' => 'licence_issued',
+                    // 'renewal' => true,
+                    'inspection' => $previousRenwal->inspection == true ? false : true,
+                    // 'payment' => true,
+                ]);
+
+                $response = Checkout::checkoutHospitalPharmacyRenewal($application = ['id' => $renewal->id], 'hospital_pharmacy');
+            }
+
+            DB::commit();
+
+            if($response['success']){
+                return redirect()->route('invoices.show', ['id' => $response['id']])
+                ->with('success', 'Renewal Application successfully submitted. Please pay amount for further action');
+            }else{
+                return back()->with('error','There is something error, please try after some time');
+            }
+
+        }catch(Exception $e) {
+            DB::rollback();
+            return back()->with('error','There is something error, please try after some time');
+        }  
+    }
 }

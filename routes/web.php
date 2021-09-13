@@ -122,6 +122,8 @@ Route::group(['middleware' => ['auth','verified', 'can:isHPharmacy', 'CheckProfi
     Route::get('/hospital-registration-status', 'App\Http\Controllers\HospitalPharmacy\RegistrationController@registrationStatus')->name('hospital-registration-status');
     
     Route::resource('hospital-renewals', 'App\Http\Controllers\HospitalPharmacy\RenewalController');
+    Route::get('/hospital-renew', 'App\Http\Controllers\HospitalPharmacy\RenewalController@renew')->name('hospital-renew');
+    Route::post('/hospital-renewal-submit', 'App\Http\Controllers\HospitalPharmacy\RenewalController@renewalSubmit')->name('hospital-renewal-submit');
 });
 
 // COMMUNITY PHARMACY ROUTES 

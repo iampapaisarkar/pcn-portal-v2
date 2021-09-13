@@ -9,7 +9,7 @@
             @if(app('App\Http\Services\HospitalRegistrationInfo')->canAccessRenewalPage()['response'])
                 <h2 class=" mb-6">Renewals</h2>
                 @if(app('App\Http\Services\HospitalRegistrationInfo')->licenceRenewalYearCheck()['response'])
-                <a href=""><button class="btn btn-primary" type="button">RENEW LICENCE</button></a>
+                <a href="{{route('hospital-renew')}}"><button class="btn btn-primary" type="button">RENEW LICENCE</button></a>
                 @else
                     @if(isset(app('App\Http\Services\HospitalRegistrationInfo')->licenceRenewalYearCheck()['renewal_date']))
                     <h5>You can renwal on {{app('App\Http\Services\HospitalRegistrationInfo')->licenceRenewalYearCheck()['renewal_date']}}</h5>
