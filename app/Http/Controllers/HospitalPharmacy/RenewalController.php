@@ -168,7 +168,7 @@ class RenewalController extends Controller
                     // 'payment' => true,
                 ]);
 
-                $response = Checkout::checkoutHospitalPharmacyRenewal($application = ['id' => $renewal->id], 'hospital_pharmacy');
+                $response = Checkout::checkoutHospitalPharmacyRenewal($application = ['id' => $renewal->id], 'hospital_pharmacy_renewal');
             }
 
             DB::commit();

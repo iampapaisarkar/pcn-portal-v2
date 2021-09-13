@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Registration;
 use App\Models\HospitalRegistration;
+use App\Models\Renewal;
 
 use App\Models\Service;
 use App\Models\ServiceFeeMeta;
@@ -53,14 +54,25 @@ class CheckoutController extends Controller
                     'payment' => true
                 ]);
 
-                // $application = HospitalRegistration::where(['id' => $order->application_id, 'user_id' => Auth::user()->id])->first();
-
                 $data = [
                     'order_id' => $order->order_id,
                     'amount' => $order->amount,
                     'type' => 'hospital_pharmacy',
                 ];
                 PaymentSuccessEmailJOB::dispatch($data);
+            }
+
+            if($order->service_type == 'hospital_pharmacy_renewal'){
+                Renewal::where(['id' => $order->application_id, 'user_id' => Auth::user()->id, 'type' => 'hospital_pharmacy_renewal'])->update([
+                    'payment' => true
+                ]);
+
+                $data = [
+                    'order_id' => $order->order_id,
+                    'amount' => $order->amount,
+                    'type' => 'hospital_pharmacy_renewal',
+                ];
+                // PaymentSuccessEmailJOB::dispatch($data);
             }
 
             return view('checkout.success', compact('order'));

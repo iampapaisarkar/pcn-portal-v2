@@ -11,8 +11,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Services\AllActivity;
 use DB;
 
-
-class DocumentPendingLicenceController extends Controller
+class RenewalPendingLicenceController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -21,8 +20,8 @@ class DocumentPendingLicenceController extends Controller
      */
     public function index(Request $request)
     {
-        $documents = Registration::where(['payment' => true])
-        ->with('hospital_pharmacy', 'user')
+        $documents = Renewal::where(['payment' => true])
+        ->with('hospital_pharmacy', 'registration', 'user')
         ->where('status', 'send_to_registration');
         
         if($request->per_page){
@@ -41,7 +40,7 @@ class DocumentPendingLicenceController extends Controller
 
         $documents = $documents->latest()->paginate($perPage);
 
-        return view('licencing.pending.index', compact('documents'));
+        return view('licencing.renewal-pending.index', compact('documents'));
     }
 
     /**
@@ -112,13 +111,13 @@ class DocumentPendingLicenceController extends Controller
 
     public function hospitalPharmacyShow(Request $request){
 
-        $registration = Registration::where(['payment' => true, 'id' => $request['registration_id'], 'user_id' => $request['user_id'], 'type' => 'hospital_pharmacy'])
-        ->with('hospital_pharmacy', 'user')
+        $registration = Renewal::where(['payment' => true, 'id' => $request['renewal_id'], 'user_id' => $request['user_id'], 'type' => 'hospital_pharmacy_renewal'])
+        ->with('hospital_pharmacy', 'registration', 'user')
         ->where('status', 'send_to_registration')
         ->first();
 
         if($registration){
-            return view('licencing.pending.hospital-show', compact('registration'));
+            return view('licencing.renewal-pending.hospital-show', compact('registration'));
         }else{
             return abort(404);
         }
@@ -131,36 +130,29 @@ class DocumentPendingLicenceController extends Controller
             $checkboxes = isset($request->check_box_bulk_action) ? true : false;
 
             if($checkboxes == true){
-                foreach($request->check_box_bulk_action as $registration_id => $registration){
+                foreach($request->check_box_bulk_action as $renewal_id => $newRenewal){
 
-                    $Registration = Registration::where(['payment' => true, 'id' => $registration_id])
+
+                    $renewal = Renewal::where(['payment' => true, 'id' => $renewal_id])
+                    ->with('hospital_pharmacy', 'registration', 'user')
                     ->where('status', 'send_to_registration')
                     ->first();
 
-                    Registration::where(['payment' => true, 'id' => $registration_id])
-                    ->where('status', 'send_to_registration')
-                    ->update([
-                        'status' => 'licence_issued'
-                    ]);
+                    if($renewal){
 
-                    if($Registration->type == 'hospital_pharmacy'){
-
-                        $HospitalRegistration = HospitalRegistration::where(['registration_id' => $registration_id, 'user_id' => $Registration->user_id])->latest()->first();
-
-                        $renewal = Renewal::create([
-                            'user_id' => $Registration->user_id,
-                            'registration_id' => $registration_id,
-                            'form_id' => $HospitalRegistration->id,
-                            'type' => 'hospital_pharmacy_renewal',
-                            'renewal_year' => date('Y'),
-                            'expires_at' => \Carbon\Carbon::now()->format('Y') .'-12-31',
+                        Renewal::where(['payment' => true, 'id' => $request['renewal_id'], 'user_id' => $request['user_id']])
+                        ->where('status', 'send_to_registration')
+                        ->update([
                             'licence' => 'TEST2021',
-                            'status' => 'licence_issued',
-                            // 'renewal' => true,
-                            'inspection' => true,
-                            'payment' => true,
+                            'status' => 'licence_issued'
                         ]);
+                        
+                        $adminName = Auth::user()->firstname .' '. Auth::user()->lastname;
+                        $activity = 'Registration & Licencing Licence Renewal Issued';
+                        AllActivity::storeActivity($request['registration_id'], $adminName, $activity, 'hospital_pharmacy');
 
+                    }else{
+                        return abort(404);
                     }
 
                     $adminName = Auth::user()->firstname .' '. Auth::user()->lastname;
@@ -193,35 +185,22 @@ class DocumentPendingLicenceController extends Controller
         try {
             DB::beginTransaction();
 
-                $registration = Registration::where(['payment' => true, 'id' => $request['registration_id'], 'user_id' => $request['user_id'], 'type' => 'hospital_pharmacy'])
+                $renewal = Renewal::where(['payment' => true, 'id' => $request['renewal_id'], 'user_id' => $request['user_id'], 'type' => 'hospital_pharmacy_renewal'])
+                ->with('hospital_pharmacy', 'registration', 'user')
                 ->where('status', 'send_to_registration')
                 ->first();
 
-                if($registration){
-                    Registration::where(['payment' => true, 'id' => $request['registration_id'], 'user_id' => $request['user_id'], 'type' => 'hospital_pharmacy'])
+                if($renewal){
+
+                    Renewal::where(['payment' => true, 'id' => $request['renewal_id'], 'user_id' => $request['user_id'], 'type' => 'hospital_pharmacy_renewal'])
                     ->where('status', 'send_to_registration')
                     ->update([
+                        'licence' => 'TEST2021',
                         'status' => 'licence_issued'
                     ]);
-
-                    $HospitalRegistration = HospitalRegistration::where(['registration_id' => $request['registration_id'], 'user_id' => $request['user_id']])->latest()->first();
-
-                    $renewal = Renewal::create([
-                        'user_id' => $registration->user_id,
-                        'registration_id' => $registration->id,
-                        'form_id' => $HospitalRegistration->id,
-                        'type' => 'hospital_pharmacy_renewal',
-                        'renewal_year' => date('Y'),
-                        'expires_at' => \Carbon\Carbon::now()->format('Y') .'-12-31',
-                        'licence' => 'TEST2021',
-                        'status' => 'licence_issued',
-                        // 'renewal' => true,
-                        // 'inspection' => true,
-                        'payment' => true,
-                    ]);
-
+                    
                     $adminName = Auth::user()->firstname .' '. Auth::user()->lastname;
-                    $activity = 'Registration & Licencing Issued Licence';
+                    $activity = 'Registration & Licencing Licence Renewal Issued';
                     AllActivity::storeActivity($request['registration_id'], $adminName, $activity, 'hospital_pharmacy');
 
                 }else{

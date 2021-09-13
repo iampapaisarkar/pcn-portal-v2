@@ -234,13 +234,13 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="">
+                    <a href="{{route('renewal-pending.index')}}">
                         <i class="nav-icon i-Receipt-4"></i>
                         <span class="item-name">Facility Renewal Licence Pending</span>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="">
+                    <a href="{{route('renewal-issued.index')}}">
                         <i class="nav-icon i-Receipt-4"></i>
                         <span class="item-name">Facility Renewal Licence Issued</span>
                     </a>
