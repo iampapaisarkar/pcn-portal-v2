@@ -20,6 +20,12 @@
                             </div>
                             @endif
 
+                            @if(isset(app('App\Http\Services\HospitalRegistrationInfo')->status()['download-licence']))
+                            <br>
+                            <br>
+                            <a href="{{app('App\Http\Services\HospitalRegistrationInfo')->status()['download-licence']}}" class="btn btn-success text-white btn-rounded ">Downlaod Licence</a>
+                            @endif
+
                             @if(isset(app('App\Http\Services\HospitalRegistrationInfo')->status()['link']))
                             <br>
                             <br>

@@ -22,7 +22,7 @@ class DoumentRecommendationController extends Controller
         $documents = Registration::where(['payment' => true])
         ->with('hospital_pharmacy', 'user')
         ->where(function($q){
-            $q->orWhere('status', 'partial_recommendation');
+            $q->where('status', 'partial_recommendation');
             $q->orWhere('status', 'full_recommendation');
         });
         
@@ -116,7 +116,7 @@ class DoumentRecommendationController extends Controller
         $registration = Registration::where(['payment' => true, 'id' => $request['registration_id'], 'user_id' => $request['user_id'], 'type' => 'hospital_pharmacy'])
         ->with('hospital_pharmacy', 'user')
         ->where(function($q){
-            $q->orWhere('status', 'partial_recommendation');
+            $q->where('status', 'partial_recommendation');
             $q->orWhere('status', 'full_recommendation');
         })
         ->first();
@@ -139,14 +139,14 @@ class DoumentRecommendationController extends Controller
 
                     $Registration = Registration::where(['payment' => true, 'id' => $registration_id])
                     ->where(function($q){
-                        $q->orWhere('status', 'partial_recommendation');
+                        $q->where('status', 'partial_recommendation');
                         $q->orWhere('status', 'full_recommendation');
                     })
                                 ->first();
 
-                                Registration::where(['payment' => true, 'id' => $registration_id])
-                                ->where(function($q){
-                        $q->orWhere('status', 'partial_recommendation');
+                    Registration::where(['payment' => true, 'id' => $registration_id])
+                    ->where(function($q){
+                        $q->where('status', 'partial_recommendation');
                         $q->orWhere('status', 'full_recommendation');
                     })
                     ->update([
@@ -182,7 +182,7 @@ class DoumentRecommendationController extends Controller
 
         $registration = Registration::where(['payment' => true, 'id' => $request['registration_id'], 'user_id' => $request['user_id'], 'type' => 'hospital_pharmacy'])
         ->where(function($q){
-            $q->orWhere('status', 'partial_recommendation');
+            $q->where('status', 'partial_recommendation');
             $q->orWhere('status', 'full_recommendation');
         })
         ->first();
@@ -190,7 +190,7 @@ class DoumentRecommendationController extends Controller
         if($registration){
             Registration::where(['payment' => true, 'id' => $request['registration_id'], 'user_id' => $request['user_id'], 'type' => 'hospital_pharmacy'])
             ->where(function($q){
-                $q->orWhere('status', 'partial_recommendation');
+                $q->where('status', 'partial_recommendation');
                 $q->orWhere('status', 'full_recommendation');
             })
             ->update([

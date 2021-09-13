@@ -97,6 +97,14 @@ class HospitalRegistrationInfo
                     'color' => 'success',
                 ];
             }
+            if($HospitalRegistration->status == 'licence_issued'){
+                return $response = [
+                    'success' => true,
+                    'message' => 'Licence Issued ',
+                    'color' => 'success',
+                    'download-licence' => route('hospital-inspection-report-download', $HospitalRegistration->id),
+                ];
+            }
             
         }else{
             return $response = [

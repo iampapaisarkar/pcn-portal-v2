@@ -229,21 +229,19 @@
         <!-- Registration licencing cards start  -->
         @can('isRLicencing')
         <div class="row">
-            <div class="col-lg-6 col-md-6 col-sm-6">
+            <div class="col-lg-3 col-md-3 col-sm-6">
                 <div class="card card-icon mb-4">
                     <div class="card-body text-center"><i class="i-Diploma"></i>
-                        <p class="text-muted mt-2 mb-2">{{$data['ppmv_pending']['type']}}</p>
-                        <p class="text-muted mt-2 mb-2">{{$data['ppmv_pending']['status']}}</p>
-                        <p class="text-primary text-60 line-height-1 m-0">{{$data['ppmv_pending']['total']}}</p>
+                        <h3 class="text-muted mt-2 mb-2">Tiered PPMV Registration Licence Pending</h3>
+                        <p class="text-primary text-60 line-height-1 m-0">60</p>
                     </div>
                 </div>
             </div>
-            <div class="col-lg-6 col-md-6 col-sm-6">
+            <div class="col-lg-3 col-md-3 col-sm-6">
                 <div class="card card-icon mb-4">
                     <div class="card-body text-center"><i class="i-Diploma"></i>
-                        <p class="text-muted mt-2 mb-2">{{$data['ppmv_approved']['type']}}</p>
-                        <p class="text-muted mt-2 mb-2">{{$data['ppmv_approved']['status']}}</p>
-                        <p class="text-primary text-60 line-height-1 m-0">{{$data['ppmv_approved']['total']}}</p>
+                        <h3 class="text-muted mt-2 mb-2">Tiered PPMV Registration Licence Approved</h3>
+                        <p class="text-primary text-60 line-height-1 m-0">60</p>
                     </div>
                 </div>
             </div>

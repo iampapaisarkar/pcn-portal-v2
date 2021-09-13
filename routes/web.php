@@ -101,7 +101,10 @@ Route::group(['middleware' => ['auth','verified', 'can:isIMonitoring']], functio
 
 // REGISTERING & LECENCING ROUTES 
 Route::group(['middleware' => ['auth','verified', 'can:isRLicencing']], function () {
-  
+    Route::resource('licence-pending', 'App\Http\Controllers\Licencing\DocumentPendingLicenceController');
+    Route::get('licence-pending-hospital-show', 'App\Http\Controllers\Licencing\DocumentPendingLicenceController@hospitalPharmacyShow')->name('licence-pending-hospital-show');
+    Route::post('licence-pending-approve-all', 'App\Http\Controllers\Licencing\DocumentPendingLicenceController@ApproveAll')->name('licence-pending-approve-all');
+    Route::post('licence-pending-hospital-approve', 'App\Http\Controllers\Licencing\DocumentPendingLicenceController@hospitalPharmacyApprove')->name('licence-pending-hospital-approve');
 });
 
 

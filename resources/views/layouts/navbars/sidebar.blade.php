@@ -222,15 +222,27 @@
                 <!-- Registration licencing routes start  -->
                 @can('isRLicencing')
                 <li class="nav-item">
-                    <a href="{{route('ppmv-licence-pending-lists')}}">
+                    <a href="{{route('licence-pending.index')}}">
                         <i class="nav-icon i-Receipt-4"></i>
-                        <span class="item-name">PPMV Registration - Licence Pending</span>
+                        <span class="item-name">Facility Registration Licence Pending</span>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="{{route('ppmv-licence-issued-lists')}}">
+                    <a href="">
                         <i class="nav-icon i-Receipt-4"></i>
-                        <span class="item-name">PPMV Registration - Licence Issued</span>
+                        <span class="item-name">Facility Registration Licence Issued</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="">
+                        <i class="nav-icon i-Receipt-4"></i>
+                        <span class="item-name">Facility Renewal Licence Pending</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="">
+                        <i class="nav-icon i-Receipt-4"></i>
+                        <span class="item-name">Facility Renewal Licence Issued</span>
                     </a>
                 </li>
                 @endcan
