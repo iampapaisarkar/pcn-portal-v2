@@ -185,4 +185,82 @@ class RenewalController extends Controller
             return back()->with('error','There is something error, please try after some time');
         }  
     }
+
+    public function renewalEdit($id){
+
+        $registration = Renewal::where('user_id', Auth::user()->id)
+        ->where('status', 'no_recommendation')
+        ->with('hospital_pharmacy', 'registration', 'user')
+        ->latest()->first();
+
+        if($registration){
+            return view('hospital-pharmacy.renewal-form-edit', compact('registration'));
+        }else{
+            return abort(404);
+        }
+    }
+
+    public function renewalUpdate(RegistrationUpdateRequest $request, $id){
+
+        try {
+            DB::beginTransaction();
+
+            if(Renewal::where(['user_id' => Auth::user()->id, 'id' => $id, 'type' => 'hospital_pharmacy_renewal'])->where('status', 'no_recommendation')->exists()){
+
+                $renewal = Renewal::where(['user_id' => Auth::user()->id, 'id' => $id, 'type' => 'hospital_pharmacy_renewal'])
+                ->where('status', 'no_recommendation')
+                ->with('hospital_pharmacy', 'registration', 'user')
+                ->first();
+
+                if($request->file('passport') != null){
+                    if($renewal->hospital_pharmacy->passport == $request->file('passport')->getClientOriginalName()){
+                        $passport = $renewal->hospital_pharmacy->passport;
+                    }else{
+                        $passport = FileUpload::upload($request->file('passport'), $private = true, 'hospital_pharmacy', 'passport');
+        
+                        $path = storage_path('app'. DIRECTORY_SEPARATOR . 'private' . 
+                        DIRECTORY_SEPARATOR . $request->user_id . DIRECTORY_SEPARATOR . 'hospital_pharmacy'. DIRECTORY_SEPARATOR . $renewal->hospital_pharmacy->passport);
+                        File::Delete($path);
+                    }
+                }else{
+                    $passport = $renewal->hospital_pharmacy->passport;
+                }
+
+                Renewal::where(['user_id' => Auth::user()->id, 'id' => $id, 'type' => 'hospital_pharmacy_renewal'])
+                ->where('status', 'no_recommendation')
+                ->with('hospital_pharmacy', 'registration', 'user')
+                ->update([
+                    'status' => 'send_to_pharmacy_practice',
+                    'payment' => false,
+                ]);
+
+                HospitalRegistration::where(['user_id' => Auth::user()->id, 'registration_id' => $id])->update([
+                    'bed_capacity' =>$request->bed_capacity,
+                    'passport' => $passport,
+                    'pharmacist_name' => $request->pharmacist_name,
+                    'pharmacist_email' => $request->pharmacist_email,
+                    'pharmacist_phone' => $request->pharmacist_phone,
+                    'qualification_year' => $request->qualification_year,
+                    'registration_no' => $request->registration_no,
+                    'last_year_licence_no' => $request->last_year_licence_no,
+                    'residential_address' => $request->residential_address,
+                ]);
+
+                $response = Checkout::checkoutHospitalPharmacyRenewal($application = ['id' => $renewal->id], 'hospital_pharmacy_renewal');
+            }
+
+            DB::commit();
+
+            if($response['success']){
+                return redirect()->route('invoices.show', ['id' => $response['id']])
+                ->with('success', 'Renewal Application successfully updated. Please pay amount for further action');
+            }else{
+                return back()->with('error','There is something error, please try after some time');
+            }
+
+        }catch(Exception $e) {
+            DB::rollback();
+            return back()->with('error','There is something error, please try after some time');
+        }  
+    }
 }

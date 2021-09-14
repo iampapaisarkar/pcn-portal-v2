@@ -44,12 +44,18 @@
                                     <p><span class="rounded badge w-badge badge-warning">PENDING</span></p>
                                 @endif
                                 @if($renewal->status == 'no_recommendation')
-                                    <p><span class="rounded badge w-badge badge-warning">NOT RECOMMENDED</span></p>
+                                    <p><span class="rounded badge w-badge badge-danger">NOT RECOMMENDATION</span></p>
+                                    <a target="_blank" href="{{route('hospital-inspection-report-download', $renewal->registration->id)}}" class="btn btn-sm btn-primary">Download Report</a>
                                 @endif
                                 @if($renewal->status == 'partial_recommendation')
-                                    <p><span class="rounded badge w-badge badge-warning">PENDING</span></p>
+                                    <p><span class="rounded badge w-badge badge-warning">PARTIAL RECOMMENDATION</span></p>
+                                    <a target="_blank" href="{{route('hospital-inspection-report-download', $renewal->registration->id)}}" class="btn btn-sm btn-primary">Download Report</a>
                                 @endif
                                 @if($renewal->status == 'full_recommendation')
+                                    <p><span class="rounded badge w-badge badge-success">FULL RECOMMENDATION</span></p>
+                                    <a target="_blank" href="{{route('hospital-inspection-report-download', $renewal->registration->id)}}" class="btn btn-sm btn-primary">Download Report</a>
+                                @endif
+                                @if($renewal->status == 'send_to_registration')
                                     <p><span class="rounded badge w-badge badge-warning">PENDING</span></p>
                                 @endif
                                 @if($renewal->status == 'licence_issued')
@@ -57,8 +63,8 @@
                                 @endif
                                 </td>
                                 <td>
-                                @if($renewal->status == 'unrecommended')
-                                <a href=""><button class="btn btn-info btn-icon btn-sm m-0" type="button"> UPDATE APPLICATION</button></a>
+                                @if($renewal->status == 'no_recommendation')
+                                <a href="{{route('hospital-renewal-edit', $renewal->id)}}"><button class="btn btn-info btn-icon btn-sm m-0" type="button">UPDATE APPLICATION</button></a>
                                 @endif
                                 @if($renewal->status == 'licence_issued')
                                 <a target="_blank" href=""><button class="btn btn-info btn-icon btn-sm m-0" type="button"> <span class="ul-btn__icon"><i class="i-Gear-2"></i></span> <span class="ul-btn__text">LICENCE</span></button></a>

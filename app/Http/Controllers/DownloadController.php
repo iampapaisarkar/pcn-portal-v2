@@ -15,11 +15,11 @@ class DownloadController extends Controller
 
         $registration = Registration::where(['payment' => true, 'id' => $id, 'type' => 'hospital_pharmacy'])
         ->with('hospital_pharmacy', 'user')
-        ->where(function($q){
-            $q->where('status', 'no_recommendation');
-            $q->orWhere('status', 'partial_recommendation');
-            $q->orWhere('status', 'full_recommendation');
-        })
+        // ->where(function($q){
+        //     $q->where('status', 'no_recommendation');
+        //     $q->orWhere('status', 'partial_recommendation');
+        //     $q->orWhere('status', 'full_recommendation');
+        // })
         ->first();
 
         if($registration){
