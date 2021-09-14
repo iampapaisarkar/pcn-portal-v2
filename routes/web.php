@@ -79,6 +79,12 @@ Route::group(['middleware' => ['auth','verified', 'can:isRegistry']], function (
     Route::get('registry-recommendation-show', 'App\Http\Controllers\Registry\DoumentRecommendationController@hospitalPharmacyShow')->name('registry-recommendation-show');
     Route::post('registry-approve-recommendation-all', 'App\Http\Controllers\Registry\DoumentRecommendationController@ApproveAll')->name('registry-approve-recommendation-all');
     Route::post('registry-recommendation-approve', 'App\Http\Controllers\Registry\DoumentRecommendationController@hospitalPharmacyApprove')->name('registry-recommendation-approve');
+
+
+    Route::resource('registry-renewal-pending', 'App\Http\Controllers\Registry\RenewalInspectionController');
+    Route::get('registry-renewal-pending-hospital-show', 'App\Http\Controllers\Registry\RenewalInspectionController@hospitalPharmacyShow')->name('registry-renewal-pending-hospital-show');
+    Route::post('registry-renewal-pending-approve-all', 'App\Http\Controllers\Registry\RenewalInspectionController@ApproveAll')->name('registry-renewal-pending-approve-all');
+    Route::post('registry-renewal-pending-hospital-approve', 'App\Http\Controllers\Registry\RenewalInspectionController@hospitalPharmacyApprove')->name('registry-renewal-pending-hospital-approve');
 });
 
 // PHARMACY PRACTICE ROUTES 

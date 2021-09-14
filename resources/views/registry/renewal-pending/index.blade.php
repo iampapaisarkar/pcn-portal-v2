@@ -1,12 +1,14 @@
 @extends('layouts.app')
 
 @section('content')
-@include('layouts.navbars.breadcrumb', ['page' => 'Facility Licence Issued', 'route' => 'renewal-issued.index'])
+@include('layouts.navbars.breadcrumb', ['page' => 'Renewal Inspection', 'route' => 'registry-renewal-pending.index'])
 <div class="row">
 <div class="col-lg-12 col-md-12">
+    <form id="approvedForm" class="w-100" method="POST" action="{{ route('registry-renewal-pending-approve-all') }}" enctype="multipart/form-data">
+    @csrf
     <div class="card text-left">
     <div class="card-body">
-        <h4>Facility Licence Issued</h4>
+        <h4>Facility Renewal Inspection - Inspection Pending</h4>
         <div class="table-responsive">
             <div class="row m-0">
                 <div class="col-sm-12 col-md-6">
@@ -25,7 +27,7 @@
                 </div>
                 <div class="col-sm-12 col-md-6">
                     <div id="multicolumn_ordering_table_filter" class="dataTables_filter float-right">
-                    <form method="GET" action="{{ route('renewal-issued.index') }}">
+                    <form method="GET" action="{{ route('registry-renewal-pending.index') }}">
                     @csrf
                         <label>Search:
                             <input name="search" value="{{Request::get('search')}}" type="text" class="form-control form-control-sm" placeholder="" aria-controls="multicolumn_ordering_table">
@@ -38,6 +40,7 @@
             <table class="display table table-striped table-bordered" style="width:100%">
                 <thead>
                     <tr>
+                        <th>#</th>
                         <th>Category</th>
                         <th>Name</th>
                         <th>Type</th>
@@ -49,19 +52,24 @@
                 <tbody>
                     @foreach($documents as $document)
                     <tr>
+                        <td>
+                            <label class="checkbox checkbox-success">
+                                <input class="check_box_bulk_action" id="check_box_bulk_action-{{$document->id}}" type="checkbox" name="check_box_bulk_action[{{$document->id}}]" /><span class="checkmark"></span>
+                            </label>
+                        </td>
                         <td>{{$document->registration->category}}</td>
                         @if($document->registration->type == 'hospital_pharmacy')
                         <td>{{$document->user->hospital_name}}</td>
                         @endif
                         @if($document->registration->type == 'hospital_pharmacy')
-                        <td>Hospital Pharmacy Renewal</td>
+                        <td>Hospital Pharmacy Registration</td>
                         @endif
                         <td>{{$document->renewal_year}}</td>
-                        <td><span class="badge badge-pill m-1 badge-success">LICENCE ISSUED</span></td>
+                        <td><span class="badge badge-pill m-1 badge-warning">Pending</span></td>
                         <td>
-                            @if($document->type == 'hospital_pharmacy_renewal')
-                            <a href="{{ route('renewal-issued-hospital-show') }}?renewal_id={{$document->id}}&user_id={{$document->user->id}}">
-                                <button class="btn btn-success btn-sm" type="button"><i class="nav-icon i-Eye"></i></button>
+                            @if($document->registration->type == 'hospital_pharmacy')
+                            <a href="{{ route('registry-renewal-pending-hospital-show') }}?renewal_id={{$document->id}}&user_id={{$document->user->id}}">
+                                <button class="btn btn-success btn-sm" type="button"><i class="nav-icon i-Pen-2"></i></button>
                             </a>
                             @endif
                         </td>
@@ -70,6 +78,7 @@
                 </tbody>
                 <tfoot>
                     <tr>
+                        <th>#</th>
                         <th>Category</th>
                         <th>Name</th>
                         <th>Type</th>
@@ -81,8 +90,10 @@
             </table>
             {{$documents->links('pagination')}}
         </div>
+        <button onclick="approveSelected(event)" type="button" class="btn btn-primary mt-5">APPROVE SELETECD FOR FACILITY INSPECTION</button>
     </div>
 </div>
+</form>
 </div>
 </div>
     <script type="text/javascript">
@@ -107,6 +118,29 @@
             var new_url = location.protocol + '//' + location.host + location.pathname + mParams;
             window.location.href = new_url;
         }
+    }
+
+    function approveSelected(event){
+        event.preventDefault();
+
+        $.confirm({
+            title: 'APPROVE SELETECD FOR FACILITY INSPECTION',
+            content: 'Are you sure want to approve for seleted registration?',
+            buttons: {   
+                ok: {
+                    text: "YES",
+                    btnClass: 'btn-primary',
+                    keys: ['enter'],
+                    action: function(){
+                        document.getElementById('approvedForm').submit();
+                    }
+                },
+                cancel: function(){
+                        console.log('the user clicked cancel');
+                }
+            }
+        });
+
     }
     </script>
 @endsection

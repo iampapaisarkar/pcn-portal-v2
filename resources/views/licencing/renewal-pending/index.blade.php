@@ -64,7 +64,7 @@
                         @if($document->registration->type == 'hospital_pharmacy')
                         <td>Hospital Pharmacy Registration</td>
                         @endif
-                        <td>{{$document->registration->registration_year}}</td>
+                        <td>{{$document->renewal_year}}</td>
                         <td><span class="badge badge-pill m-1 badge-success">RECOMMENDED</span></td>
                         <td>
                             @if($document->type == 'hospital_pharmacy_renewal')
