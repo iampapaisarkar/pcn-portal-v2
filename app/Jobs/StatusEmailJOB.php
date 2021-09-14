@@ -10,15 +10,10 @@ use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use App\Http\Services\EmailSend;
 
-class MEPTPQueryEmailJOB implements ShouldQueue
+class StatusEmailJOB implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
-    /**
-     * Create a new job instance.
-     *
-     * @return void
-     */
     public  $data;
     /**
      * Create a new job instance.
@@ -37,6 +32,6 @@ class MEPTPQueryEmailJOB implements ShouldQueue
      */
     public function handle()
     {
-        EmailSend::sendMEPTPQueryEmail($this->data);
+        EmailSend::sendMail($this->data);
     }
 }
