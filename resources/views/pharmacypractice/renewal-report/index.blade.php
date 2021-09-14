@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-@include('layouts.navbars.breadcrumb', ['page' => 'Facility Inspection Report', 'route' => 'pharmacy-practice-reports.index'])
+@include('layouts.navbars.breadcrumb', ['page' => 'Facility Inspection Report', 'route' => 'pharmacy-renewal-reports.index'])
 <div class="row">
 <div class="col-lg-12 col-md-12">
     <div class="card text-left">
@@ -25,7 +25,7 @@
                 </div>
                 <div class="col-sm-12 col-md-6">
                     <div id="multicolumn_ordering_table_filter" class="dataTables_filter float-right">
-                    <form method="GET" action="{{ route('pharmacy-practice-reports.index') }}">
+                    <form method="GET" action="{{ route('pharmacy-renewal-reports.index') }}">
                     @csrf
                         <label>Search:
                             <input name="search" value="{{Request::get('search')}}" type="text" class="form-control form-control-sm" placeholder="" aria-controls="multicolumn_ordering_table">
@@ -51,14 +51,14 @@
                     @foreach($documents as $document)
                     <tr>
                         <td>{{$document->created_at->format('d/m/Y')}}</td>
-                        <td>{{$document->category}}</td>
-                        @if($document->type == 'hospital_pharmacy')
+                        <td>{{$document->registration->category}}</td>
+                        @if($document->registration->type == 'hospital_pharmacy')
                         <td>{{$document->user->hospital_name}}</td>
                         @endif
-                        @if($document->type == 'hospital_pharmacy')
+                        @if($document->registration->type == 'hospital_pharmacy')
                         <td>Hospital Pharmacy Registration</td>
                         @endif
-                        <td>{{$document->registration_year}}</td>
+                        <td>{{$document->registration->registration_year}}</td>
                         @if($document->status == 'no_recommendation')
                         <td><span class="badge badge-pill m-1 badge-danger">NO RECOMMENDATION</span></td>
                         @endif
@@ -69,8 +69,8 @@
                         <td><span class="badge badge-pill m-1 badge-success">FULL RECOMMENDATION</span></td>
                         @endif
                         <td>
-                            @if($document->type == 'hospital_pharmacy')
-                            <a href="{{ route('pharmacy-practice-reports-show') }}?registration_id={{$document->id}}&user_id={{$document->user->id}}">
+                            @if($document->registration->type == 'hospital_pharmacy')
+                            <a href="{{ route('pharmacy-renewal-reports-show') }}?renewal_id={{$document->id}}&user_id={{$document->user->id}}">
                                 <button class="btn btn-success btn-sm" type="button"><i class="nav-icon i-Eye"></i></button>
                             </a>
                             @endif
