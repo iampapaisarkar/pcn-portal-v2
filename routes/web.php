@@ -96,6 +96,12 @@ Route::group(['middleware' => ['auth','verified', 'can:isPPractice']], function 
     Route::resource('pharmacy-practice-reports', 'App\Http\Controllers\PharmacyPractice\DocumentReportController');
     Route::get('pharmacy-practice-reports-show', 'App\Http\Controllers\PharmacyPractice\DocumentReportController@hospitalPharmacyShow')->name('pharmacy-practice-reports-show');
 
+
+    
+
+    Route::resource('pharmacy-renewal-pending', 'App\Http\Controllers\PharmacyPractice\RenewalInspectionController');
+    Route::get('pharmacy-renewal-pending-hospital-show', 'App\Http\Controllers\PharmacyPractice\RenewalInspectionController@hospitalPharmacyShow')->name('pharmacy-renewal-pending-hospital-show');
+    Route::post('pharmacy-renewal-hospital-inspection', 'App\Http\Controllers\PharmacyPractice\RenewalInspectionController@hospitalPharmacyInspectionupdate')->name('pharmacy-renewal-hospital-inspection');
 });
 
 // INSPECTION & MONITORING ROUTES 
