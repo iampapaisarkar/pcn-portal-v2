@@ -2,7 +2,7 @@
 
 
 @if($data['registration_type'] == 'hospital_pharmacy')
-# Hospital Pharmacy Registration Payment Notification - {{env('APP_NAME')}}
+# Hospital Pharmacy Registration Payment - {{env('APP_NAME')}}
 <div>Hello {{$data['user']['firstname']}} {{$data['user']['lastname']}}, <br>
 This is to acknowledge your application and payment of the sum of N{{$data['amount']}} being made for PCN HOSPITAL REGISTRATION).
 @endif

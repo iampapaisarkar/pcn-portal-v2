@@ -8,6 +8,7 @@ use App\Models\Registration;
 use App\Models\HospitalRegistration;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Services\AllActivity;
+use App\Jobs\EmailSendJOB;
 
 class DocumentReviewController extends Controller
 {
@@ -160,6 +161,7 @@ class DocumentReviewController extends Controller
 
         $registration = Registration::where(['payment' => true, 'id' => $request['registration_id'], 'user_id' => $request['user_id'], 'type' => 'hospital_pharmacy'])
         ->where('status', 'send_to_state_office')
+        ->with('user')
         ->whereHas('user', function($q){
             $q->where('state', Auth::user()->state);
         })
@@ -179,6 +181,13 @@ class DocumentReviewController extends Controller
             $adminName = Auth::user()->firstname .' '. Auth::user()->lastname;
             $activity = 'State Officer Document Verification Query';
             AllActivity::storeActivity($request['registration_id'], $adminName, $activity, 'hospital_pharmacy');
+
+            $data = [
+                'user' => $registration->user,
+                'registration_type' => 'hospital_pharmacy',
+                'type' => 'state_office_query',
+            ];
+            EmailSendJOB::dispatch($data);
 
             return redirect()->route('state-office-documents.index')->with('success', 'Registration Queried successfully done');
         }else{

@@ -9,6 +9,7 @@ use App\Models\Payment;
 use DB;
 use Mail;
 use App\Mail\PaymentSuccessEmail;
+use App\Mail\StateOfficeQueryEmail;
 
 class EmailSend
 {
@@ -18,6 +19,21 @@ class EmailSend
             DB::beginTransaction();
 
             Mail::to($data['user']['email'])->send(new PaymentSuccessEmail($data));
+
+            DB::commit();
+            return ['success' => true];
+        }catch(Exception $e) {
+            DB::rollback();
+            return ['success' => false];
+        }  
+    }
+
+    public static function sendStateOfficeQueryEMAIL($data){
+
+        try {
+            DB::beginTransaction();
+
+            Mail::to($data['user']['email'])->send(new StateOfficeQueryEmail($data));
 
             DB::commit();
             return ['success' => true];

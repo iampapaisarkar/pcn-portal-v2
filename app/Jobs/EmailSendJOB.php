@@ -35,5 +35,8 @@ class EmailSendJOB implements ShouldQueue
         if($this->data['type'] == 'payment_success'){
             EmailSend::sendPaymentSuccessEMAIL($this->data);
         }
+        if($this->data['type'] == 'state_office_query'){
+            EmailSend::sendStateOfficeQueryEMAIL($this->data);
+        }
     }
 }
