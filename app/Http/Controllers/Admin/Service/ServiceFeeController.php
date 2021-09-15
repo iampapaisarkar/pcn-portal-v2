@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin\Service;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Service;
+use App\Models\ChildService;
 use App\Models\ServiceFeeMeta;
 use DB;
 
@@ -17,9 +18,9 @@ class ServiceFeeController extends Controller
      */
     public function index(Request $request)
     {
-        if(isset($request->service) && Service::where('id', $request->service)->exists()){
+        if(isset($request->service) && ChildService::where('id', $request->service)->exists()){
 
-            $service = Service::with('fees')->where('id', $request->service)->first();
+            $service = ChildService::with('fees')->where('id', $request->service)->first();
 
             return view('admin.services.service-fee.index', compact('service'));
         }else{
@@ -35,9 +36,9 @@ class ServiceFeeController extends Controller
      */
     public function create(Request $request)
     {
-        if(isset($request->service) && Service::where('id', $request->service)->exists()){
+        if(isset($request->service) && ChildService::where('id', $request->service)->exists()){
 
-            $service = Service::where('id', $request->service)->first();
+            $service = ChildService::where('id', $request->service)->first();
 
             return view('admin.services.service-fee.create', compact('service'));
         }else{
@@ -53,7 +54,7 @@ class ServiceFeeController extends Controller
      */
     public function store(Request $request)
     {
-        if(isset($request->service) && Service::where('id', $request->service)->exists()){
+        if(isset($request->service) && ChildService::where('id', $request->service)->exists()){
 
             $this->validate($request, [
                 'description' => ['required'],
@@ -93,10 +94,10 @@ class ServiceFeeController extends Controller
      */
     public function show(Request $request, $id)
     {
-        if(isset($request->service) && Service::where('id', $request->service)->exists()
+        if(isset($request->service) && ChildService::where('id', $request->service)->exists()
         && ServiceFeeMeta::where('service_id', $request->service)->where('id', $id)->exists()){
 
-            $service = Service::where('id', $request->service)->first();
+            $service = ChildService::where('id', $request->service)->first();
             $fee = ServiceFeeMeta::where('id', $id)->first();
 
             return view('admin.services.service-fee.show', compact('service', 'fee'));
@@ -125,10 +126,10 @@ class ServiceFeeController extends Controller
      */
     public function update(Request $request, $id)
     {
-        if(isset($request->service) && Service::where('id', $request->service)->exists()
+        if(isset($request->service) && ChildService::where('id', $request->service)->exists()
         && ServiceFeeMeta::where('service_id', $request->service)->where('id', $id)->exists()){
 
-            $service = Service::where('id', $request->service)->first();
+            $service = ChildService::where('id', $request->service)->first();
             $fee = ServiceFeeMeta::where('id', $id)->first();
 
             try {
@@ -140,7 +141,7 @@ class ServiceFeeController extends Controller
                     'status' => $request->status == 'on' ? true : false,
                 ]);
 
-                Service::where('id', $request->service)->update([
+                ChildService::where('id', $request->service)->update([
                     'updated_at' => now()
                 ]);
                 

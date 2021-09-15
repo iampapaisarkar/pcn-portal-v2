@@ -55,6 +55,7 @@ Route::group(['middleware' => ['auth','verified', 'can:isAdmin']], function () {
     Route::resource('users', 'App\Http\Controllers\Admin\UserController');
     // Route::resource('vendor-profiles', 'App\Http\Controllers\Admin\VendorController');
     Route::resource('services', 'App\Http\Controllers\Admin\Service\ServiceController');
+    Route::resource('child-services', 'App\Http\Controllers\Admin\Service\ChildServiceController');
     Route::resource('services-fee', 'App\Http\Controllers\Admin\Service\ServiceFeeController');
     Route::get('/payments', 'App\Http\Controllers\InvoiceController@index')->name('payments.index');
 	Route::get('/payments/{id}', 'App\Http\Controllers\InvoiceController@show')->name('payments.show');

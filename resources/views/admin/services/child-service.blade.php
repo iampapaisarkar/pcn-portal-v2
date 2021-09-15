@@ -23,7 +23,7 @@
                                 <td> <p><span class="rounded badge w-badge badge-success">
                                         Updated {{$service->updated_at->format('d-M-Y')}}
                                     </span></p></td>
-                                <td><a href="{{route('child-services.index', 'service=' . $service->id)}}"><button class="btn btn-info" type="button">MANAGE</button></a></td>
+                                <td><a href="{{route('services-fee.index', 'service=' . $service->id)}}"><button class="btn btn-info" type="button">MANAGE</button></a></td>
                             </tr>
                             @endforeach
                         </tbody>

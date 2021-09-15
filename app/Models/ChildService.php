@@ -18,4 +18,14 @@ class ChildService extends Model
         return $this->hasMany(ServiceFeeMeta::class,'service_id', 'id');
     }
 
+    public function fees() {
+        return $this->hasMany(ServiceFeeMeta::class,'service_id', 'id');
+    }
+
+    public function netFees() {
+        return $this->hasMany(ServiceFeeMeta::class,'service_id', 'id')
+        ->where('status', true);
+    }
+
+
 }
