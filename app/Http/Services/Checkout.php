@@ -3,6 +3,7 @@
 namespace App\Http\Services;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Service;
+use App\Models\ChildService;
 use App\Models\ServiceFeeMeta;
 use App\Models\Payment;
 use App\Models\Registration;
@@ -20,7 +21,7 @@ class Checkout
             $HospitalRegistration = Registration::where(['id' => $application['id'], 'payment' => false, 'type' => $type])->first(); 
 
             if($HospitalRegistration){
-                $service = Service::where('id', 1)
+                $service = ChildService::where('id', 1)
                 ->with('netFees')
                 ->first();
 
@@ -72,7 +73,7 @@ class Checkout
             $Renewal = Renewal::where(['id' => $application['id'], 'payment' => false, 'type' => $type])->first(); 
 
             if($Renewal){
-                $service = Service::where('id', 1)
+                $service = ChildService::where('id', 2)
                 ->with('netFees')
                 ->first();
 
