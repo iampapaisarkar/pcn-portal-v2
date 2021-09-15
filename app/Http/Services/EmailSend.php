@@ -3,14 +3,12 @@
 namespace App\Http\Services;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Service;
+use App\Models\ChildService;
 use App\Models\ServiceFeeMeta;
 use App\Models\Payment;
-use App\Models\MEPTPApplication;
-use App\Models\PPMVApplication;
-use App\Models\PPMVRenewal;
 use DB;
 use Mail;
-use App\Mail\StatusEmail;
+use App\Mail\PaymentSuccessEmail;
 
 class EmailSend
 {
@@ -19,7 +17,7 @@ class EmailSend
         try {
             DB::beginTransaction();
 
-            Mail::to(Auth::user()->email)->send(new PaymentSuccessEmail($data));
+            Mail::to($data['user']['email'])->send(new PaymentSuccessEmail($data));
 
             DB::commit();
             return ['success' => true];
@@ -29,23 +27,23 @@ class EmailSend
         }  
     }
 
-    public static function sendMail($data){
+    // public static function sendMail($data){
 
-        try {
-            DB::beginTransaction();
+    //     try {
+    //         DB::beginTransaction();
 
-            Mail::to($data['vendor']['email'])->send(new ApproveTierEmail($data));
+    //         Mail::to($data['user']['email'])->send(new ApproveTierEmail($data));
 
-            foreach ($data['state_officer'] as $state) {
-                Mail::to($state['email'])->send(new ApproveTierEmail($data));
-            }
+    //         foreach ($data['state_officer'] as $state) {
+    //             Mail::to($state['email'])->send(new ApproveTierEmail($data));
+    //         }
 
-            DB::commit();
-            return ['success' => true];
-        }catch(Exception $e) {
-            DB::rollback();
-            return ['success' => false];
-        }  
-    }
+    //         DB::commit();
+    //         return ['success' => true];
+    //     }catch(Exception $e) {
+    //         DB::rollback();
+    //         return ['success' => false];
+    //     }  
+    // }
 
 }

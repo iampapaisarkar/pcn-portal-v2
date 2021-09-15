@@ -89,7 +89,7 @@ class UserSeeder extends Seeder
             'firstname' => 'Hospital',
             'lastname' => 'Pharmacy',
             'phone' => '+919002090020',
-            'email' => 'hospital@test.com',
+            'email' => 'iampapaisarkar@gmail.com',
             'email_verified_at' => now(),
             'password' => Hash::make('123456'),
             'state' => null,

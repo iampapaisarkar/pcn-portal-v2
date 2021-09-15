@@ -12,7 +12,7 @@ use App\Models\Service;
 use App\Models\ServiceFeeMeta;
 use App\Models\Payment;
 use DB;
-use App\Jobs\PaymentSuccessEmailJOB;
+use App\Jobs\EmailSendJOB;
 
 class CheckoutController extends Controller
 {
@@ -57,9 +57,11 @@ class CheckoutController extends Controller
                 $data = [
                     'order_id' => $order->order_id,
                     'amount' => $order->amount,
-                    'type' => 'hospital_pharmacy',
+                    'user' => Auth::user(),
+                    'registration_type' => 'hospital_pharmacy',
+                    'type' => 'payment_success',
                 ];
-                PaymentSuccessEmailJOB::dispatch($data);
+                EmailSendJOB::dispatch($data);
             }
 
             if($order->service_type == 'hospital_pharmacy_renewal'){
@@ -70,9 +72,11 @@ class CheckoutController extends Controller
                 $data = [
                     'order_id' => $order->order_id,
                     'amount' => $order->amount,
-                    'type' => 'hospital_pharmacy_renewal',
+                    'user' => Auth::user(),
+                    'registration_type' => 'hospital_pharmacy_renewal',
+                    'type' => 'payment_success',
                 ];
-                // PaymentSuccessEmailJOB::dispatch($data);
+                EmailSendJOB::dispatch($data);
             }
 
             return view('checkout.success', compact('order'));
