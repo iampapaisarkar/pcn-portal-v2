@@ -70,7 +70,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="">
+                    <a href="{{route('premises.index')}}">
                         <i class="nav-icon i-Gears"></i>
                         <span class="item-name">Premises</span>
                     </a>

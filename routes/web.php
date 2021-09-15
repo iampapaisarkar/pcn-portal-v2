@@ -52,8 +52,11 @@ Route::group(['middleware' => ['auth','verified', 'CheckProfileStatus']], functi
 ////////////////////////////  BACKEND USERS ROUTE   /////////////////////////////////
 // SUPER ADMIN ROUTE 
 Route::group(['middleware' => ['auth','verified', 'can:isAdmin']], function () {
+
     Route::resource('users', 'App\Http\Controllers\Admin\UserController');
-    // Route::resource('vendor-profiles', 'App\Http\Controllers\Admin\VendorController');
+    Route::resource('premises', 'App\Http\Controllers\Admin\PremisesController');
+    Route::resource('public-users', 'App\Http\Controllers\Admin\PublicUserController');
+
     Route::resource('services', 'App\Http\Controllers\Admin\Service\ServiceController');
     Route::resource('child-services', 'App\Http\Controllers\Admin\Service\ChildServiceController');
     Route::resource('services-fee', 'App\Http\Controllers\Admin\Service\ServiceFeeController');

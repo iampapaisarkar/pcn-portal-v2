@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-@include('layouts.navbars.breadcrumb', ['page' => 'Vendor Profiles', 'route' => 'vendor-profiles.index'])
+@include('layouts.navbars.breadcrumb', ['page' => 'Public Users', 'route' => 'public-users.index'])
 <div class="row">
 <div class="col-lg-12 col-md-12">
     <div class="card text-left">
@@ -24,7 +24,7 @@
                 </div>
                 <div class="col-sm-12 col-md-6">
                     <div id="multicolumn_ordering_table_filter" class="dataTables_filter float-right">
-                    <form method="GET" action="{{ route('vendor-profiles.index') }}">
+                    <form method="GET" action="{{ route('public-users.index') }}">
                     @csrf
                         <label>Search:
                             <input name="search" value="{{Request::get('search')}}" type="search"  class="form-control form-control-sm" placeholder="" aria-controls="multicolumn_ordering_table">
