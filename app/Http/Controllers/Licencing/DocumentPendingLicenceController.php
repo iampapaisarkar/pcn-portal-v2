@@ -10,7 +10,7 @@ use App\Models\Renewal;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Services\AllActivity;
 use DB;
-
+use App\Jobs\EmailSendJOB;
 
 class DocumentPendingLicenceController extends Controller
 {
@@ -145,7 +145,9 @@ class DocumentPendingLicenceController extends Controller
 
                     if($Registration->type == 'hospital_pharmacy'){
 
-                        $HospitalRegistration = HospitalRegistration::where(['registration_id' => $registration_id, 'user_id' => $Registration->user_id])->latest()->first();
+                        $HospitalRegistration = HospitalRegistration::where(['registration_id' => $registration_id, 'user_id' => $Registration->user_id])
+                        ->with('user')
+                        ->latest()->first();
 
                         $renewal = Renewal::create([
                             'user_id' => $Registration->user_id,
@@ -160,6 +162,13 @@ class DocumentPendingLicenceController extends Controller
                             'inspection' => true,
                             'payment' => true,
                         ]);
+
+                        $data = [
+                            'user' => $HospitalRegistration->user,
+                            'registration_type' => 'hospital_pharmacy',
+                            'type' => 'licencing_issued',
+                        ];
+                        EmailSendJOB::dispatch($data);
 
                     }
 
@@ -223,6 +232,13 @@ class DocumentPendingLicenceController extends Controller
                     $adminName = Auth::user()->firstname .' '. Auth::user()->lastname;
                     $activity = 'Registration & Licencing Issued Licence';
                     AllActivity::storeActivity($request['registration_id'], $adminName, $activity, 'hospital_pharmacy');
+
+                    $data = [
+                        'user' => $Registration->user,
+                        'registration_type' => 'hospital_pharmacy',
+                        'type' => 'licencing_issued',
+                    ];
+                    EmailSendJOB::dispatch($data);
 
                 }else{
                     return abort(404);

@@ -41,5 +41,8 @@ class EmailSendJOB implements ShouldQueue
         if($this->data['type'] == 'pharmacy_recommendation'){
             EmailSend::sendPharmacyRecommendationEMAIL($this->data);
         }
+        if($this->data['type'] == 'licencing_issued'){
+            EmailSend::sendLicencingIssuedEMAIL($this->data);
+        }
     }
 }

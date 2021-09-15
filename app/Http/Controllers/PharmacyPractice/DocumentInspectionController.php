@@ -175,12 +175,15 @@ class DocumentInspectionController extends Controller
                 }
                 AllActivity::storeActivity($Registration->id, $adminName, $activity, 'hospital_pharmacy');
 
-                $data = [
-                    'user' => $Registration->user,
-                    'registration_type' => 'hospital_pharmacy',
-                    'type' => 'pharmacy_recommendation',
-                ];
-                EmailSendJOB::dispatch($data);
+
+                if($request->recommendation == 'no_recommendation'){
+                    $data = [
+                        'user' => $Registration->user,
+                        'registration_type' => 'hospital_pharmacy',
+                        'type' => 'pharmacy_recommendation',
+                    ];
+                    EmailSendJOB::dispatch($data);
+                }
 
             }else{
                 return abort(404);

@@ -29,7 +29,7 @@ class StateOfficeQueryEmail extends Mailable
     public function build()
     {
         if($this->newData['registration_type'] == 'hospital_pharmacy'){
-            $subject = 'Hospital Registration Queried Notification';
+            $subject = 'Hospital Pharmacy Queried Notification';
         }
 
         return $this->markdown('mail.state-offcie-query',['data'=>$this->newData])->subject($subject);

@@ -11,6 +11,7 @@ use Mail;
 use App\Mail\PaymentSuccessEmail;
 use App\Mail\StateOfficeQueryEmail;
 use App\Mail\PharmacyRecommendationEmail;
+use App\Mail\LicencingIssuedEmail;
 
 class EmailSend
 {
@@ -50,6 +51,21 @@ class EmailSend
             DB::beginTransaction();
 
             Mail::to($data['user']['email'])->send(new PharmacyRecommendationEmail($data));
+
+            DB::commit();
+            return ['success' => true];
+        }catch(Exception $e) {
+            DB::rollback();
+            return ['success' => false];
+        }  
+    }
+
+    public static function sendLicencingIssuedEMAIL($data){
+
+        try {
+            DB::beginTransaction();
+
+            Mail::to($data['user']['email'])->send(new LicencingIssuedEmail($data));
 
             DB::commit();
             return ['success' => true];

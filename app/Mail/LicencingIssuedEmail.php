@@ -7,7 +7,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 
-class PaymentSuccessEmail extends Mailable
+class LicencingIssuedEmail extends Mailable
 {
     use Queueable, SerializesModels;
 
@@ -29,12 +29,9 @@ class PaymentSuccessEmail extends Mailable
     public function build()
     {
         if($this->newData['registration_type'] == 'hospital_pharmacy'){
-            $subject = 'Hospital Pharmacy Payment Notification';
-        }
-        if($this->newData['registration_type'] == 'hospital_pharmacy_renewal'){
-            $subject = 'Hospital Pharmacy Licence Renewal Payment Notification';
+            $subject = 'Hospital Pharmacy Licence Issued Notification';
         }
 
-        return $this->markdown('mail.payment-success',['data'=>$this->newData])->subject($subject);
+        return $this->markdown('mail.licence-issued',['data'=>$this->newData])->subject($subject);
     }
 }
