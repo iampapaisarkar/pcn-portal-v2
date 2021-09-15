@@ -9,6 +9,7 @@ use App\Models\HospitalRegistration;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Services\AllActivity;
 use DB;
+use App\Jobs\EmailSendJOB;
 
 class DocumentInspectionController extends Controller
 {
@@ -173,6 +174,13 @@ class DocumentInspectionController extends Controller
                     $activity = 'Facility Inspection Report Uploaded';
                 }
                 AllActivity::storeActivity($Registration->id, $adminName, $activity, 'hospital_pharmacy');
+
+                $data = [
+                    'user' => $Registration->user,
+                    'registration_type' => 'hospital_pharmacy',
+                    'type' => 'pharmacy_recommendation',
+                ];
+                EmailSendJOB::dispatch($data);
 
             }else{
                 return abort(404);
