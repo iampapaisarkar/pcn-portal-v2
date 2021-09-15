@@ -20,7 +20,7 @@ class Payment extends Model
     }
 
     public function service() {
-        return $this->hasOne(Service::class,'id', 'service_id');
+        return $this->hasOne(ChildService::class,'id', 'service_id');
     }
 
     // public function application() {
