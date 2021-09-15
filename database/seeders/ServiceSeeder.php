@@ -16,23 +16,23 @@ class ServiceSeeder extends Seeder
     {
         $services = [
             [
-            'description' => 'Hospital Pharmacy Registration Fees',
+            'description' => 'Hospital Pharmacy',
             'updated_at' => now()
             ],
             [
-            'description' => 'Hospital Pharmacy Licence Renewal Fees',
+            'description' => 'Community Pharmacy',
             'updated_at' => now()
             ],
             [
-            'description' => 'PPMV Location Approval Fees',
+            'description' => 'Distribution Premises',
             'updated_at' => now()
             ],
             [
-            'description' => 'PPMV Registration and Licencing Fees',
+            'description' => 'Manufacturing Premises',
             'updated_at' => now()
             ],
             [
-            'description' => 'PPMV Licence Renewal Fees',
+            'description' => 'PPMV',
             'updated_at' => now()
             ]
         ];

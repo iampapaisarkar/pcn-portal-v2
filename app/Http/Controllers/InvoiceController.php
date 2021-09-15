@@ -34,7 +34,6 @@ class InvoiceController extends Controller
                 $search = $request->search;
                 $invoices = $invoices->where(function($q) use ($search){
                     $q->where('order_id', 'like', '%' .$search. '%');
-                    // $q->orWhere('code', 'like', '%' .$search. '%');
                 });
             }
             $invoices = $invoices->latest()->paginate($perPage);
@@ -44,7 +43,7 @@ class InvoiceController extends Controller
             $invoices = $invoices->latest()->where('vendor_id', $authUser->id)->get();
         }
 
-        
+
         return view('invoice.index', compact('invoices'));
     }
 

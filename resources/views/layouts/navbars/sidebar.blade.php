@@ -69,24 +69,12 @@
                         <span class="item-name">Admin Users</span>
                     </a>
                 </li>
-                <!-- <li class="nav-item">
-                    <a href="{{route('vendor-profiles.index')}}">
-                        <i class="nav-icon i-Professor"></i>
-                        <span class="item-name">Vendor Profiles</span>
+                <li class="nav-item">
+                    <a href="">
+                        <i class="nav-icon i-Gears"></i>
+                        <span class="item-name">Premises</span>
                     </a>
                 </li>
-                <li class="nav-item">
-                    <a href="{{route('schools.index')}}">
-                        <i class="nav-icon i-Receipt-4"></i>
-                        <span class="item-name">Training Schools</span>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="{{route('batches.index')}}">
-                        <i class="nav-icon i-Receipt-4"></i>
-                        <span class="item-name">MEPTP Batches</span>
-                    </a>
-                </li> -->
                 <li class="nav-item">
                     <a href="{{route('services.index')}}">
                         <i class="nav-icon i-Money-2"></i>

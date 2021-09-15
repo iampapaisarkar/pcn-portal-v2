@@ -19,6 +19,7 @@ class DatabaseSeeder extends Seeder
         $this->call([StateSeeder::class]);
         $this->call([LgaSeeder::class]);
         $this->call([ServiceSeeder::class]);
+        $this->call([ChildServiceSeeder::class]);
         $this->call([ServiceFeeMetaSeeder::class]);
     }
 }
