@@ -10,6 +10,7 @@ use App\Models\Renewal;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Services\AllActivity;
 use DB;
+use App\Jobs\EmailSendJOB;
 
 class RenewalInspectionController extends Controller
 {
@@ -172,12 +173,33 @@ class RenewalInspectionController extends Controller
 
                 if($request->recommendation == 'no_recommendation'){
                     $activity = 'Renewal Inspection Report Uploaded';
+                    $data = [
+                        'user' => $Registration->user,
+                        'registration_type' => 'hospital_pharmacy_renewal',
+                        'type' => 'pharmacy_recommendation',
+                        'status' => 'no_recommendation',
+                    ];
+                    EmailSendJOB::dispatch($data);
                 }
                 if($request->recommendation == 'partial_recommendation'){
                     $activity = 'Renewal Inspection Report Uploaded';
+                    $data = [
+                        'user' => $Registration->user,
+                        'registration_type' => 'hospital_pharmacy_renewal',
+                        'type' => 'pharmacy_recommendation',
+                        'status' => 'partial_recommendation',
+                    ];
+                    EmailSendJOB::dispatch($data);
                 }
                 if($request->recommendation == 'full_recommendation'){
                     $activity = 'Renewal Inspection Report Uploaded';
+                    $data = [
+                        'user' => $Registration->user,
+                        'registration_type' => 'hospital_pharmacy_renewal',
+                        'type' => 'pharmacy_recommendation',
+                        'status' => 'full_recommendation',
+                    ];
+                    EmailSendJOB::dispatch($data);
                 }
                 AllActivity::storeActivity($Registration->id, $adminName, $activity, 'hospital_pharmacy');
 

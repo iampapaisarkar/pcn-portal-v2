@@ -10,6 +10,7 @@ use App\Models\Renewal;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Services\AllActivity;
 use DB;
+use App\Jobs\EmailSendJOB;
 
 class RenewalPendingLicenceController extends Controller
 {
@@ -151,6 +152,15 @@ class RenewalPendingLicenceController extends Controller
                         $adminName = Auth::user()->firstname .' '. Auth::user()->lastname;
                         $activity = 'Registration & Licencing Licence Renewal Issued';
                         AllActivity::storeActivity($renewal_id, $adminName, $activity, 'hospital_pharmacy');
+                        
+                        if($renewal->type == 'hospital_pharmacy_renewal'){
+                            $data = [
+                                'user' => $renewal->user,
+                                'registration_type' => 'hospital_pharmacy_renewal',
+                                'type' => 'licencing_issued',
+                            ];
+                            EmailSendJOB::dispatch($data);
+                        }
 
                     }else{
                         return abort(404);
@@ -199,6 +209,13 @@ class RenewalPendingLicenceController extends Controller
                     $adminName = Auth::user()->firstname .' '. Auth::user()->lastname;
                     $activity = 'Registration & Licencing Licence Renewal Issued';
                     AllActivity::storeActivity($request['registration_id'], $adminName, $activity, 'hospital_pharmacy');
+
+                    $data = [
+                        'user' => $renewal->user,
+                        'registration_type' => 'hospital_pharmacy_renewal',
+                        'type' => 'licencing_issued',
+                    ];
+                    EmailSendJOB::dispatch($data);
 
                 }else{
                     return abort(404);
