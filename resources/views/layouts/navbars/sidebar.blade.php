@@ -263,7 +263,54 @@
                     </a>
                 </li>
                 @endcan
-                <!-- Vendor routes end  -->
+                <!-- Hospital Pharmacy routes end  -->
+
+                <!-- PPMV routes start  -->
+                @can('isPPMV')
+                <li class="nav-item">
+                    <a href="">
+                        <i class="nav-icon i-Map2"></i>
+                        <span class="item-name">Location Approval</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="">
+                        <i class="nav-icon i-Map2"></i>
+                        <span class="item-name">Location Approval Status</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="">
+                        <i class="nav-icon i-Notepad"></i>
+                        <span class="item-name">Registration</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="">
+                        <i class="nav-icon i-Notepad"></i>
+                        <span class="item-name">Registration</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="">
+                        <i class="nav-icon i-Notepad"></i>
+                        <span class="item-name">Registration Status</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="">
+                        <i class="nav-icon i-Notepad"></i>
+                        <span class="item-name">Renewal</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="">
+                        <i class="nav-icon i-Receipt-4"></i>
+                        <span class="item-name">Invoices</span>
+                    </a>
+                </li>
+                @endcan
+                <!-- PPMV routes end  -->
             </ul>
         </div>
     </div>

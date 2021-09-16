@@ -249,7 +249,7 @@
         @endcan
         <!-- Registration licencing cards end  -->
         
-         <!-- Vendor cards start  -->
+        <!-- Hospital Pharmacy cards start  -->
         @can('isHPharmacy')
         <div class="row">
             <div class="col-lg-8 col-md-8 col-sm-8">
@@ -282,7 +282,86 @@
             </div>
         </div>
         @endcan
-        <!-- Vendor cards end  -->
+        <!-- Hospital Pharmacy cards end  -->
+
+        <!-- PPMV cards start  -->
+        @can('isPPMV')
+        <div class="row">
+            <div class="col-lg-8 col-md-8 col-sm-8">
+                <div class="row">
+                    <div class="col-lg-6 col-md-6 col-sm-6">
+                        <div class="card card-icon mb-4">
+                            <div class="card-body text-center"><i class="i-Map2"></i>
+                                <p class="text-muted mt-2 mb-2">LOCATION APPROVAL</p>
+                                <p class="text-primary text-20 line-height-1 m-0">DOCS. REVIEW PENDING</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-6">
+                        <div class="card card-icon mb-4">
+                            <div class="card-body text-center"><i class="i-Map2"></i>
+                                <p class="text-muted mt-2 mb-2">LOCATION APPROVAL</p>
+                                <p class="text-primary text-20 line-height-1 m-0">DOCS. REVIEW QUERIED</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-8 col-md-8 col-sm-8">
+                <div class="row">
+                    <div class="col-lg-6 col-md-6 col-sm-6">
+                        <div class="card card-icon mb-4">
+                            <div class="card-body text-center"><i class="i-Map2"></i>
+                                <p class="text-muted mt-2 mb-2">LOCATION APPROVAL</p>
+                                <p class="text-primary text-20 line-height-1 m-0">INSPECTION PENDING</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-6">
+                        <div class="card card-icon mb-4">
+                            <div class="card-body text-center"><i class="i-Map2"></i>
+                                <p class="text-muted mt-2 mb-2">LOCATION APPROVAL</p>
+                                <p class="text-primary text-20 line-height-1 m-0">NOT RECOMMENDED</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-8 col-md-8 col-sm-8">
+                <div class="row">
+                    <div class="col-lg-6 col-md-6 col-sm-6">
+                        <div class="card card-icon mb-4">
+                            <div class="card-body text-center"><i class="i-Map2"></i>
+                                <p class="text-muted mt-2 mb-2">LOCATION APPROVAL</p>
+                                <p class="text-primary text-20 line-height-1 m-0">RECOMMENDED</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-6">
+                        <div class="card card-icon mb-4">
+                            <div class="card-body text-center"><i class="i-Diploma-2"></i>
+                                <p class="text-muted mt-2 mb-2">REGISTRATION AND LICENCING</p>
+                                <p class="text-primary text-20 line-height-1 m-0">PENDING</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-8 col-md-8 col-sm-8">
+                <div class="row">
+                    <div class="col-lg-6 col-md-6 col-sm-6">
+                        <div class="card card-icon mb-4">
+                            <div class="card-body text-center"><i class="i-Diploma-2"></i>
+                                <p class="text-muted mt-2 mb-2">REGISTRATION AND LICENCING</p>
+                                <p class="text-primary text-20 line-height-1 m-0">LICENCE ISSUSED</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        @endcan
+        <!-- PPMV cards end  -->
     </div>
 </div>
 @endsection
