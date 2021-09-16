@@ -25,8 +25,15 @@ class CreateUsersTable extends Migration
             $table->string('hospital_address')->nullable();
             $table->integer('state')->nullable();
             $table->integer('lga')->nullable();
-            // $table->string('dob')->nullable();
+            $table->string('gender')->nullable();
+            $table->longtext('address')->nullable();
+            $table->string('dob')->nullable();
             $table->string('photo')->nullable();
+            $table->string('shop_name')->nullable();
+            $table->string('shop_email')->nullable();
+            $table->string('shop_phone')->nullable();
+            $table->string('shop_address')->nullable();
+            $table->string('shop_city')->nullable();
             $table->boolean('status')->default(true);
             $table->longtext('activation_token')->nullable();
             $table->rememberToken();
