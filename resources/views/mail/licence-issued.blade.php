@@ -2,9 +2,9 @@
 
 
 @if($data['registration_type'] == 'hospital_pharmacy')
-# Hospital Pharmacy Licence Issued - {{env('APP_NAME')}}
+# Facility Inspection Application Licence Issued - {{env('APP_NAME')}}
 <div>Hello {{$data['user']['firstname']}} {{$data['user']['lastname']}}, <br>
-<div>Your licence issued for Hospital Pharmacy.</div>
+<div>Your licence issued for PCN HOSPITAL PHARM ACY REGISTRATION AND INSPECTION.</div>
 @endif
 
 <div>Kindly log in into you profile to download licence.</div>

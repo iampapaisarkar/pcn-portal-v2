@@ -29,7 +29,7 @@ class LicencingIssuedEmail extends Mailable
     public function build()
     {
         if($this->newData['registration_type'] == 'hospital_pharmacy'){
-            $subject = 'Hospital Pharmacy Licence Issued Notification';
+            $subject = 'Facility Inspection Application Licence Issued';
         }
 
         return $this->markdown('mail.licence-issued',['data'=>$this->newData])->subject($subject);
