@@ -66,7 +66,9 @@
                     </span>
                     @enderror
                 </div>
-                @can('isHPharmacy', 'isCPharmacy', 'isDPremisis', 'isMPremisis', 'isPPMV')
+
+
+                @can('isHPharmacy')
                 <div class="col-md-4 form-group mb-3">
                     <label for="hname">Hospital Name:</label>
                     <input name="hospital_name" class="form-control @error('hospital_name') is-invalid @enderror"
@@ -133,7 +135,83 @@
                     </span>
                     @enderror
                 </div>
-                <!-- <div class="col-md-4 form-group mb-3">
+                @endcan
+
+                @can('isPPMV')
+                <div class="col-md-4 form-group mb-3">
+                    <label for="picker1">Gender</label>
+                    <select id="genderField" required name="gender"
+                        class="form-control @error('gender') is-invalid @enderror">
+                        @if(Auth::user()->gender)
+                        <option hidden selected value="{{Auth::user()->gender}}">{{Auth::user()->gender}}</option>
+                        @endif
+                        <option {{!Auth::user()->gender ? 'selected' : ''}} value="">Select Gender</option>
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                    </select>
+                    @error('gender')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                    @enderror
+                </div>
+                <div class="col-md-4 form-group mb-3">
+                    <label for="haddress">Address:</label>
+                    <input name="address" class="form-control @error('address') is-invalid @enderror"
+                        value="{{Auth::user()->address}}" id="address" placeholder="Address" required />
+                    @error('address')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                    @enderror
+                </div>
+                <div class="col-md-4 form-group mb-3">
+                    @php
+                    $states = app('App\Http\Services\BasicInformation')->states();
+                    @endphp
+                    <label for="picker1">State</label>
+                    <select id="stateField" required name="state"
+                        class="form-control @error('state') is-invalid @enderror">
+                        @if(Auth::user()->state)
+                        <option hidden selected value="{{Auth::user()->user_state->id}}">
+                            {{Auth::user()->user_state->name}}</option>
+                        @endif
+                        <option {{!Auth::user()->state ? 'selected' : ''}} value="">Select State</option>
+                        @foreach($states as $state)
+                        <option value="{{$state->id}}">{{$state->name}}</option>
+                        @endforeach
+                    </select>
+                    @error('state')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                    @enderror
+                </div>
+                <div class="col-md-4 form-group mb-3">
+                    @php
+                    $lgas = app('App\Http\Services\BasicInformation')->lgas();
+                    @endphp
+                    <label for="picker1">LGA</label>
+                    <select {{!Auth::user()->lga ? 'disabled' : ''}} id="lgaField" required name="lga"
+                        class="form-control @error('lga') is-invalid @enderror">
+                        @if(Auth::user()->lga)
+                        <option hidden selected value="{{Auth::user()->user_lga->id}}">{{Auth::user()->user_lga->name}}
+                        </option>
+                        @endif
+                        <option {{!Auth::user()->lga ? 'selected' : ''}} value="">Select LGA</option>
+                        @if(Auth::user()->lga)
+                        @foreach(Auth::user()->user_state->lga as $lga)
+                        <option value="{{$lga->id}}">{{$lga->name}}</option>
+                        @endforeach
+                        @endif
+                    </select>
+                    @error('lga')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                    @enderror
+                </div>
+                <div class="col-md-4 form-group mb-3">
                     <label for="datepicker">Date of Birth</label>
                     <input readonly name="dob" class="form-control @error('dob') is-invalid @enderror" id="datepicker"
                         value="{{Auth::user()->dob}}" placeholder="dd-mm-yyyy" name="dp" required />
@@ -142,8 +220,8 @@
                         <strong>{{ $message }}</strong>
                     </span>
                     @enderror
-                </div> -->
-                <!-- <div class="col-md-4 form-group mb-3">
+                </div>
+                <div class="col-md-4 form-group mb-3">
                     <label for="picker1">Passport Photo</label>
                     <div class="custom-file mb-3">
                         <input name="photo" type="file" name="color_passportsize" class="custom-file-input"
@@ -155,12 +233,76 @@
                         <img id="profile-pic-new-preview" src="" alt="" class="w-25">
                         <img id="profile-pic-old-preview" src="{{asset('images/' . Auth::user()->photo)}}" alt=""
                             class="w-25">
-                         @if(Auth::user()->photo)
+                        <!-- @if(Auth::user()->photo)
                             <a href="#">Remove photo</a>
-                        @endif
+                        @endif -->
                     </div>
-                </div> -->
+                </div>
                 @endcan
+
+                @can('isPPMV')
+                <div class="col-md-12 form-group mb-3"><h3>Shop Details</h3></div>
+                <div class="col-12">
+                <div class="row">
+                    <div class="col-md-4 form-group mb-3">
+                        <label for="shop_name1">Shop Name</label>
+                        <input name="shop_name" class="form-control @error('shop_name') is-invalid @enderror"
+                            id="shop_name1" type="text" placeholder="Enter your Shop Name"
+                            value="{{Auth::user()->shop_name}}" />
+                        @error('shop_name')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                        @enderror
+                    </div>
+                    <div class="col-md-4 form-group mb-3">
+                        <label for="shop_email1">Shop Email</label>
+                        <input name="shop_email" class="form-control @error('shop_email') is-invalid @enderror"
+                            id="shop_email1" type="text" placeholder="Enter your Shop Email"
+                            value="{{Auth::user()->shop_email}}" />
+                        @error('shop_email')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                        @enderror
+                    </div>
+                    <div class="col-md-4 form-group mb-3">
+                        <label for="shop_phone1">Shop Phone</label>
+                        <input name="shop_phone" class="form-control @error('shop_phone') is-invalid @enderror"
+                            id="shop_phone1" type="text" placeholder="Enter your Shop Phone"
+                            value="{{Auth::user()->shop_phone}}" />
+                        @error('shop_phone')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                        @enderror
+                    </div>
+                    <div class="col-md-4 form-group mb-3">
+                        <label for="shop_address1">Shop Address</label>
+                        <input name="shop_address" class="form-control @error('shop_address') is-invalid @enderror"
+                            id="shop_address1" type="text" placeholder="Enter your Shop Name"
+                            value="{{Auth::user()->shop_address}}" />
+                        @error('shop_address')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                        @enderror
+                    </div>
+                    <div class="col-md-4 form-group mb-3">
+                        <label for="shop_city1">Shop City/Town</label>
+                        <input name="shop_city" class="form-control @error('shop_city') is-invalid @enderror"
+                            id="shop_city1" type="text" placeholder="Enter your Shop Name"
+                            value="{{Auth::user()->shop_city}}" />
+                        @error('shop_city')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                        @enderror
+                    </div>
+                </div>
+                </div>
+                @endcan
+
                 <div class="col-md-12">
                     <button type="submit" class="btn btn-primary">Submit</button>
                 </div>
@@ -169,7 +311,7 @@
 
         <form class="mt-5" method="POST" action="{{ route('profile-password-update') }}" enctype="multipart/form-data">
             @csrf
-            <h5>Update Password</h5>
+            <h3>Update Password</h3>
             <div class="row">
                 <div class="col-md-4 form-group mb-3">
                     <label for="old_password1">Old Password</label>
