@@ -29,10 +29,10 @@ class PaymentSuccessEmail extends Mailable
     public function build()
     {
         if($this->newData['registration_type'] == 'hospital_pharmacy'){
-            $subject = 'Hospital Pharmacy Payment Notification';
+            $subject = 'PCN - Registration & Inspection Payment Notification';
         }
         if($this->newData['registration_type'] == 'hospital_pharmacy_renewal'){
-            $subject = 'Hospital Pharmacy Licence Renewal Payment Notification';
+            $subject = 'PCN - Renewal & Licence Payment Notification';
         }
 
         return $this->markdown('mail.payment-success',['data'=>$this->newData])->subject($subject);

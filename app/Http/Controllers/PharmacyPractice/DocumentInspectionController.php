@@ -166,24 +166,38 @@ class DocumentInspectionController extends Controller
 
                 if($request->recommendation == 'no_recommendation'){
                     $activity = 'Facility Inspection Report Uploaded';
-                }
-                if($request->recommendation == 'partial_recommendation'){
-                    $activity = 'Facility Inspection Report Uploaded';
-                }
-                if($request->recommendation == 'full_recommendation'){
-                    $activity = 'Facility Inspection Report Uploaded';
-                }
-                AllActivity::storeActivity($Registration->id, $adminName, $activity, 'hospital_pharmacy');
 
-
-                if($request->recommendation == 'no_recommendation'){
                     $data = [
                         'user' => $Registration->user,
                         'registration_type' => 'hospital_pharmacy',
                         'type' => 'pharmacy_recommendation',
+                        'status' => 'no_recommendation',
                     ];
                     EmailSendJOB::dispatch($data);
                 }
+                if($request->recommendation == 'partial_recommendation'){
+                    $activity = 'Facility Inspection Report Uploaded';
+
+                    $data = [
+                        'user' => $Registration->user,
+                        'registration_type' => 'hospital_pharmacy',
+                        'type' => 'pharmacy_recommendation',
+                        'status' => 'partial_recommendation',
+                    ];
+                    EmailSendJOB::dispatch($data);
+                }
+                if($request->recommendation == 'full_recommendation'){
+                    $activity = 'Facility Inspection Report Uploaded';
+
+                    $data = [
+                        'user' => $Registration->user,
+                        'registration_type' => 'hospital_pharmacy',
+                        'type' => 'pharmacy_recommendation',
+                        'status' => 'full_recommendation',
+                    ];
+                    EmailSendJOB::dispatch($data);
+                }
+                AllActivity::storeActivity($Registration->id, $adminName, $activity, 'hospital_pharmacy');
 
             }else{
                 return abort(404);

@@ -29,7 +29,15 @@ class PharmacyRecommendationEmail extends Mailable
     public function build()
     {
         if($this->newData['registration_type'] == 'hospital_pharmacy'){
-            $subject = 'Hospital Pharmacy Recommendation Notification';
+            if($this->newData['status'] == 'full_recommendation'){
+                $subject = 'Facility Inspection Application Approval';
+            }
+            if($this->newData['status'] == 'partial_recommendation'){
+                $subject = 'Facility Inspection Application Approval';
+            }
+            if($this->newData['status'] == 'no_recommendation'){
+                $subject = 'Facility Inspection Application Query';
+            }
         }
 
         return $this->markdown('mail.pharamcy-recommendation',['data'=>$this->newData])->subject($subject);
