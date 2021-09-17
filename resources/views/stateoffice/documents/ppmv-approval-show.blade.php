@@ -14,7 +14,7 @@
                 <div class="custom-separator"></div>
 
                 <div class="row">
-                    <form action="{{route('state-office-documents-hospital-approve')}}" method="POST" id="approveForm">
+                    <form action="{{route('state-office-documents-ppmv-approve')}}" method="POST" id="approveForm">
                     @csrf
                         <input type="hidden" name="application_id" value="{{$application->id}}">
                         <input type="hidden" name="user_id" value="{{$application->user_id}}">
@@ -26,7 +26,7 @@
                 <!-- Modal -->
                 <div class="modal fade" id="queryModal" tabindex="-1" role="dialog" aria-labelledby="queryModalTitle" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered" role="document">
-                    <form id="quriedForm" class="w-100" method="POST" action="{{route('state-office-documents-hospital-reject')}}" enctype="multipart/form-data">
+                    <form id="quriedForm" class="w-100" method="POST" action="{{route('state-office-documents-ppmv-reject')}}" enctype="multipart/form-data">
                     @csrf
                     <div class="modal-content">
                     <div class="modal-header">
