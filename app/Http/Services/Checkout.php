@@ -18,9 +18,9 @@ class Checkout
         try {
             DB::beginTransaction();
 
-            $HospitalRegistration = Registration::where(['id' => $application['id'], 'payment' => false, 'type' => $type])->first(); 
+            $Registration = Registration::where(['id' => $application['id'], 'payment' => false, 'type' => $type])->first(); 
 
-            if($HospitalRegistration){
+            if($Registration){
                 $service = ChildService::where('id', 1)
                 ->with('netFees')
                 ->first();
@@ -74,6 +74,57 @@ class Checkout
 
             if($Renewal){
                 $service = ChildService::where('id', 2)
+                ->with('netFees')
+                ->first();
+
+                $totalAmount = 0;
+                foreach($service->netFees as $fee){
+                    $totalAmount += $fee->amount;
+                }
+
+                $token = md5(uniqid(rand(), true));
+                $order_id = date('m-Y') . '-' .rand(10,1000);
+
+                $payment = Payment::create([
+                    'vendor_id' => Auth::user()->id,
+                    'order_id' => $order_id,
+                    'application_id' => $application['id'],
+                    'service_id' => $service->id,
+                    'service_type' => $type,
+                    'amount' => $totalAmount,
+                    'token' => $token,
+                ]);
+
+                $response = [
+                    'success' => true,
+                    'order_id' => $order_id,
+                    'token' => $token,
+                    'id' => $payment->id,
+                ];
+
+            }else{
+                $response = ['success' => false];
+            }
+
+            DB::commit();
+
+            return $response;
+
+        }catch(Exception $e) {
+            DB::rollback();
+            return ['success' => false];
+        }  
+    }
+
+    public static function checkoutPpmvLocation($application, $type){
+
+        try {
+            DB::beginTransaction();
+
+            $Registration = Registration::where(['id' => $application['id'], 'payment' => false, 'type' => $type])->first(); 
+
+            if($Registration){
+                $service = ChildService::where('id', 12)
                 ->with('netFees')
                 ->first();
 
