@@ -76,7 +76,7 @@
                             </a>
                             @endif
                             @if($document->type == 'ppmv')
-                            <a href="">
+                            <a href="{{ route('state-office-documents-ppmv-show') }}?application_id={{$document->id}}&user_id={{$document->user->id}}">
                                 <button class="btn btn-success btn-sm" type="button"><i class="nav-icon i-Pen-2"></i></button>
                             </a>
                             @endif

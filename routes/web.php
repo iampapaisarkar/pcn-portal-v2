@@ -76,6 +76,8 @@ Route::group(['middleware' => ['auth','verified', 'can:isSOffice']], function ()
     Route::get('state-office-documents-hospital-show', 'App\Http\Controllers\StateOffice\DocumentReviewController@hospitalPharmacyShow')->name('state-office-documents-hospital-show');
     Route::post('state-office-documents-hospital-approve', 'App\Http\Controllers\StateOffice\DocumentReviewController@hospitalPharmacyApprove')->name('state-office-documents-hospital-approve');
     Route::post('state-office-documents-hospital-reject', 'App\Http\Controllers\StateOffice\DocumentReviewController@hospitalPharmacyReject')->name('state-office-documents-hospital-reject');
+
+    Route::get('state-office-documents-ppmv-show', 'App\Http\Controllers\StateOffice\DocumentReviewController@ppmvApprovalShow')->name('state-office-documents-ppmv-show');
 });
 
 // REFISTRY ROUTES 

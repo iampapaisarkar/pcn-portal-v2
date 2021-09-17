@@ -194,4 +194,21 @@ class DocumentReviewController extends Controller
             return abort(404);
         }
     }
+
+    public function ppmvApprovalShow(Request $request){
+
+        $application = Registration::where(['payment' => true, 'id' => $request['application_id'], 'user_id' => $request['user_id'], 'type' => 'ppmv'])
+        ->with('ppmv', 'user')
+        ->whereHas('user', function($q){
+            $q->where('state', Auth::user()->state);
+        })
+        ->where('status', 'send_to_state_office')
+        ->first();
+
+        if($application){
+            return view('stateoffice.documents.ppmv-approval-show', compact('application'));
+        }else{
+            return abort(404);
+        }
+    }
 }
