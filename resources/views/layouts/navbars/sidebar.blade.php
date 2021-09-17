@@ -274,7 +274,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="">
+                    <a href="{{route('ppmv-application-status')}}">
                         <i class="nav-icon i-Map2"></i>
                         <span class="item-name">Location Approval Status</span>
                     </a>

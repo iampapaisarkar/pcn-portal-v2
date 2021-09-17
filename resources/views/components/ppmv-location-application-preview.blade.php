@@ -9,10 +9,6 @@
             <div>{{$application->user->firstname}}</div>
         </div>
 
-        <!-- <div class="col-md-4">
-            <label for="inputEmail1" class="ul-form__label"><strong>Middle Name:</strong></label>
-            <div>Olubunmi</div>
-        </div> -->
 
         <div class="col-md-4">
             <label for="inputEmail1" class="ul-form__label"><strong>Lastname:</strong></label>

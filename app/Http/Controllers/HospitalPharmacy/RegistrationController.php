@@ -70,7 +70,7 @@ class RegistrationController extends Controller
 
     public function registrationStatus(){
 
-        $registration = HospitalRegistration::where('user_id', Auth::user()->id)->latest()->first();
+        $registration = Registration::where('user_id', Auth::user()->id)->latest()->first();
         return view('hospital-pharmacy.status', compact('registration'));
     }
 

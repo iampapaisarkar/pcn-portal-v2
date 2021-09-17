@@ -81,4 +81,10 @@ class ApplicationController extends Controller
             return back()->with('error','There is something error, please try after some time');
         }  
     }
+
+    public function status(){
+
+        $application = Registration::where('user_id', Auth::user()->id)->latest()->first();
+        return view('ppmv.status', compact('application'));
+    }
 }
