@@ -49,7 +49,7 @@ class PPMVApplicationInfo
                     'message' => 'Document Verification Queried',
                     'color' => 'danger',
                     'reason' => $ppmv->query,
-                    'link' => route('hospital-registration-edit', $ppmv->id)
+                    'link' => route('ppmv-application-edit', $ppmv->id)
                 ];
             }
             if($ppmv->status == 'send_to_registry'){

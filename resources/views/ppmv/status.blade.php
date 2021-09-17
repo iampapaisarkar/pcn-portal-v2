@@ -29,13 +29,13 @@
                             @if(isset(app('App\Http\Services\PPMVApplicationInfo')->status()['link']))
                             <br>
                             <br>
-                            <a href="{{app('App\Http\Services\PPMVApplicationInfo')->status()['link']}}" class="btn btn-danger text-white btn-rounded ">Update & Re-submit Registration</a>
+                            <a href="{{app('App\Http\Services\PPMVApplicationInfo')->status()['link']}}" class="btn btn-danger text-white btn-rounded ">Update & Re-submit Application</a>
                             @endif
 
                             @if(isset(app('App\Http\Services\PPMVApplicationInfo')->status()['new-link']))
                             <br>
                             <br>
-                            <a href="{{app('App\Http\Services\PPMVApplicationInfo')->status()['new-link']}}" class="btn btn-danger text-white btn-rounded ">Re-submit Registration</a>
+                            <a href="{{app('App\Http\Services\PPMVApplicationInfo')->status()['new-link']}}" class="btn btn-danger text-white btn-rounded ">Re-submit Application</a>
                             @endif
 
                             @if(isset(app('App\Http\Services\PPMVApplicationInfo')->status()['download-link']))

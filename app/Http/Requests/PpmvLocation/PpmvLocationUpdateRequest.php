@@ -36,9 +36,6 @@ class PpmvLocationUpdateRequest extends FormRequest
             'reference_1_address' => [
                 'required', 'min:3', 'max:255'
             ],
-            'reference_1_letter' => [
-                'required'
-            ],
             'reference_2_name' => [
                 'required'
             ],
@@ -51,14 +48,14 @@ class PpmvLocationUpdateRequest extends FormRequest
             'reference_2_address' => [
                 'required', 'min:3', 'max:255'
             ],
-            'reference_2_letter' => [
-                'required'
-            ],
             'current_annual_licence' => [
                 'required', 'min:3', 'max:255'
             ],
             'reference_occupation' => [
                 'required', 'min:3', 'max:255'
+            ],
+            'terms' => [
+                'required'
             ]
         ];
     }
