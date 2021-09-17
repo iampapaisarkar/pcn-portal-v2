@@ -21,7 +21,7 @@ class HospitalRegistrationInfo
             }else{
                 return $response = [
                     'success' => false,
-                    'message' => 'HOSPITAL REFISTRATION ALREADY SUBMITED',
+                    'message' => 'HOSPITAL PHARMACY REGISTRATION ALREADY SUBMITTED',
                 ];
             }
         }else{
