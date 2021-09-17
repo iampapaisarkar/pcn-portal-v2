@@ -20,4 +20,8 @@ class Registration extends Model
     public function hospital_pharmacy() {
         return $this->hasOne(HospitalRegistration::class,'registration_id', 'id');
     }
+
+    public function ppmv() {
+        return $this->hasOne(PpmvLocationApplication::class,'registration_id', 'id');
+    }
 }

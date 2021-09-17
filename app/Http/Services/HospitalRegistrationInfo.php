@@ -10,7 +10,7 @@ class HospitalRegistrationInfo
 {
 
     public static function canSubmitHospitalRegistration(){
-        $HospitalRegistration = Registration::where(['user_id' => Auth::user()->id, 'payment' => true, 'type' => 'hospital_pharmacy'])
+        $HospitalRegistration = Registration::where(['user_id' => Auth::user()->id, 'type' => 'hospital_pharmacy'])
         ->with('hospital_pharmacy')->latest()->first();
 
         if($HospitalRegistration){

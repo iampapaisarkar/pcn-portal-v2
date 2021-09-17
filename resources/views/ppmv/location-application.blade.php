@@ -6,7 +6,7 @@
     <div class="col-lg-12 col-md-12">
         <div class="card-body">
             <!--begin::form-->
-
+            @if(app('App\Http\Services\PPMVApplicationInfo')->canSubmitPPMVApplication()['success'] == true)
             <form method="POST" action="{{ route('ppmv-application-form-submit') }}" enctype="multipart/form-data" novalidate>
             @csrf
                 <h4>PPMV Details</h4>
@@ -429,6 +429,11 @@
                     </div>
                 </div>
             </form>
+            @else
+                <div class="alert alert-card alert-warning" role="alert">
+                    {{app('App\Http\Services\PPMVApplicationInfo')->canSubmitPPMVApplication()['message']}}
+                </div>
+            @endif
         </div>
     </div>
 </div>
