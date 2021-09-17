@@ -25,16 +25,6 @@ class FileUpload
                     \mkdir($private_storage_path, intval('755',8), true);
                 }
             }
-            // if($type == 'ppmv'){
-            //     $private_storage_path = storage_path(
-            //         'app'. DIRECTORY_SEPARATOR . 'private' . DIRECTORY_SEPARATOR . Auth::user()->id . DIRECTORY_SEPARATOR . 'PPMV'
-            //     );
-
-            //     if(!file_exists($private_storage_path)){
-            //         \mkdir($private_storage_path, intval('755',8), true);
-            //     }
-            // }
-            
 
             // $file_name = $file->getClientOriginalName();
             $file_name = 'vendor'.Auth::user()->id.'-'.$doc_type.'.'.$file->getClientOriginalExtension();
@@ -47,7 +37,7 @@ class FileUpload
                 mkdir($default_storage_path, intval('755',8), true);
             }
             $file_name = $file->getClientOriginalName();
-            $file->move($private_storage_path, $file_name);
+            $file->move($default_storage_path, $file_name);
             return $file_name;
         }
     }

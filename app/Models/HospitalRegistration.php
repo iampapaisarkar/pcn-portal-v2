@@ -17,4 +17,10 @@ class HospitalRegistration extends Model
     public function user() {
         return $this->hasOne(User::class,'id', 'user_id');
     }
+
+    public function passport_doc() {
+        return storage_path('app'. DIRECTORY_SEPARATOR . 'private' . 
+        DIRECTORY_SEPARATOR . $this->user_id . DIRECTORY_SEPARATOR . 'hospital_pharmacy' . DIRECTORY_SEPARATOR . $this->passport);
+    }
+
 }

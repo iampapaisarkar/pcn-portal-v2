@@ -98,7 +98,7 @@
                         <label for="picker1">Upload Passport Photo of Supritendent Pharmacist:</label>
                         <div class="custom-file mb-3">
                             <input name="passport" type="file" name="color_passportsize" class="custom-file-input
-                            @error('passport') is-invalid @enderror" accept="application/pdf"
+                            @error('passport') is-invalid @enderror" accept="images/*"
                                 id="inputGroupFile01">
                             <label class="custom-file-label " for="inputGroupFile01"
                                 aria-describedby="inputGroupFileAddon02" id="inputGroupFile01previewLabel">{{ $registration->hospital_pharmacy->passport }}</label>
@@ -110,7 +110,7 @@
                         </div>
                     </div>
                     <div class="form-group col-md-2 d-flex align-items-center">
-                        <img id="inputGroupFile01preview" src="" alt="" class="w-100">
+                        <img id="inputGroupFile01preview" src="{{ asset('storage/images/' . $registration->hospital_pharmacy->passport) }}" alt="" class="w-100">
                     </div>
                 </div>
                 

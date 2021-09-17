@@ -27,7 +27,7 @@ class RegistrationController extends Controller
         try {
             DB::beginTransaction();
 
-            $passport = FileUpload::upload($request->file('passport'), $private = true, 'hospital_pharmacy', 'passport');
+            $passport = FileUpload::upload($request->file('passport'), $private = false, 'hospital_pharmacy', 'passport');
 
             $Registration = Registration::create([
                 'user_id' => Auth::user()->id,
@@ -101,10 +101,13 @@ class RegistrationController extends Controller
                     if($Registration->hospital_pharmacy->passport == $request->file('passport')->getClientOriginalName()){
                         $passport = $Registration->hospital_pharmacy->passport;
                     }else{
-                        $passport = FileUpload::upload($request->file('passport'), $private = true, 'hospital_pharmacy', 'passport');
+                        $passport = FileUpload::upload($request->file('passport'), $private = false, 'hospital_pharmacy', 'passport');
         
-                        $path = storage_path('app'. DIRECTORY_SEPARATOR . 'private' . 
-                        DIRECTORY_SEPARATOR . $request->user_id . DIRECTORY_SEPARATOR . 'hospital_pharmacy'. DIRECTORY_SEPARATOR . $Registration->hospital_pharmacy->passport);
+                        // $path = storage_path('app'. DIRECTORY_SEPARATOR . 'private' . 
+                        // DIRECTORY_SEPARATOR . $request->user_id . DIRECTORY_SEPARATOR . 'hospital_pharmacy'. DIRECTORY_SEPARATOR . $Registration->hospital_pharmacy->passport);
+
+                        $path = storage_path('app'. DIRECTORY_SEPARATOR . 'public' . 
+                        DIRECTORY_SEPARATOR . 'images'. DIRECTORY_SEPARATOR . $Registration->hospital_pharmacy->passport);
                         File::Delete($path);
                     }
                 }else{

@@ -54,7 +54,7 @@
     <div class="form-row">
         <div class="form-group col-md-6">
         <label  class="ul-form__label"><strong>Supritendent Pharmacist:</strong></label>
-            <div><img class="w-25" src="{{ Auth::user()->photo ? asset('images/' . Auth::user()->photo) : asset('admin/dist-assets/images/avatar.jpg') }}" alt=""></div>
+            <div><img class="w-25" src="{{ asset('storage/images/' . $registration->hospital_pharmacy->passport) }}" alt=""></div>
         </div>
     </div>
     
