@@ -175,5 +175,6 @@ Route::group(['middleware' => ['auth','verified', 'can:isMPremisis', 'CheckProfi
 
 // PPMV ROUTES 
 Route::group(['middleware' => ['auth','verified', 'can:isPPMV', 'CheckProfileStatus']], function () {
-  
+    Route::get('/ppmv-application-form', 'App\Http\Controllers\Ppmv\ApplicationController@applicationForm')->name('ppmv-application-form');
+    Route::get('/ppmv-application-form-submit', 'App\Http\Controllers\Ppmv\ApplicationController@applicationForm')->name('ppmv-application-form-submit');
 });

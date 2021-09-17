@@ -268,7 +268,7 @@
                 <!-- PPMV routes start  -->
                 @can('isPPMV')
                 <li class="nav-item">
-                    <a href="">
+                    <a href="{{route('ppmv-application-form')}}">
                         <i class="nav-icon i-Map2"></i>
                         <span class="item-name">Location Approval</span>
                     </a>
