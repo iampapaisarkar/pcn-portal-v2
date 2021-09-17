@@ -178,18 +178,15 @@
                         <div class="custom-file mb-3">
                             <input name="birth_certificate" type="file" name="color_passportsize" class="custom-file-input
                             @error('birth_certificate') is-invalid @enderror" accept="application/pdf"
-                                id="inputGroupFile01">
-                            <label class="custom-file-label " for="inputGroupFile01"
-                                aria-describedby="inputGroupFileAddon02" id="inputGroupFile01previewLabel">Choose file</label>
+                                id="birth_certificate">
+                            <label class="custom-file-label " for="birth_certificate"
+                                aria-describedby="birth_certificate" id="birth_certificatepreviewLabel">Choose file</label>
                             @error('birth_certificate')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
                             </span>
                             @enderror
                         </div>
-                    </div>
-                    <div class="form-group col-md-2 d-flex align-items-center">
-                        <img id="inputGroupFile01preview" src="" alt="" class="w-100">
                     </div>
                 </div>
                 <div class="form-row">
@@ -198,18 +195,15 @@
                         <div class="custom-file mb-3">
                             <input name="educational_certificate" type="file" name="color_passportsize" class="custom-file-input
                             @error('educational_certificate') is-invalid @enderror" accept="application/pdf"
-                                id="inputGroupFile02">
-                            <label class="custom-file-label " for="inputGroupFile02"
-                                aria-describedby="inputGroupFileAddon02" id="inputGroupFile02previewLabel">Choose file</label>
+                                id="educational_certificate">
+                            <label class="custom-file-label " for="educational_certificate"
+                                aria-describedby="educational_certificate" id="educational_certificatepreviewLabel">Choose file</label>
                             @error('educational_certificate')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
                             </span>
                             @enderror
                         </div>
-                    </div>
-                    <div class="form-group col-md-2 d-flex align-items-center">
-                        <img id="inputGroupFile02preview" src="" alt="" class="w-100">
                     </div>
                 </div>
 
@@ -220,18 +214,15 @@
                         <div class="custom-file mb-3">
                             <input name="income_tax" type="file" name="color_passportsize" class="custom-file-input
                             @error('income_tax') is-invalid @enderror" accept="application/pdf"
-                                id="inputGroupFile03">
-                            <label class="custom-file-label " for="inputGroupFile03"
-                                aria-describedby="inputGroupFileAddon02" id="inputGroupFile03previewLabel">Choose file</label>
+                                id="income_tax">
+                            <label class="custom-file-label " for="income_tax"
+                                aria-describedby="income_tax" id="income_taxpreviewLabel">Choose file</label>
                             @error('income_tax')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
                             </span>
                             @enderror
                         </div>
-                    </div>
-                    <div class="form-group col-md-2 d-flex align-items-center">
-                        <img id="inputGroupFile03preview" src="" alt="" class="w-100">
                     </div>
                 </div>
 
@@ -241,18 +232,15 @@
                         <div class="custom-file mb-3">
                             <input name="handwritten_certificate" type="file" name="color_passportsize" class="custom-file-input
                             @error('handwritten_certificate') is-invalid @enderror" accept="application/pdf"
-                                id="inputGroupFile04">
-                            <label class="custom-file-label " for="inputGroupFile04"
-                                aria-describedby="inputGroupFileAddon02" id="inputGroupFile04previewLabel">Choose file</label>
+                                id="handwritten_certificate">
+                            <label class="custom-file-label " for="handwritten_certificate"
+                                aria-describedby="handwritten_certificate" id="handwritten_certificatepreviewLabel">Choose file</label>
                             @error('handwritten_certificate')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
                             </span>
                             @enderror
                         </div>
-                    </div>
-                    <div class="form-group col-md-2 d-flex align-items-center">
-                        <img id="inputGroupFile04preview" src="" alt="" class="w-100">
                     </div>
                 </div>
                 
@@ -322,9 +310,9 @@
                         <div class="custom-file">
                             <input name="reference_1_letter" type="file" name="color_passportsize" class="custom-file-input
                             @error('reference_1_letter') is-invalid @enderror" accept="application/pdf"
-                                id="inputGroupFile01" accept="image/*">
-                            <label class="custom-file-label " for="inputGroupFile01"
-                                aria-describedby="inputGroupFileAddon02" id="inputGroupFile01previewLabel">Choose file</label>
+                                id="reference_1_letter" accept="image/*">
+                            <label class="custom-file-label " for="reference_1_letter"
+                                aria-describedby="reference_1_letter" id="reference_1_letterpreviewLabel">Choose file</label>
                             @error('reference_1_letter')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -400,9 +388,9 @@
                         <div class="custom-file">
                             <input name="reference_2_letter" type="file" name="color_passportsize" class="custom-file-input
                             @error('reference_2_letter') is-invalid @enderror" accept="application/pdf"
-                                id="inputGroupFile02" accept="image/*">
-                            <label class="custom-file-label " for="inputGroupFile02"
-                                aria-describedby="inputGroupFileAddon02" id="inputGroupFile02previewLabel">Choose file</label>
+                                id="reference_2_letter" accept="image/*">
+                            <label class="custom-file-label " for="reference_2_letter"
+                                aria-describedby="reference_2_letter" id="reference_2_letterpreviewLabel">Choose file</label>
                             @error('reference_2_letter')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -415,12 +403,17 @@
                 <div class="form-row mt-5">
                     <div class="form-group col-md-12">
                     I as an applicant for a Patent and Proprietary Medicines Vendor's License residing hereby make the foregoing solemnly and consciously believing same to be true and correct.
-                    <label class="checkbox checkbox-primary mr-2">
+                    <label class="checkbox checkbox-primary mr-2 @error('terms') is-invalid @enderror">
                         <input name="terms" type="checkbox" value="I accept">
                         <span>I Accept</span>
                         <span class="checkmark"></span>
                     </label>
                     </div>
+                    @error('terms')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                    @enderror
                 </div>
 
                 <div class="custom-separator"></div>
@@ -441,68 +434,53 @@
 </div>
 <script>
 // Birth Certificate Photo on upload preview 
-inputGroupFile01.onchange = evt => {
-    const [file] = inputGroupFile01.files
+birth_certificate.onchange = evt => {
+    const [file] = birth_certificate.files
     if (file) {
-        $('#inputGroupFile01preview').attr('src', URL.createObjectURL(file));
-        $('#inputGroupFile01previewLabel').html(file.name);
+        $('#birth_certificatepreviewLabel').html(file.name);
     }
 }
 
 // Educational Certificate Photo on upload preview 
-inputGroupFile02.onchange = evt => {
-    const [file] = inputGroupFile02.files
+educational_certificate.onchange = evt => {
+    const [file] = educational_certificate.files
     if (file) {
-        $('#inputGroupFile02preview').attr('src', URL.createObjectURL(file));
-        $('#inputGroupFile02previewLabel').html(file.name);
+        $('#educational_certificatepreviewLabel').html(file.name);
     }
 }
 
 // Income Tax Certificate Photo on upload preview 
-inputGroupFile03.onchange = evt => {
-    const [file] = inputGroupFile03.files
+income_tax.onchange = evt => {
+    const [file] = income_tax.files
     if (file) {
-        $('#inputGroupFile03preview').attr('src', URL.createObjectURL(file));
-        $('#inputGroupFile03previewLabel').html(file.name);
+        $('#income_taxpreviewLabel').html(file.name);
     }
 }
 
 //Hand Written Certificate Photo on upload preview 
-inputGroupFile04.onchange = evt => {
-    const [file] = inputGroupFile04.files
+handwritten_certificate.onchange = evt => {
+    const [file] = handwritten_certificate.files
     if (file) {
-        $('#inputGroupFile04preview').attr('src', URL.createObjectURL(file));
-        $('#inputGroupFile04previewLabel').html(file.name);
+        $('#handwritten_certificatepreviewLabel').html(file.name);
     }
 }
 
-// State Selection 
-$('#stateField').on('change', function() {
-    var value = this.value;
-    if (value && value.length != null) {
-        $('#lgaField').removeAttr('disabled');
-        var lgas = <?php if(isset($lgas)){echo $lgas;} ?>;
-        var optionsHTML = '<option selected value="">Select LGA</option>';
-        lgas.forEach(lga => {
-            if (lga.state_id == value) {
-                optionsHTML += '<option value="' + lga.id + '">' + lga.name + '</option>'
-            }
-        });
-        $('#lgaField').html(optionsHTML);
-    } else {
-        $('#lgaField').html('<option selected value="">Select LGA</option>');
-        $('#lgaField').attr('disabled');
+//Reference Letter 1 on upload preview 
+reference_1_letter.onchange = evt => {
+    const [file] = reference_1_letter.files
+    if (file) {
+        $('#reference_1_letterpreviewLabel').html(file.name);
     }
-});
+}
 
-// Check Is Register Selection 
-$('#is_registeredField').on('change', function() {
-    var value = this.value;
-    if (value && value == 'yes') {
-        $("#ppmvl_noField").show();
-    } else {
-        $("#ppmvl_noField").hide();
+//Reference Letter 2 on upload preview 
+reference_2_letter.onchange = evt => {
+    const [file] = reference_2_letter.files
+    if (file) {
+        $('#reference_2_letterpreviewLabel').html(file.name);
     }
-});
+}
+
+
 </script>
 @endsection

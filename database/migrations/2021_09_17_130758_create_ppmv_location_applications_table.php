@@ -15,7 +15,7 @@ class CreatePpmvLocationApplicationsTable extends Migration
     {
         Schema::create('ppmv_location_applications', function (Blueprint $table) {
             $table->id();
-            $table->integer('vendor_id');
+            $table->integer('user_id');
             $table->integer('registration_id');
 
             $table->string('birth_certificate');

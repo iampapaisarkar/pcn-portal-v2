@@ -59,12 +59,7 @@
                             <tr>
                                 
                                 <td>
-                                @if($invoice->service_type == 'hospital_pharmacy')
-                                    APPLICATION FOR {{$invoice->service->description}} 
-                                @endif
-                                @if($invoice->service_type == 'hospital_pharmacy_renewal')
-                                    APPLICATION FOR {{$invoice->service->description}} 
-                                @endif
+                                APPLICATION FOR {{$invoice->service->description}} 
                                 </td>
 
                                 <td>

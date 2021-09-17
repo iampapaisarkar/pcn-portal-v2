@@ -22,7 +22,8 @@ class ApplicationController extends Controller
         return view('ppmv.location-application');
     }
 
-    public function applicationSubmit(PpmvLocationStoreRequest $request){
+    public function applicationFormSubmit(PpmvLocationStoreRequest $request){
+
         try {
             DB::beginTransaction();
 
@@ -30,6 +31,8 @@ class ApplicationController extends Controller
             $educational_certificate = FileUpload::upload($request->file('educational_certificate'), $private = true, 'ppmv', 'educational_certificate');
             $income_tax = FileUpload::upload($request->file('income_tax'), $private = true, 'ppmv', 'income_tax');
             $handwritten_certificate = FileUpload::upload($request->file('handwritten_certificate'), $private = true, 'ppmv', 'handwritten_certificate');
+            $reference_1_letter = FileUpload::upload($request->file('reference_1_letter'), $private = true, 'ppmv', 'reference_1_letter');
+            $reference_2_letter = FileUpload::upload($request->file('reference_2_letter'), $private = true, 'ppmv', 'reference_2_letter');
 
             $Registration = Registration::create([
                 'user_id' => Auth::user()->id,

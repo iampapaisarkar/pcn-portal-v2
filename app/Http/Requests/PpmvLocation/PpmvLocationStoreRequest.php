@@ -71,6 +71,9 @@ class PpmvLocationStoreRequest extends FormRequest
             ],
             'reference_occupation' => [
                 'required', 'min:3', 'max:255'
+            ],
+            'terms' => [
+                'required'
             ]
         ];
     }
