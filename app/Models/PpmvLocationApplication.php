@@ -29,4 +29,8 @@ class PpmvLocationApplication extends Model
         'reference_2_letter', 
         'reference_occupation',
     ];
+
+    public function user() {
+        return $this->hasOne(User::class,'id', 'user_id');
+    }
 }

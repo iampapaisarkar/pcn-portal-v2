@@ -46,6 +46,12 @@ Route::group(['middleware' => ['auth','verified', 'CheckProfileStatus']], functi
 
     // Donwload routes
     Route::get('hospital-inspection-report-download/{id}', 'App\Http\Controllers\DownloadController@downloadHospitalInspectionReport')->name('hospital-inspection-report-download');
+    Route::get('ppmv-birth-certificate-download/{id}', 'App\Http\Controllers\DownloadController@downloadPPMVBirthCertificate')->name('ppmv-birth-certificate-download');
+    Route::get('ppmv-education-certificate-download/{id}', 'App\Http\Controllers\DownloadController@downloadPPMVEducationCertificate')->name('ppmv-education-certificate-download');
+    Route::get('ppmv-incometax-certificate-download/{id}', 'App\Http\Controllers\DownloadController@downloadPPMVIncomeTaxCertificate')->name('ppmv-incometax-certificate-download');
+    Route::get('ppmv-handwritten-certificate-download/{id}', 'App\Http\Controllers\DownloadController@downloadPPMVHandwrittenCertificate')->name('ppmv-handwritten-certificate-download');
+    Route::get('ppmv-reference-letter-1-download/{id}', 'App\Http\Controllers\DownloadController@downloadPPMVReferenceLetter1')->name('ppmv-reference-letter-1-download');
+    Route::get('ppmv-reference-letter-2-download/{id}', 'App\Http\Controllers\DownloadController@downloadPPMVReferenceLetter2')->name('ppmv-reference-letter-2-download');
 });
 
 
