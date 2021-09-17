@@ -412,16 +412,25 @@
                     </div>
                 </div>
 
+                <div class="form-row mt-5">
+                    <div class="form-group col-md-12">
+                    I as an applicant for a Patent and Proprietary Medicines Vendor's License residing hereby make the foregoing solemnly and consciously believing same to be true and correct.
+                    <label class="checkbox checkbox-primary mr-2">
+                        <input name="terms" type="checkbox" value="I accept">
+                        <span>I Accept</span>
+                        <span class="checkmark"></span>
+                    </label>
+                    </div>
+                </div>
+
                 <div class="custom-separator"></div>
                 
                 <div class="card-footer">
                     <div class="mc-footer">
                         <div class="row">
                             <div class="col-lg-12">
-                                <button type="submit" class="btn  btn-primary m-1" id="save" name="save">Submit MEPTP
+                                <button type="submit" class="btn  btn-primary m-1" id="save" name="save">Submit Location Approval
                                     Application</button>
-                                <!-- <button type="button" onclick="makePayment()" class="btn  btn-primary m-1" id="save" name="save">Submit MEPTP
-                                Application</button> -->
                             </div>
                         </div>
                     </div>

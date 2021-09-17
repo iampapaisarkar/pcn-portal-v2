@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\PPMV;
+namespace App\Http\Requests\PpmvLocation;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class PPMVApplicationUpdateRequest extends FormRequest
+class PpmvLocationUpdateRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -36,9 +36,9 @@ class PPMVApplicationUpdateRequest extends FormRequest
             'reference_1_address' => [
                 'required', 'min:3', 'max:255'
             ],
-            // 'reference_1_letter' => [
-            //     'required'
-            // ],
+            'reference_1_letter' => [
+                'required'
+            ],
             'reference_2_name' => [
                 'required'
             ],
@@ -51,15 +51,15 @@ class PPMVApplicationUpdateRequest extends FormRequest
             'reference_2_address' => [
                 'required', 'min:3', 'max:255'
             ],
-            // 'reference_2_letter' => [
-            //     'required'
-            // ],
+            'reference_2_letter' => [
+                'required'
+            ],
             'current_annual_licence' => [
                 'required', 'min:3', 'max:255'
             ],
             'reference_occupation' => [
                 'required', 'min:3', 'max:255'
-            ],
+            ]
         ];
     }
 }

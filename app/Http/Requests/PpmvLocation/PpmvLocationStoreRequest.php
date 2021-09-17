@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\PPMV;
+namespace App\Http\Requests\PpmvLocation;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class PPMVApplicationStoreRequest extends FormRequest
+class PpmvLocationStoreRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,6 +24,18 @@ class PPMVApplicationStoreRequest extends FormRequest
     public function rules()
     {
         return [
+            'birth_certificate' => [
+                'required'
+            ],
+            'educational_certificate' => [
+                'required'
+            ],
+            'income_tax' => [
+                'required'
+            ],
+            'handwritten_certificate' => [
+                'required'
+            ],
             'reference_1_name' => [
                 'required'
             ],
@@ -59,7 +71,7 @@ class PPMVApplicationStoreRequest extends FormRequest
             ],
             'reference_occupation' => [
                 'required', 'min:3', 'max:255'
-            ],
+            ]
         ];
     }
 }
