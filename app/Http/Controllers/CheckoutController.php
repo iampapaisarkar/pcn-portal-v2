@@ -79,6 +79,21 @@ class CheckoutController extends Controller
                 EmailSendJOB::dispatch($data);
             }
 
+            if($order->service_type == 'ppmv'){
+                Registration::where(['id' => $order->application_id, 'user_id' => Auth::user()->id, 'type' => 'ppmv'])->update([
+                    'payment' => true
+                ]);
+
+                // $data = [
+                //     'order_id' => $order->order_id,
+                //     'amount' => $order->amount,
+                //     'user' => Auth::user(),
+                //     'registration_type' => 'ppmv',
+                //     'type' => 'payment_success',
+                // ];
+                // EmailSendJOB::dispatch($data);
+            }
+
             return view('checkout.success', compact('order'));
         }else{
             return abort(404);

@@ -27,7 +27,7 @@ class PpmvLocationApplicationPreview extends Component
     public function render()
     {
 
-        $application = Registration::where(['payment' => true, 'id' => $this->registration_id, 'user_id' => $this->user_id, 'type' => 'ppmv'])
+        $application = Registration::where(['payment' => true, 'id' => $this->application_id, 'user_id' => $this->user_id, 'type' => 'ppmv'])
         ->with('ppmv', 'user')
         ->first();
 
