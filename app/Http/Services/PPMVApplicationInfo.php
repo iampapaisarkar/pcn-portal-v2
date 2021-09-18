@@ -142,10 +142,10 @@ class PPMVApplicationInfo
                     'color' => 'success',
                 ];
             }
-            if($ppmv->status == 'facility_licence_issued'){
+            if($ppmv->status == 'licence_issued'){
                 return $response = [
                     'success' => true,
-                    'message' => 'Recommended for Facility Registration',
+                    'message' => 'Licence Issued',
                     'color' => 'success',
                 ];
             }
@@ -211,17 +211,17 @@ class PPMVApplicationInfo
                     'download-link' => route('ppmv-registration-inspection-report-download', $ppmv->id),
                 ];
             }
-            if($ppmv->status == 'facility_inspection_approved'){
+            if($ppmv->status == 'facility_send_to_registration'){
                 return $response = [
                     'success' => true,
                     'message' => 'Recommended for Facility Registration',
                     'color' => 'success',
                 ];
             }
-            if($ppmv->status == 'facility_licence_issued'){
+            if($ppmv->status == 'licence_issued'){
                 return $response = [
                     'success' => true,
-                    'message' => 'Recommended for Facility Registration',
+                    'message' => 'Licence Issued',
                     'color' => 'success',
                 ];
             }

@@ -109,6 +109,9 @@ Route::group(['middleware' => ['auth','verified', 'can:isRegistry']], function (
     Route::get('registry-recommendation-show', 'App\Http\Controllers\Registry\DoumentRecommendationController@hospitalPharmacyShow')->name('registry-recommendation-show');
     Route::post('registry-approve-recommendation-all', 'App\Http\Controllers\Registry\DoumentRecommendationController@ApproveAll')->name('registry-approve-recommendation-all');
     Route::post('registry-recommendation-approve', 'App\Http\Controllers\Registry\DoumentRecommendationController@hospitalPharmacyApprove')->name('registry-recommendation-approve');
+    
+    Route::get('registry-recommendation-ppmv-show', 'App\Http\Controllers\Registry\DoumentRecommendationController@ppmvRegistrationShow')->name('registry-recommendation-ppmv-show');
+    Route::post('registry-recommendation-ppmv-approve', 'App\Http\Controllers\Registry\DoumentRecommendationController@ppmvRegistrationApprove')->name('registry-recommendation-ppmv-approve');
 
 
     Route::resource('registry-renewal-pending', 'App\Http\Controllers\Registry\RenewalInspectionController');

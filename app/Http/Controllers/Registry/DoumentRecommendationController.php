@@ -20,10 +20,11 @@ class DoumentRecommendationController extends Controller
     public function index(Request $request)
     {
         $documents = Registration::where(['payment' => true])
-        ->with('hospital_pharmacy', 'user')
+        ->with('hospital_pharmacy', 'ppmv', 'user')
         ->where(function($q){
             $q->where('status', 'partial_recommendation');
             $q->orWhere('status', 'full_recommendation');
+            $q->orWhere('status', 'facility_full_recommendation');
         });
         
         if($request->per_page){
@@ -122,11 +123,6 @@ class DoumentRecommendationController extends Controller
         ->first();
 
         if($registration){
-            return view('registry.recommendation.hospital-show', compact('registration'));
-        }else{
-            return abort(404);
-        }
-        if($registration){
             $alert = [];
             if($registration->status == 'no_recommendation'){
                 $alert = [
@@ -171,17 +167,29 @@ class DoumentRecommendationController extends Controller
                     ->where(function($q){
                         $q->where('status', 'partial_recommendation');
                         $q->orWhere('status', 'full_recommendation');
+                        $q->orWhere('status', 'facility_full_recommendation');
                     })
-                                ->first();
+                    ->first();
 
-                    Registration::where(['payment' => true, 'id' => $registration_id])
-                    ->where(function($q){
-                        $q->where('status', 'partial_recommendation');
-                        $q->orWhere('status', 'full_recommendation');
-                    })
-                    ->update([
-                        'status' => 'send_to_registration'
-                    ]);
+                    if($Registration->type == 'hospital_pharmacy'){
+                        Registration::where(['payment' => true, 'id' => $registration_id])
+                        ->where(function($q){
+                            $q->where('status', 'partial_recommendation');
+                            $q->orWhere('status', 'full_recommendation');
+                        })
+                        ->update([
+                            'status' => 'send_to_registration'
+                        ]);
+                    }
+                    if($Registration->type == 'ppmv'){
+                        Registration::where(['payment' => true, 'id' => $registration_id])
+                        ->where(function($q){
+                            $q->where('status', 'facility_full_recommendation');
+                        })
+                        ->update([
+                            'status' => 'facility_send_to_registration'
+                        ]);
+                    }
 
                     $adminName = Auth::user()->firstname .' '. Auth::user()->lastname;
                     $activity = 'Registry Document Facility Inspection Report Approval';
@@ -230,6 +238,67 @@ class DoumentRecommendationController extends Controller
             $adminName = Auth::user()->firstname .' '. Auth::user()->lastname;
             $activity = 'Registry Document Facility Inspection Report Approval';
             AllActivity::storeActivity($request['registration_id'], $adminName, $activity, 'hospital_pharmacy');
+
+            return redirect()->route('registry-recommendation.index')->with('success', 'Registration Approved successfully done');
+        }else{
+            return abort(404);
+        }
+    }
+
+
+    public function ppmvRegistrationShow(Request $request){
+
+        $registration = Registration::where(['payment' => true, 'id' => $request['registration_id'], 'user_id' => $request['user_id'], 'type' => 'ppmv'])
+        ->with('ppmv', 'user')
+        ->where(function($q){
+            $q->where('status', 'facility_full_recommendation');
+        })
+        ->first();
+
+        if($registration){
+            $alert = [];
+            if($registration->status == 'facility_no_recommendation'){
+                $alert = [
+                    'success' => true,
+                    'message' => 'Inspection Report: No Recommendation',
+                    'color' => 'danger',
+                    'download-link' => route('ppmv-registration-inspection-report-download', $registration->id),
+                ];
+            }
+            if($registration->status == 'facility_full_recommendation'){
+                $alert = [
+                    'success' => true,
+                    'message' => 'Inspection Report: Full Recommendation',
+                    'color' => 'success',
+                    'download-link' => route('ppmv-registration-inspection-report-download', $registration->id),
+                ];
+            }
+            return view('registry.recommendation.ppmv-registration-show', compact('registration', 'alert'));
+        }else{
+            return abort(404);
+        }
+    }
+
+    public function ppmvRegistrationApprove(Request $request){
+
+        $registration = Registration::where(['payment' => true, 'id' => $request['registration_id'], 'user_id' => $request['user_id'], 'type' => 'ppmv'])
+        ->where(function($q){
+            $q->where('status', 'facility_full_recommendation');
+        })
+        ->first();
+
+        if($registration){
+            Registration::where(['payment' => true, 'id' => $request['registration_id'], 'user_id' => $request['user_id'], 'type' => 'ppmv'])
+            ->where(function($q){
+                $q->where('status', 'facility_full_recommendation');
+            })
+            ->update([
+                'status' => 'facility_send_to_registration'
+            ]);
+
+            $adminName = Auth::user()->firstname .' '. Auth::user()->lastname;
+            $activity = 'Registry Document Facility Inspection Report Approval';
+            AllActivity::storeActivity($request['registration_id'], $adminName, $activity, 'ppmv');
 
             return redirect()->route('registry-recommendation.index')->with('success', 'Registration Approved successfully done');
         }else{
