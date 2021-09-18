@@ -19,7 +19,6 @@ class DocumentReviewController extends Controller
      */
     public function index(Request $request)
     {
-
         $documents = Registration::where(['payment' => true])
         ->with('hospital_pharmacy', 'user')
         ->whereHas('user', function($q){

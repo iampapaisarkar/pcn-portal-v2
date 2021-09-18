@@ -88,6 +88,10 @@ Route::group(['middleware' => ['auth','verified', 'can:isSOffice']], function ()
 
     Route::resource('state-office-location-reports', 'App\Http\Controllers\StateOffice\LocationReportController');
     Route::get('state-office-location-report-ppmv-show', 'App\Http\Controllers\StateOffice\LocationReportController@ppmvLocationShow')->name('state-office-location-report-ppmv-show');
+
+    Route::resource('state-office-registration', 'App\Http\Controllers\StateOffice\FacilityApplicationController');
+    Route::get('state-office-registration-ppmv-show', 'App\Http\Controllers\StateOffice\FacilityApplicationController@ppmvRegistrationShow')->name('state-office-registration-ppmv-show');
+    Route::post('state-office-registration-ppmv-inspection-update', 'App\Http\Controllers\StateOffice\FacilityApplicationController@ppmvRegistrationInspectionUpdate')->name('state-office-registration-ppmv-inspection-update');
 });
 
 // REFISTRY ROUTES 
