@@ -12,9 +12,15 @@
                 :userID="$registration->user_id" 
                 type="hospital_pharmacy" />
 
+
+                <div class="custom-separator"></div>
+                <h4>Facility Inspection Report Recommendation</h4>
+                <div class="alert alert-card alert-{{$alert['color']}}" role="alert">
+                <h3>{{$alert['message']}}</h3>
+                <a href="{{$alert['download-link']}}" target="_blank" class="btn btn-rounded btn-{{$alert['color']}} ml-3">Download Inspection Report</a>
+                </div>
                 <div class="custom-separator"></div>
                 
-
                 <div class="row">
                     <form action="{{route('registry-recommendation-approve')}}" method="POST" id="approveForm">
                     @csrf

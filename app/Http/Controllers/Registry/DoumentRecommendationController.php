@@ -126,6 +126,36 @@ class DoumentRecommendationController extends Controller
         }else{
             return abort(404);
         }
+        if($registration){
+            $alert = [];
+            if($registration->status == 'no_recommendation'){
+                $alert = [
+                    'success' => true,
+                    'message' => 'Inspection Report: No Recommendation',
+                    'color' => 'danger',
+                    'download-link' => route('hospital-inspection-report-download', $registration->id),
+                ];
+            }
+            if($registration->status == 'partial_recommendation'){
+                $alert = [
+                    'success' => true,
+                    'message' => 'Inspection Report: Partial Recommendation',
+                    'color' => 'success',
+                    'download-link' => route('hospital-inspection-report-download', $registration->id),
+                ];
+            }
+            if($registration->status == 'full_recommendation'){
+                $alert = [
+                    'success' => true,
+                    'message' => 'Inspection Report: Full Recommendation',
+                    'color' => 'success',
+                    'download-link' => route('hospital-inspection-report-download', $registration->id),
+                ];
+            }
+            return view('registry.recommendation.hospital-show', compact('registration', 'alert'));
+        }else{
+            return abort(404);
+        }
     }
 
     public function ApproveAll(Request $request){
