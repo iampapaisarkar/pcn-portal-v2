@@ -68,9 +68,9 @@
                         @if($application->status == 'no_recommendation')
                         <td><span class="badge badge-pill m-1 badge-danger">NO RECOMMENDATION</span></td>
                         @endif
-                        @if($application->status == 'partial_recommendation')
+                        <!-- @if($application->status == 'partial_recommendation')
                         <td><span class="badge badge-pill m-1 badge-warning">PARTIAL RECOMMENDATION</span></td>
-                        @endif
+                        @endif -->
                         @if($application->status == 'full_recommendation')
                         <td><span class="badge badge-pill m-1 badge-success">FULL RECOMMENDATION</span></td>
                         @endif
