@@ -280,7 +280,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="">
+                    <a href="{{route('ppmv-facility-application-form')}}">
                         <i class="nav-icon i-Notepad"></i>
                         <span class="item-name">Registration</span>
                     </a>

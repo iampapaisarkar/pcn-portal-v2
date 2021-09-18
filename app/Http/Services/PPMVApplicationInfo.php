@@ -121,6 +121,22 @@ class PPMVApplicationInfo
         }
     }
 
+    public static function canSubmitPPMVFacilityApplication(){
+        $ppmv = Registration::where(['user_id' => Auth::user()->id, 'type' => 'ppmv', 'status' => 'inspection_approved'])
+        ->with('ppmv')->latest()->first();
+
+        if($ppmv){
+            return $response = [
+                'success' => true,
+            ];
+        }else{
+            return $response = [
+                'success' => false,
+                'message' => 'PPMV LOCATION APPROVAL APPLICATION NOT COMPLETE YET',
+            ];
+        }
+    }
+
 
     // public function canAccessRenewalPage(){
     //     if(Renewal::where('user_id', Auth::user()->id)

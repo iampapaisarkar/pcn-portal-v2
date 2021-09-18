@@ -150,19 +150,6 @@
                         </span>
                         @enderror
                     </div>
-
-
-                    <div id="ppmvl_noField" style="{{old('is_registered') == 'yes' ? 'display: block;' : 'display: none;'}}" class="form-group col-md-4">
-                        <label for="inputEmail3" class="ul-form__label">PPMVL Number :</label>
-                        <input name="ppmvl_no" class="form-control @error('ppmvl_no') is-invalid @enderror"
-                        value="{{old('ppmvl_no')}}"
-                        id="ppmvl_no" placeholder="Enter Town/ppmvl_no" />
-                        @error('ppmvl_no')
-                        <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                        @enderror
-                    </div>
                 </div>
 
                 <div class="custom-separator"></div>
