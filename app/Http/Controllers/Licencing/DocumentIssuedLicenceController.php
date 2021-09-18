@@ -123,4 +123,18 @@ class DocumentIssuedLicenceController extends Controller
             return abort(404);
         }
     }
+
+    public function ppmvShow(Request $request){
+
+        $registration = Registration::where(['payment' => true, 'id' => $request['registration_id'], 'user_id' => $request['user_id'], 'type' => 'ppmv'])
+        ->with('ppmv', 'user')
+        ->where('status', 'licence_issued')
+        ->first();
+
+        if($registration){
+            return view('licencing.issued.ppmv-show', compact('registration'));
+        }else{
+            return abort(404);
+        }
+    }
 }

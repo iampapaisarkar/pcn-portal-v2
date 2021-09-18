@@ -50,17 +50,31 @@
                     @foreach($documents as $document)
                     <tr>
                         <td>{{$document->category}}</td>
+                        
                         @if($document->type == 'hospital_pharmacy')
                         <td>{{$document->user->hospital_name}}</td>
                         @endif
+                        @if($document->type == 'ppmv')
+                        <td>{{$document->user->shop_name}}</td>
+                        @endif
+
                         @if($document->type == 'hospital_pharmacy')
                         <td>Hospital Pharmacy Registration</td>
                         @endif
+                        @if($document->type == 'ppmv')
+                        <td>PPMV Location Approval Application</td>
+                        @endif
+
                         <td>{{$document->registration_year}}</td>
                         <td><span class="badge badge-pill m-1 badge-success">LICENCE ISSUED</span></td>
                         <td>
                             @if($document->type == 'hospital_pharmacy')
                             <a href="{{ route('licence-issued-hospital-show') }}?registration_id={{$document->id}}&user_id={{$document->user->id}}">
+                                <button class="btn btn-success btn-sm" type="button"><i class="nav-icon i-Eye"></i></button>
+                            </a>
+                            @endif
+                            @if($document->type == 'ppmv')
+                            <a href="{{ route('licence-issued-ppmv-show') }}?registration_id={{$document->id}}&user_id={{$document->user->id}}">
                                 <button class="btn btn-success btn-sm" type="button"><i class="nav-icon i-Eye"></i></button>
                             </a>
                             @endif
