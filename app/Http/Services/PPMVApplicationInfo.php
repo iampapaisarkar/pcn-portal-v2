@@ -75,14 +75,14 @@ class PPMVApplicationInfo
                     'download-link' => route('ppmv-location-inspection-report-download', $ppmv->id),
                 ];
             }
-            if($ppmv->status == 'partial_recommendation'){
-                return $response = [
-                    'success' => true,
-                    'message' => 'Recommended for Licensure',
-                    'color' => 'success',
-                    'download-link' => route('ppmv-location-inspection-report-download', $ppmv->id),
-                ];
-            }
+            // if($ppmv->status == 'partial_recommendation'){
+            //     return $response = [
+            //         'success' => true,
+            //         'message' => 'Recommended for Licensure',
+            //         'color' => 'success',
+            //         'download-link' => route('ppmv-location-inspection-report-download', $ppmv->id),
+            //     ];
+            // }
             if($ppmv->status == 'full_recommendation'){
                 return $response = [
                     'success' => true,

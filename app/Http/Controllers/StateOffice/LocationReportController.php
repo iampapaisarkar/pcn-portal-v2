@@ -21,9 +21,12 @@ class LocationReportController extends Controller
     {
         $applications = Registration::where(['payment' => true])
         ->with('ppmv', 'user')
+        ->whereHas('user', function($q){
+            $q->where('state', Auth::user()->state);
+        })
         ->where(function($q){
             $q->where('status', 'no_recommendation');
-            $q->orWhere('status', 'partial_recommendation');
+            // $q->orWhere('status', 'partial_recommendation');
             $q->orWhere('status', 'full_recommendation');
         });
         
@@ -116,9 +119,12 @@ class LocationReportController extends Controller
 
         $application = Registration::where(['payment' => true, 'id' => $request['application_id'], 'user_id' => $request['user_id'], 'type' => 'ppmv'])
         ->with('ppmv', 'user')
+        ->whereHas('user', function($q){
+            $q->where('state', Auth::user()->state);
+        })
         ->where(function($q){
             $q->where('status', 'no_recommendation');
-            $q->orWhere('status', 'partial_recommendation');
+            // $q->orWhere('status', 'partial_recommendation');
             $q->orWhere('status', 'full_recommendation');
         })
         ->first();

@@ -26,7 +26,7 @@
                                 <select class="form-control @error('recommendation') is-invalid @enderror" name="recommendation">
                                     <option value="">Select Recommendation</option>
                                     <option value="no_recommendation">NO RECOMMENDATION</option>
-                                    <option value="partial_recommendation">PARTIAL RECOMMENDATION</option>
+                                    <!-- <option value="partial_recommendation">PARTIAL RECOMMENDATION</option> -->
                                     <option value="full_recommendation">FULL RECOMMENDATION</option>
                                 </select>
                                 @error('recommendation')

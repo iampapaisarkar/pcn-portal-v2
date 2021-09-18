@@ -21,6 +21,9 @@ class LocationInspectionController extends Controller
     {
         $applications = Registration::where(['payment' => true])
         ->with('ppmv', 'user')
+        ->whereHas('user', function($q){
+            $q->where('state', Auth::user()->state);
+        })
         ->where('status', 'send_to_state_office_inspection');
         
         if($request->per_page){
@@ -112,6 +115,9 @@ class LocationInspectionController extends Controller
 
         $application = Registration::where(['payment' => true, 'id' => $request['application_id'], 'user_id' => $request['user_id'], 'type' => 'ppmv'])
         ->with('ppmv', 'user')
+        ->whereHas('user', function($q){
+            $q->where('state', Auth::user()->state);
+        })
         ->where('status', 'send_to_state_office_inspection')
         ->first();
 
@@ -136,6 +142,9 @@ class LocationInspectionController extends Controller
             ->where('status', 'send_to_state_office_inspection')
             ->where('payment', true)
             ->with('ppmv', 'user')
+            ->whereHas('user', function($q){
+                $q->where('state', Auth::user()->state);
+            })
             ->first();
 
             if($Registration){
@@ -155,6 +164,9 @@ class LocationInspectionController extends Controller
                 Registration::where(['id' => $request->application_id, 'user_id' => $request->user_id, 'type' => 'ppmv'])
                 ->where('status', 'send_to_state_office_inspection')
                 ->where('payment', true)
+                ->whereHas('user', function($q){
+                    $q->where('state', Auth::user()->state);
+                })
                 ->update([
                     'status' => $request->recommendation,
                     'inspection_report' => $file_name,
