@@ -106,6 +106,13 @@ class PPMVApplicationInfo
             //         'download-licence' => route('ppmv-location-inspection-report-download', $ppmv->id),
             //     ];
             // }
+            if($ppmv->status == 'inspection_approved'){
+                return $response = [
+                    'success' => true,
+                    'message' => 'Recommended for Facility Registration',
+                    'color' => 'success',
+                ];
+            }
             
         }else{
             return $response = [

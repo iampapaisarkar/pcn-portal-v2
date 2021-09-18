@@ -288,12 +288,6 @@
                 <li class="nav-item">
                     <a href="">
                         <i class="nav-icon i-Notepad"></i>
-                        <span class="item-name">Registration</span>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="">
-                        <i class="nav-icon i-Notepad"></i>
                         <span class="item-name">Registration Status</span>
                     </a>
                 </li>
