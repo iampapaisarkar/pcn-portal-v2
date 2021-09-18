@@ -104,6 +104,11 @@ Route::group(['middleware' => ['auth','verified', 'can:isRegistry']], function (
     Route::get('registry-renewal-recommendation-show', 'App\Http\Controllers\Registry\RenewalRecommendationController@hospitalPharmacyShow')->name('registry-renewal-recommendation-show');
     Route::post('registry-renewal-recommendation-approve-all', 'App\Http\Controllers\Registry\RenewalRecommendationController@ApproveAll')->name('registry-renewal-recommendation-approve-all');
     Route::post('registry-renewal-recommendation-approve', 'App\Http\Controllers\Registry\RenewalRecommendationController@hospitalPharmacyApprove')->name('registry-renewal-recommendation-approve');
+
+    Route::resource('registry-locations', 'App\Http\Controllers\Registry\LocationApplicationController');
+    Route::get('registry-location-ppmv-show', 'App\Http\Controllers\Registry\LocationApplicationController@ppmvLocationShow')->name('registry-location-ppmv-show');
+    Route::post('registry-locations-approve-all', 'App\Http\Controllers\Registry\LocationApplicationController@ApproveAll')->name('registry-locations-approve-all');
+    Route::post('registry-location-ppmv-approve', 'App\Http\Controllers\Registry\LocationApplicationController@ppmvLocationApprove')->name('registry-location-ppmv-approve');
 });
 
 // PHARMACY PRACTICE ROUTES 

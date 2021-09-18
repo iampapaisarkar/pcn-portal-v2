@@ -59,7 +59,7 @@ class PPMVApplicationInfo
                     'color' => 'warning',
                 ];
             }
-            if($ppmv->status == 'send_to_pharmacy_practice'){
+            if($ppmv->status == 'send_to_state_office_inspection'){
                 return $response = [
                     'success' => true,
                     'message' => 'Inspection Pending',

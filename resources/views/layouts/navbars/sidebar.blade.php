@@ -140,13 +140,13 @@
                 <!-- Registry routes start  -->
                 @can('isRegistry')
                 <li class="nav-item">
-                    <a href="">
+                    <a href="{{route('registry-locations.index')}}">
                         <i class="nav-icon i-Receipt-4"></i>
                         <span class="item-name">Location Inspection</span>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="">
+                    <a href="{{route('registry-locations.index')}}">
                         <i class="nav-icon i-Receipt-4"></i>
                         <span class="item-name">Location Inspection Recommendation</span>
                     </a>
