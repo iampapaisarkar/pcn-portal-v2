@@ -211,5 +211,5 @@ Route::group(['middleware' => ['auth','verified', 'can:isPPMV', 'CheckProfileSta
     Route::get('/ppmv-application-status', 'App\Http\Controllers\Ppmv\ApplicationController@status')->name('ppmv-application-status');
 
     Route::get('/ppmv-facility-application-form', 'App\Http\Controllers\Ppmv\FacilityApplicationController@applicationForm')->name('ppmv-facility-application-form');
-    Route::get('/ppmv-facility-application-form-submit', 'App\Http\Controllers\Ppmv\FacilityApplicationController@applicationFormSubmit')->name('ppmv-facility-application-form-submit');
+    Route::post('/ppmv-facility-application-form-submit', 'App\Http\Controllers\Ppmv\FacilityApplicationController@applicationFormSubmit')->name('ppmv-facility-application-form-submit');
 });

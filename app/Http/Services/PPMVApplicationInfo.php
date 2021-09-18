@@ -32,7 +32,8 @@ class PPMVApplicationInfo
     }
 
     public static function status(){
-        $ppmv = Registration::where(['user_id' => Auth::user()->id, 'payment' => true, 'type' => 'ppmv'])
+        // $ppmv = Registration::where(['user_id' => Auth::user()->id, 'payment' => true, 'type' => 'ppmv'])
+        $ppmv = Registration::where(['user_id' => Auth::user()->id, 'type' => 'ppmv'])
         ->with('ppmv')->latest()->first();
 
         if($ppmv){
@@ -113,6 +114,13 @@ class PPMVApplicationInfo
                     'color' => 'success',
                 ];
             }
+            if($ppmv->status == 'send_to_state_office_registration'){
+                return $response = [
+                    'success' => true,
+                    'message' => 'Recommended for Facility Registration',
+                    'color' => 'success',
+                ];
+            }
             
         }else{
             return $response = [
@@ -122,13 +130,21 @@ class PPMVApplicationInfo
     }
 
     public static function canSubmitPPMVFacilityApplication(){
-        $ppmv = Registration::where(['user_id' => Auth::user()->id, 'type' => 'ppmv', 'status' => 'inspection_approved'])
+        $ppmv = Registration::where(['user_id' => Auth::user()->id, 'type' => 'ppmv'])
         ->with('ppmv')->latest()->first();
 
         if($ppmv){
-            return $response = [
-                'success' => true,
-            ];
+            if($ppmv->status == 'inspection_approved'){
+                return $response = [
+                    'success' => true,
+
+                ];
+            }else{
+                return $response = [
+                    'success' => false,
+                    'message' => 'PPMV FACILITY REGISTRATION APPLICATION ALREADY SUBMITTED',
+                ];
+            }
         }else{
             return $response = [
                 'success' => false,

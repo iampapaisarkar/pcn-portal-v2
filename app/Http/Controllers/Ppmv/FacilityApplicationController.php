@@ -19,4 +19,34 @@ class FacilityApplicationController extends Controller
     public function applicationForm(){
         return view('ppmv.facility-application');
     }
+
+    public function applicationFormSubmit(){
+
+        $application = Registration::where(['payment' => true, 'user_id' => Auth::user()->id, 'type' => 'ppmv'])
+        ->with('ppmv', 'user')
+        ->where('status', 'inspection_approved')
+        ->first();
+
+        if($application){
+            Registration::where(['payment' => true, 'user_id' => Auth::user()->id, 'type' => 'ppmv'])
+            ->with('ppmv', 'user')
+            ->where('status', 'inspection_approved')
+            ->update([
+                'status' => 'send_to_state_office_registration',
+                'payment' => false,
+            ]);
+
+            $response = Checkout::checkoutPpmvRegistration($application = ['id' => $application->id], 'ppmv');
+
+            if($response['success']){
+                return redirect()->route('invoices.show', ['id' => $response['id']])
+                ->with('success', 'Registration application successfully submitted. Please pay amount for further action');
+            }else{
+                return back()->with('error','There is something error, please try after some time');
+            }
+
+        }else{
+            abort(404);
+        }
+    }
 }
