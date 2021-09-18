@@ -71,7 +71,7 @@ class PPMVApplicationInfo
                     'success' => true,
                     'message' => 'Not Recommended for Licensure',
                     'color' => 'danger',
-                    'new-link' => route('hospital-registration-form'),
+                    'new-link' => route('ppmv-application-form'),
                     'download-link' => route('ppmv-location-inspection-report-download', $ppmv->id),
                 ];
             }
