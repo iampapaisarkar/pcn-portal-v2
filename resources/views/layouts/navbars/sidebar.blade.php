@@ -146,7 +146,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="{{route('registry-locations.index')}}">
+                    <a href="{{route('registry-location-recommendation.index')}}">
                         <i class="nav-icon i-Receipt-4"></i>
                         <span class="item-name">Location Inspection Recommendation</span>
                     </a>

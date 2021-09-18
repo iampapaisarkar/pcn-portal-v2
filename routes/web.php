@@ -117,6 +117,11 @@ Route::group(['middleware' => ['auth','verified', 'can:isRegistry']], function (
     Route::get('registry-location-ppmv-show', 'App\Http\Controllers\Registry\LocationApplicationController@ppmvLocationShow')->name('registry-location-ppmv-show');
     Route::post('registry-locations-approve-all', 'App\Http\Controllers\Registry\LocationApplicationController@ApproveAll')->name('registry-locations-approve-all');
     Route::post('registry-location-ppmv-approve', 'App\Http\Controllers\Registry\LocationApplicationController@ppmvLocationApprove')->name('registry-location-ppmv-approve');
+
+    Route::resource('registry-location-recommendation', 'App\Http\Controllers\Registry\LocationApplicationRecommendation');
+    Route::get('registry-location-ppmv-recommendation-show', 'App\Http\Controllers\Registry\LocationApplicationRecommendation@ppmvLocationRecommendationShow')->name('registry-location-ppmv-recommendation-show');
+    Route::post('registry-approve-location-recommendation-all', 'App\Http\Controllers\Registry\LocationApplicationRecommendation@ApproveAll')->name('registry-approve-location-recommendation-all');
+    Route::post('registry-location-ppmv-recommendation-approve', 'App\Http\Controllers\Registry\LocationApplicationRecommendation@ppmvLocationRecommendationApprove')->name('registry-location-ppmv-recommendation-approve');
 });
 
 // PHARMACY PRACTICE ROUTES 

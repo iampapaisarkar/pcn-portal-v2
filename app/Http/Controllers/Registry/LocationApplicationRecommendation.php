@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\StateOffice;
+namespace App\Http\Controllers\Registry;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Services\AllActivity;
 use DB;
 
-class LocationReportController extends Controller
+class LocationApplicationRecommendation extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -21,13 +21,8 @@ class LocationReportController extends Controller
     {
         $applications = Registration::where(['payment' => true])
         ->with('ppmv', 'user')
-        ->whereHas('user', function($q){
-            $q->where('state', Auth::user()->state);
-        })
         ->where(function($q){
-            $q->where('status', 'no_recommendation');
-            // $q->orWhere('status', 'partial_recommendation');
-            $q->orWhere('status', 'full_recommendation');
+            $q->where('status', 'full_recommendation');
         });
         
         if($request->per_page){
@@ -46,7 +41,7 @@ class LocationReportController extends Controller
 
         $applications = $applications->latest()->paginate($perPage);
 
-        return view('stateoffice.location-inspection-report.index', compact('applications'));
+        return view('registry.location-recommendation.index', compact('applications'));
     }
 
     /**
@@ -115,22 +110,16 @@ class LocationReportController extends Controller
         //
     }
 
-    public function ppmvLocationShow(Request $request){
+    public function ppmvLocationRecommendationShow(Request $request){
 
         $application = Registration::where(['payment' => true, 'id' => $request['application_id'], 'user_id' => $request['user_id'], 'type' => 'ppmv'])
         ->with('ppmv', 'user')
-        ->whereHas('user', function($q){
-            $q->where('state', Auth::user()->state);
-        })
         ->where(function($q){
-            $q->where('status', 'no_recommendation');
-            // $q->orWhere('status', 'partial_recommendation');
-            $q->orWhere('status', 'full_recommendation');
+            $q->where('status', 'full_recommendation');
         })
         ->first();
 
         if($application){
-            $alert = [];
             if($application->status == 'no_recommendation'){
                 $alert = [
                     'success' => true,
@@ -155,8 +144,84 @@ class LocationReportController extends Controller
                     'download-link' => route('ppmv-location-inspection-report-download', $application->id),
                 ];
             }
+            return view('registry.location-recommendation.ppmv-location-show', compact('application', 'alert'));
+        }else{
+            return abort(404);
+        }
+    }
 
-            return view('stateoffice.location-inspection-report.ppmv-location-show', compact('application', 'alert'));
+    public function ApproveAll(Request $request){
+        try {
+            DB::beginTransaction();
+
+            $checkboxes = isset($request->check_box_bulk_action) ? true : false;
+
+            if($checkboxes == true){
+                foreach($request->check_box_bulk_action as $registration_id => $registration){
+
+                    $Registration = Registration::where(['payment' => true, 'id' => $registration_id])
+                    ->where(function($q){
+                        $q->where('status', 'full_recommendation');
+                    })
+                    ->first();
+
+                    if($Registration->type == 'ppmv'){
+                        Registration::where(['payment' => true, 'id' => $registration_id])
+                        ->where(function($q){
+                            $q->where('status', 'full_recommendation');
+                        })
+                        ->update([
+                            'status' => 'inspection_approved'
+                        ]);
+                    }
+
+                    $adminName = Auth::user()->firstname .' '. Auth::user()->lastname;
+                    $activity = 'Registry Location Inspection Report Approval';
+                    AllActivity::storeActivity($registration_id, $adminName, $activity, $Registration->type);
+
+                }
+                $response = true;
+            }else{
+                $response = false;
+            }
+
+        DB::commit();
+
+            if($response == true){
+                return back()->with('success', 'Registration approved successfully.');
+            }else{
+                return back()->with('error', 'Please select atleast one registration.');
+            }
+
+        }catch(Exception $e) {
+            DB::rollback();
+            return back()->with('error','There is something error, please try after some time');
+        }
+
+    }
+
+    public function ppmvLocationRecommendationApprove(Request $request){
+
+        $registration = Registration::where(['payment' => true, 'id' => $request['application_id'], 'user_id' => $request['user_id'], 'type' => 'ppmv'])
+        ->where(function($q){
+            $q->where('status', 'full_recommendation');
+        })
+        ->first();
+
+        if($registration){
+            Registration::where(['payment' => true, 'id' => $request['application_id'], 'user_id' => $request['user_id'], 'type' => 'ppmv'])
+            ->where(function($q){
+                $q->where('status', 'full_recommendation');
+            })
+            ->update([
+                'status' => 'inspection_approved'
+            ]);
+
+            $adminName = Auth::user()->firstname .' '. Auth::user()->lastname;
+            $activity = 'Registry Location Inspection Report Approval';
+            AllActivity::storeActivity($request['application_id'], $adminName, $activity, 'ppmv');
+
+            return redirect()->route('registry-location-recommendation.index')->with('success', 'Application Approved successfully done');
         }else{
             return abort(404);
         }
