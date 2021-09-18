@@ -105,7 +105,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="">
+                    <a href="{{route('state-office-location-reports.index')}}">
                         <i class="nav-icon i-Receipt-4"></i>
                         <span class="item-name">Location Inspection - Reports</span>
                     </a>

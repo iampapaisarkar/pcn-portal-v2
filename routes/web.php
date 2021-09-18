@@ -52,6 +52,7 @@ Route::group(['middleware' => ['auth','verified', 'CheckProfileStatus']], functi
     Route::get('ppmv-handwritten-certificate-download/{id}', 'App\Http\Controllers\DownloadController@downloadPPMVHandwrittenCertificate')->name('ppmv-handwritten-certificate-download');
     Route::get('ppmv-reference-letter-1-download/{id}', 'App\Http\Controllers\DownloadController@downloadPPMVReferenceLetter1')->name('ppmv-reference-letter-1-download');
     Route::get('ppmv-reference-letter-2-download/{id}', 'App\Http\Controllers\DownloadController@downloadPPMVReferenceLetter2')->name('ppmv-reference-letter-2-download');
+    Route::get('ppmv-location-inspection-report-download/{id}', 'App\Http\Controllers\DownloadController@downloadPPMVLocationInspectionReport')->name('ppmv-location-inspection-report-download');
 });
 
 
@@ -84,6 +85,9 @@ Route::group(['middleware' => ['auth','verified', 'can:isSOffice']], function ()
     Route::resource('state-office-locations', 'App\Http\Controllers\StateOffice\LocationInspectionController');
     Route::get('state-office-locations-ppmv-show', 'App\Http\Controllers\StateOffice\LocationInspectionController@ppmvLocationShow')->name('state-office-locations-ppmv-show');
     Route::post('state-office-locations-ppmv-inspection-update', 'App\Http\Controllers\StateOffice\LocationInspectionController@ppmvLocationInspectionupdate')->name('state-office-locations-ppmv-inspection-update');
+
+    Route::resource('state-office-location-reports', 'App\Http\Controllers\StateOffice\LocationReportController');
+    Route::get('state-office-location-report-ppmv-show', 'App\Http\Controllers\StateOffice\LocationReportController@ppmvLocationShow')->name('state-office-location-report-ppmv-show');
 });
 
 // REFISTRY ROUTES 
