@@ -53,6 +53,7 @@ Route::group(['middleware' => ['auth','verified', 'CheckProfileStatus']], functi
     Route::get('ppmv-reference-letter-1-download/{id}', 'App\Http\Controllers\DownloadController@downloadPPMVReferenceLetter1')->name('ppmv-reference-letter-1-download');
     Route::get('ppmv-reference-letter-2-download/{id}', 'App\Http\Controllers\DownloadController@downloadPPMVReferenceLetter2')->name('ppmv-reference-letter-2-download');
     Route::get('ppmv-location-inspection-report-download/{id}', 'App\Http\Controllers\DownloadController@downloadPPMVLocationInspectionReport')->name('ppmv-location-inspection-report-download');
+    Route::get('ppmv-registration-inspection-report-download/{id}', 'App\Http\Controllers\DownloadController@downloadPPMVRegistrationInspectionReport')->name('ppmv-registration-inspection-report-download');
 });
 
 

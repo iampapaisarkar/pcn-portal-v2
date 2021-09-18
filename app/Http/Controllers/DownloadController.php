@@ -119,4 +119,18 @@ class DownloadController extends Controller
             return abort(404);
         }
     }
+
+    public function downloadPPMVRegistrationInspectionReport(Request $request, $id){
+        $application = Registration::where(['payment' => true, 'id' => $id, 'type' => 'ppmv'])
+        ->with('ppmv', 'user')
+        ->first();
+
+        if($application){
+            $path = storage_path('app'. DIRECTORY_SEPARATOR . 'private' . 
+            DIRECTORY_SEPARATOR . $application->user_id . DIRECTORY_SEPARATOR . 'ppmv' . DIRECTORY_SEPARATOR . $application->inspection_report);
+            return response()->download($path);
+        }else{
+            return abort(404);
+        }
+    }
 }

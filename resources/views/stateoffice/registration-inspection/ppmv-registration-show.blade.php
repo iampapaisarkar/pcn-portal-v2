@@ -25,9 +25,9 @@
                                 <label for="inputEmail3" class="ul-form__label">Recommendation:</label>
                                 <select class="form-control @error('recommendation') is-invalid @enderror" name="recommendation">
                                     <option value="">Select Recommendation</option>
-                                    <option value="no_recommendation">NO RECOMMENDATION</option>
+                                    <option value="facility_no_recommendation">NO RECOMMENDATION</option>
                                     <!-- <option value="partial_recommendation">PARTIAL RECOMMENDATION</option> -->
-                                    <option value="full_recommendation">FULL RECOMMENDATION</option>
+                                    <option value="facility_full_recommendation">FULL RECOMMENDATION</option>
                                 </select>
                                 @error('recommendation')
                                 <span class="invalid-feedback" role="alert">

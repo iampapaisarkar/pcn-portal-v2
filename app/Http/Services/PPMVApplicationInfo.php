@@ -199,8 +199,8 @@ class PPMVApplicationInfo
                     'success' => true,
                     'message' => 'Not Recommended for Licensure',
                     'color' => 'danger',
-                    'new-link' => route('ppmv-application-form'),
-                    'download-link' => route('ppmv-location-inspection-report-download', $ppmv->id),
+                    'new-link' => route('ppmv-facility-application-form'),
+                    'download-link' => route('ppmv-registration-inspection-report-download', $ppmv->id),
                 ];
             }
             if($ppmv->status == 'facility_full_recommendation'){
@@ -208,7 +208,7 @@ class PPMVApplicationInfo
                     'success' => true,
                     'message' => 'Recommended for Licensure',
                     'color' => 'success',
-                    'download-link' => route('ppmv-location-inspection-report-download', $ppmv->id),
+                    'download-link' => route('ppmv-registration-inspection-report-download', $ppmv->id),
                 ];
             }
             if($ppmv->status == 'facility_inspection_approved'){

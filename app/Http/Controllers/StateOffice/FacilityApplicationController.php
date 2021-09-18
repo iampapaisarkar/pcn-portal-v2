@@ -9,6 +9,7 @@ use App\Models\HospitalRegistration;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Services\AllActivity;
 use App\Jobs\EmailSendJOB;
+use DB;
 
 class FacilityApplicationController extends Controller
 {
@@ -140,7 +141,7 @@ class FacilityApplicationController extends Controller
             DB::beginTransaction();
 
             $Registration = Registration::where(['id' => $request->application_id, 'user_id' => $request->user_id, 'type' => 'ppmv'])
-            ->where('status', 'send_to_state_office_inspection')
+            ->where('status', 'send_to_state_office_registration')
             ->where('payment', true)
             ->with('ppmv', 'user')
             ->whereHas('user', function($q){
@@ -163,7 +164,7 @@ class FacilityApplicationController extends Controller
                 $file->move($private_storage_path, $file_name);
 
                 Registration::where(['id' => $request->application_id, 'user_id' => $request->user_id, 'type' => 'ppmv'])
-                ->where('status', 'send_to_state_office_inspection')
+                ->where('status', 'send_to_state_office_registration')
                 ->where('payment', true)
                 ->whereHas('user', function($q){
                     $q->where('state', Auth::user()->state);
@@ -173,10 +174,9 @@ class FacilityApplicationController extends Controller
                     'inspection_report' => $file_name,
                 ]);
 
-
                 $adminName = Auth::user()->firstname .' '. Auth::user()->lastname;
 
-                if($request->recommendation == 'no_recommendation'){
+                if($request->recommendation == 'facility_no_recommendation'){
                     $activity = 'Facility Inspection Report Uploaded';
 
                     // $data = [
@@ -187,18 +187,7 @@ class FacilityApplicationController extends Controller
                     // ];
                     // EmailSendJOB::dispatch($data);
                 }
-                if($request->recommendation == 'partial_recommendation'){
-                    $activity = 'Facility Inspection Report Uploaded';
-
-                    // $data = [
-                    //     'user' => $Registration->user,
-                    //     'registration_type' => 'ppmv',
-                    //     'type' => 'pharmacy_recommendation',
-                    //     'status' => 'partial_recommendation',
-                    // ];
-                    // EmailSendJOB::dispatch($data);
-                }
-                if($request->recommendation == 'full_recommendation'){
+                if($request->recommendation == 'facility_full_recommendation'){
                     $activity = 'Facility Inspection Report Uploaded';
 
                     // $data = [
@@ -217,7 +206,7 @@ class FacilityApplicationController extends Controller
             
             DB::commit();
 
-            return redirect()->route('state-office-locations.index')
+            return redirect()->route('state-office-registration.index')
             ->with('success', 'Inspection Report updated successfully');
 
         }catch(Exception $e) {
