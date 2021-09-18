@@ -105,7 +105,6 @@ class ApplicationController extends Controller
 
     public function applicationUpdate(PpmvLocationUpdateRequest $request, $id){
 
-        // dd(PpmvLocationApplication::where(['user_id' => Auth::user()->id, 'registration_id' => $id])->first());
         try {
             DB::beginTransaction();
 
