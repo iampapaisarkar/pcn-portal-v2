@@ -22,8 +22,11 @@ class DocumentPendingLicenceController extends Controller
     public function index(Request $request)
     {
         $documents = Registration::where(['payment' => true])
-        ->with('hospital_pharmacy', 'user')
-        ->where('status', 'send_to_registration');
+        ->with('hospital_pharmacy', 'ppmv', 'user')
+        ->where(function($q){
+            $q->where('status', 'send_to_registration');
+            $q->orWhere('status', 'facility_send_to_registration');
+        });
         
         if($request->per_page){
             $perPage = (integer) $request->per_page;
@@ -134,11 +137,18 @@ class DocumentPendingLicenceController extends Controller
                 foreach($request->check_box_bulk_action as $registration_id => $registration){
 
                     $Registration = Registration::where(['payment' => true, 'id' => $registration_id])
-                    ->where('status', 'send_to_registration')
+                    // ->where('status', 'send_to_registration')
+                    ->where(function($q){
+                        $q->where('status', 'send_to_registration');
+                        $q->orWhere('status', 'facility_send_to_registration');
+                    })
                     ->first();
 
                     Registration::where(['payment' => true, 'id' => $registration_id])
-                    ->where('status', 'send_to_registration')
+                    ->where(function($q){
+                        $q->where('status', 'send_to_registration');
+                        $q->orWhere('status', 'facility_send_to_registration');
+                    })
                     ->update([
                         'status' => 'licence_issued'
                     ]);
@@ -169,6 +179,10 @@ class DocumentPendingLicenceController extends Controller
                             'type' => 'licencing_issued',
                         ];
                         EmailSendJOB::dispatch($data);
+
+                    }
+
+                    if($Registration->type == 'ppmv'){
 
                     }
 
@@ -239,6 +253,77 @@ class DocumentPendingLicenceController extends Controller
                         'type' => 'licencing_issued',
                     ];
                     EmailSendJOB::dispatch($data);
+
+                }else{
+                    return abort(404);
+                }
+
+        DB::commit();
+            return redirect()->route('licence-pending.index')->with('success', 'Licence issued successfully done');
+        }catch(Exception $e) {
+            DB::rollback();
+            return back()->with('error','There is something error, please try after some time');
+        }
+    }
+
+
+    public function ppmvShow(Request $request){
+
+        $registration = Registration::where(['payment' => true, 'id' => $request['registration_id'], 'user_id' => $request['user_id'], 'type' => 'ppmv'])
+        ->with('ppmv', 'user')
+        ->where('status', 'facility_send_to_registration')
+        ->first();
+
+        if($registration){
+            return view('licencing.pending.ppmv-registration-show', compact('registration'));
+        }else{
+            return abort(404);
+        }
+    }
+
+
+    public function ppmvApprove(Request $request){
+
+        try {
+            DB::beginTransaction();
+
+                $registration = Registration::where(['payment' => true, 'id' => $request['registration_id'], 'user_id' => $request['user_id'], 'type' => 'ppmv'])
+                ->where('status', 'facility_send_to_registration')
+                ->first();
+
+                if($registration){
+                    Registration::where(['payment' => true, 'id' => $request['registration_id'], 'user_id' => $request['user_id'], 'type' => 'ppmv'])
+                    ->where('status', 'facility_send_to_registration')
+                    ->update([
+                        'status' => 'licence_issued'
+                    ]);
+
+                    // $HospitalRegistration = HospitalRegistration::where(['registration_id' => $request['registration_id'], 'user_id' => $request['user_id']])->latest()->first();
+
+                    // $renewal = Renewal::create([
+                    //     'user_id' => $registration->user_id,
+                    //     'registration_id' => $registration->id,
+                    //     'form_id' => $HospitalRegistration->id,
+                    //     'type' => 'hospital_pharmacy_renewal',
+                    //     'renewal_year' => date('Y'),
+                    //     'expires_at' => \Carbon\Carbon::now()->format('Y') .'-12-31',
+                    //     'licence' => 'TEST2021',
+                    //     'status' => 'licence_issued',
+                    //     // 'renewal' => true,
+                    //     // 'inspection' => true,
+                    //     'payment' => true,
+                    // ]);
+
+                    $adminName = Auth::user()->firstname .' '. Auth::user()->lastname;
+                    $activity = 'Registration & Licencing Issued Licence';
+                    AllActivity::storeActivity($request['registration_id'], $adminName, $activity, 'ppmv');
+
+                    // $data = [
+                    //     'user' => $registration->user,
+                    //     'registration_type' => 'hospital_pharmacy',
+                    //     'type' => 'licencing_issued',
+                    // ];
+                    // EmailSendJOB::dispatch($data);
 
                 }else{
                     return abort(404);

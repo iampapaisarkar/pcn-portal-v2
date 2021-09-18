@@ -161,9 +161,12 @@ Route::group(['middleware' => ['auth','verified', 'can:isIMonitoring']], functio
 // REGISTERING & LECENCING ROUTES 
 Route::group(['middleware' => ['auth','verified', 'can:isRLicencing']], function () {
     Route::resource('licence-pending', 'App\Http\Controllers\Licencing\DocumentPendingLicenceController');
-    Route::get('licence-pending-hospital-show', 'App\Http\Controllers\Licencing\DocumentPendingLicenceController@hospitalPharmacyShow')->name('licence-pending-hospital-show');
     Route::post('licence-pending-approve-all', 'App\Http\Controllers\Licencing\DocumentPendingLicenceController@ApproveAll')->name('licence-pending-approve-all');
+    Route::get('licence-pending-hospital-show', 'App\Http\Controllers\Licencing\DocumentPendingLicenceController@hospitalPharmacyShow')->name('licence-pending-hospital-show');
     Route::post('licence-pending-hospital-approve', 'App\Http\Controllers\Licencing\DocumentPendingLicenceController@hospitalPharmacyApprove')->name('licence-pending-hospital-approve');
+
+    Route::get('licence-pending-ppmv-show', 'App\Http\Controllers\Licencing\DocumentPendingLicenceController@ppmvShow')->name('licence-pending-ppmv-show');
+    Route::post('licence-pending-ppmv-approve', 'App\Http\Controllers\Licencing\DocumentPendingLicenceController@ppmvApprove')->name('licence-pending-ppmv-approve');
 
     Route::resource('licence-issued', 'App\Http\Controllers\Licencing\DocumentIssuedLicenceController');
     Route::get('licence-issued-hospital-show', 'App\Http\Controllers\Licencing\DocumentIssuedLicenceController@hospitalPharmacyShow')->name('licence-issued-hospital-show');
