@@ -72,7 +72,7 @@ class PPMVApplicationInfo
                     'message' => 'Not Recommended for Licensure',
                     'color' => 'danger',
                     'new-link' => route('hospital-registration-form'),
-                    'download-link' => route('hospital-inspection-report-download', $ppmv->id),
+                    'download-link' => route('ppmv-location-inspection-report-download', $ppmv->id),
                 ];
             }
             if($ppmv->status == 'partial_recommendation'){
@@ -80,7 +80,7 @@ class PPMVApplicationInfo
                     'success' => true,
                     'message' => 'Recommended for Licensure',
                     'color' => 'success',
-                    'download-link' => route('hospital-inspection-report-download', $ppmv->id),
+                    'download-link' => route('ppmv-location-inspection-report-download', $ppmv->id),
                 ];
             }
             if($ppmv->status == 'full_recommendation'){
@@ -88,24 +88,24 @@ class PPMVApplicationInfo
                     'success' => true,
                     'message' => 'Recommended for Licensure',
                     'color' => 'success',
-                    'download-link' => route('hospital-inspection-report-download', $ppmv->id),
+                    'download-link' => route('ppmv-location-inspection-report-download', $ppmv->id),
                 ];
             }
-            if($ppmv->status == 'send_to_registration'){
-                return $response = [
-                    'success' => true,
-                    'message' => 'Recommended for Licensure',
-                    'color' => 'success',
-                ];
-            }
-            if($ppmv->status == 'licence_issued'){
-                return $response = [
-                    'success' => true,
-                    'message' => 'Licence Issued ',
-                    'color' => 'success',
-                    'download-licence' => route('hospital-inspection-report-download', $ppmv->id),
-                ];
-            }
+            // if($ppmv->status == 'send_to_registration'){
+            //     return $response = [
+            //         'success' => true,
+            //         'message' => 'Recommended for Licensure',
+            //         'color' => 'success',
+            //     ];
+            // }
+            // if($ppmv->status == 'licence_issued'){
+            //     return $response = [
+            //         'success' => true,
+            //         'message' => 'Licence Issued ',
+            //         'color' => 'success',
+            //         'download-licence' => route('ppmv-location-inspection-report-download', $ppmv->id),
+            //     ];
+            // }
             
         }else{
             return $response = [
