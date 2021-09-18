@@ -49,4 +49,9 @@ class FacilityApplicationController extends Controller
             abort(404);
         }
     }
+
+    public function status(){
+        $application = Registration::where('user_id', Auth::user()->id)->latest()->first();
+        return view('ppmv.facility-status', compact('application'));
+    }
 }

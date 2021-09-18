@@ -121,6 +121,34 @@ class PPMVApplicationInfo
                     'color' => 'success',
                 ];
             }
+            if($ppmv->status == 'facility_no_recommendation'){
+                return $response = [
+                    'success' => true,
+                    'message' => 'Recommended for Facility Registration',
+                    'color' => 'success',
+                ];
+            }
+            if($ppmv->status == 'facility_full_recommendation'){
+                return $response = [
+                    'success' => true,
+                    'message' => 'Recommended for Facility Registration',
+                    'color' => 'success',
+                ];
+            }
+            if($ppmv->status == 'facility_inspection_approved'){
+                return $response = [
+                    'success' => true,
+                    'message' => 'Recommended for Facility Registration',
+                    'color' => 'success',
+                ];
+            }
+            if($ppmv->status == 'facility_licence_issued'){
+                return $response = [
+                    'success' => true,
+                    'message' => 'Recommended for Facility Registration',
+                    'color' => 'success',
+                ];
+            }
             
         }else{
             return $response = [
@@ -134,7 +162,7 @@ class PPMVApplicationInfo
         ->with('ppmv')->latest()->first();
 
         if($ppmv){
-            if($ppmv->status == 'inspection_approved'){
+            if($ppmv->status == 'facility_no_recommendation'){
                 return $response = [
                     'success' => true,
 
@@ -149,6 +177,58 @@ class PPMVApplicationInfo
             return $response = [
                 'success' => false,
                 'message' => 'PPMV LOCATION APPROVAL APPLICATION NOT COMPLETE YET',
+            ];
+        }
+    }
+
+    public static function facilityStatus(){
+        // $ppmv = Registration::where(['user_id' => Auth::user()->id, 'payment' => true, 'type' => 'ppmv'])
+        $ppmv = Registration::where(['user_id' => Auth::user()->id, 'type' => 'ppmv'])
+        ->with('ppmv')->latest()->first();
+
+        if($ppmv){
+            if($ppmv->status == 'send_to_state_office_registration'){
+                return $response = [
+                    'success' => true,
+                    'message' => 'Document Verification Pending',
+                    'color' => 'warning',
+                ];
+            }
+            if($ppmv->status == 'facility_no_recommendation'){
+                return $response = [
+                    'success' => true,
+                    'message' => 'Not Recommended for Licensure',
+                    'color' => 'danger',
+                    'new-link' => route('ppmv-application-form'),
+                    'download-link' => route('ppmv-location-inspection-report-download', $ppmv->id),
+                ];
+            }
+            if($ppmv->status == 'facility_full_recommendation'){
+                return $response = [
+                    'success' => true,
+                    'message' => 'Recommended for Licensure',
+                    'color' => 'success',
+                    'download-link' => route('ppmv-location-inspection-report-download', $ppmv->id),
+                ];
+            }
+            if($ppmv->status == 'facility_inspection_approved'){
+                return $response = [
+                    'success' => true,
+                    'message' => 'Recommended for Facility Registration',
+                    'color' => 'success',
+                ];
+            }
+            if($ppmv->status == 'facility_licence_issued'){
+                return $response = [
+                    'success' => true,
+                    'message' => 'Recommended for Facility Registration',
+                    'color' => 'success',
+                ];
+            }
+            
+        }else{
+            return $response = [
+                'success' => false,
             ];
         }
     }

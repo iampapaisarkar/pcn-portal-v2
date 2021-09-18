@@ -286,7 +286,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="">
+                    <a href="{{route('ppmv-facility-application-status')}}">
                         <i class="nav-icon i-Notepad"></i>
                         <span class="item-name">Registration Status</span>
                     </a>
