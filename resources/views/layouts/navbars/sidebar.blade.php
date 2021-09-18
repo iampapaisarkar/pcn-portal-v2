@@ -98,8 +98,8 @@
                         <span class="item-name">Documents Review </span>
                     </a>
                 </li>
-                <!-- <li class="nav-item">
-                    <a href="">
+                <li class="nav-item">
+                    <a href="{{route('state-office-locations.index')}}">
                         <i class="nav-icon i-Receipt-4"></i>
                         <span class="item-name">Location Inspection - Report Upload</span>
                     </a>
@@ -109,7 +109,7 @@
                         <i class="nav-icon i-Receipt-4"></i>
                         <span class="item-name">Location Inspection - Reports</span>
                     </a>
-                </li> -->
+                </li>
                 <!-- <li class="nav-item">
                     <a href="">
                         <i class="nav-icon i-Receipt-4"></i>
