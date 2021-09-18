@@ -173,7 +173,8 @@ class Checkout
         try {
             DB::beginTransaction();
 
-            $Registration = Registration::where(['id' => $application['id'], 'payment' => false, 'type' => $type])->first(); 
+            // $Registration = Registration::where(['id' => $application['id'], 'payment' => false, 'type' => $type])->first(); 
+            $Registration = Registration::where(['id' => $application['id'], 'type' => $type])->first(); 
 
             if($Registration){
                 $service = ChildService::where('id', 13)

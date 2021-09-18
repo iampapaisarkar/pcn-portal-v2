@@ -24,13 +24,19 @@ class FacilityApplicationController extends Controller
 
         $application = Registration::where(['payment' => true, 'user_id' => Auth::user()->id, 'type' => 'ppmv'])
         ->with('ppmv', 'user')
-        ->where('status', 'inspection_approved')
+        ->where(function($q){
+            $q->where('status', 'facility_no_recommendation');
+            $q->orWhere('status', 'inspection_approved');
+        })
         ->first();
 
         if($application){
             Registration::where(['payment' => true, 'user_id' => Auth::user()->id, 'type' => 'ppmv'])
             ->with('ppmv', 'user')
-            ->where('status', 'inspection_approved')
+            ->where(function($q){
+                $q->where('status', 'facility_no_recommendation');
+                $q->orWhere('status', 'inspection_approved');
+            })
             ->update([
                 'status' => 'send_to_state_office_registration',
                 'payment' => false,
