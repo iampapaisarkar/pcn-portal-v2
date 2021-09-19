@@ -229,4 +229,10 @@ Route::group(['middleware' => ['auth','verified', 'can:isPPMV', 'CheckProfileSta
     Route::post('/ppmv-facility-application-form-submit', 'App\Http\Controllers\Ppmv\FacilityApplicationController@applicationFormSubmit')->name('ppmv-facility-application-form-submit');
 
     Route::get('/ppmv-facility-application-status', 'App\Http\Controllers\Ppmv\FacilityApplicationController@status')->name('ppmv-facility-application-status');
+
+    Route::resource('ppmv-renewals', 'App\Http\Controllers\Ppmv\RenewalController');
+    Route::get('/ppmv-renew', 'App\Http\Controllers\Ppmv\RenewalController@renew')->name('ppmv-renew');
+    Route::post('/ppmv-renewal-submit', 'App\Http\Controllers\Ppmv\RenewalController@renewalSubmit')->name('ppmv-renewal-submit');
+    Route::get('/ppmv-renewal-edit/{id}', 'App\Http\Controllers\Ppmv\RenewalController@renewalEdit')->name('ppmv-renewal-edit');
+    Route::post('/ppmv-renewal-update/{id}', 'App\Http\Controllers\Ppmv\RenewalController@renewalUpdate')->name('ppmv-renewal-update');
 });

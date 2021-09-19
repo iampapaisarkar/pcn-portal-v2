@@ -245,65 +245,59 @@ class PPMVApplicationInfo
     }
 
 
-    // public function canAccessRenewalPage(){
-    //     if(Renewal::where('user_id', Auth::user()->id)
-    //     // ->where('renewal', true)
-    //     ->latest()
-    //     ->first()){
-    //         return $response = [
-    //             'response' => true,
-    //             'color' => 'warning',
-    //             'message' => 'You\'re already submited PPMV registration',
-    //         ]; 
+    public function canAccessRenewalPage(){
+        if(Renewal::where('user_id', Auth::user()->id)
+        // ->where('renewal', true)
+        ->latest()
+        ->first()){
+            return $response = [
+                'response' => true,
+                'color' => 'warning',
+                'message' => 'You\'re already submited PPMV registration',
+            ]; 
         
-    //     }else{
-    //         return $response = [
-    //             'response' => false,
-    //             'color' => 'warning',
-    //             'message' => 'You don\'t have licence or renwals yet.',
-    //         ];
-    //     }
-    // }
+        }else{
+            return $response = [
+                'response' => false,
+                'color' => 'warning',
+                'message' => 'You don\'t have licence or renwals yet.',
+            ];
+        }
+    }
 
 
-    // public function licenceRenewalYearCheck(){
-    //     // $meptp = Auth::user()->passed_meptp_application()->first();
+    public function licenceRenewalYearCheck(){
 
-    //     $renwal = Renewal::where('user_id', Auth::user()->id)->orderBy('renewal_year', 'desc')->first();
+        $renwal = Renewal::where('user_id', Auth::user()->id)->orderBy('renewal_year', 'desc')->first();
 
-    //     if($renwal && $renwal->status == 'send_to_registry'){
-    //         return [
-    //             'response' => false
-    //         ];
-    //     }
-    //     if($renwal && $renwal->status == 'send_to_registration'){
-    //         return [
-    //             'response' => false
-    //         ];
-    //     }
-    //     if($renwal && $renwal->status == 'no_recommendation'){
-    //         return [
-    //             'response' => false
-    //         ];
-    //     }
-    //     if($renwal && $renwal->status == 'partial_recommendation'){
-    //         return [
-    //             'response' => false
-    //         ];
-    //     }
-    //     if($renwal && $renwal->status == 'full_recommendation'){
-    //         return [
-    //             'response' => false
-    //         ];
-    //     }
-    //     if(($renwal && $renwal->status == 'licence_issued') && (date('Y-m-d') < \Carbon\Carbon::createFromFormat('Y-m-d', $renwal->expires_at)->addDays(1)->format('Y-m-d'))){
-    //         return [
-    //             'response' => false,
-    //             'renewal_date' => \Carbon\Carbon::createFromFormat('Y-m-d', $renwal->expires_at)->addDays(1)->format('d M, Y')
-    //         ];
-    //     }
-    //     return [
-    //         'response' => true
-    //     ];
-    // }
+        if($renwal && $renwal->status == 'send_to_registry'){
+            return [
+                'response' => false
+            ];
+        }
+        if($renwal && $renwal->status == 'send_to_registration'){
+            return [
+                'response' => false
+            ];
+        }
+        if($renwal && $renwal->status == 'no_recommendation'){
+            return [
+                'response' => false
+            ];
+        }
+        if($renwal && $renwal->status == 'full_recommendation'){
+            return [
+                'response' => false
+            ];
+        }
+        if(($renwal && $renwal->status == 'licence_issued') && (date('Y-m-d') < \Carbon\Carbon::createFromFormat('Y-m-d', $renwal->expires_at)->addDays(1)->format('Y-m-d'))){
+            return [
+                'response' => false,
+                'renewal_date' => \Carbon\Carbon::createFromFormat('Y-m-d', $renwal->expires_at)->addDays(1)->format('d M, Y')
+            ];
+        }
+        return [
+            'response' => true
+        ];
+    }
 }

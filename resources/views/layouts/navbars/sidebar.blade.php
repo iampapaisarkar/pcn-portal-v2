@@ -292,7 +292,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="">
+                    <a href="{{route('ppmv-renewals.index')}}">
                         <i class="nav-icon i-Notepad"></i>
                         <span class="item-name">Renewal</span>
                     </a>
