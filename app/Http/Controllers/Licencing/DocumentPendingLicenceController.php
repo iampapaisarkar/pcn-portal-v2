@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Registration;
 use App\Models\HospitalRegistration;
+use App\Models\PpmvLocationApplication;
 use App\Models\Renewal;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Services\AllActivity;
@@ -183,7 +184,30 @@ class DocumentPendingLicenceController extends Controller
                     }
 
                     if($Registration->type == 'ppmv'){
+                        $PpmvLocationApplication = PpmvLocationApplication::where(['registration_id' => $registration_id, 'user_id' => $Registration->user_id])
+                        ->with('user')
+                        ->latest()->first();
 
+                        $renewal = Renewal::create([
+                            'user_id' => $Registration->user_id,
+                            'registration_id' => $registration_id,
+                            'form_id' => $PpmvLocationApplication->id,
+                            'type' => 'ppmv_renewal',
+                            'renewal_year' => date('Y'),
+                            'expires_at' => \Carbon\Carbon::now()->format('Y') .'-12-31',
+                            'licence' => 'TEST2021',
+                            'status' => 'licence_issued',
+                            'renewal' => false,
+                            'inspection' => true,
+                            'payment' => true,
+                        ]);
+
+                        $data = [
+                            'user' => $PpmvLocationApplication->user,
+                            'registration_type' => 'ppmv',
+                            'type' => 'licencing_issued',
+                        ];
+                        // EmailSendJOB::dispatch($data);
                     }
 
                     $adminName = Auth::user()->firstname .' '. Auth::user()->lastname;
@@ -298,21 +322,24 @@ class DocumentPendingLicenceController extends Controller
                         'status' => 'licence_issued'
                     ]);
 
-                    // $HospitalRegistration = HospitalRegistration::where(['registration_id' => $request['registration_id'], 'user_id' => $request['user_id']])->latest()->first();
+                    $PpmvLocationApplication = PpmvLocationApplication::where(['registration_id' => $registration_id, 'user_id' => $Registration->user_id])
+                    ->with('user')
+                    ->latest()->first();
 
-                    // $renewal = Renewal::create([
-                    //     'user_id' => $registration->user_id,
-                    //     'registration_id' => $registration->id,
-                    //     'form_id' => $HospitalRegistration->id,
-                    //     'type' => 'hospital_pharmacy_renewal',
-                    //     'renewal_year' => date('Y'),
-                    //     'expires_at' => \Carbon\Carbon::now()->format('Y') .'-12-31',
-                    //     'licence' => 'TEST2021',
-                    //     'status' => 'licence_issued',
-                    //     // 'renewal' => true,
-                    //     // 'inspection' => true,
-                    //     'payment' => true,
-                    // ]);
+                    $renewal = Renewal::create([
+                        'user_id' => $Registration->user_id,
+                        'registration_id' => $registration_id,
+                        'form_id' => $PpmvLocationApplication->id,
+                        'type' => 'ppmv_renewal',
+                        'renewal_year' => date('Y'),
+                        'expires_at' => \Carbon\Carbon::now()->format('Y') .'-12-31',
+                        'licence' => 'TEST2021',
+                        'status' => 'licence_issued',
+                        'renewal' => false,
+                        'inspection' => true,
+                        'payment' => true,
+                    ]);
+
 
                     $adminName = Auth::user()->firstname .' '. Auth::user()->lastname;
                     $activity = 'Registration & Licencing Issued Licence';
