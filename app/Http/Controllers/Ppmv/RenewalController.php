@@ -156,4 +156,56 @@ class RenewalController extends Controller
             return back()->with('error','There is something error, please try after some time');
         }  
     }
+
+    public function renewalEdit($id){
+        $registration = Renewal::where('user_id', Auth::user()->id)
+        ->where('id', $id)
+        ->with('ppmv', 'registration', 'user')
+        ->latest()->first();
+
+
+        if($registration){
+            return view('ppmv.renewal-form-edit', compact('registration'));
+        }else{
+            return abort(404);
+        }
+    }
+
+    public function renewalUpdate(Request $request, $id){
+
+        try {
+            DB::beginTransaction();
+
+            if(Renewal::where(['user_id' => Auth::user()->id, 'id' => $id, 'type' => 'ppmv_renewal'])->where('status', 'no_recommendation')->exists()){
+
+                $renewal = Renewal::where(['user_id' => Auth::user()->id, 'id' => $id, 'type' => 'ppmv_renewal'])
+                ->where('status', 'no_recommendation')
+                ->with('ppmv', 'registration', 'user')
+                ->first();
+
+                Renewal::where(['user_id' => Auth::user()->id, 'id' => $id, 'type' => 'ppmv_renewal'])
+                ->where('status', 'no_recommendation')
+                ->with('ppmv', 'registration', 'user')
+                ->update([
+                    'status' => 'send_to_pharmacy_practice',
+                    'payment' => false,
+                ]);
+
+                $response = Checkout::checkoutPPMVRenewal($application = ['id' => $renewal->id], 'ppmv_renewal');
+            }
+
+            DB::commit();
+
+            if($response['success']){
+                return redirect()->route('invoices.show', ['id' => $response['id']])
+                ->with('success', 'Renewal Application successfully updated. Please pay amount for further action');
+            }else{
+                return back()->with('error','There is something error, please try after some time');
+            }
+
+        }catch(Exception $e) {
+            DB::rollback();
+            return back()->with('error','There is something error, please try after some time');
+        }  
+    }
 }
