@@ -164,13 +164,21 @@ class PPMVApplicationInfo
         if($ppmv){
             if($ppmv->status == 'facility_no_recommendation'){
                 return $response = [
+                    'success' => false,
+                    'message' => 'PPMV LOCATION APPROVAL APPLICATION NOT COMPLETE YET',
+
+                ];
+            }
+            if($ppmv->status == 'inspection_approved'){
+                return $response = [
                     'success' => true,
 
                 ];
             }else{
                 return $response = [
                     'success' => false,
-                    'message' => 'PPMV FACILITY REGISTRATION APPLICATION ALREADY SUBMITTED',
+                    'message' => 'PPMV FACILITY INSPECTION APPLICATION ALEARY SUBMITTED',
+
                 ];
             }
         }else{
@@ -225,6 +233,9 @@ class PPMVApplicationInfo
                     'color' => 'success',
                 ];
             }
+            return $response = [
+                'success' => false,
+            ];
             
         }else{
             return $response = [

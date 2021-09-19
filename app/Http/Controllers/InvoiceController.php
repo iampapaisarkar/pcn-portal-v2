@@ -108,6 +108,15 @@ class InvoiceController extends Controller
             if($data->service_type == 'hospital_pharmacy'){
                 $title = 'Hospital Pharmacy Registration Fees';
             }
+            if($data->service_type == 'hospital_pharmacy_renewal'){
+                $title = 'Hospital Pharmacy Renewal Fees';
+            }
+            if($data->service_type == 'ppmv'){
+                $title = 'PPMV Location Approval Fees';
+            }
+            if($data->service_type == 'ppmv_renewal'){
+                $title = 'PPMV Renewal Fees';
+            }
 
             $items = [
                 (new InvoiceItem())->title($title)->pricePerUnit($data->amount)->units($data->service->netFees),
