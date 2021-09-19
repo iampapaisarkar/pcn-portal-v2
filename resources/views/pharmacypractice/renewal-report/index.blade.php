@@ -52,13 +52,23 @@
                     <tr>
                         <td>{{$document->created_at->format('d/m/Y')}}</td>
                         <td>{{$document->registration->category}}</td>
+
                         @if($document->registration->type == 'hospital_pharmacy')
                         <td>{{$document->user->hospital_name}}</td>
                         @endif
+                        @if($document->registration->type == 'ppmv')
+                        <td>{{$document->user->shop_name}}</td>
+                        @endif
+                        
                         @if($document->registration->type == 'hospital_pharmacy')
                         <td>Hospital Pharmacy Registration</td>
                         @endif
+                        @if($document->registration->type == 'ppmv')
+                        <td>PPMV Location Approval Application</td>
+                        @endif
+
                         <td>{{$document->registration->registration_year}}</td>
+
                         @if($document->status == 'no_recommendation')
                         <td><span class="badge badge-pill m-1 badge-danger">NO RECOMMENDATION</span></td>
                         @endif
@@ -68,9 +78,15 @@
                         @if($document->status == 'full_recommendation')
                         <td><span class="badge badge-pill m-1 badge-success">FULL RECOMMENDATION</span></td>
                         @endif
+
                         <td>
                             @if($document->registration->type == 'hospital_pharmacy')
                             <a href="{{ route('pharmacy-renewal-reports-show') }}?renewal_id={{$document->id}}&user_id={{$document->user->id}}">
+                                <button class="btn btn-success btn-sm" type="button"><i class="nav-icon i-Eye"></i></button>
+                            </a>
+                            @endif
+                            @if($document->registration->type == 'ppmv')
+                            <a href="{{ route('pharmacy-renewal-reports-ppmv-show') }}?renewal_id={{$document->id}}&user_id={{$document->user->id}}">
                                 <button class="btn btn-success btn-sm" type="button"><i class="nav-icon i-Eye"></i></button>
                             </a>
                             @endif

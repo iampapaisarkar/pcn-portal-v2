@@ -116,15 +116,6 @@ class RenewalReportController extends Controller
 
     public function hospitalPharmacyShow(Request $request){
 
-        // $registration = Registration::where(['payment' => true, 'id' => $request['registration_id'], 'user_id' => $request['user_id'], 'type' => 'hospital_pharmacy'])
-        // ->with('hospital_pharmacy', 'user')
-        // ->where(function($q){
-        //     $q->where('status', 'no_recommendation');
-        //     $q->orWhere('status', 'partial_recommendation');
-        //     $q->orWhere('status', 'full_recommendation');
-        // })
-        // ->first();
-
         $registration = Renewal::where(['payment' => true, 'id' => $request['renewal_id'], 'user_id' => $request['user_id'], 'type' => 'hospital_pharmacy_renewal'])
         ->with('hospital_pharmacy', 'registration', 'user')
         ->where(function($q){
@@ -162,6 +153,50 @@ class RenewalReportController extends Controller
             }
 
             return view('pharmacypractice.renewal-report.hospital-show', compact('registration', 'alert'));
+        }else{
+            return abort(404);
+        }
+    }
+
+
+    public function ppmvShow(Request $request){
+
+        $registration = Renewal::where(['payment' => true, 'id' => $request['renewal_id'], 'user_id' => $request['user_id'], 'type' => 'ppmv_renewal'])
+        ->with('ppmv', 'registration', 'user')
+        ->where(function($q){
+            $q->where('status', 'no_recommendation');
+            $q->orWhere('status', 'full_recommendation');
+        })
+        ->first();
+
+        if($registration){
+            $alert = [];
+            if($registration->status == 'no_recommendation'){
+                $alert = [
+                    'success' => true,
+                    'message' => 'Inspection Report: No Recommendation',
+                    'color' => 'danger',
+                    'download-link' => route('ppmv-registration-inspection-report-download', $registration->registration->id),
+                ];
+            }
+            if($registration->status == 'partial_recommendation'){
+                $alert = [
+                    'success' => true,
+                    'message' => 'Inspection Report: Partial Recommendation',
+                    'color' => 'success',
+                    'download-link' => route('ppmv-registration-inspection-report-download', $registration->registration->id),
+                ];
+            }
+            if($registration->status == 'full_recommendation'){
+                $alert = [
+                    'success' => true,
+                    'message' => 'Inspection Report: Full Recommendation',
+                    'color' => 'success',
+                    'download-link' => route('ppmv-registration-inspection-report-download', $registration->registration->id),
+                ];
+            }
+
+            return view('pharmacypractice.renewal-report.ppmv-renewal-show', compact('registration', 'alert'));
         }else{
             return abort(404);
         }
