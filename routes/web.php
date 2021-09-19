@@ -176,6 +176,8 @@ Route::group(['middleware' => ['auth','verified', 'can:isRLicencing']], function
     Route::get('renewal-pending-hospital-show', 'App\Http\Controllers\Licencing\RenewalPendingLicenceController@hospitalPharmacyShow')->name('renewal-pending-hospital-show');
     Route::post('renewal-pending-approve-all', 'App\Http\Controllers\Licencing\RenewalPendingLicenceController@ApproveAll')->name('renewal-pending-approve-all');
     Route::post('renewal-pending-hospital-approve', 'App\Http\Controllers\Licencing\RenewalPendingLicenceController@hospitalPharmacyApprove')->name('renewal-pending-hospital-approve');
+    Route::get('renewal-pending-ppmv-show', 'App\Http\Controllers\Licencing\RenewalPendingLicenceController@ppmvShow')->name('renewal-pending-ppmv-show');
+    Route::post('licence-renewal-pending-ppmv-approve', 'App\Http\Controllers\Licencing\RenewalPendingLicenceController@ppmvApprove')->name('licence-renewal-pending-ppmv-approve');
 
     Route::resource('renewal-issued', 'App\Http\Controllers\Licencing\RenewalIssuedLicenceController');
     Route::get('renewal-issued-hospital-show', 'App\Http\Controllers\Licencing\RenewalIssuedLicenceController@hospitalPharmacyShow')->name('renewal-issued-hospital-show');

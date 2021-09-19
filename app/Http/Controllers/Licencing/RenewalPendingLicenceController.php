@@ -228,4 +228,62 @@ class RenewalPendingLicenceController extends Controller
             return back()->with('error','There is something error, please try after some time');
         }
     }
+
+
+
+    public function ppmvShow(Request $request){
+
+        $registration = Renewal::where(['payment' => true, 'id' => $request['renewal_id'], 'user_id' => $request['user_id'], 'type' => 'ppmv_renewal'])
+        ->with('ppmv', 'registration', 'user')
+        ->where('status', 'send_to_registration')
+        ->first();
+
+        if($registration){
+            return view('licencing.renewal-pending.ppmv-renewal-show', compact('registration'));
+        }else{
+            return abort(404);
+        }
+    }
+
+    public function ppmvApprove(Request $request){
+
+        try {
+            DB::beginTransaction();
+
+                $renewal = Renewal::where(['payment' => true, 'id' => $request['renewal_id'], 'user_id' => $request['user_id'], 'type' => 'ppmv_renewal'])
+                ->with('ppmv', 'registration', 'user')
+                ->where('status', 'send_to_registration')
+                ->first();
+
+                if($renewal){
+
+                    Renewal::where(['payment' => true, 'id' => $request['renewal_id'], 'user_id' => $request['user_id'], 'type' => 'ppmv_renewal'])
+                    ->where('status', 'send_to_registration')
+                    ->update([
+                        'licence' => 'TEST2021',
+                        'status' => 'licence_issued'
+                    ]);
+                    
+                    $adminName = Auth::user()->firstname .' '. Auth::user()->lastname;
+                    $activity = 'Registration & Licencing Licence Renewal Issued';
+                    AllActivity::storeActivity($request['registration_id'], $adminName, $activity, 'ppmv');
+
+                    // $data = [
+                    //     'user' => $renewal->user,
+                    //     'registration_type' => 'ppmv_renewal',
+                    //     'type' => 'licencing_issued',
+                    // ];
+                    // EmailSendJOB::dispatch($data);
+
+                }else{
+                    return abort(404);
+                }
+
+        DB::commit();
+            return redirect()->route('licence-pending.index')->with('success', 'Licence issued successfully done');
+        }catch(Exception $e) {
+            DB::rollback();
+            return back()->with('error','There is something error, please try after some time');
+        }
+    }
 }
