@@ -181,6 +181,8 @@ Route::group(['middleware' => ['auth','verified', 'can:isRLicencing']], function
 
     Route::resource('renewal-issued', 'App\Http\Controllers\Licencing\RenewalIssuedLicenceController');
     Route::get('renewal-issued-hospital-show', 'App\Http\Controllers\Licencing\RenewalIssuedLicenceController@hospitalPharmacyShow')->name('renewal-issued-hospital-show');
+    Route::get('renewal-issued-ppmv-show', 'App\Http\Controllers\Licencing\RenewalIssuedLicenceController@ppmvShow')->name('renewal-issued-ppmv-show');
+
 });
 
 
