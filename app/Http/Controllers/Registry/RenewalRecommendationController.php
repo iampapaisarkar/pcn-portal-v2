@@ -123,7 +123,7 @@ class RenewalRecommendationController extends Controller
         ->first();
 
         if($registration){
-            return view('registry.renewal-pending.hospital-show', compact('registration'));
+            return view('registry.renewal-recommendation.hospital-show', compact('registration'));
         }else{
             return abort(404);
         }
@@ -220,7 +220,62 @@ class RenewalRecommendationController extends Controller
                 }
 
         DB::commit();
-            return redirect()->route('registry-renewal-pending.index')->with('success', 'Licence issued successfully done');
+            return redirect()->route('registry-renewal-recommendation.index')->with('success', 'Licence issued successfully done');
+        }catch(Exception $e) {
+            DB::rollback();
+            return back()->with('error','There is something error, please try after some time');
+        }
+    }
+
+
+    public function ppmvShow(Request $request){
+
+        $registration = Renewal::where(['payment' => true, 'id' => $request['renewal_id'], 'user_id' => $request['user_id'], 'type' => 'ppmv_renewal'])
+        ->with('ppmv', 'registration', 'user')
+        ->where(function($q){
+            $q->where('status', 'full_recommendation');
+        })
+        ->first();
+
+        if($registration){
+            return view('registry.renewal-recommendation.ppmv-registration-show', compact('registration'));
+        }else{
+            return abort(404);
+        }
+    }
+
+    public function ppmvApprove(Request $request){
+
+        try {
+            DB::beginTransaction();
+
+                $renewal = Renewal::where(['payment' => true, 'id' => $request['renewal_id'], 'user_id' => $request['user_id'], 'type' => 'ppmv_renewal'])
+                ->with('ppmv', 'registration', 'user')
+                ->where(function($q){
+                    $q->where('status', 'full_recommendation');
+                })
+                ->first();
+
+                if($renewal){
+
+                    Renewal::where(['payment' => true, 'id' => $request['renewal_id'], 'user_id' => $request['user_id'], 'type' => 'ppmv_renewal'])
+                    ->where(function($q){
+                        $q->where('status', 'full_recommendation');
+                    })
+                    ->update([
+                        'status' => 'send_to_registration'
+                    ]);
+                    
+                    $adminName = Auth::user()->firstname .' '. Auth::user()->lastname;
+                    $activity = 'Registry Document Renewal Inspection Report Approval';
+                    AllActivity::storeActivity($request['registration_id'], $adminName, $activity, 'ppmv');
+
+                }else{
+                    return abort(404);
+                }
+
+        DB::commit();
+            return redirect()->route('registry-renewal-recommendation.index')->with('success', 'Licence issued successfully done');
         }catch(Exception $e) {
             DB::rollback();
             return back()->with('error','There is something error, please try after some time');
