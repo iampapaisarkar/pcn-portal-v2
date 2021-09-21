@@ -25,6 +25,7 @@ class FacilityApplicationController extends Controller
         ->whereHas('user', function($q){
             $q->where('state', Auth::user()->state);
         })
+        ->where('location_approval', false)
         ->where('status', 'send_to_state_office_registration');
         
         if($request->per_page){

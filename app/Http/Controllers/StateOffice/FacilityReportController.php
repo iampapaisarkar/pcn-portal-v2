@@ -24,6 +24,7 @@ class FacilityReportController extends Controller
         ->whereHas('user', function($q){
             $q->where('state', Auth::user()->state);
         })
+        ->where('location_approval', false)
         ->where(function($q){
             $q->where('status', 'facility_no_recommendation');
             $q->orWhere('status', 'facility_full_recommendation');

@@ -21,6 +21,7 @@ class DocumentReportController extends Controller
     {
         $documents = Registration::where(['payment' => true, 'type' => 'hospital_pharmacy'])
         ->with('hospital_pharmacy', 'user')
+        ->where('location_approval', false)
         ->where(function($q){
             $q->where('status', 'no_recommendation');
             $q->orWhere('status', 'partial_recommendation');

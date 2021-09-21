@@ -22,6 +22,7 @@ class DocumentInspectionController extends Controller
     {
         $documents = Registration::where(['payment' => true, 'type' => 'hospital_pharmacy'])
         ->with('hospital_pharmacy', 'user')
+        ->where('location_approval', false)
         ->where('status', 'send_to_pharmacy_practice');
         
         if($request->per_page){

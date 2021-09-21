@@ -21,6 +21,7 @@ class LocationReportController extends Controller
     {
         $applications = Registration::where(['payment' => true])
         ->with('ppmv', 'user')
+        ->where('location_approval', true)
         ->whereHas('user', function($q){
             $q->where('state', Auth::user()->state);
         })
