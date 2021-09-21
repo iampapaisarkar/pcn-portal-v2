@@ -242,6 +242,7 @@ class DocumentPendingLicenceController extends Controller
 
                 $registration = Registration::where(['payment' => true, 'id' => $request['registration_id'], 'user_id' => $request['user_id'], 'type' => 'hospital_pharmacy'])
                 ->where('status', 'send_to_registration')
+                ->with('user')
                 ->first();
 
                 if($registration){
@@ -272,7 +273,7 @@ class DocumentPendingLicenceController extends Controller
                     AllActivity::storeActivity($request['registration_id'], $adminName, $activity, 'hospital_pharmacy');
 
                     $data = [
-                        'user' => $Registration->user,
+                        'user' => $registration->user,
                         'registration_type' => 'hospital_pharmacy',
                         'type' => 'licencing_issued',
                     ];
