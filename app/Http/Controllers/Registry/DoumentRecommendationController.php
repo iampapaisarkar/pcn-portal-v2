@@ -21,6 +21,7 @@ class DoumentRecommendationController extends Controller
     {
         $documents = Registration::where(['payment' => true])
         ->with('hospital_pharmacy', 'ppmv', 'user')
+        ->where('location_approval', false)
         ->where(function($q){
             $q->where('status', 'partial_recommendation');
             $q->orWhere('status', 'full_recommendation');

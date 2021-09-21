@@ -40,6 +40,7 @@ class FacilityApplicationController extends Controller
             ->update([
                 'status' => 'send_to_state_office_registration',
                 'payment' => false,
+                'location_approval' => false
             ]);
 
             $response = Checkout::checkoutPpmvRegistration($application = ['id' => $application->id], 'ppmv');

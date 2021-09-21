@@ -40,6 +40,7 @@ class ApplicationController extends Controller
                 'category' => 'PPMV',
                 'registration_year' => date('Y'),
                 'status' => 'send_to_state_office',
+                'location_approval' => true
             ]);
 
             PpmvLocationApplication::create([
