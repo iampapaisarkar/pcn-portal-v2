@@ -185,6 +185,7 @@ class DocumentReviewController extends Controller
                 'user' => $registration->user,
                 'registration_type' => 'hospital_pharmacy',
                 'type' => 'state_office_query',
+                'query' => $request['query'],
             ];
             EmailSendJOB::dispatch($data);
 

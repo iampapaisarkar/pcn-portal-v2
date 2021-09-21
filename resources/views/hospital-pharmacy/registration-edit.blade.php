@@ -72,12 +72,14 @@
                         </thead>
                         <tbody>
                             @foreach(config('custom.beds') as $bed)
+                            @if($bed['id'] == $registration->hospital_pharmacy->bed_capacity)
                             <tr>
                                 <td><input name="bed_capacity" {{ $registration->hospital_pharmacy->bed_capacity == $bed['id'] ? 'checked' : '' }} type="radio" value="{{$bed['id']}}"></td>
                                 <td>{{$bed['bed_capacity']}}</td>
                                 <td>NGN {{number_format($bed['registration_fee'])}}</td>
                                 <td>NGN {{number_format($bed['inspection_fee'])}}</td>
                             </tr>
+                            @endif
                             @endforeach
                         </tbody>
                     </table>

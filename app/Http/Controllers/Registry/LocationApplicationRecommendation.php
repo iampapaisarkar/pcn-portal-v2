@@ -21,6 +21,7 @@ class LocationApplicationRecommendation extends Controller
     {
         $applications = Registration::where(['payment' => true])
         ->with('ppmv', 'user')
+        ->where('location_approval', true)
         ->where(function($q){
             $q->where('status', 'full_recommendation');
         });

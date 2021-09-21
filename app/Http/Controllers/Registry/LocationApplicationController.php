@@ -21,6 +21,7 @@ class LocationApplicationController extends Controller
     {
         $applications = Registration::where(['payment' => true])
         ->with('ppmv', 'user')
+        ->where('location_approval', true)
         ->where('status', 'send_to_registry');
         
         if($request->per_page){
