@@ -265,12 +265,13 @@ class DocumentReviewController extends Controller
             $activity = 'State Officer Document Verification Query';
             AllActivity::storeActivity($request['application_id'], $adminName, $activity, 'ppmv');
 
-            // $data = [
-            //     'user' => $registration->user,
-            //     'registration_type' => 'ppmv',
-            //     'type' => 'state_office_query',
-            // ];
-            // EmailSendJOB::dispatch($data);
+            $data = [
+                'user' => $registration->user,
+                'registration_type' => 'ppmv',
+                'type' => 'state_office_query',
+                'query' => $request['query'],
+            ];
+            EmailSendJOB::dispatch($data);
 
             return redirect()->route('state-office-documents.index')->with('success', 'Registration Queried successfully done');
         }else{

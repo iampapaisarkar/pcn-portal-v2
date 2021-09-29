@@ -31,6 +31,9 @@ class StateOfficeQueryEmail extends Mailable
         if($this->newData['registration_type'] == 'hospital_pharmacy'){
             $subject = 'Facility Inspection Application Document Review Query';
         }
+        if($this->newData['registration_type'] == 'ppmv'){
+            $subject = 'Facility Location Inspection Application Document Review Query';
+        }
 
         return $this->markdown('mail.state-offcie-query',['data'=>$this->newData])->subject($subject);
     }
