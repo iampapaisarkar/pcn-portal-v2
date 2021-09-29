@@ -9,6 +9,7 @@ use App\Models\HospitalRegistration;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Services\AllActivity;
 use DB;
+use App\Jobs\EmailSendJOB;
 
 class LocationInspectionController extends Controller
 {
@@ -179,35 +180,35 @@ class LocationInspectionController extends Controller
                 if($request->recommendation == 'no_recommendation'){
                     $activity = 'Facility Inspection Report Uploaded';
 
-                    // $data = [
-                    //     'user' => $Registration->user,
-                    //     'registration_type' => 'ppmv',
-                    //     'type' => 'pharmacy_recommendation',
-                    //     'status' => 'no_recommendation',
-                    // ];
-                    // EmailSendJOB::dispatch($data);
+                    $data = [
+                        'user' => $Registration->user,
+                        'registration_type' => 'ppmv',
+                        'type' => 'state_recommendation',
+                        'status' => 'no_recommendation',
+                    ];
+                    EmailSendJOB::dispatch($data);
                 }
-                if($request->recommendation == 'partial_recommendation'){
-                    $activity = 'Facility Inspection Report Uploaded';
+                // if($request->recommendation == 'partial_recommendation'){
+                //     $activity = 'Facility Inspection Report Uploaded';
 
-                    // $data = [
-                    //     'user' => $Registration->user,
-                    //     'registration_type' => 'ppmv',
-                    //     'type' => 'pharmacy_recommendation',
-                    //     'status' => 'partial_recommendation',
-                    // ];
-                    // EmailSendJOB::dispatch($data);
-                }
+                //     // $data = [
+                //     //     'user' => $Registration->user,
+                //     //     'registration_type' => 'ppmv',
+                //     //     'type' => 'state_recommendation',
+                //     //     'status' => 'partial_recommendation',
+                //     // ];
+                //     // EmailSendJOB::dispatch($data);
+                // }
                 if($request->recommendation == 'full_recommendation'){
                     $activity = 'Facility Inspection Report Uploaded';
 
-                    // $data = [
-                    //     'user' => $Registration->user,
-                    //     'registration_type' => 'ppmv',
-                    //     'type' => 'pharmacy_recommendation',
-                    //     'status' => 'full_recommendation',
-                    // ];
-                    // EmailSendJOB::dispatch($data);
+                    $data = [
+                        'user' => $Registration->user,
+                        'registration_type' => 'ppmv',
+                        'type' => 'state_recommendation',
+                        'status' => 'full_recommendation',
+                    ];
+                    EmailSendJOB::dispatch($data);
                 }
                 AllActivity::storeActivity($Registration->id, $adminName, $activity, 'ppmv');
 
