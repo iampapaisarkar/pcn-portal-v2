@@ -31,7 +31,7 @@
         <h1 class="mr-2">Manufacturing Premisis</h1>
     @endif
     @if(Auth::user()->hasRole(['ppmv']))
-        <h1 class="mr-2">Hospital Pharmacy</h1>
+        <h1 class="mr-2">PPMV</h1>
     @endif
     <ul>
         <li><a href="{{route($route)}}">{{$page}}</a></li>

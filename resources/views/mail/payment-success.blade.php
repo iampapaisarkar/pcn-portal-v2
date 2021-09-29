@@ -13,6 +13,12 @@ This is to acknowledge your application and payment of the sum of N{{$data['amou
 This is to acknowledge your application and payment of the sum of N{{$data['amount']}} being made for PCN HOSPITAL PHARM ACY RENEWAL AND LICENCE FEES.
 @endif
 
+@if($data['registration_type'] == 'ppmv')
+# PCN - Inspection Payment Notification - {{env('APP_NAME')}}
+<div>Hello {{$data['user']['firstname']}} {{$data['user']['lastname']}}, <br>
+This is to acknowledge your application and payment of the sum of N{{$data['amount']}} being made for LOCATION INSPECTION FEES.
+@endif
+
 </div>
 <div>Kindly log in to the portal to view status and application progress.</div>
 <div>Thank you.</div>

@@ -84,14 +84,14 @@ class CheckoutController extends Controller
                     'payment' => true
                 ]);
 
-                // $data = [
-                //     'order_id' => $order->order_id,
-                //     'amount' => $order->amount,
-                //     'user' => Auth::user(),
-                //     'registration_type' => 'ppmv',
-                //     'type' => 'payment_success',
-                // ];
-                // EmailSendJOB::dispatch($data);
+                $data = [
+                    'order_id' => $order->order_id,
+                    'amount' => $order->amount,
+                    'user' => Auth::user(),
+                    'registration_type' => 'ppmv',
+                    'type' => 'payment_success',
+                ];
+                EmailSendJOB::dispatch($data);
             }
 
             if($order->service_type == 'ppmv_renewal'){
@@ -99,14 +99,14 @@ class CheckoutController extends Controller
                     'payment' => true
                 ]);
 
-                // $data = [
-                //     'order_id' => $order->order_id,
-                //     'amount' => $order->amount,
-                //     'user' => Auth::user(),
-                //     'registration_type' => 'ppmv',
-                //     'type' => 'payment_success',
-                // ];
-                // EmailSendJOB::dispatch($data);
+                $data = [
+                    'order_id' => $order->order_id,
+                    'amount' => $order->amount,
+                    'user' => Auth::user(),
+                    'registration_type' => 'ppmv_renewal',
+                    'type' => 'payment_success',
+                ];
+                EmailSendJOB::dispatch($data);
             }
 
             return view('checkout.success', compact('order'));
