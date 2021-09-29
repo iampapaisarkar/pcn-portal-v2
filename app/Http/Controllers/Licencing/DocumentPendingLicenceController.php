@@ -207,7 +207,7 @@ class DocumentPendingLicenceController extends Controller
                             'registration_type' => 'ppmv',
                             'type' => 'licencing_issued',
                         ];
-                        // EmailSendJOB::dispatch($data);
+                        EmailSendJOB::dispatch($data);
                     }
 
                     $adminName = Auth::user()->firstname .' '. Auth::user()->lastname;
@@ -346,12 +346,12 @@ class DocumentPendingLicenceController extends Controller
                     $activity = 'Registration & Licencing Issued Licence';
                     AllActivity::storeActivity($request['registration_id'], $adminName, $activity, 'ppmv');
 
-                    // $data = [
-                    //     'user' => $registration->user,
-                    //     'registration_type' => 'hospital_pharmacy',
-                    //     'type' => 'licencing_issued',
-                    // ];
-                    // EmailSendJOB::dispatch($data);
+                    $data = [
+                        'user' => $registration->user,
+                        'registration_type' => 'ppmv',
+                        'type' => 'licencing_issued',
+                    ];
+                    EmailSendJOB::dispatch($data);
 
                 }else{
                     return abort(404);
