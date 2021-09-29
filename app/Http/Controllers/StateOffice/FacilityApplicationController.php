@@ -180,24 +180,24 @@ class FacilityApplicationController extends Controller
                 if($request->recommendation == 'facility_no_recommendation'){
                     $activity = 'Facility Inspection Report Uploaded';
 
-                    // $data = [
-                    //     'user' => $Registration->user,
-                    //     'registration_type' => 'ppmv',
-                    //     'type' => 'pharmacy_recommendation',
-                    //     'status' => 'no_recommendation',
-                    // ];
-                    // EmailSendJOB::dispatch($data);
+                    $data = [
+                        'user' => $Registration->user,
+                        'registration_type' => 'ppmv_registration',
+                        'type' => 'state_recommendation',
+                        'status' => 'no_recommendation',
+                    ];
+                    EmailSendJOB::dispatch($data);
                 }
                 if($request->recommendation == 'facility_full_recommendation'){
                     $activity = 'Facility Inspection Report Uploaded';
 
-                    // $data = [
-                    //     'user' => $Registration->user,
-                    //     'registration_type' => 'ppmv',
-                    //     'type' => 'pharmacy_recommendation',
-                    //     'status' => 'full_recommendation',
-                    // ];
-                    // EmailSendJOB::dispatch($data);
+                    $data = [
+                        'user' => $Registration->user,
+                        'registration_type' => 'ppmv_registration',
+                        'type' => 'state_recommendation',
+                        'status' => 'full_recommendation',
+                    ];
+                    EmailSendJOB::dispatch($data);
                 }
                 AllActivity::storeActivity($Registration->id, $adminName, $activity, 'ppmv');
 

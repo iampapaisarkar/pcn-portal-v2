@@ -31,6 +31,9 @@ class StateRecommendationEmail extends Mailable
         if($this->newData['registration_type'] == 'ppmv'){
             $subject = 'Facility Location Inspection Application Recommendation Notification';
         }
+        if($this->newData['registration_type'] == 'ppmv_registration'){
+            $subject = 'Facility Registration/Licence Application Document Review Recommendation';
+        }
 
         return $this->markdown('mail.pharamcy-recommendation',['data'=>$this->newData])->subject($subject);
     }
