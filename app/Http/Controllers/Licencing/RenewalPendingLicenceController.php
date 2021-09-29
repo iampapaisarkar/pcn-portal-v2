@@ -161,6 +161,14 @@ class RenewalPendingLicenceController extends Controller
                             ];
                             EmailSendJOB::dispatch($data);
                         }
+                        if($renewal->type == 'ppmv_renewal'){
+                            $data = [
+                                'user' => $renewal->user,
+                                'registration_type' => 'ppmv_renewal',
+                                'type' => 'licencing_issued',
+                            ];
+                            EmailSendJOB::dispatch($data);
+                        }
 
                     }else{
                         return abort(404);
@@ -268,12 +276,12 @@ class RenewalPendingLicenceController extends Controller
                     $activity = 'Registration & Licencing Licence Renewal Issued';
                     AllActivity::storeActivity($request['registration_id'], $adminName, $activity, 'ppmv');
 
-                    // $data = [
-                    //     'user' => $renewal->user,
-                    //     'registration_type' => 'ppmv_renewal',
-                    //     'type' => 'licencing_issued',
-                    // ];
-                    // EmailSendJOB::dispatch($data);
+                    $data = [
+                        'user' => $renewal->user,
+                        'registration_type' => 'ppmv_renewal',
+                        'type' => 'licencing_issued',
+                    ];
+                    EmailSendJOB::dispatch($data);
 
                 }else{
                     return abort(404);

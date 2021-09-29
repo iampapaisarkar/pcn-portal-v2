@@ -37,6 +37,9 @@ class LicencingIssuedEmail extends Mailable
         if($this->newData['registration_type'] == 'ppmv'){
             $subject = 'Facility Inspection Application Approval';
         }
+        if($this->newData['registration_type'] == 'ppmv_renewal'){
+            $subject = 'Facility Inspection Application Approval';
+        }
 
         return $this->markdown('mail.licence-issued',['data'=>$this->newData])->subject($subject);
     }
