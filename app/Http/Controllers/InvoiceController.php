@@ -114,6 +114,9 @@ class InvoiceController extends Controller
             if($data->service_type == 'ppmv'){
                 $title = 'PPMV Location Approval Fees';
             }
+            if($data->service_type == 'ppmv_registration'){
+                $title = 'PPMV Facility Inspection Registration Fees';
+            }
             if($data->service_type == 'ppmv_renewal'){
                 $title = 'PPMV Renewal Fees';
             }

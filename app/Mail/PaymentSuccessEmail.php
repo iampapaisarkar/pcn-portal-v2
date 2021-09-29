@@ -37,6 +37,9 @@ class PaymentSuccessEmail extends Mailable
         if($this->newData['registration_type'] == 'ppmv'){
             $subject = 'PCN - Inspection Payment Notification';
         }
+        if($this->newData['registration_type'] == 'ppmv_registration'){
+            $subject = 'PCN - Registration & Licence Payment Notification';
+        }
         // if($this->newData['registration_type'] == 'ppmv_renewal'){
         //     $subject = 'PCN - Inspection Renewal Payment Notification';
         // }
