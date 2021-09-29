@@ -78,6 +78,11 @@
                                         @endphp
                                         <div>{{$extra_service['bed_capacity']}}: Registration Fee N{{number_format($extra_service['registration_fee'])}} : Inspection Fee N{{number_format($extra_service['inspection_fee'])}}</div>
                                     @endif
+                                    @if($invoice->service_type == 'ppmv_registration')
+                                            @foreach (config('custom.ppmv-registration-fees') as $key => $extraService)
+                                                <div>{{$extraService['description']}}: N{{number_format($extraService['fee'])}}</div>
+                                            @endforeach
+                                    @endif
                                 </td>
 
 
