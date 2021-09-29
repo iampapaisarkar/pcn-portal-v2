@@ -23,7 +23,7 @@ class RegistrationController extends Controller
     }
 
     public function registrationSubmit(RegistrationRequest $request){
-
+        
         try {
             DB::beginTransaction();
 

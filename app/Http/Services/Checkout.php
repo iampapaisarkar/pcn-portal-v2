@@ -19,6 +19,7 @@ class Checkout
             DB::beginTransaction();
 
             $Registration = Registration::where(['id' => $application['id'], 'payment' => false, 'type' => $type])->first(); 
+            $HospitalRegistration = HospitalRegistration::where(['registration_id' => $application['id']])->first(); 
 
             if($Registration){
                 $service = ChildService::where('id', 1)
@@ -30,6 +31,15 @@ class Checkout
                     $totalAmount += $fee->amount;
                 }
 
+                $extraServices = config('custom.beds');
+                $extra_service_id = null;
+                foreach ($extraServices as $key => $extraService) {
+                    if($HospitalRegistration->bed_capacity == $extraService['id']){
+                        $extra_service_id =  $extraService['id'];
+                        $totalAmount += (floatval($extraService['registration_fee']) + floatval($extraService['inspection_fee']));
+                    }
+                }
+
                 $token = md5(uniqid(rand(), true));
                 $order_id = date('m-Y') . '-' .rand(10,1000);
 
@@ -38,6 +48,7 @@ class Checkout
                     'order_id' => $order_id,
                     'application_id' => $application['id'],
                     'service_id' => $service->id,
+                    'extra_service_id' => $extra_service_id,
                     'service_type' => $type,
                     'amount' => $totalAmount,
                     'token' => $token,

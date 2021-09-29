@@ -11,7 +11,7 @@ class Payment extends Model
     use HasFactory;
 
     protected $fillable = [
-        'vendor_id', 'order_id', 'reference_id', 'application_id', 'service_id', 'service_type', 'amount', 'service_charge',
+        'vendor_id', 'order_id', 'reference_id', 'application_id', 'service_id', 'extra_service_id', 'service_type', 'amount', 'service_charge',
         'total_amount', 'status', 'token'
     ];
 

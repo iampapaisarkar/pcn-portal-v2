@@ -20,6 +20,7 @@ class CreatePaymentsTable extends Migration
             $table->string('reference_id')->nullable();
             $table->integer('application_id');
             $table->integer('service_id');
+            $table->integer('extra_service_id')->nullable();
             $table->string('service_type');
             $table->float('amount');
             $table->float('service_charge')->nullable();

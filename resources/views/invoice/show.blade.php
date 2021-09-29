@@ -66,6 +66,18 @@
                                     @foreach($invoice->service->netFees as $fee)
                                     <div>{{$fee->description}}: N{{number_format($fee->amount)}}</div>
                                     @endforeach
+                                    @if($invoice->service_type == 'hospital_pharmacy')
+                                    @php 
+                                        $extraServices = config('custom.beds');
+                                        $extra_service = null;
+                                        foreach ($extraServices as $key => $extraService) {
+                                            if($invoice->extra_service_id == $extraService['id']){
+                                                $extra_service =  $extraService;
+                                            }
+                                        }
+                                    @endphp
+                                    <div>{{$extra_service['bed_capacity']}}: Registration Fee N{{number_format($extra_service['registration_fee'])}} : Inspection Fee N{{number_format($extra_service['inspection_fee'])}}</div>
+                                    @endif
                                 </td>
 
 
