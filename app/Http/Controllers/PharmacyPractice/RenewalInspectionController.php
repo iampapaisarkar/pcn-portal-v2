@@ -283,23 +283,23 @@ class RenewalInspectionController extends Controller
 
                 if($request->recommendation == 'no_recommendation'){
                     $activity = 'Renewal Inspection Report Uploaded';
-                    // $data = [
-                    //     'user' => $Registration->user,
-                    //     'registration_type' => 'ppmv_renewal',
-                    //     'type' => 'pharmacy_recommendation',
-                    //     'status' => 'no_recommendation',
-                    // ];
-                    // EmailSendJOB::dispatch($data);
+                    $data = [
+                        'user' => $Registration->user,
+                        'registration_type' => 'ppmv_renewal',
+                        'type' => 'pharmacy_recommendation',
+                        'status' => 'no_recommendation',
+                    ];
+                    EmailSendJOB::dispatch($data);
                 }
                 if($request->recommendation == 'full_recommendation'){
                     $activity = 'Renewal Inspection Report Uploaded';
-                    // $data = [
-                    //     'user' => $Registration->user,
-                    //     'registration_type' => 'ppmv_renewal',
-                    //     'type' => 'pharmacy_recommendation',
-                    //     'status' => 'full_recommendation',
-                    // ];
-                    // EmailSendJOB::dispatch($data);
+                    $data = [
+                        'user' => $Registration->user,
+                        'registration_type' => 'ppmv_renewal',
+                        'type' => 'pharmacy_recommendation',
+                        'status' => 'full_recommendation',
+                    ];
+                    EmailSendJOB::dispatch($data);
                 }
                 AllActivity::storeActivity($Registration->id, $adminName, $activity, 'ppmv');
 

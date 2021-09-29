@@ -268,6 +268,12 @@ class Checkout
                     $totalAmount += $fee->amount;
                 }
 
+                $extraServices = config('custom.ppmv-registration-fees');
+                $extra_service_amount = 0;
+                foreach ($extraServices as $key => $extraService) {
+                    $extra_service_amount += $extraService['fee'];
+                }
+
                 $token = md5(uniqid(rand(), true));
                 $order_id = date('m-Y') . '-' .rand(10,1000);
 
@@ -276,8 +282,8 @@ class Checkout
                     'order_id' => $order_id,
                     'application_id' => $application['id'],
                     'service_id' => $service->id,
-                    'service_type' => $type,
-                    'amount' => $totalAmount,
+                    'service_type' => 'ppmv_registration',
+                    'amount' => $totalAmount + $extra_service_amount,
                     'token' => $token,
                 ]);
 
