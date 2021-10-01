@@ -201,7 +201,7 @@
             <div class="col-lg-3 col-md-3 col-sm-6">
                 <div class="card card-icon mb-4">
                     <div class="card-body text-center"><i class="i-Diploma-2"></i>
-                        <h3 class="text-muted mt-2 mb-2">Facility Inspection Uploaded/h3>
+                        <h3 class="text-muted mt-2 mb-2">Facility Inspection Uploaded</h3>
                         <p class="text-primary text-60 line-height-1 m-0">60</p>
                     </div>
                 </div>
@@ -225,6 +225,147 @@
         </div>
         @endcan
         <!-- Pharmacy practice cards end  -->
+
+         <!-- Community Pharmacy cards start  -->
+         @can('isCPharmacy')
+        <div class="row">
+            <div class="col-lg-3 col-md-3 col-sm-6">
+                <div class="card card-icon mb-4">
+                    <div class="card-body text-center"><i class="i-Diploma-2"></i>
+                        <p class="text-muted mt-2 mb-2">LOCATION APPROVAL</p>
+                        <p class="text-primary text-20 line-height-1 m-0">DOCS. REVIEW PENDING</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-3 col-sm-6">
+                <div class="card card-icon mb-4">
+                    <div class="card-body text-center"><i class="i-Diploma-2"></i>
+                        <p class="text-muted mt-2 mb-2">LOCATION APPROVAL</p>
+                        <p class="text-primary text-20 line-height-1 m-0">DOCS. REVIEW QUERIED</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-3 col-sm-6">
+                <div class="card card-icon mb-4">
+                    <div class="card-body text-center"><i class="i-Diploma-2"></i>
+                        <p class="text-muted mt-2 mb-2">LOCATION APPROVAL</p>
+                        <p class="text-primary text-20 line-height-1 m-0">RECOMMENDED</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-3 col-sm-6">
+                <div class="card card-icon mb-4">
+                    <div class="card-body text-center"><i class="i-Diploma-2"></i>
+                        <p class="text-muted mt-2 mb-2">REGISTRATION AND LICENCING</p>
+                        <p class="text-primary text-20 line-height-1 m-0">PENDING</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-3 col-sm-6">
+                <div class="card card-icon mb-4">
+                    <div class="card-body text-center"><i class="i-Diploma-2"></i>
+                        <p class="text-muted mt-2 mb-2">REGISTRATION AND LICENCING</p>
+                        <p class="text-primary text-20 line-height-1 m-0">LICENCE ISSUSED</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        @endcan
+        <!-- Community Pharmacy cards end  -->
+
+        <!-- Distribution Premises cards start  -->
+        @can('isDPremisis')
+        <div class="row">
+            <div class="col-lg-3 col-md-3 col-sm-6">
+                <div class="card card-icon mb-4">
+                    <div class="card-body text-center"><i class="i-Diploma-2"></i>
+                        <p class="text-muted mt-2 mb-2">LOCATION APPROVAL</p>
+                        <p class="text-primary text-20 line-height-1 m-0">DOCS. REVIEW PENDING</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-3 col-sm-6">
+                <div class="card card-icon mb-4">
+                    <div class="card-body text-center"><i class="i-Diploma-2"></i>
+                        <p class="text-muted mt-2 mb-2">LOCATION APPROVAL</p>
+                        <p class="text-primary text-20 line-height-1 m-0">DOCS. REVIEW QUERIED</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-3 col-sm-6">
+                <div class="card card-icon mb-4">
+                    <div class="card-body text-center"><i class="i-Diploma-2"></i>
+                        <p class="text-muted mt-2 mb-2">LOCATION APPROVAL</p>
+                        <p class="text-primary text-20 line-height-1 m-0">RECOMMENDED</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-3 col-sm-6">
+                <div class="card card-icon mb-4">
+                    <div class="card-body text-center"><i class="i-Diploma-2"></i>
+                        <p class="text-muted mt-2 mb-2">REGISTRATION AND LICENCING</p>
+                        <p class="text-primary text-20 line-height-1 m-0">PENDING</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-3 col-sm-6">
+                <div class="card card-icon mb-4">
+                    <div class="card-body text-center"><i class="i-Diploma-2"></i>
+                        <p class="text-muted mt-2 mb-2">REGISTRATION AND LICENCING</p>
+                        <p class="text-primary text-20 line-height-1 m-0">LICENCE ISSUSED</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        @endcan
+        <!-- Distribution Premises cards end  -->
+
+        <!-- Manufacturing Premises cards start  -->
+        @can('isMPremisis')
+        <div class="row">
+            <div class="col-lg-3 col-md-3 col-sm-6">
+                <div class="card card-icon mb-4">
+                    <div class="card-body text-center"><i class="i-Diploma-2"></i>
+                        <p class="text-muted mt-2 mb-2">LOCATION APPROVAL</p>
+                        <p class="text-primary text-20 line-height-1 m-0">DOCS. REVIEW PENDING</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-3 col-sm-6">
+                <div class="card card-icon mb-4">
+                    <div class="card-body text-center"><i class="i-Diploma-2"></i>
+                        <p class="text-muted mt-2 mb-2">LOCATION APPROVAL</p>
+                        <p class="text-primary text-20 line-height-1 m-0">DOCS. REVIEW QUERIED</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-3 col-sm-6">
+                <div class="card card-icon mb-4">
+                    <div class="card-body text-center"><i class="i-Diploma-2"></i>
+                        <p class="text-muted mt-2 mb-2">LOCATION APPROVAL</p>
+                        <p class="text-primary text-20 line-height-1 m-0">RECOMMENDED</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-3 col-sm-6">
+                <div class="card card-icon mb-4">
+                    <div class="card-body text-center"><i class="i-Diploma-2"></i>
+                        <p class="text-muted mt-2 mb-2">REGISTRATION AND LICENCING</p>
+                        <p class="text-primary text-20 line-height-1 m-0">PENDING</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-3 col-sm-6">
+                <div class="card card-icon mb-4">
+                    <div class="card-body text-center"><i class="i-Diploma-2"></i>
+                        <p class="text-muted mt-2 mb-2">REGISTRATION AND LICENCING</p>
+                        <p class="text-primary text-20 line-height-1 m-0">LICENCE ISSUSED</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        @endcan
+        <!-- Manufacturing Premises cards end  -->
 
         <!-- Registration licencing cards start  -->
         @can('isRLicencing')
