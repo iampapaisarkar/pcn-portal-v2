@@ -265,8 +265,149 @@
                 @endcan
                 <!-- Hospital Pharmacy routes end  -->
 
+                <!-- Community Pharmacy routes start  -->
+                @can('isCPharmacy')
+                <li class="nav-item">
+                    <a href="">
+                        <i class="nav-icon i-Security-Settings"></i>
+                        <span class="item-name">Company Profile</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="">
+                        <i class="nav-icon i-Map2"></i>
+                        <span class="item-name">Location Approval</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="">
+                        <i class="nav-icon i-Map2"></i>
+                        <span class="item-name">Location Approval Status</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="">
+                        <i class="nav-icon i-Notepad"></i>
+                        <span class="item-name">Registration</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="">
+                        <i class="nav-icon i-Notepad"></i>
+                        <span class="item-name">Registration Status</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="">
+                        <i class="nav-icon i-Notepad"></i>
+                        <span class="item-name">Renewal</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{route('invoices.index')}}">
+                        <i class="nav-icon i-Receipt-4"></i>
+                        <span class="item-name">Invoices</span>
+                    </a>
+                </li>
+                @endcan
+                <!-- Community Pharmacy routes end  -->
+
+                <!-- Distribution Premises routes start  -->
+                @can('isDPremisis')
+                <li class="nav-item">
+                    <a href="">
+                        <i class="nav-icon i-Security-Settings"></i>
+                        <span class="item-name">Company Profile</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="">
+                        <i class="nav-icon i-Map2"></i>
+                        <span class="item-name">Location Approval</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="">
+                        <i class="nav-icon i-Map2"></i>
+                        <span class="item-name">Location Approval Status</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="">
+                        <i class="nav-icon i-Notepad"></i>
+                        <span class="item-name">Registration</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="">
+                        <i class="nav-icon i-Notepad"></i>
+                        <span class="item-name">Registration Status</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="">
+                        <i class="nav-icon i-Notepad"></i>
+                        <span class="item-name">Renewal</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{route('invoices.index')}}">
+                        <i class="nav-icon i-Receipt-4"></i>
+                        <span class="item-name">Invoices</span>
+                    </a>
+                </li>
+                @endcan
+                <!-- Distribution Premises routes end  -->
+
+                <!-- Manufacturing Premises routes start  -->
+                @can('isDPremisis')
+                <li class="nav-item">
+                    <a href="">
+                        <i class="nav-icon i-Security-Settings"></i>
+                        <span class="item-name">Company Profile</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="">
+                        <i class="nav-icon i-Map2"></i>
+                        <span class="item-name">Location Approval</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="">
+                        <i class="nav-icon i-Map2"></i>
+                        <span class="item-name">Location Approval Status</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="">
+                        <i class="nav-icon i-Notepad"></i>
+                        <span class="item-name">Registration</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="">
+                        <i class="nav-icon i-Notepad"></i>
+                        <span class="item-name">Registration Status</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="">
+                        <i class="nav-icon i-Notepad"></i>
+                        <span class="item-name">Renewal</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{route('invoices.index')}}">
+                        <i class="nav-icon i-Receipt-4"></i>
+                        <span class="item-name">Invoices</span>
+                    </a>
+                </li>
+                @endcan
+                <!-- Manufacturing Premises routes end  -->
+
                 <!-- PPMV routes start  -->
-                @can('isPPMV')
+                @can('isMPremisis')
                 <li class="nav-item">
                     <a href="{{route('ppmv-application-form')}}">
                         <i class="nav-icon i-Map2"></i>
