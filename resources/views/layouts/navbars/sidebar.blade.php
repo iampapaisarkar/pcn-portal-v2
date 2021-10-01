@@ -268,7 +268,7 @@
                 <!-- Community Pharmacy routes start  -->
                 @can('isCPharmacy')
                 <li class="nav-item">
-                    <a href="">
+                    <a href="{{route('company-profile')}}">
                         <i class="nav-icon i-Security-Settings"></i>
                         <span class="item-name">Company Profile</span>
                     </a>
@@ -315,7 +315,7 @@
                 <!-- Distribution Premises routes start  -->
                 @can('isDPremisis')
                 <li class="nav-item">
-                    <a href="">
+                    <a href="{{route('company-profile')}}">
                         <i class="nav-icon i-Security-Settings"></i>
                         <span class="item-name">Company Profile</span>
                     </a>
@@ -362,7 +362,7 @@
                 <!-- Manufacturing Premises routes start  -->
                 @can('isDPremisis')
                 <li class="nav-item">
-                    <a href="">
+                    <a href="{{route('company-profile')}}">
                         <i class="nav-icon i-Security-Settings"></i>
                         <span class="item-name">Company Profile</span>
                     </a>

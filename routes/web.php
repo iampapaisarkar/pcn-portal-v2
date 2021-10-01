@@ -215,7 +215,7 @@ Route::group(['middleware' => ['auth','verified', 'can:isHPharmacy', 'CheckProfi
 
 // COMMUNITY PHARMACY ROUTES 
 Route::group(['middleware' => ['auth','verified', 'can:isCPharmacy', 'CheckProfileStatus']], function () {
-  
+    Route::get('/company-profile', 'App\Http\Controllers\CompanyProfileController@profile')->name('company-profile');
 });
 
 // DISTRIBUTION PREMISIS ROUTES 
