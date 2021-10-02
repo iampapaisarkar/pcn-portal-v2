@@ -7,6 +7,9 @@
         <form method="POST" action="" enctype="multipart/form-data">
             @csrf
             <div class="row">
+                <div class="col-md-12 form-group mb-3">
+                    <h3>Company Details</h3>
+                </div>
                 <div class="col-md-4 form-group mb-3">
                     <label for="firstName1">Company name</label>
                     <input name="company_name" class="form-control @error('company_name') is-invalid @enderror"
@@ -62,8 +65,165 @@
                 <div class="col-md-4 form-group mb-3">
                     <label for="middleName1">Category of Practise</label>
                     <input name="category_practise" class="form-control @error('category_practise') is-invalid @enderror" id="category_practise1"
-                        type="text" placeholder="Enter your middle name" value="" readonly/>
+                        type="text" placeholder="Enter your middle name" value="Community Pharmacy" readonly/>
                     @error('category_practise')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                    @enderror
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col-md-12 form-group mb-3">
+                    <h3>Pharmacist In Control of Business</h3>
+                </div>
+                <div class="col-md-6 form-group mb-3">
+                    <label for="firstName1">Name of Pharmacist:</label>
+                    <input name="name" class="form-control @error('name') is-invalid @enderror"
+                        id="name1" type="text" placeholder="Enter your company name"
+                        value="" />
+                    @error('name')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                    @enderror
+                </div>
+                <div class="col-md-6 form-group mb-3">
+                    <label for="middleName1">Full Registration Number:</label>
+                    <input name="registration_number" class="form-control @error('registration_number') is-invalid @enderror" id="registration_number1"
+                        type="text" placeholder="Enter your company address" value="" />
+                    @error('registration_number')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                    @enderror
+                </div>
+
+                <div class="form-group col-md-6">
+                    <label for="picker1">Upload Supporting Documents (PDF):</label>
+                    <div class="custom-file mb-3">
+                        <input name="supporting_document" type="file" name="color_passportsize" class="custom-file-input
+                        @error('supporting_document') is-invalid @enderror" accept="application/pdf"
+                            id="supporting_document">
+                        <label class="custom-file-label " for="supporting_document"
+                            aria-describedby="supporting_document" id="supporting_documentpreviewLabel">Choose file</label>
+                        @error('supporting_document')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                        @enderror
+                    </div>
+                </div>
+
+                <div class="col-md-6 form-group mb-3">
+                    <label for="picker1">Upload Passport Photo of Pharmacist:</label>
+                    <div class="custom-file mb-3">
+                        <input name="photo" type="file" name="color_passportsize" class="custom-file-input"
+                            id="inputGroupFile02" accept="image/*">
+                        <label class="custom-file-label " for="inputGroupFile02"
+                            aria-describedby="inputGroupFileAddon02">Choose file</label>
+                    </div>
+                    <div class="profilePreview">
+                        <img id="profile-pic-new-preview" src="" alt="" class="w-25">
+                        <img id="profile-pic-old-preview" src="{{asset('images/' . Auth::user()->photo)}}" alt=""
+                            class="w-25">
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12 form-group mb-3">
+                    <h3>Pharmacist Directors (as in CAC Form C.O.7)</h3>
+                </div>
+                <div class="col-md-4 form-group mb-3">
+                    <label for="firstName1">Full name</label>
+                    <input name="name" class="form-control @error('name') is-invalid @enderror"
+                        id="name1" type="text" placeholder="Enter full name of director"
+                        value="" />
+                    @error('name')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                    @enderror
+                </div>
+                <div class="col-md-4 form-group mb-3">
+                    <label for="middleName1">Full Registration Number:</label>
+                    <input name="registration_number" class="form-control @error('registration_number') is-invalid @enderror" id="registration_number1"
+                        type="text" placeholder="Enter full registration number" value="" />
+                    @error('registration_number')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                    @enderror
+                </div>
+                <div class="col-md-4 form-group mb-3">
+                    <label for="middleName1">Current Annual Licence Number:</label>
+                    <input name="annual_licence_number" class="form-control @error('annual_licence_number') is-invalid @enderror" id="annual_licence_number1"
+                        type="text" placeholder="Enter current annual licence number" value="" />
+                    @error('annual_licence_number')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                    @enderror
+                </div>
+                <div class="col-md-4 form-group mb-3">
+                    <label for="firstName1">Full name</label>
+                    <input name="name" class="form-control @error('name') is-invalid @enderror"
+                        id="name1" type="text" placeholder="Enter full name of director"
+                        value="" />
+                    @error('name')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                    @enderror
+                </div>
+                <div class="col-md-4 form-group mb-3">
+                    <label for="middleName1">Full Registration Number:</label>
+                    <input name="registration_number" class="form-control @error('registration_number') is-invalid @enderror" id="registration_number1"
+                        type="text" placeholder="Enter full registration number" value="" />
+                    @error('registration_number')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                    @enderror
+                </div>
+                <div class="col-md-4 form-group mb-3">
+                    <label for="middleName1">Current Annual Licence Number:</label>
+                    <input name="annual_licence_number" class="form-control @error('annual_licence_number') is-invalid @enderror" id="annual_licence_number1"
+                        type="text" placeholder="Enter current annual licence number" value="" />
+                    @error('annual_licence_number')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                    @enderror
+                </div>
+                <div class="col-md-4 form-group mb-3">
+                    <label for="firstName1">Full name</label>
+                    <input name="name" class="form-control @error('name') is-invalid @enderror"
+                        id="name1" type="text" placeholder="Enter full name of director"
+                        value="" />
+                    @error('name')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                    @enderror
+                </div>
+                <div class="col-md-4 form-group mb-3">
+                    <label for="middleName1">Full Registration Number:</label>
+                    <input name="registration_number" class="form-control @error('registration_number') is-invalid @enderror" id="registration_number1"
+                        type="text" placeholder="Enter full registration number" value="" />
+                    @error('registration_number')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                    @enderror
+                </div>
+                <div class="col-md-4 form-group mb-3">
+                    <label for="middleName1">Current Annual Licence Number:</label>
+                    <input name="annual_licence_number" class="form-control @error('annual_licence_number') is-invalid @enderror" id="annual_licence_number1"
+                        type="text" placeholder="Enter current annual licence number" value="" />
+                    @error('annual_licence_number')
                     <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>
                     </span>
@@ -106,6 +266,14 @@ $('#stateField').on('change', function() {
         $('#lgaField').attr('disabled');
     }
 });
+
+// Birth Certificate Photo on upload preview 
+supporting_document.onchange = evt => {
+    const [file] = supporting_document.files
+    if (file) {
+        $('#supporting_documentpreviewLabel').html(file.name);
+    }
+}
 
 // Passport Photo on upload preview 
 inputGroupFile02.onchange = evt => {
