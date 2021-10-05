@@ -166,8 +166,10 @@ class PPMVApplicationInfo
             $ppmv->status == 'queried_by_state_office' || 
             $ppmv->status == 'send_to_registry' || 
             $ppmv->status == 'send_to_state_office_inspection' || 
-            $ppmv->status == 'no_recommendation' || 
-            $ppmv->status == 'facility_no_recommendation'){
+            $ppmv->status == 'no_recommendation' 
+            // || 
+            // $ppmv->status == 'facility_no_recommendation'
+            ){
                 return $response = [
                     'success' => false,
                     'message' => 'PPMV LOCATION APPROVAL APPLICATION NOT COMPLETE YET',
