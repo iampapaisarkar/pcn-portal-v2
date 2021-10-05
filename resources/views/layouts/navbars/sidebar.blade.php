@@ -360,7 +360,7 @@
                 <!-- Distribution Premises routes end  -->
 
                 <!-- Manufacturing Premises routes start  -->
-                @can('isDPremisis')
+                @can('isMPremisis')
                 <li class="nav-item">
                     <a href="{{route('company-profile')}}">
                         <i class="nav-icon i-Security-Settings"></i>
@@ -407,7 +407,7 @@
                 <!-- Manufacturing Premises routes end  -->
 
                 <!-- PPMV routes start  -->
-                @can('isMPremisis')
+                @can('isPPMV')
                 <li class="nav-item">
                     <a href="{{route('ppmv-application-form')}}">
                         <i class="nav-icon i-Map2"></i>
