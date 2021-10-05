@@ -176,7 +176,7 @@ class PPMVApplicationInfo
 
                 ];
             }
-            if($ppmv->status == 'inspection_approved'){
+            if($ppmv->status == 'inspection_approved' || $ppmv->status == 'facility_no_recommendation'){
                 return $response = [
                     'success' => true,
 
