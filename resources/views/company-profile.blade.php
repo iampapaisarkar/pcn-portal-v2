@@ -395,12 +395,15 @@ $(document).ready(function() {
  });
 
 function addOtherDirectorRow(){
-    var rowCount = $('.otherDirectorRow').length;
+    // var rowCount = $('.otherDirectorRow').length + 1;
+    var rowCount = 0;
+    var rowArray = [];
+    rowArray.push(rowArray.length+1)
 
-    // alert(rowCount)
+    console.log(rowArray)
 
     var formHtml = '';
-    for (let i = rowCount + 1; i < rowCount; i++) {
+    for (let i = rowCount; i < rowCount; i++) {
         // console.log(rowCount)
         formHtml += '<div class="row" class="otherDirectorRow">\
                         <div class="col-md-6 form-group mb-3">\

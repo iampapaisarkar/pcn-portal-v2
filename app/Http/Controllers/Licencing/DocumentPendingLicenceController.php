@@ -329,7 +329,7 @@ class DocumentPendingLicenceController extends Controller
 
                     $renewal = Renewal::create([
                         'user_id' => $registration->user_id,
-                        'registration_id' => $registration_id,
+                        'registration_id' => $registration->id,
                         'form_id' => $PpmvLocationApplication->id,
                         'type' => 'ppmv_renewal',
                         'renewal_year' => date('Y'),
