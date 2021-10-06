@@ -260,10 +260,17 @@
             </div>
 
             <div class="row">
-                <div class="col-md-12 form-group mb-3">
+                <div class="col-md-6 form-group mb-3">
                     <h3>Other Directors (as in CAC Form C.O.7)</h3>
                 </div>
-                <div class="col-md-6 form-group mb-3">
+                <div class="col-md-6 form-group mb-3 d-flex justify-content-end">
+                    <button type="button" onclick="addOtherDirectorRow()" class="btn btn-primary">Add row</button>
+                </div>
+
+                <div class="col-12" id="otherDirectorRow">
+                    
+                </div>
+                <!-- <div class="col-md-6 form-group mb-3">
                     <label for="other_director_name1">Full name</label>
                     <input name="other_director[0][other_director_name]" class="form-control @error('other_director_name') is-invalid @enderror"
                         id="other_director_name1" type="text" placeholder="Enter full name of director"
@@ -327,7 +334,7 @@
                         <strong>{{ $message }}</strong>
                     </span>
                     @enderror
-                </div>
+                </div> -->
             </div>
             <div class="row">
                 <div class="col-md-12">
@@ -381,6 +388,37 @@ inputGroupFile02.onchange = evt => {
         $('#profile-pic-old-preview').hide();
         $('#profile-pic-new-preview').attr('src', URL.createObjectURL(file));
     }
+}
+
+$(document).ready(function() { 
+    
+ });
+
+function addOtherDirectorRow(){
+    var rowCount = $('.otherDirectorRow').length;
+
+    // alert(rowCount)
+
+    var formHtml = '';
+    for (let i = rowCount + 1; i < rowCount; i++) {
+        // console.log(rowCount)
+        formHtml += '<div class="row" class="otherDirectorRow">\
+                        <div class="col-md-6 form-group mb-3">\
+                            <label for="other_director_name1">Full name</label>\
+                            <input name="other_director['+rowCount+'][other_director_name]" class="form-control"\
+                            id="other_director_name1" type="text" placeholder="Enter full name of director"\
+                            value="" />\
+                        </div>\
+                        <div class="col-md-6 form-group mb-3">\
+                            <label for="other_director_profession1">Profession:</label>\
+                            <input name="other_director['+rowCount+'][other_director_profession]" class="form-control id="other_director_profession1"\
+                            type="text" placeholder="Enter profession"\
+                            value="" />\
+                        </div>\
+                    </div>';
+    }
+
+    $("#otherDirectorRow").append(formHtml);
 }
 </script>
 <style>
