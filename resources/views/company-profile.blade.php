@@ -4,7 +4,12 @@
 @include('layouts.navbars.breadcrumb', ['page' => 'Company Profile', 'route' => 'company-profile'])
 <div class="row">
     <div class="col-lg-12 col-md-12">
-        <form method="POST" action="" enctype="multipart/form-data">
+        @if (session('status'))
+        <div class="alert alert-warning">
+            {{ session('status') }}
+        </div>
+        @endif
+        <form method="POST" action="{{route('company-profile-update')}}" enctype="multipart/form-data" novalidate>
             @csrf
             <div class="row">
                 <div class="col-md-12 form-group mb-3">
@@ -12,20 +17,20 @@
                 </div>
                 <div class="col-md-4 form-group mb-3">
                     <label for="name">Company name</label>
-                    <input name="company_name" class="form-control @error('name') is-invalid @enderror"
-                        id="name1" type="text" placeholder="Enter your company name"
+                    <input name="company_name" class="form-control @error('company_name') is-invalid @enderror"
+                        id="company_name1" type="text" placeholder="Enter your company name"
                         value="" />
-                    @error('name')
+                    @error('company_name')
                     <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>
                     </span>
                     @enderror
                 </div>
                 <div class="col-md-8 form-group mb-3">
-                    <label for="middleName1">Company Address</label>
-                    <input name="address" class="form-control @error('address') is-invalid @enderror" id="address1"
+                    <label for="copmany_address1">Company Address</label>
+                    <input name="copmany_address" class="form-control @error('copmany_address') is-invalid @enderror" id="copmany_address1"
                         type="text" placeholder="Enter your company address" value="" />
-                    @error('address')
+                    @error('copmany_address')
                     <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>
                     </span>
@@ -79,9 +84,9 @@
                 </div>
                 <div class="col-md-4 form-group mb-3">
                     <label for="middleName1">Category of Practise</label>
-                    <input name="category_practise" class="form-control @error('category_practise') is-invalid @enderror" id="category_practise1"
-                        type="text" placeholder="Enter your middle name" value="Community Pharmacy" readonly/>
-                    @error('category_practise')
+                    <input name="category" class="form-control @error('category') is-invalid @enderror" id="category1"
+                        type="text" placeholder="Enter your category" value="Community Pharmacy" readonly/>
+                    @error('category')
                     <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>
                     </span>

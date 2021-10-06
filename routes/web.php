@@ -35,6 +35,7 @@ Route::post('/profile-password-update', 'App\Http\Controllers\ProfileController@
 
 Route::group(['middleware' => ['auth','verified', 'can:isCPharmacy, isDPremisis, isMPremisis']], function () {
     Route::get('/company-profile', 'App\Http\Controllers\CompanyProfileController@profile')->name('company-profile');
+    Route::post('/company-profile-update', 'App\Http\Controllers\CompanyProfileController@profileUpdate')->name('company-profile-update');
 });
 
 // DASHBOARD ROUTE 
