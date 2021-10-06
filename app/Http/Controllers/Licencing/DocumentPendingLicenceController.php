@@ -323,12 +323,12 @@ class DocumentPendingLicenceController extends Controller
                         'status' => 'licence_issued'
                     ]);
 
-                    $PpmvLocationApplication = PpmvLocationApplication::where(['registration_id' => $registration_id, 'user_id' => $Registration->user_id])
+                    $PpmvLocationApplication = PpmvLocationApplication::where(['registration_id' => $registration->id, 'user_id' => $registration->user_id])
                     ->with('user')
                     ->latest()->first();
 
                     $renewal = Renewal::create([
-                        'user_id' => $Registration->user_id,
+                        'user_id' => $registration->user_id,
                         'registration_id' => $registration_id,
                         'form_id' => $PpmvLocationApplication->id,
                         'type' => 'ppmv_renewal',
