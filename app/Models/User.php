@@ -60,6 +60,10 @@ class User extends Authenticatable implements MustVerifyEmail
         'email_verified_at' => 'datetime',
     ];
 
+    public function company() {
+        return $this->hasOne(Company::class,'user_id', 'id');
+    }
+
     public function user_state() {
         return $this->hasOne(State::class,'id', 'state');
     }
