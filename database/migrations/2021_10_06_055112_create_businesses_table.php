@@ -18,8 +18,8 @@ class CreateBusinessesTable extends Migration
             $table->integer('company_id');
             $table->string('name');
             $table->string('registration_number');
-            $table->string('supporting_document');
-            $table->string('passport');
+            $table->string('supporting_document')->nullable();
+            $table->string('passport')->nullable();
             $table->timestamps();
         });
     }

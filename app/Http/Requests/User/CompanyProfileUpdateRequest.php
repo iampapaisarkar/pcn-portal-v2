@@ -49,12 +49,12 @@ class CompanyProfileUpdateRequest extends FormRequest
             'pharmacist_registration_number' => [
                 'required', 'min:3', 'max:255'
             ],
-            'supporting_document' => [
-                'required'
-            ],
-            'passport' => [
-                'required'
-            ],
+            // 'supporting_document' => [
+            //     'required'
+            // ],
+            // 'passport' => [
+            //     'required'
+            // ],
 
             // Director 
             // 'director_name' => [

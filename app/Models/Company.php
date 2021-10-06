@@ -31,6 +31,6 @@ class Company extends Model
     }
 
     public function other_director() {
-        return $this->hasMany(Director::class,'company_id', 'id');
+        return $this->hasMany(OtherDirector::class,'company_id', 'id');
     }
 }

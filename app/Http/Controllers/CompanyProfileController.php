@@ -34,22 +34,21 @@ class CompanyProfileController extends Controller
 
             // Check Document Validation 
             if($request->file('supporting_document') != null){
-                if($authUser->company()->first() && ($authUser->company()->first()->supporting_document == $request->file('supporting_document')->getClientOriginalName())){
-                    $supporting_document = $authUser->company()->first()->supporting_document;
+                if($authUser->company()->first() && ($authUser->company()->first()->business()->first()->supporting_document == $request->file('supporting_document')->getClientOriginalName())){
+                    $supporting_document = $authUser->company()->first()->business()->first()->supporting_document;
                 }else{
                     $supporting_document = FileUpload::upload($request->file('supporting_document'), $private = true, 'company', 'supporting_document');
 
                     if($authUser->company()->first()){
                         $path = storage_path('app'. DIRECTORY_SEPARATOR . 'private' . 
-                        DIRECTORY_SEPARATOR . $request->user_id . DIRECTORY_SEPARATOR . 'company'. DIRECTORY_SEPARATOR . $authUser->company()->first()->supporting_document);
+                        DIRECTORY_SEPARATOR . $request->user_id . DIRECTORY_SEPARATOR . 'company'. DIRECTORY_SEPARATOR . $authUser->company()->first()->business()->first()->supporting_document);
                         File::Delete($path);
                     }
                 }
             }else{
-                $supporting_document = $authUser->company()->first()->supporting_document;
+                $supporting_document = $authUser->company()->first() ? $authUser->company()->first()->business()->first()->supporting_document : null;
             }
 
-            // dd($request->file('passport'));
 
             // Check Passport Validation 
             if($request->file('passport')){
@@ -66,14 +65,14 @@ class CompanyProfileController extends Controller
             }
             
 
-            if(isset($file_name) && $authUser->company()->first() && ($authUser->company()->first()->passport == $file_name)){
-                $passport_photo = $authUser->company()->first()->passport;
-            }else if(isset($file_name) && $authUser->company()->first() && ($authUser->company()->first()->passport != $file_name)){
+            if(isset($file_name) && $authUser->company()->first() && ($authUser->company()->first()->business()->first()->passport == $file_name)){
+                $passport_photo = $authUser->company()->first()->business()->first()->passport;
+            }else if(isset($file_name) && $authUser->company()->first() && ($authUser->company()->first()->business()->first()->passport != $file_name)){
                 $destinationPath = 'images/';
-                File::delete($destinationPath.$authUser->company()->first()->passport);
+                File::delete($destinationPath.$authUser->company()->first()->business()->first()->passport);
                 $passport_photo = $file_name;
-            }else if(!isset($file_name) && $authUser->company()->first()->passport){
-                $passport_photo = $authUser->company()->first()->passport;
+            }else if(!isset($file_name) && $authUser->company()->first()->business()->first()->passport){
+                $passport_photo = $authUser->company()->first()->business()->first()->passport;
             }else if(isset($file_name)){
                 $passport_photo = $file_name;
             }
@@ -108,6 +107,7 @@ class CompanyProfileController extends Controller
 
                     foreach ($request->director as $key => $director) {
                         Director::create([
+                            'company_id' => $company->id,
                             'name' => $director['director_name'],
                             'registration_number' => $director['director_registration_number'],
                             'licence_number' => $director['director_licence_number']
@@ -115,15 +115,17 @@ class CompanyProfileController extends Controller
                     }
                 }
 
+
                 // Othre Director Create New 
                 if(!empty($request->other_director)){
                     // Delete old Directors 
                     OtherDirector::where(['company_id' => $company->id])->delete();
 
-                    foreach ($request->other_director as $key => $director) {
+                    foreach ($request->other_director as $key => $other_director) {
                         OtherDirector::create([
-                            'name' => $director['other_director_name'],
-                            'profession' => $director['other_director_profession'],
+                            'company_id' => $company->id,
+                            'name' => $other_director['other_director_name'],
+                            'profession' => $other_director['other_director_profession'],
                         ]);
                     }
                 }
@@ -162,11 +164,11 @@ class CompanyProfileController extends Controller
 
                 // Othre Director Create New 
                 if(!empty($request->other_director)){
-                    foreach ($request->other_director as $key => $director) {
+                    foreach ($request->other_director as $key => $other_director) {
                         OtherDirector::create([
                             'company_id' => $company->id,
-                            'name' => $director['other_director_name'],
-                            'profession' => $director['other_director_profession'],
+                            'name' => $other_director['other_director_name'],
+                            'profession' => $other_director['other_director_profession'],
                         ]);
                     }
                 }
