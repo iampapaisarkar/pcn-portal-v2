@@ -33,6 +33,10 @@ Route::post('/profile-update', 'App\Http\Controllers\ProfileController@update')-
 Route::post('/profile-password-update', 'App\Http\Controllers\ProfileController@updatePassword')->name('profile-password-update')->middleware('auth', 'verified');
 // Route::post('/remove-photo', 'App\Http\Controllers\ProfileController@removeProfilePhoto')->name('remove-profile-photo')->middleware('auth', 'verified');
 
+Route::group(['middleware' => ['auth','verified', 'can:isCPharmacy, isDPremisis, isMPremisis']], function () {
+    Route::get('/company-profile', 'App\Http\Controllers\CompanyProfileController@profile')->name('company-profile');
+});
+
 // DASHBOARD ROUTE 
 Route::group(['middleware' => ['auth','verified', 'CheckProfileStatus']], function () {
     Route::get('/', 'App\Http\Controllers\HomeController@index')->name('dashboard');
@@ -215,7 +219,7 @@ Route::group(['middleware' => ['auth','verified', 'can:isHPharmacy', 'CheckProfi
 
 // COMMUNITY PHARMACY ROUTES 
 Route::group(['middleware' => ['auth','verified', 'can:isCPharmacy', 'CheckProfileStatus']], function () {
-    Route::get('/company-profile', 'App\Http\Controllers\CompanyProfileController@profile')->name('company-profile');
+    // Route::get('/company-profile', 'App\Http\Controllers\CompanyProfileController@profile')->name('company-profile');
 });
 
 // DISTRIBUTION PREMISIS ROUTES 

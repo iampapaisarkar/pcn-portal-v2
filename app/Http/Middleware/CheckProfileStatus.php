@@ -37,18 +37,14 @@ class CheckProfileStatus
             }
             return redirect('profile')->with('status','Please update your profile to perform further action');
         }else if(auth()->user()->hasRole(['community_pharmacy', 'distribution_premisis', 'manufacturing_premisis'])){
-            if(auth()->user()->company()->name && 
-            auth()->user()->company()->address &&
-            auth()->user()->company()->state &&
-            auth()->user()->company()->lga &&
-            auth()->user()->company()->category &&
-            auth()->user()->company()->business()->name &&
-            auth()->user()->company()->business()->registration_number &&
-            auth()->user()->company()->business()->document &&
-            auth()->user()->company()->business()->passport
-            ){
+
+            if(auth()->user()->company()->first()){
+                dd(1);
                 return $next($request);
             }
+
+            // dd(0);
+            // return redirect('profile')->with('status','Please update your profile to perform further action');
             return redirect('company-profile')->with('status','Please update your company profile to perform further action');
         }else{
             return $next($request);
