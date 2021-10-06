@@ -38,7 +38,11 @@
                     <label for="picker1">State</label>
                     <select id="stateField" required name="state"
                         class="form-control @error('state') is-invalid @enderror">
-                        <option value="">Select State</option>
+                        @if(Auth::user()->company()->first())
+                        <option hidden selected value="{{Auth::user()->company()->company_state()->first()->id}}">
+                            {{Auth::user()->company()->company_state()->first()->name}}</option>
+                        @endif
+                        <option {{!Auth::user()->company()->first() ? 'selected' : ''}} value="">Select State</option>
                         @foreach($states as $state)
                         <option value="{{$state->id}}">{{$state->name}}</option>
                         @endforeach
@@ -54,7 +58,18 @@
                     $lgas = app('App\Http\Services\BasicInformation')->lgas();
                     @endphp
                     <label for="picker1">LGA</label>
-                    <select id="lgaField" required name="lga" class="form-control @error('lga') is-invalid @enderror">
+                    <select {{!Auth::user()->company()->first() ? 'disabled' : ''}} id="lgaField" required name="lga"
+                        class="form-control @error('lga') is-invalid @enderror">
+                        @if(Auth::user()->company()->first())
+                        <option hidden selected value="{{Auth::user()->company()->company_lga()->first()->id}}">{{Auth::user()->company()->company_lga()->first()->name}}
+                        </option>
+                        @endif
+                        <option {{!Auth::user()->company()->first() ? 'selected' : ''}} value="">Select LGA</option>
+                        @if(Auth::user()->company()->first())
+                        @foreach(Auth::user()->company()->lga()->get() as $lga)
+                        <option value="{{$lga->id}}">{{$lga->name}}</option>
+                        @endforeach
+                        @endif
                     </select>
                     @error('lga')
                     <span class="invalid-feedback" role="alert">
@@ -249,7 +264,7 @@
                 <div class="col-md-6 form-group mb-3">
                     <label for="other_director_profession1">Profession:</label>
                     <input name="other_director_profession[]" class="form-control @error('other_director_profession') is-invalid @enderror" id="other_director_profession1"
-                        type="text" placeholder="Enter other_director_profession" value="" />
+                        type="text" placeholder="Enter profession" value="" />
                     @error('other_director_profession')
                     <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>
@@ -270,7 +285,7 @@
                 <div class="col-md-6 form-group mb-3">
                     <label for="other_director_profession1">Profession:</label>
                     <input name="other_director_profession[]" class="form-control @error('other_director_profession') is-invalid @enderror" id="other_director_profession1"
-                        type="text" placeholder="Enter other_director_profession" value="" />
+                        type="text" placeholder="Enter profession" value="" />
                     @error('other_director_profession')
                     <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>
@@ -291,7 +306,7 @@
                 <div class="col-md-6 form-group mb-3">
                     <label for="other_director_profession1">Profession:</label>
                     <input name="other_director_profession[]" class="form-control @error('other_director_profession') is-invalid @enderror" id="other_director_profession1"
-                        type="text" placeholder="Enter other_director_profession" value="" />
+                        type="text" placeholder="Enter profession" value="" />
                     @error('other_director_profession')
                     <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>
