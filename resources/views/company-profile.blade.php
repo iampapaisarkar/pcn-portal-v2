@@ -158,7 +158,7 @@
                 </div>
                 <div class="col-md-4 form-group mb-3">
                     <label for="director_name1">Full name</label>
-                    <input name="director_name[]" class="form-control @error('director_name') is-invalid @enderror"
+                    <input name="director[0][director_name]" class="form-control @error('director_name') is-invalid @enderror"
                         id="director_name1" type="text" placeholder="Enter full name of director"
                         value="" />
                     @error('director_name')
@@ -169,7 +169,7 @@
                 </div>
                 <div class="col-md-4 form-group mb-3">
                     <label for="director_registration_number1">Full Registration Number:</label>
-                    <input name="director_registration_number[]" class="form-control @error('director_registration_number') is-invalid @enderror" id="director_registration_number1"
+                    <input name="director[0][director_registration_number]" class="form-control @error('director_registration_number') is-invalid @enderror" id="director_registration_number1"
                         type="text" placeholder="Enter full registration number" value="" />
                     @error('director_registration_number')
                     <span class="invalid-feedback" role="alert">
@@ -179,7 +179,7 @@
                 </div>
                 <div class="col-md-4 form-group mb-3">
                     <label for="director_licence_number">Current Annual Licence Number:</label>
-                    <input name="director_licence_number[]" class="form-control @error('director_licence_number') is-invalid @enderror" id="director_licence_number1"
+                    <input name="director[0][director_licence_number]" class="form-control @error('director_licence_number') is-invalid @enderror" id="director_licence_number1"
                         type="text" placeholder="Enter current annual licence number" value="" />
                     @error('director_licence_number')
                     <span class="invalid-feedback" role="alert">
@@ -189,7 +189,7 @@
                 </div>
                 <div class="col-md-4 form-group mb-3">
                     <label for="director_name1">Full name</label>
-                    <input name="director_name[]" class="form-control @error('director_name') is-invalid @enderror"
+                    <input name="director[1][director_name]" class="form-control @error('director_name') is-invalid @enderror"
                         id="director_name1" type="text" placeholder="Enter full name of director"
                         value="" />
                     @error('director_name')
@@ -200,7 +200,7 @@
                 </div>
                 <div class="col-md-4 form-group mb-3">
                     <label for="director_registration_number1">Full Registration Number:</label>
-                    <input name="director_registration_number[]" class="form-control @error('director_registration_number') is-invalid @enderror" id="director_registration_number1"
+                    <input name="director[1][director_registration_number]" class="form-control @error('director_registration_number') is-invalid @enderror" id="director_registration_number1"
                         type="text" placeholder="Enter full registration number" value="" />
                     @error('director_registration_number')
                     <span class="invalid-feedback" role="alert">
@@ -210,7 +210,7 @@
                 </div>
                 <div class="col-md-4 form-group mb-3">
                     <label for="director_licence_number">Current Annual Licence Number:</label>
-                    <input name="director_licence_number[]" class="form-control @error('director_licence_number') is-invalid @enderror" id="director_licence_number1"
+                    <input name="director[1][director_licence_number]" class="form-control @error('director_licence_number') is-invalid @enderror" id="director_licence_number1"
                         type="text" placeholder="Enter current annual licence number" value="" />
                     @error('director_licence_number')
                     <span class="invalid-feedback" role="alert">
@@ -220,7 +220,7 @@
                 </div>
                 <div class="col-md-4 form-group mb-3">
                     <label for="director_name1">Full name</label>
-                    <input name="director_name[]" class="form-control @error('director_name') is-invalid @enderror"
+                    <input name="director[2][director_name]" class="form-control @error('director_name') is-invalid @enderror"
                         id="director_name1" type="text" placeholder="Enter full name of director"
                         value="" />
                     @error('director_name')
@@ -231,7 +231,7 @@
                 </div>
                 <div class="col-md-4 form-group mb-3">
                     <label for="director_registration_number1">Full Registration Number:</label>
-                    <input name="director_registration_number[]" class="form-control @error('director_registration_number') is-invalid @enderror" id="director_registration_number1"
+                    <input name="director[2][director_registration_number]" class="form-control @error('director_registration_number') is-invalid @enderror" id="director_registration_number1"
                         type="text" placeholder="Enter full registration number" value="" />
                     @error('director_registration_number')
                     <span class="invalid-feedback" role="alert">
@@ -241,7 +241,7 @@
                 </div>
                 <div class="col-md-4 form-group mb-3">
                     <label for="director_licence_number">Current Annual Licence Number:</label>
-                    <input name="director_licence_number[]" class="form-control @error('director_licence_number') is-invalid @enderror" id="director_licence_number1"
+                    <input name="director[2][director_licence_number]" class="form-control @error('director_licence_number') is-invalid @enderror" id="director_licence_number1"
                         type="text" placeholder="Enter current annual licence number" value="" />
                     @error('director_licence_number')
                     <span class="invalid-feedback" role="alert">
@@ -257,7 +257,7 @@
                 </div>
                 <div class="col-md-6 form-group mb-3">
                     <label for="other_director_name1">Full name</label>
-                    <input name="other_director_name[]" class="form-control @error('other_director_name') is-invalid @enderror"
+                    <input name="other_director[0][other_director_name]" class="form-control @error('other_director_name') is-invalid @enderror"
                         id="other_director_name1" type="text" placeholder="Enter full name of director"
                         value="" />
                     @error('other_director_name')
@@ -268,7 +268,7 @@
                 </div>
                 <div class="col-md-6 form-group mb-3">
                     <label for="other_director_profession1">Profession:</label>
-                    <input name="other_director_profession[]" class="form-control @error('other_director_profession') is-invalid @enderror" id="other_director_profession1"
+                    <input name="other_director[0][other_director_profession]" class="form-control @error('other_director_profession') is-invalid @enderror" id="other_director_profession1"
                         type="text" placeholder="Enter profession" value="" />
                     @error('other_director_profession')
                     <span class="invalid-feedback" role="alert">
@@ -278,7 +278,7 @@
                 </div>
                 <div class="col-md-6 form-group mb-3">
                     <label for="other_director_name1">Full name</label>
-                    <input name="other_director_name[]" class="form-control @error('other_director_name') is-invalid @enderror"
+                    <input name="other_director[1][other_director_name]" class="form-control @error('other_director_name') is-invalid @enderror"
                         id="other_director_name1" type="text" placeholder="Enter full name of director"
                         value="" />
                     @error('other_director_name')
@@ -289,7 +289,7 @@
                 </div>
                 <div class="col-md-6 form-group mb-3">
                     <label for="other_director_profession1">Profession:</label>
-                    <input name="other_director_profession[]" class="form-control @error('other_director_profession') is-invalid @enderror" id="other_director_profession1"
+                    <input name="other_director[1][other_director_profession]" class="form-control @error('other_director_profession') is-invalid @enderror" id="other_director_profession1"
                         type="text" placeholder="Enter profession" value="" />
                     @error('other_director_profession')
                     <span class="invalid-feedback" role="alert">
@@ -299,7 +299,7 @@
                 </div>
                 <div class="col-md-6 form-group mb-3">
                     <label for="other_director_name1">Full name</label>
-                    <input name="other_director_name[]" class="form-control @error('other_director_name') is-invalid @enderror"
+                    <input name="other_director[2][other_director_name]" class="form-control @error('other_director_name') is-invalid @enderror"
                         id="other_director_name1" type="text" placeholder="Enter full name of director"
                         value="" />
                     @error('other_director_name')
@@ -310,7 +310,7 @@
                 </div>
                 <div class="col-md-6 form-group mb-3">
                     <label for="other_director_profession1">Profession:</label>
-                    <input name="other_director_profession[]" class="form-control @error('other_director_profession') is-invalid @enderror" id="other_director_profession1"
+                    <input name="other_director[2][other_director_profession]" class="form-control @error('other_director_profession') is-invalid @enderror" id="other_director_profession1"
                         type="text" placeholder="Enter profession" value="" />
                     @error('other_director_profession')
                     <span class="invalid-feedback" role="alert">

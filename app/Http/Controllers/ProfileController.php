@@ -160,16 +160,16 @@ class ProfileController extends Controller
             if(Auth::user()->hasRole(['community_pharmacy', 'distribution_premisis', 'manufacturing_premisis'])){
 
                 $this->validate($request, [
-                    'hospital_name' => [
+                    'firstname' => [
                         'required', 'min:3', 'max:255'
                     ],
-                    'hospital_address' => [
+                    'lastname' => [
                         'required', 'min:3', 'max:255'
                     ],
-                    'state' => [
+                    'email' => [
                         'required'
                     ],
-                    'lga' => [
+                    'phone' => [
                         'required'
                     ],
                 ]);
@@ -203,10 +203,10 @@ class ProfileController extends Controller
                 }
 
                 auth()->user()->update([
-                    'hospital_name' => $request->hospital_name,
-                    'hospital_address' => $request->hospital_address,
-                    'state' => $request->state,
-                    'lga' => $request->lga,
+                    'firstname' => $request->hospital_name,
+                    'lastname' => $request->hospital_address,
+                    'email' => $request->state,
+                    'phone' => $request->lga,
                     'photo' => $fileName
                 ]);
 

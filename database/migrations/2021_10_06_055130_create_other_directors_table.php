@@ -16,8 +16,8 @@ class CreateOtherDirectorsTable extends Migration
         Schema::create('other_directors', function (Blueprint $table) {
             $table->id();
             $table->integer('company_id');
-            $table->string('name');
-            $table->string('profession');
+            $table->string('name')->nullable();
+            $table->string('profession')->nullable();
             $table->timestamps();
         });
     }

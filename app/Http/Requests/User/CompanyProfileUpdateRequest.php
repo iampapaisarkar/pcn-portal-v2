@@ -52,29 +52,29 @@ class CompanyProfileUpdateRequest extends FormRequest
             'supporting_document' => [
                 'required'
             ],
-            // 'passport' => [
-            //     'required'
-            // ],
-
-            // Director 
-            'director_name' => [
-                'required', 'min:3', 'max:255'
-            ],
-            'director_registration_number' => [
-                'required', 'min:3', 'max:255'
-            ],
-            'director_licence_number' => [
+            'passport' => [
                 'required'
             ],
 
+            // Director 
+            // 'director_name' => [
+            //     'required', 'min:3', 'max:255'
+            // ],
+            // 'director_registration_number' => [
+            //     'required', 'min:3', 'max:255'
+            // ],
+            // 'director_licence_number' => [
+            //     'required'
+            // ],
+
 
             // Other Director 
-            'other_director_name' => [
-                'required', 'min:3', 'max:255'
-            ],
-            'other_director_profession' => [
-                'required', 'min:3', 'max:255'
-            ]
+            // 'other_director_name' => [
+            //     'required', 'min:3', 'max:255'
+            // ],
+            // 'other_director_profession' => [
+            //     'required', 'min:3', 'max:255'
+            // ]
             
         ];
     }

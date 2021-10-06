@@ -16,9 +16,9 @@ class CreateDirectorsTable extends Migration
         Schema::create('directors', function (Blueprint $table) {
             $table->id();
             $table->integer('company_id');
-            $table->string('name');
-            $table->string('registration_number');
-            $table->string('licence_number');
+            $table->string('name')->nullable();
+            $table->string('registration_number')->nullable();
+            $table->string('licence_number')->nullable();
             $table->timestamps();
         });
     }
