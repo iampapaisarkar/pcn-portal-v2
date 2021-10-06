@@ -161,101 +161,52 @@
             </div>
 
             <div class="row">
-                <div class="col-md-12 form-group mb-3">
+                <div class="col-md-6 form-group mb-3">
                     <h3>Pharmacist Directors (as in CAC Form C.O.7)</h3>
                 </div>
-                <div class="col-md-4 form-group mb-3">
-                    <label for="director_name1">Full name</label>
-                    <input name="director[0][director_name]" class="form-control @error('director_name') is-invalid @enderror"
-                        id="director_name1" type="text" placeholder="Enter full name of director"
-                        value="{{ $director ? $director[0]['name'] : old('director[0][director_name]')}}" />
-                    @error('director_name')
-                    <span class="invalid-feedback" role="alert">
-                        <strong>{{ $message }}</strong>
-                    </span>
-                    @enderror
+                <div class="col-md-6 form-group mb-3 d-flex justify-content-end">
+                    <button type="button" onclick="addDirectorRow()" class="btn btn-primary">Add row</button>
                 </div>
-                <div class="col-md-4 form-group mb-3">
-                    <label for="director_registration_number1">Full Registration Number:</label>
-                    <input name="director[0][director_registration_number]" class="form-control @error('director_registration_number') is-invalid @enderror" id="director_registration_number1"
-                        type="text" placeholder="Enter full registration number" value="{{ $director ? $director[0]['registration_number'] : old('director[0][director_registration_number]')}}" />
-                    @error('director_registration_number')
-                    <span class="invalid-feedback" role="alert">
-                        <strong>{{ $message }}</strong>
-                    </span>
-                    @enderror
-                </div>
-                <div class="col-md-4 form-group mb-3">
-                    <label for="director_licence_number">Current Annual Licence Number:</label>
-                    <input name="director[0][director_licence_number]" class="form-control @error('director_licence_number') is-invalid @enderror" id="director_licence_number1"
-                        type="text" placeholder="Enter current annual licence number" value="{{ $director ? $director[0]['licence_number'] : old('director[0][director_licence_number]')}}" />
-                    @error('director_licence_number')
-                    <span class="invalid-feedback" role="alert">
-                        <strong>{{ $message }}</strong>
-                    </span>
-                    @enderror
-                </div>
-                <div class="col-md-4 form-group mb-3">
-                    <label for="director_name1">Full name</label>
-                    <input name="director[1][director_name]" class="form-control @error('director_name') is-invalid @enderror"
-                        id="director_name1" type="text" placeholder="Enter full name of director"
-                        value="{{ $director ? $director[1]['name'] : old('director[1][director_name]')}}" />
-                    @error('director_name')
-                    <span class="invalid-feedback" role="alert">
-                        <strong>{{ $message }}</strong>
-                    </span>
-                    @enderror
-                </div>
-                <div class="col-md-4 form-group mb-3">
-                    <label for="director_registration_number1">Full Registration Number:</label>
-                    <input name="director[1][director_registration_number]" class="form-control @error('director_registration_number') is-invalid @enderror" id="director_registration_number1"
-                        type="text" placeholder="Enter full registration number" value="{{ $director ? $director[1]['registration_number'] : old('director[1][director_registration_number]')}}" />
-                    @error('director_registration_number')
-                    <span class="invalid-feedback" role="alert">
-                        <strong>{{ $message }}</strong>
-                    </span>
-                    @enderror
-                </div>
-                <div class="col-md-4 form-group mb-3">
-                    <label for="director_licence_number">Current Annual Licence Number:</label>
-                    <input name="director[1][director_licence_number]" class="form-control @error('director_licence_number') is-invalid @enderror" id="director_licence_number1"
-                        type="text" placeholder="Enter current annual licence number" value="{{ $director ? $director[1]['licence_number'] : old('director[1][director_licence_number]')}}" />
-                    @error('director_licence_number')
-                    <span class="invalid-feedback" role="alert">
-                        <strong>{{ $message }}</strong>
-                    </span>
-                    @enderror
-                </div>
-                <div class="col-md-4 form-group mb-3">
-                    <label for="director_name1">Full name</label>
-                    <input name="director[2][director_name]" class="form-control @error('director_name') is-invalid @enderror"
-                        id="director_name1" type="text" placeholder="Enter full name of director"
-                        value="{{ $director ? $director[2]['name'] : old('director[2][director_name]')}}" />
-                    @error('director_name')
-                    <span class="invalid-feedback" role="alert">
-                        <strong>{{ $message }}</strong>
-                    </span>
-                    @enderror
-                </div>
-                <div class="col-md-4 form-group mb-3">
-                    <label for="director_registration_number1">Full Registration Number:</label>
-                    <input name="director[2][director_registration_number]" class="form-control @error('director_registration_number') is-invalid @enderror" id="director_registration_number1"
-                        type="text" placeholder="Enter full registration number" value="{{ $director ? $director[2]['registration_number'] : old('director[2][director_registration_number]')}}" />
-                    @error('director_registration_number')
-                    <span class="invalid-feedback" role="alert">
-                        <strong>{{ $message }}</strong>
-                    </span>
-                    @enderror
-                </div>
-                <div class="col-md-4 form-group mb-3">
-                    <label for="director_licence_number">Current Annual Licence Number:</label>
-                    <input name="director[2][director_licence_number]" class="form-control @error('director_licence_number') is-invalid @enderror" id="director_licence_number1"
-                        type="text" placeholder="Enter current annual licence number" value="{{ $director ? $director[2]['licence_number'] : old('director[2][director_licence_number]')}}" />
-                    @error('director_licence_number')
-                    <span class="invalid-feedback" role="alert">
-                        <strong>{{ $message }}</strong>
-                    </span>
-                    @enderror
+                
+                <div class="col-12" id="directorRow">
+                    @foreach($director as $key => $direct)
+                    <div class="row directorRow" id="directorID_{{$key}}">
+                        <div class="col-md-3 form-group mb-3">
+                            <label for="director_name1">Full name</label>
+                            <input name="director[{{$key}}][director_name]" class="form-control @error('director_name') is-invalid @enderror"
+                                id="director_name1" type="text" placeholder="Enter full name of director"
+                                value="{{ $director ? $director[$key]['name'] : old('director[$key][director_name]')}}" />
+                            @error('director_name')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                            @enderror
+                        </div>
+                        <div class="col-md-3 form-group mb-3">
+                            <label for="director_registration_number1">Full Registration Number:</label>
+                            <input name="director[{{$key}}][director_registration_number]" class="form-control @error('director_registration_number') is-invalid @enderror" id="director_registration_number1"
+                                type="text" placeholder="Enter full registration number" value="{{ $director ? $director[$key]['registration_number'] : old('director[$key][director_registration_number]')}}" />
+                            @error('director_registration_number')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                            @enderror
+                        </div>
+                        <div class="col-md-4 form-group mb-3">
+                            <label for="director_licence_number">Current Annual Licence Number:</label>
+                            <input name="director[{{$key}}][director_licence_number]" class="form-control @error('director_licence_number') is-invalid @enderror" id="director_licence_number1"
+                                type="text" placeholder="Enter current annual licence number" value="{{ $director ? $director[$key]['licence_number'] : old('director[$key][director_licence_number]')}}" />
+                            @error('director_licence_number')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                            @enderror
+                        </div>
+                        <div class="col-md-2 form-group mb-3 d-flex align-items-center">
+                            <button type="button" class="btn btn-sm btn-secondary mt-3" id="deleteDirectorRow_{{$key}}" onclick="deleteDirectorRow({{$key}})">Delete</button>
+                        </div>
+                    </div>
+                    @endforeach
                 </div>
             </div>
 
@@ -268,73 +219,26 @@
                 </div>
 
                 <div class="col-12" id="otherDirectorRow">
-                    
+                    @foreach($other_director as $key => $other)
+                    <div class="row otherDirectorRow" id="otherDirectorID_{{$key}}">
+                        <div class="col-md-5 form-group mb-3">
+                            <label for="other_director_name1">Full name</label>
+                            <input name="other_director[{{$key}}][other_director_name]" class="form-control"
+                            id="other_director_name1" type="text" placeholder="Enter full name of director"
+                            value="{{ $other_director ? $other_director[$key]['name'] : old('other_director[$key][other_director_name]')}}" />
+                        </div>
+                        <div class="col-md-5 form-group mb-3">
+                            <label for="other_director_profession1">Profession:</label>
+                            <input name="other_director[{{$key}}][other_director_profession]" class="form-control" id="other_director_profession1"
+                            type="text" placeholder="Enter profession"
+                            value="{{ $other_director ? $other_director[$key]['profession'] : old('other_director[$key][other_director_profession]')}}" />
+                        </div>
+                        <div class="col-md-2 form-group mb-3 d-flex align-items-center">
+                           <button type="button" class="btn btn-sm btn-secondary mt-3" id="deleteOtherDirectorRow_{{$key}}" onclick="deleteOtherDirectorRow({{$key}})">Delete</button>
+                        </div>
+                    </div>
+                    @endforeach
                 </div>
-                <!-- <div class="col-md-6 form-group mb-3">
-                    <label for="other_director_name1">Full name</label>
-                    <input name="other_director[0][other_director_name]" class="form-control @error('other_director_name') is-invalid @enderror"
-                        id="other_director_name1" type="text" placeholder="Enter full name of director"
-                        value="{{ $other_director ? $other_director[0]['name'] : old('other_director[0][other_director_name]')}}" />
-                    @error('other_director_name')
-                    <span class="invalid-feedback" role="alert">
-                        <strong>{{ $message }}</strong>
-                    </span>
-                    @enderror
-                </div>
-                <div class="col-md-6 form-group mb-3">
-                    <label for="other_director_profession1">Profession:</label>
-                    <input name="other_director[0][other_director_profession]" class="form-control @error('other_director_profession') is-invalid @enderror" id="other_director_profession1"
-                        type="text" placeholder="Enter profession" value="{{ $other_director ? $other_director[0]['profession'] : old('other_director[0][other_director_profession]')}}" />
-                    @error('other_director_profession')
-                    <span class="invalid-feedback" role="alert">
-                        <strong>{{ $message }}</strong>
-                    </span>
-                    @enderror
-                </div>
-
-                <div class="col-md-6 form-group mb-3">
-                    <label for="other_director_name1">Full name</label>
-                    <input name="other_director[1][other_director_name]" class="form-control @error('other_director_name') is-invalid @enderror"
-                        id="other_director_name1" type="text" placeholder="Enter full name of director"
-                        value="{{ $other_director ? $other_director[1]['name'] : old('other_director[1][other_director_name]')}}" />
-                    @error('other_director_name')
-                    <span class="invalid-feedback" role="alert">
-                        <strong>{{ $message }}</strong>
-                    </span>
-                    @enderror
-                </div>
-                <div class="col-md-6 form-group mb-3">
-                    <label for="other_director_profession1">Profession:</label>
-                    <input name="other_director[1][other_director_profession]" class="form-control @error('other_director_profession') is-invalid @enderror" id="other_director_profession1"
-                        type="text" placeholder="Enter profession" value="{{ $other_director ? $other_director[1]['profession'] : old('other_director[1][other_director_profession]')}}" />
-                    @error('other_director_profession')
-                    <span class="invalid-feedback" role="alert">
-                        <strong>{{ $message }}</strong>
-                    </span>
-                    @enderror
-                </div>
-
-                <div class="col-md-6 form-group mb-3">
-                    <label for="other_director_name1">Full name</label>
-                    <input name="other_director[2][other_director_name]" class="form-control @error('other_director_name') is-invalid @enderror"
-                        id="other_director_name1" type="text" placeholder="Enter full name of director"
-                        value="{{ $other_director ? $other_director[2]['name'] : old('other_director[2][other_director_name]')}}" />
-                    @error('other_director_name')
-                    <span class="invalid-feedback" role="alert">
-                        <strong>{{ $message }}</strong>
-                    </span>
-                    @enderror
-                </div>
-                <div class="col-md-6 form-group mb-3">
-                    <label for="other_director_profession1">Profession:</label>
-                    <input name="other_director[2][other_director_profession]" class="form-control @error('other_director_profession') is-invalid @enderror" id="other_director_profession1"
-                        type="text" placeholder="Enter profession" value="{{ $other_director ? $other_director[2]['profession'] : old('other_director[2][other_director_profession]')}}" />
-                    @error('other_director_profession')
-                    <span class="invalid-feedback" role="alert">
-                        <strong>{{ $message }}</strong>
-                    </span>
-                    @enderror
-                </div> -->
             </div>
             <div class="row">
                 <div class="col-md-12">
@@ -390,39 +294,116 @@ inputGroupFile02.onchange = evt => {
     }
 }
 
-$(document).ready(function() { 
-    
- });
+
+function addDirectorRow(){
+    var rowCount = $('.directorRow').length;
+
+    if(rowCount == 0){
+        var formHtml = '<div class="row directorRow" id="directorID_'+rowCount+'">\
+                            <div class="col-md-3 form-group mb-3">\
+                                <label for="director_name1">Full name</label>\
+                                <input name="director['+rowCount+'][director_name]" class="form-control"\
+                                id="director_name1" type="text" placeholder="Enter full name of director"\
+                                value="" />\
+                            </div>\
+                            <div class="col-md-3 form-group mb-3">\
+                                <label for="director_registration_number1">Full Registration Number:</label>\
+                                <input name="director['+rowCount+'][director_registration_number]" class="form-control id="director_registration_number1"\
+                                type="text" placeholder="Enter full registration number" value="" />\
+                            </div>\
+                            <div class="col-md-4 form-group mb-3">\
+                                <label for="director_licence_number">Current Annual Licence Number:</label>\
+                                <input name="director['+rowCount+'][director_licence_number]" class="form-control @error('director_licence_number') is-invalid @enderror" id="director_licence_number1"\
+                                type="text" placeholder="Enter current annual licence number" value="" />\
+                            </div>\
+                            <div class="col-md-2 form-group mb-3 d-flex align-items-center">\
+                                <button type="button" class="btn btn-sm btn-secondary mt-3" id="deleteDirectorRow_'+rowCount+'" onclick="deleteDirectorRow('+rowCount+')">Delete</button>\
+                            </div>\
+                        </div>';
+
+        $("#directorRow").append(formHtml);
+    }else{
+        formHtml = '<div class="row directorRow" id="directorID_'+rowCount+'">\
+                        <div class="col-md-3 form-group mb-3">\
+                            <label for="director_name1">Full name</label>\
+                            <input name="director['+rowCount+'][director_name]" class="form-control"\
+                            id="director_name1" type="text" placeholder="Enter full name of director"\
+                            value="" />\
+                        </div>\
+                        <div class="col-md-3 form-group mb-3">\
+                            <label for="director_registration_number1">Full Registration Number:</label>\
+                            <input name="director['+rowCount+'][director_registration_number]" class="form-control id="director_registration_number1"\
+                            type="text" placeholder="Enter full registration number" value="" />\
+                        </div>\
+                        <div class="col-md-4 form-group mb-3">\
+                            <label for="director_licence_number">Current Annual Licence Number:</label>\
+                            <input name="director['+rowCount+'][director_licence_number]" class="form-control @error('director_licence_number') is-invalid @enderror" id="director_licence_number1"\
+                            type="text" placeholder="Enter current annual licence number" value="" />\
+                        </div>\
+                        <div class="col-md-2 form-group mb-3 d-flex align-items-center">\
+                            <button type="button" class="btn btn-sm btn-secondary mt-3" id="deleteDirectorRow_'+rowCount+'" onclick="deleteDirectorRow('+rowCount+')">Delete</button>\
+                        </div>\
+                    </div>';
+        $("#directorRow").append(formHtml);
+    }
+}
+
+function deleteDirectorRow(id){
+    $("#directorID_"+id).remove();
+}
+
+
+
 
 function addOtherDirectorRow(){
-    // var rowCount = $('.otherDirectorRow').length + 1;
-    var rowCount = 0;
-    var rowArray = [];
-    rowArray.push(rowArray.length+1)
+    var rowCount = $('.otherDirectorRow').length;
 
-    console.log(rowArray)
-
-    var formHtml = '';
-    for (let i = rowCount; i < rowCount; i++) {
-        // console.log(rowCount)
-        formHtml += '<div class="row" class="otherDirectorRow">\
-                        <div class="col-md-6 form-group mb-3">\
+    if(rowCount == 0){
+        var formHtml = '<div class="row otherDirectorRow" id="otherDirectorID_'+rowCount+'">\
+                        <div class="col-md-5 form-group mb-3">\
                             <label for="other_director_name1">Full name</label>\
                             <input name="other_director['+rowCount+'][other_director_name]" class="form-control"\
                             id="other_director_name1" type="text" placeholder="Enter full name of director"\
                             value="" />\
                         </div>\
-                        <div class="col-md-6 form-group mb-3">\
+                        <div class="col-md-5 form-group mb-3">\
                             <label for="other_director_profession1">Profession:</label>\
                             <input name="other_director['+rowCount+'][other_director_profession]" class="form-control id="other_director_profession1"\
                             type="text" placeholder="Enter profession"\
                             value="" />\
                         </div>\
+                        <div class="col-md-2 form-group mb-3 d-flex align-items-center">\
+                           <button type="button" class="btn btn-sm btn-secondary mt-3" id="deleteOtherDirectorRow_'+rowCount+'" onclick="deleteOtherDirectorRow('+rowCount+')">Delete</button>\
+                        </div>\
                     </div>';
-    }
 
-    $("#otherDirectorRow").append(formHtml);
+        $("#otherDirectorRow").append(formHtml);
+    }else{
+        formHtml = '<div class="row otherDirectorRow" id="otherDirectorID_'+rowCount+'">\
+                        <div class="col-md-5 form-group mb-3">\
+                            <label for="other_director_name1">Full name</label>\
+                            <input name="other_director['+rowCount+'][other_director_name]" class="form-control"\
+                            id="other_director_name1" type="text" placeholder="Enter full name of director"\
+                            value="" />\
+                        </div>\
+                        <div class="col-md-5 form-group mb-3">\
+                            <label for="other_director_profession1">Profession:</label>\
+                            <input name="other_director['+rowCount+'][other_director_profession]" class="form-control id="other_director_profession1"\
+                            type="text" placeholder="Enter profession"\
+                            value="" />\
+                        </div>\
+                        <div class="col-md-2 form-group mb-3 d-flex align-items-center">\
+                            <button type="button" class="btn btn-sm btn-secondary mt-3" id="deleteOtherDirectorRow_'+rowCount+'" onclick="deleteOtherDirectorRow('+rowCount+')">Delete</button>\
+                        </div>\
+                    </div>';
+        $("#otherDirectorRow").append(formHtml);
+    }
 }
+
+function deleteOtherDirectorRow(id){
+    $("#otherDirectorID_"+id).remove();
+}
+
 </script>
 <style>
 .profilePreview img {
