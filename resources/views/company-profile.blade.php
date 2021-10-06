@@ -11,11 +11,11 @@
                     <h3>Company Details</h3>
                 </div>
                 <div class="col-md-4 form-group mb-3">
-                    <label for="firstName1">Company name</label>
-                    <input name="company_name" class="form-control @error('company_name') is-invalid @enderror"
-                        id="company_name1" type="text" placeholder="Enter your company name"
+                    <label for="name">Company name</label>
+                    <input name="company_name" class="form-control @error('name') is-invalid @enderror"
+                        id="name1" type="text" placeholder="Enter your company name"
                         value="" />
-                    @error('company_name')
+                    @error('name')
                     <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>
                     </span>
@@ -23,9 +23,9 @@
                 </div>
                 <div class="col-md-8 form-group mb-3">
                     <label for="middleName1">Company Address</label>
-                    <input name="company_address" class="form-control @error('company_address') is-invalid @enderror" id="company_address1"
+                    <input name="address" class="form-control @error('address') is-invalid @enderror" id="address1"
                         type="text" placeholder="Enter your company address" value="" />
-                    @error('company_address')
+                    @error('address')
                     <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>
                     </span>
@@ -79,21 +79,21 @@
                     <h3>Pharmacist In Control of Business</h3>
                 </div>
                 <div class="col-md-6 form-group mb-3">
-                    <label for="firstName1">Name of Pharmacist:</label>
-                    <input name="name" class="form-control @error('name') is-invalid @enderror"
-                        id="name1" type="text" placeholder="Enter your company name"
+                    <label for="pharmacist_name1">Name of Pharmacist:</label>
+                    <input name="pharmacist_name" class="form-control @error('pharmacist_name') is-invalid @enderror"
+                        id="pharmacist_name1" type="text" placeholder="Enter your company name"
                         value="" />
-                    @error('name')
+                    @error('pharmacist_name')
                     <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>
                     </span>
                     @enderror
                 </div>
                 <div class="col-md-6 form-group mb-3">
-                    <label for="middleName1">Full Registration Number:</label>
-                    <input name="registration_number" class="form-control @error('registration_number') is-invalid @enderror" id="registration_number1"
+                    <label for="pharmacist_registration_number1">Full Registration Number:</label>
+                    <input name="pharmacist_registration_number" class="form-control @error('pharmacist_registration_number') is-invalid @enderror" id="pharmacist_registration_number1"
                         type="text" placeholder="Enter your company address" value="" />
-                    @error('registration_number')
+                    @error('pharmacist_registration_number')
                     <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>
                     </span>
@@ -119,14 +119,14 @@
                 <div class="col-md-6 form-group mb-3">
                     <label for="picker1">Upload Passport Photo of Pharmacist:</label>
                     <div class="custom-file mb-3">
-                        <input name="photo" type="file" name="color_passportsize" class="custom-file-input"
+                        <input name="passport" type="file" name="color_passportsize" class="custom-file-input"
                             id="inputGroupFile02" accept="image/*">
                         <label class="custom-file-label " for="inputGroupFile02"
                             aria-describedby="inputGroupFileAddon02">Choose file</label>
                     </div>
                     <div class="profilePreview">
                         <img id="profile-pic-new-preview" src="" alt="" class="w-25">
-                        <img id="profile-pic-old-preview" src="{{asset('images/' . Auth::user()->photo)}}" alt=""
+                        <img id="profile-pic-old-preview" src="{{asset('images/' . Auth::user()->passport)}}" alt=""
                             class="w-25">
                     </div>
                 </div>
@@ -137,93 +137,162 @@
                     <h3>Pharmacist Directors (as in CAC Form C.O.7)</h3>
                 </div>
                 <div class="col-md-4 form-group mb-3">
-                    <label for="firstName1">Full name</label>
-                    <input name="name" class="form-control @error('name') is-invalid @enderror"
-                        id="name1" type="text" placeholder="Enter full name of director"
+                    <label for="director_name1">Full name</label>
+                    <input name="director_name[]" class="form-control @error('director_name') is-invalid @enderror"
+                        id="director_name1" type="text" placeholder="Enter full name of director"
                         value="" />
-                    @error('name')
+                    @error('director_name')
                     <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>
                     </span>
                     @enderror
                 </div>
                 <div class="col-md-4 form-group mb-3">
-                    <label for="middleName1">Full Registration Number:</label>
-                    <input name="registration_number" class="form-control @error('registration_number') is-invalid @enderror" id="registration_number1"
+                    <label for="director_registration_number1">Full Registration Number:</label>
+                    <input name="director_registration_number[]" class="form-control @error('director_registration_number') is-invalid @enderror" id="director_registration_number1"
                         type="text" placeholder="Enter full registration number" value="" />
-                    @error('registration_number')
+                    @error('director_registration_number')
                     <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>
                     </span>
                     @enderror
                 </div>
                 <div class="col-md-4 form-group mb-3">
-                    <label for="middleName1">Current Annual Licence Number:</label>
-                    <input name="annual_licence_number" class="form-control @error('annual_licence_number') is-invalid @enderror" id="annual_licence_number1"
+                    <label for="director_licence_number">Current Annual Licence Number:</label>
+                    <input name="director_licence_number[]" class="form-control @error('director_licence_number') is-invalid @enderror" id="director_licence_number1"
                         type="text" placeholder="Enter current annual licence number" value="" />
-                    @error('annual_licence_number')
+                    @error('director_licence_number')
                     <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>
                     </span>
                     @enderror
                 </div>
                 <div class="col-md-4 form-group mb-3">
-                    <label for="firstName1">Full name</label>
-                    <input name="name" class="form-control @error('name') is-invalid @enderror"
-                        id="name1" type="text" placeholder="Enter full name of director"
+                    <label for="director_name1">Full name</label>
+                    <input name="director_name[]" class="form-control @error('director_name') is-invalid @enderror"
+                        id="director_name1" type="text" placeholder="Enter full name of director"
                         value="" />
-                    @error('name')
+                    @error('director_name')
                     <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>
                     </span>
                     @enderror
                 </div>
                 <div class="col-md-4 form-group mb-3">
-                    <label for="middleName1">Full Registration Number:</label>
-                    <input name="registration_number" class="form-control @error('registration_number') is-invalid @enderror" id="registration_number1"
+                    <label for="director_registration_number1">Full Registration Number:</label>
+                    <input name="director_registration_number[]" class="form-control @error('director_registration_number') is-invalid @enderror" id="director_registration_number1"
                         type="text" placeholder="Enter full registration number" value="" />
-                    @error('registration_number')
+                    @error('director_registration_number')
                     <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>
                     </span>
                     @enderror
                 </div>
                 <div class="col-md-4 form-group mb-3">
-                    <label for="middleName1">Current Annual Licence Number:</label>
-                    <input name="annual_licence_number" class="form-control @error('annual_licence_number') is-invalid @enderror" id="annual_licence_number1"
+                    <label for="director_licence_number">Current Annual Licence Number:</label>
+                    <input name="director_licence_number[]" class="form-control @error('director_licence_number') is-invalid @enderror" id="director_licence_number1"
                         type="text" placeholder="Enter current annual licence number" value="" />
-                    @error('annual_licence_number')
+                    @error('director_licence_number')
                     <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>
                     </span>
                     @enderror
                 </div>
                 <div class="col-md-4 form-group mb-3">
-                    <label for="firstName1">Full name</label>
-                    <input name="name" class="form-control @error('name') is-invalid @enderror"
-                        id="name1" type="text" placeholder="Enter full name of director"
+                    <label for="director_name1">Full name</label>
+                    <input name="director_name[]" class="form-control @error('director_name') is-invalid @enderror"
+                        id="director_name1" type="text" placeholder="Enter full name of director"
                         value="" />
-                    @error('name')
+                    @error('director_name')
                     <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>
                     </span>
                     @enderror
                 </div>
                 <div class="col-md-4 form-group mb-3">
-                    <label for="middleName1">Full Registration Number:</label>
-                    <input name="registration_number" class="form-control @error('registration_number') is-invalid @enderror" id="registration_number1"
+                    <label for="director_registration_number1">Full Registration Number:</label>
+                    <input name="director_registration_number[]" class="form-control @error('director_registration_number') is-invalid @enderror" id="director_registration_number1"
                         type="text" placeholder="Enter full registration number" value="" />
-                    @error('registration_number')
+                    @error('director_registration_number')
                     <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>
                     </span>
                     @enderror
                 </div>
                 <div class="col-md-4 form-group mb-3">
-                    <label for="middleName1">Current Annual Licence Number:</label>
-                    <input name="annual_licence_number" class="form-control @error('annual_licence_number') is-invalid @enderror" id="annual_licence_number1"
+                    <label for="director_licence_number">Current Annual Licence Number:</label>
+                    <input name="director_licence_number[]" class="form-control @error('director_licence_number') is-invalid @enderror" id="director_licence_number1"
                         type="text" placeholder="Enter current annual licence number" value="" />
-                    @error('annual_licence_number')
+                    @error('director_licence_number')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                    @enderror
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12 form-group mb-3">
+                    <h3>Other Directors (as in CAC Form C.O.7)</h3>
+                </div>
+                <div class="col-md-6 form-group mb-3">
+                    <label for="other_director_name1">Full name</label>
+                    <input name="other_director_name[]" class="form-control @error('other_director_name') is-invalid @enderror"
+                        id="other_director_name1" type="text" placeholder="Enter full name of director"
+                        value="" />
+                    @error('other_director_name')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                    @enderror
+                </div>
+                <div class="col-md-6 form-group mb-3">
+                    <label for="other_director_profession1">Profession:</label>
+                    <input name="other_director_profession[]" class="form-control @error('other_director_profession') is-invalid @enderror" id="other_director_profession1"
+                        type="text" placeholder="Enter other_director_profession" value="" />
+                    @error('other_director_profession')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                    @enderror
+                </div>
+                <div class="col-md-6 form-group mb-3">
+                    <label for="other_director_name1">Full name</label>
+                    <input name="other_director_name[]" class="form-control @error('other_director_name') is-invalid @enderror"
+                        id="other_director_name1" type="text" placeholder="Enter full name of director"
+                        value="" />
+                    @error('other_director_name')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                    @enderror
+                </div>
+                <div class="col-md-6 form-group mb-3">
+                    <label for="other_director_profession1">Profession:</label>
+                    <input name="other_director_profession[]" class="form-control @error('other_director_profession') is-invalid @enderror" id="other_director_profession1"
+                        type="text" placeholder="Enter other_director_profession" value="" />
+                    @error('other_director_profession')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                    @enderror
+                </div>
+                <div class="col-md-6 form-group mb-3">
+                    <label for="other_director_name1">Full name</label>
+                    <input name="other_director_name[]" class="form-control @error('other_director_name') is-invalid @enderror"
+                        id="other_director_name1" type="text" placeholder="Enter full name of director"
+                        value="" />
+                    @error('other_director_name')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                    @enderror
+                </div>
+                <div class="col-md-6 form-group mb-3">
+                    <label for="other_director_profession1">Profession:</label>
+                    <input name="other_director_profession[]" class="form-control @error('other_director_profession') is-invalid @enderror" id="other_director_profession1"
+                        type="text" placeholder="Enter other_director_profession" value="" />
+                    @error('other_director_profession')
                     <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>
                     </span>

@@ -10,6 +10,6 @@ class Business extends Model
     use HasFactory;
 
     protected $fillable = [
-        'company_id','name', 'registration_number', 'document', 'passport'
+        'company_id','name', 'registration_number', 'supporting_document', 'passport'
     ];
 }

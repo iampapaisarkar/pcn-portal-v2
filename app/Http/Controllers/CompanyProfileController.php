@@ -7,6 +7,6 @@ use Illuminate\Http\Request;
 class CompanyProfileController extends Controller
 {
     public function profile(){
-        return view('community-pharmacy.company-profile');
+        return view('company-profile');
     }
 }
