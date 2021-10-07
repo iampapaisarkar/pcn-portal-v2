@@ -17,7 +17,7 @@
             $director = Auth::user()->company()->first() ? Auth::user()->company()->first()->director()->get() : null;
             $other_director = Auth::user()->company()->first() ? Auth::user()->company()->first()->other_director()->get() : null;
         @endphp
-        <form method="POST" action="{{route('company-profile-update')}}" enctype="multipart/form-data" novalidate>
+        <form method="POST" action="{{route('location-approval-form-submit')}}" enctype="multipart/form-data" novalidate>
             @csrf
             <div class="row">
                 <div class="col-md-12 form-group mb-3">
@@ -219,7 +219,7 @@
                 </div>
                 <div class="col-md-4 form-group mb-3">
                     <label for="gender1">Gender</label>
-                    <select class="form-control @error('gender') is-invalid @enderror">
+                    <select class="form-control @error('gender') is-invalid @enderror" name="gender">
                         <option selected="" hidden>Select Gender</option>
                         <option value="Male">Male</option>
                         <option value="Female">Female</option>
@@ -234,7 +234,7 @@
                 <div class="col-md-4 form-group mb-3">
                     <label for="doq1">Date of Qualification</label>
                     <input name="doq" class="form-control @error('doq') is-invalid @enderror"
-                        id="doq1" type="text" placeholder="Enter your date of qualification"/>
+                        id="doq1" type="number" placeholder="Enter your date of qualification"/>
                     @error('doq')
                     <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>
@@ -254,7 +254,7 @@
                 <div class="col-md-4 form-group mb-3">
                     <label for="annual_licence_no1">Last Annual licence no</label>
                     <input name="annual_licence_no" class="form-control @error('annual_licence_no') is-invalid @enderror" id="annual_licence_no1"
-                        type="text" placeholder="Enter your sur name" />
+                        type="text" placeholder="Enter your annual licence no" />
                     @error('annual_licence_no')
                     <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>
