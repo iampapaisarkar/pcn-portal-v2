@@ -233,6 +233,11 @@ Route::group(['middleware' => ['auth','verified', 'can:isMPremisis', 'CheckProfi
   
 });
 
+// COMMUNITY PHARMACY ROUTES // DISTRIBUTION PREMISIS ROUTES // MANUFACTURING PREMISIS ROUTES 
+Route::group(['middleware' => ['auth','verified', 'can:isCPharmacy, isDPremisis, isMPremisis', 'CheckProfileStatus']], function () {
+    Route::get('/location-approval-form', 'App\Http\Controllers\LocationApprovalController@locationForm')->name('location-approval-form');
+});
+
 // PPMV ROUTES 
 Route::group(['middleware' => ['auth','verified', 'can:isPPMV', 'CheckProfileStatus']], function () {
     Route::get('/ppmv-application-form', 'App\Http\Controllers\Ppmv\ApplicationController@applicationForm')->name('ppmv-application-form');
