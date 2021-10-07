@@ -16,6 +16,7 @@ class CreateOtherRegistrationsTable extends Migration
         Schema::create('other_registrations', function (Blueprint $table) {
             $table->id();
             $table->integer('registration_id');
+            $table->integer('company_id');
             $table->integer('user_id');
             $table->string('firstname');
             $table->string('middlename');

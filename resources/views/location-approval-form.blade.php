@@ -4,7 +4,7 @@
 @include('layouts.navbars.breadcrumb', ['page' => 'Location Approval', 'route' => 'location-approval-form'])
 <div class="row">
     <div class="col-lg-12 col-md-12">
-        @if(app('App\Http\Services\CommunityManufacturingInfo')->canSubmitLocationApplication()['success'] == true)
+        @if(app('App\Http\Services\CommunityDistributionInfo')->canSubmitLocationApplication()['success'] == true)
         @php 
             $company = Auth::user()->company()->first();
             $company_state = Auth::user()->company()->first() ? Auth::user()->company()->first()->company_state()->first() : null;
@@ -279,7 +279,7 @@
         </form>
         @else
             <div class="alert alert-card alert-warning" role="alert">
-                {{app('App\Http\Services\CommunityManufacturingInfo')->canSubmitLocationApplication()['message']}}
+                {{app('App\Http\Services\CommunityDistributionInfo')->canSubmitLocationApplication()['message']}}
             </div>
         @endif
     </div>

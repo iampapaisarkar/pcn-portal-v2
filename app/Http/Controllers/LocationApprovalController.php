@@ -44,6 +44,7 @@ class LocationApprovalController extends Controller
 
             OtherRegistration::create([
                 'registration_id' => $Registration->id,
+                'company_id' => Auth::user()->company()->first()->id,
                 'user_id' => Auth::user()->id,
                 'firstname' =>$request->firstname,
                 'middlename' => $request->middlename,

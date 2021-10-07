@@ -6,7 +6,7 @@ use App\Models\Registration;
 use App\Models\OtherRegistration;
 use App\Models\Renewal;
 
-class CommunityManufacturingInfo
+class CommunityDistributionInfo
 {
     public static function canSubmitLocationApplication(){
 
