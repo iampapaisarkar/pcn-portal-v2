@@ -234,7 +234,7 @@
                 <div class="col-md-4 form-group mb-3">
                     <label for="doq1">Date of Qualification</label>
                     <input name="doq" class="form-control @error('doq') is-invalid @enderror"
-                        id="doq1" type="number" placeholder="Enter your date of qualification"/>
+                        id="doq1" type="date" placeholder="Enter your date of qualification"/>
                     @error('doq')
                     <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>

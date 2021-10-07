@@ -48,9 +48,9 @@ class LocationRequest extends FormRequest
             'residental_address' => [
                 'required'
             ],
-            'annual_licence_no' => [
-                'required'
-            ]
+            // 'annual_licence_no' => [
+            //     'required'
+            // ]
         ];
     }
 }

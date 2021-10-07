@@ -8,6 +8,7 @@ use App\Models\ServiceFeeMeta;
 use App\Models\Payment;
 use App\Models\Registration;
 use App\Models\HospitalRegistration;
+use App\Models\OtherRegistration;
 use App\Models\Renewal;
 use DB;
 
@@ -284,6 +285,59 @@ class Checkout
                     'service_id' => $service->id,
                     'service_type' => 'ppmv_registration',
                     'amount' => $totalAmount + $extra_service_amount,
+                    'token' => $token,
+                ]);
+
+                $response = [
+                    'success' => true,
+                    'order_id' => $order_id,
+                    'token' => $token,
+                    'id' => $payment->id,
+                ];
+
+            }else{
+                $response = ['success' => false];
+            }
+
+            DB::commit();
+
+            return $response;
+
+        }catch(Exception $e) {
+            DB::rollback();
+            return ['success' => false];
+        }  
+    }
+
+
+    public static function checkoutCommunitDistribution($application, $type){
+
+        try {
+            DB::beginTransaction();
+
+            $Registration = Registration::where(['id' => $application['id'], 'payment' => false, 'type' => $type])->first(); 
+            $OtherRegistration = OtherRegistration::where(['registration_id' => $application['id']])->first(); 
+
+            if($Registration){
+                $service = ChildService::where('id', 3)
+                ->with('netFees')
+                ->first();
+
+                $totalAmount = 0;
+                foreach($service->netFees as $fee){
+                    $totalAmount += $fee->amount;
+                }
+
+                $token = md5(uniqid(rand(), true));
+                $order_id = date('m-Y') . '-' .rand(10,1000);
+
+                $payment = Payment::create([
+                    'vendor_id' => Auth::user()->id,
+                    'order_id' => $order_id,
+                    'application_id' => $application['id'],
+                    'service_id' => $service->id,
+                    'service_type' => $type,
+                    'amount' => $totalAmount,
                     'token' => $token,
                 ]);
 

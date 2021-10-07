@@ -169,6 +169,7 @@
                 </div>
                 
                 <div class="col-12" id="directorRow">
+                    @if(!empty($director))
                     @foreach($director as $key => $direct)
                     <div class="row directorRow" id="directorID_{{$key}}">
                         <div class="col-md-3 form-group mb-3">
@@ -207,6 +208,7 @@
                         </div>
                     </div>
                     @endforeach
+                    @endif
                 </div>
             </div>
 
@@ -219,6 +221,7 @@
                 </div>
 
                 <div class="col-12" id="otherDirectorRow">
+                    @if(!empty($director))
                     @foreach($other_director as $key => $other)
                     <div class="row otherDirectorRow" id="otherDirectorID_{{$key}}">
                         <div class="col-md-5 form-group mb-3">
@@ -238,6 +241,7 @@
                         </div>
                     </div>
                     @endforeach
+                    @endif
                 </div>
             </div>
             <div class="row">

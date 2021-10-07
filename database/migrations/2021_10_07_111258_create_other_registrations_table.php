@@ -17,13 +17,13 @@ class CreateOtherRegistrationsTable extends Migration
             $table->id();
             $table->integer('registration_id');
             $table->integer('user_id');
-            $table->integer('firstname');
-            $table->integer('middlename');
+            $table->string('firstname');
+            $table->string('middlename');
             $table->string('surname');
             $table->string('email');
             $table->string('phone');
             $table->string('gender');
-            $table->integer('doq');
+            $table->date('doq');
             $table->longtext('residental_address');
             $table->string('annual_licence_no')->nullable();
             $table->timestamps();
