@@ -23,8 +23,6 @@ class LocationApprovalController extends Controller
 
     public function locationFormSubmit(LocationRequest $request){
 
-        // dd($request->all());
-
         try {
             DB::beginTransaction();
 
@@ -73,6 +71,11 @@ class LocationApprovalController extends Controller
             DB::rollback();
             return back()->with('error','There is something error, please try after some time');
         }
+    }
 
+    public function locationStatus(){
+
+        $registration = Registration::where('user_id', Auth::user()->id)->with('other_registration')->latest()->first();
+        return view('location-approval-status', compact('registration'));
     }
 }

@@ -237,6 +237,7 @@ Route::group(['middleware' => ['auth','verified', 'can:isMPremisis', 'CheckProfi
 Route::group(['middleware' => ['auth','verified', 'can:isCPharmacy, isDPremisis', 'CheckProfileStatus']], function () {
     Route::get('/location-approval-form', 'App\Http\Controllers\LocationApprovalController@locationForm')->name('location-approval-form');
     Route::post('/location-approval-form-submit', 'App\Http\Controllers\LocationApprovalController@locationFormSubmit')->name('location-approval-form-submit');
+    Route::get('/location-approval-status', 'App\Http\Controllers\LocationApprovalController@locationStatus')->name('location-approval-status');
 });
 
 // PPMV ROUTES 

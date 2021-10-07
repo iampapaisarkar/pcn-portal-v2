@@ -24,4 +24,8 @@ class Registration extends Model
     public function ppmv() {
         return $this->hasOne(PpmvLocationApplication::class,'registration_id', 'id');
     }
+
+    public function other_registration() {
+        return $this->hasOne(OtherRegistration::class,'registration_id', 'id');
+    }
 }

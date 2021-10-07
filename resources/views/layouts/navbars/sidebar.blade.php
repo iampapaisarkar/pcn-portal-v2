@@ -296,7 +296,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="">
+                    <a href="{{route('location-approval-status')}}">
                         <i class="nav-icon i-Map2"></i>
                         <span class="item-name">Location Approval Status</span>
                     </a>
@@ -337,13 +337,13 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="">
+                    <a href="{{route('location-approval-form')}}">
                         <i class="nav-icon i-Map2"></i>
                         <span class="item-name">Location Approval</span>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="">
+                    <a href="{{route('location-approval-status')}}">
                         <i class="nav-icon i-Map2"></i>
                         <span class="item-name">Location Approval Status</span>
                     </a>
