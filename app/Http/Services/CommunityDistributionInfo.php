@@ -62,7 +62,7 @@ class CommunityDistributionInfo
                     'message' => 'Document Verification Queried',
                     'color' => 'danger',
                     'reason' => $registration->query,
-                    'link' => route('ppmv-application-edit', $registration->id)
+                    'link' => route('location-approval-form-edit', $registration->id)
                 ];
             }
             if($registration->status == 'send_to_registry'){

@@ -79,4 +79,64 @@ class LocationApprovalController extends Controller
         $registration = Registration::where('user_id', Auth::user()->id)->with('other_registration')->latest()->first();
         return view('location-approval-status', compact('registration'));
     }
+
+
+
+    public function locationFormEdit($id){
+
+        $application = Registration::where('user_id', Auth::user()->id)
+        ->where('status', 'queried_by_state_office')
+        ->with('other_registration', 'user')
+        ->latest()->first();
+
+        if($application){
+            return view('location-approval-form-edit', compact('application'));
+        }else{
+            return abort(404);
+        }
+    }
+
+    public function locationFormUpdate(LocationRequest $request, $id){
+
+        try {
+            DB::beginTransaction();
+
+            if(Auth::user()->hasRole(['community_pharmacy'])){
+                $type = 'community_pharmacy';
+                $category = 'Community';
+            }else if(Auth::user()->hasRole(['distribution_premisis'])){
+                $type = 'distribution_premisis';
+                $category = 'Distribution';
+            }
+
+            if(Registration::where(['user_id' => Auth::user()->id, 'id' => $id, 'type' => $type, 'status' => 'queried_by_state_office'])->exists()){
+
+                Registration::where(['user_id' => Auth::user()->id, 'id' => $id, 'type' =>  $type, 'status' => 'queried_by_state_office'])->update([
+                    'status' => 'send_to_state_office',
+                ]);
+
+                OtherRegistration::where(['user_id' => Auth::user()->id, 'registration_id' => $id])->update([
+                    'firstname' =>$request->firstname,
+                    'middlename' => $request->middlename,
+                    'surname' => $request->surname,
+                    'email' => $request->email,
+                    'phone' => $request->phone,
+                    'gender' => $request->gender,
+                    'doq' => $request->doq,
+                    'residental_address' => $request->residental_address,
+                    'annual_licence_no' => $request->annual_licence_no,
+                ]);
+
+            }
+
+            DB::commit();
+
+            return redirect()->route('location-approval-status')
+            ->with('success', 'Application successfully updated.');
+
+        }catch(Exception $e) {
+            DB::rollback();
+            return back()->with('error','There is something error, please try after some time');
+        }  
+    }
 }
