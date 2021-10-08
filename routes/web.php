@@ -146,6 +146,10 @@ Route::group(['middleware' => ['auth','verified', 'can:isRegistry']], function (
     Route::get('registry-location-ppmv-show', 'App\Http\Controllers\Registry\LocationApplicationController@ppmvLocationShow')->name('registry-location-ppmv-show');
     Route::post('registry-locations-approve-all', 'App\Http\Controllers\Registry\LocationApplicationController@ApproveAll')->name('registry-locations-approve-all');
     Route::post('registry-location-ppmv-approve', 'App\Http\Controllers\Registry\LocationApplicationController@ppmvLocationApprove')->name('registry-location-ppmv-approve');
+    Route::get('registry-location-community-show', 'App\Http\Controllers\Registry\LocationApplicationController@communityLocationShow')->name('registry-location-community-show');
+    Route::post('registry-location-community-approve', 'App\Http\Controllers\Registry\LocationApplicationController@communityLocationApprove')->name('registry-location-community-approve');
+    Route::get('registry-location-distribution-show', 'App\Http\Controllers\Registry\LocationApplicationController@distributionLocationShow')->name('registry-location-distribution-show');
+    Route::post('registry-location-distribution-approve', 'App\Http\Controllers\Registry\LocationApplicationController@distributionLocationApprove')->name('registry-location-distribution-approve');
 
     Route::resource('registry-location-recommendation', 'App\Http\Controllers\Registry\LocationApplicationRecommendation');
     Route::get('registry-location-ppmv-recommendation-show', 'App\Http\Controllers\Registry\LocationApplicationRecommendation@ppmvLocationRecommendationShow')->name('registry-location-ppmv-recommendation-show');

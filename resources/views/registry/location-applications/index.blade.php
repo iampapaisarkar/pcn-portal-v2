@@ -62,10 +62,23 @@
                         @if($application->type == 'ppmv')
                         <td>{{$application->user->shop_name}}</td>
                         @endif
+                        @if($application->type == 'community_pharmacy')
+                        <td>{{$application->other_registration->company->name}}</td>
+                        @endif
+                        @if($application->type == 'distribution_premises')
+                        <td>{{$application->other_registration->company->name}}</td>
+                        @endif
 
                       
                         @if($application->type == 'ppmv')
                         <td>PPMV Location Approval Application</td>
+                        @endif
+
+                        @if($application->type == 'community_pharmacy')
+                        <td>Community Pharmacy Location Approval Application</td>
+                        @endif
+                        @if($application->type == 'distribution_premises')
+                        <td>Distribution Premises Location Approval Application</td>
                         @endif
 
                         <td>{{$application->registration_year}}</td>
@@ -73,6 +86,16 @@
                         <td>
                             @if($application->type == 'ppmv')
                             <a href="{{ route('registry-location-ppmv-show') }}?application_id={{$application->id}}&user_id={{$application->user->id}}">
+                                <button class="btn btn-success btn-sm" type="button"><i class="nav-icon i-Pen-2"></i></button>
+                            </a>
+                            @endif
+                            @if($application->type == 'community_pharmacy')
+                            <a href="{{ route('registry-location-community-show') }}?application_id={{$application->id}}&user_id={{$application->user->id}}">
+                                <button class="btn btn-success btn-sm" type="button"><i class="nav-icon i-Pen-2"></i></button>
+                            </a>
+                            @endif
+                            @if($application->type == 'distribution_premises')
+                            <a href="{{ route('registry-location-distribution-show') }}?application_id={{$application->id}}&user_id={{$application->user->id}}">
                                 <button class="btn btn-success btn-sm" type="button"><i class="nav-icon i-Pen-2"></i></button>
                             </a>
                             @endif

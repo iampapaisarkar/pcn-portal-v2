@@ -40,6 +40,7 @@ class LocationApprovalController extends Controller
                 'category' => $category,
                 'registration_year' => date('Y'),
                 'status' => 'send_to_state_office',
+                'location_approval' => true
             ]);
 
             OtherRegistration::create([

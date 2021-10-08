@@ -20,7 +20,7 @@ class LocationApplicationController extends Controller
     public function index(Request $request)
     {
         $applications = Registration::where(['payment' => true])
-        ->with('ppmv', 'user')
+        ->with('ppmv', 'other_registration.company', 'user')
         ->where('location_approval', true)
         ->where('status', 'send_to_registry');
         
@@ -143,6 +143,20 @@ class LocationApplicationController extends Controller
                             'status' => 'send_to_state_office_inspection'
                         ]);
                     }
+                    if($Registration->type == 'community_pharmacy'){
+                        Registration::where(['payment' => true, 'id' => $registration_id])
+                        ->where('status', 'send_to_registry')
+                        ->update([
+                            'status' => 'send_to_inspection_monitoring'
+                        ]);
+                    }
+                    if($Registration->type == 'distribution_premises'){
+                        Registration::where(['payment' => true, 'id' => $registration_id])
+                        ->where('status', 'send_to_registry')
+                        ->update([
+                            'status' => 'send_to_inspection_monitoring'
+                        ]);
+                    }
 
                     $adminName = Auth::user()->firstname .' '. Auth::user()->lastname;
                     $activity = 'Registry Document Location Inspection Approval';
@@ -185,6 +199,81 @@ class LocationApplicationController extends Controller
             $adminName = Auth::user()->firstname .' '. Auth::user()->lastname;
             $activity = 'Registry Document Location Inspection Approval';
             AllActivity::storeActivity($request['application_id'], $adminName, $activity, 'ppmv');
+
+            return redirect()->route('registry-locations.index')->with('success', 'Application Approved successfully done');
+        }else{
+            return abort(404);
+        }
+    }
+
+
+    public function communityLocationShow(Request $request){
+
+        $application = Registration::where(['payment' => true, 'id' => $request['application_id'], 'user_id' => $request['user_id'], 'type' => 'community_pharmacy'])
+        ->with('other_registration.company', 'user')
+        ->where('status', 'send_to_registry')
+        ->first();
+
+        if($application){
+            return view('registry.location-applications.community-location-show', compact('application'));
+        }else{
+            return abort(404);
+        }
+    }
+
+    public function communityLocationApprove(Request $request){
+
+        $application = Registration::where(['payment' => true, 'id' => $request['application_id'], 'user_id' => $request['user_id'], 'type' => 'community_pharmacy'])
+        ->where('status', 'send_to_registry')
+        ->first();
+
+        if($application){
+            Registration::where(['payment' => true, 'id' => $request['application_id'], 'user_id' => $request['user_id'], 'type' => 'community_pharmacy'])
+            ->where('status', 'send_to_registry')
+            ->update([
+                'status' => 'send_to_inspection_monitoring'
+            ]);
+
+            $adminName = Auth::user()->firstname .' '. Auth::user()->lastname;
+            $activity = 'Registry Document Location Inspection Approval';
+            AllActivity::storeActivity($request['application_id'], $adminName, $activity, 'community_pharmacy');
+
+            return redirect()->route('registry-locations.index')->with('success', 'Application Approved successfully done');
+        }else{
+            return abort(404);
+        }
+    }
+
+    public function distributionLocationShow(Request $request){
+
+        $application = Registration::where(['payment' => true, 'id' => $request['application_id'], 'user_id' => $request['user_id'], 'type' => 'distribution_premises'])
+        ->with('other_registration.company', 'user')
+        ->where('status', 'send_to_registry')
+        ->first();
+
+        if($application){
+            return view('registry.location-applications.distribution-location-show', compact('application'));
+        }else{
+            return abort(404);
+        }
+    }
+
+    public function distributionLocationApprove(Request $request){
+
+        $application = Registration::where(['payment' => true, 'id' => $request['application_id'], 'user_id' => $request['user_id'], 'type' => 'distribution_premises'])
+        ->where('status', 'send_to_registry')
+        ->first();
+
+        if($application){
+            Registration::where(['payment' => true, 'id' => $request['application_id'], 'user_id' => $request['user_id'], 'type' => 'distribution_premises'])
+            ->where('status', 'send_to_registry')
+            ->update([
+                'status' => 'send_to_inspection_monitoring'
+            ]);
+
+            $adminName = Auth::user()->firstname .' '. Auth::user()->lastname;
+            $activity = 'Registry Document Location Inspection Approval';
+            AllActivity::storeActivity($request['application_id'], $adminName, $activity, 'distribution_premises');
 
             return redirect()->route('registry-locations.index')->with('success', 'Application Approved successfully done');
         }else{
