@@ -88,6 +88,14 @@ Route::group(['middleware' => ['auth','verified', 'can:isSOffice']], function ()
     Route::post('state-office-documents-ppmv-approve', 'App\Http\Controllers\StateOffice\DocumentReviewController@ppmvApprove')->name('state-office-documents-ppmv-approve');
     Route::post('state-office-documents-ppmv-reject', 'App\Http\Controllers\StateOffice\DocumentReviewController@ppmvReject')->name('state-office-documents-ppmv-reject');
 
+    Route::get('state-office-documents-community-show', 'App\Http\Controllers\StateOffice\DocumentReviewController@communityApprovalShow')->name('state-office-documents-community-show');
+    Route::post('state-office-documents-community-approve', 'App\Http\Controllers\StateOffice\DocumentReviewController@communityApprove')->name('state-office-documents-community-approve');
+    Route::post('state-office-documents-community-reject', 'App\Http\Controllers\StateOffice\DocumentReviewController@communityReject')->name('state-office-documents-community-reject');
+
+    Route::get('state-office-documents-distribution-show', 'App\Http\Controllers\StateOffice\DocumentReviewController@distributionApprovalShow')->name('state-office-documents-distribution-show');
+    Route::post('state-office-documents-distribution-approve', 'App\Http\Controllers\StateOffice\DocumentReviewController@distributionApprove')->name('state-office-documents-distribution-approve');
+    Route::post('state-office-documents-distribution-reject', 'App\Http\Controllers\StateOffice\DocumentReviewController@distributionReject')->name('state-office-documents-distribution-reject');
+
     Route::resource('state-office-locations', 'App\Http\Controllers\StateOffice\LocationInspectionController');
     Route::get('state-office-locations-ppmv-show', 'App\Http\Controllers\StateOffice\LocationInspectionController@ppmvLocationShow')->name('state-office-locations-ppmv-show');
     Route::post('state-office-locations-ppmv-inspection-update', 'App\Http\Controllers\StateOffice\LocationInspectionController@ppmvLocationInspectionupdate')->name('state-office-locations-ppmv-inspection-update');

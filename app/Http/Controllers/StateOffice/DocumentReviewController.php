@@ -20,8 +20,11 @@ class DocumentReviewController extends Controller
     public function index(Request $request)
     {
         $documents = Registration::where(['payment' => true])
-        ->with('hospital_pharmacy', 'user')
+        ->with('hospital_pharmacy', 'other_registration.company', 'user')
         ->whereHas('user', function($q){
+            $q->where('state', Auth::user()->state);
+        })
+        ->orWhereHas('other_registration.company', function($q){
             $q->where('state', Auth::user()->state);
         })
         ->where('status', 'send_to_state_office');
@@ -272,6 +275,177 @@ class DocumentReviewController extends Controller
                 'query' => $request['query'],
             ];
             EmailSendJOB::dispatch($data);
+
+            return redirect()->route('state-office-documents.index')->with('success', 'Registration Queried successfully done');
+        }else{
+            return abort(404);
+        }
+    }
+
+
+    public function communityApprovalShow(Request $request){
+
+        $application = Registration::where(['payment' => true, 'id' => $request['application_id'], 'user_id' => $request['user_id'], 'type' => 'community_pharmacy'])
+        ->with('other_registration.company', 'user')
+        ->whereHas('other_registration.company', function($q){
+            $q->where('state', Auth::user()->state);
+        })
+        ->where('status', 'send_to_state_office')
+        ->first();
+
+        if($application){
+            return view('stateoffice.documents.community-approval-show', compact('application'));
+        }else{
+            return abort(404);
+        }
+    }
+
+
+    public function communityApprove(Request $request){
+
+        $registration = Registration::where(['payment' => true, 'id' => $request['application_id'], 'user_id' => $request['user_id'], 'type' => 'community_pharmacy'])
+        ->with('other_registration.company', 'user')
+        ->whereHas('other_registration.company', function($q){
+            $q->where('state', Auth::user()->state);
+        })
+        ->first();
+
+        if($registration){
+            Registration::where(['payment' => true, 'id' => $request['application_id'], 'user_id' => $request['user_id'], 'type' => 'community_pharmacy'])
+            ->where('status', 'send_to_state_office')
+            ->update([
+                'token' => md5(uniqid(rand(), true)),
+                'status' => 'send_to_registry'
+            ]);
+
+            $adminName = Auth::user()->firstname .' '. Auth::user()->lastname;
+            $activity = 'State Officer Document Verification Approval';
+            AllActivity::storeActivity($request['application_id'], $adminName, $activity, 'community_pharmacy');
+
+            return redirect()->route('state-office-documents.index')->with('success', 'Registration Approved successfully done');
+        }else{
+            return abort(404);
+        }
+    }
+
+    public function communityReject(Request $request){
+
+        $registration = Registration::where(['payment' => true, 'id' => $request['application_id'], 'user_id' => $request['user_id'], 'type' => 'community_pharmacy'])
+        ->with('other_registration.company', 'user')
+        ->whereHas('other_registration.company', function($q){
+            $q->where('state', Auth::user()->state);
+        })
+        ->first();
+
+        if($registration){
+            Registration::where(['payment' => true, 'id' => $request['application_id'], 'user_id' => $request['user_id'], 'type' => 'community_pharmacy'])
+            ->where('status', 'send_to_state_office')
+            ->with('other_registration.company', 'user')
+            ->whereHas('other_registration.company', function($q){
+                $q->where('state', Auth::user()->state);
+            })
+            ->update([
+                'status' => 'queried_by_state_office',
+                'query' => $request['query'],
+            ]);
+
+            $adminName = Auth::user()->firstname .' '. Auth::user()->lastname;
+            $activity = 'State Officer Document Verification Query';
+            AllActivity::storeActivity($request['application_id'], $adminName, $activity, 'community_pharmacy');
+
+            // $data = [
+            //     'user' => $registration->user,
+            //     'registration_type' => 'community_pharmacy',
+            //     'type' => 'state_office_query',
+            //     'query' => $request['query'],
+            // ];
+            // EmailSendJOB::dispatch($data);
+
+            return redirect()->route('state-office-documents.index')->with('success', 'Registration Queried successfully done');
+        }else{
+            return abort(404);
+        }
+    }
+
+
+
+    public function distributionApprovalShow(Request $request){
+
+        $application = Registration::where(['payment' => true, 'id' => $request['application_id'], 'user_id' => $request['user_id'], 'type' => 'community_pharmacy'])
+        ->with('other_registration.company', 'user')
+        ->whereHas('other_registration.company', function($q){
+            $q->where('state', Auth::user()->state);
+        })
+        ->where('status', 'send_to_state_office')
+        ->first();
+
+        if($application){
+            return view('stateoffice.documents.community-approval-show', compact('application'));
+        }else{
+            return abort(404);
+        }
+    }
+
+
+    public function distributionApprove(Request $request){
+
+        $registration = Registration::where(['payment' => true, 'id' => $request['application_id'], 'user_id' => $request['user_id'], 'type' => 'distribution_premises'])
+        ->with('other_registration.company', 'user')
+        ->whereHas('other_registration.company', function($q){
+            $q->where('state', Auth::user()->state);
+        })
+        ->first();
+
+        if($registration){
+            Registration::where(['payment' => true, 'id' => $request['application_id'], 'user_id' => $request['user_id'], 'type' => 'distribution_premises'])
+            ->where('status', 'send_to_state_office')
+            ->update([
+                'token' => md5(uniqid(rand(), true)),
+                'status' => 'send_to_registry'
+            ]);
+
+            $adminName = Auth::user()->firstname .' '. Auth::user()->lastname;
+            $activity = 'State Officer Document Verification Approval';
+            AllActivity::storeActivity($request['application_id'], $adminName, $activity, 'distribution_premises');
+
+            return redirect()->route('state-office-documents.index')->with('success', 'Registration Approved successfully done');
+        }else{
+            return abort(404);
+        }
+    }
+
+    public function distributioneject(Request $request){
+
+        $registration = Registration::where(['payment' => true, 'id' => $request['application_id'], 'user_id' => $request['user_id'], 'type' => 'distribution_premises'])
+        ->with('other_registration.company', 'user')
+        ->whereHas('other_registration.company', function($q){
+            $q->where('state', Auth::user()->state);
+        })
+        ->first();
+
+        if($registration){
+            Registration::where(['payment' => true, 'id' => $request['application_id'], 'user_id' => $request['user_id'], 'type' => 'distribution_premises'])
+            ->where('status', 'send_to_state_office')
+            ->with('other_registration.company', 'user')
+            ->whereHas('other_registration.company', function($q){
+                $q->where('state', Auth::user()->state);
+            })
+            ->update([
+                'status' => 'queried_by_state_office',
+                'query' => $request['query'],
+            ]);
+
+            $adminName = Auth::user()->firstname .' '. Auth::user()->lastname;
+            $activity = 'State Officer Document Verification Query';
+            AllActivity::storeActivity($request['application_id'], $adminName, $activity, 'distribution_premises');
+
+            // $data = [
+            //     'user' => $registration->user,
+            //     'registration_type' => 'distribution_premises',
+            //     'type' => 'state_office_query',
+            //     'query' => $request['query'],
+            // ];
+            // EmailSendJOB::dispatch($data);
 
             return redirect()->route('state-office-documents.index')->with('success', 'Registration Queried successfully done');
         }else{
