@@ -25,7 +25,10 @@ class FacilityRegistrationController extends Controller
         }
 
         $application = Registration::where(['user_id' => Auth::user()->id, 'type' => $type])
-        ->where('status', 'inspection_approved')
+        ->where(function($q){
+            $q->where('status', 'facility_no_recommendation');
+            $q->orWhere('status', 'inspection_approved');
+        })
         ->with('other_registration', 'user')
         ->latest()->first();
 
@@ -93,5 +96,10 @@ class FacilityRegistrationController extends Controller
             DB::rollback();
             return back()->with('error','There is something error, please try after some time');
         }  
+    }
+
+    public function facilityStatus(){
+        $registration = Registration::where('user_id', Auth::user()->id)->with('other_registration')->latest()->first();
+        return view('facility-application-status', compact('registration'));
     }
 }

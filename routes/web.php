@@ -128,6 +128,11 @@ Route::group(['middleware' => ['auth','verified', 'can:isRegistry']], function (
     Route::get('registry-recommendation-ppmv-show', 'App\Http\Controllers\Registry\DoumentRecommendationController@ppmvRegistrationShow')->name('registry-recommendation-ppmv-show');
     Route::post('registry-recommendation-ppmv-approve', 'App\Http\Controllers\Registry\DoumentRecommendationController@ppmvRegistrationApprove')->name('registry-recommendation-ppmv-approve');
 
+    Route::get('registry-recommendation-community-show', 'App\Http\Controllers\Registry\DoumentRecommendationController@communityRegistrationShow')->name('registry-recommendation-community-show');
+    Route::post('registry-recommendation-community-approve', 'App\Http\Controllers\Registry\DoumentRecommendationController@communityRegistrationApprove')->name('registry-recommendation-community-approve');
+    Route::get('registry-recommendation-distribution-show', 'App\Http\Controllers\Registry\DoumentRecommendationController@distributionRegistrationShow')->name('registry-recommendation-distribution-show');
+    Route::post('registry-recommendation-distribution-approve', 'App\Http\Controllers\Registry\DoumentRecommendationController@distributionRegistrationApprove')->name('registry-recommendation-distribution-approve');
+
 
     Route::resource('registry-renewal-pending', 'App\Http\Controllers\Registry\RenewalInspectionController');
     Route::get('registry-renewal-pending-hospital-show', 'App\Http\Controllers\Registry\RenewalInspectionController@hospitalPharmacyShow')->name('registry-renewal-pending-hospital-show');

@@ -156,15 +156,15 @@ class CommunityDistributionInfo
             $type = 'distribution_premisis';
         }
 
-        $ppmv = Registration::where(['user_id' => Auth::user()->id, 'type' => $type])
+        $registration = Registration::where(['user_id' => Auth::user()->id, 'type' => $type])
         ->with('other_registration')->latest()->first();
 
-        if($ppmv){
-            if($ppmv->status == 'send_to_state_office' || 
-            $ppmv->status == 'queried_by_state_office' || 
-            $ppmv->status == 'send_to_registry' || 
-            $ppmv->status == 'send_to_inspection_monitoring' || 
-            $ppmv->status == 'no_recommendation' 
+        if($registration){
+            if($registration->status == 'send_to_state_office' || 
+            $registration->status == 'queried_by_state_office' || 
+            $registration->status == 'send_to_registry' || 
+            $registration->status == 'send_to_inspection_monitoring' || 
+            $registration->status == 'no_recommendation' 
             ){
                 return $response = [
                     'success' => false,
@@ -172,7 +172,7 @@ class CommunityDistributionInfo
 
                 ];
             }
-            if($ppmv->status == 'inspection_approved' || $ppmv->status == 'facility_no_recommendation'){
+            if($registration->status == 'inspection_approved' || $registration->status == 'facility_no_recommendation'){
                 return $response = [
                     'success' => true,
 
@@ -200,42 +200,42 @@ class CommunityDistributionInfo
             $type = 'distribution_premisis';
         }
 
-        $ppmv = Registration::where(['user_id' => Auth::user()->id, 'type' => $type])
+        $registration = Registration::where(['user_id' => Auth::user()->id, 'type' => $type])
         ->with('other_registration')->latest()->first();
 
-        if($ppmv){
-            if($ppmv->status == 'send_to_inspection_monitoring_registration'){
+        if($registration){
+            if($registration->status == 'send_to_inspection_monitoring_registration'){
                 return $response = [
                     'success' => true,
                     'message' => 'Document Verification Pending',
                     'color' => 'warning',
                 ];
             }
-            if($ppmv->status == 'facility_no_recommendation'){
+            if($registration->status == 'facility_no_recommendation'){
                 return $response = [
                     'success' => true,
                     'message' => 'Not Recommended for Licensure',
                     'color' => 'danger',
-                    'new-link' => route('ppmv-facility-application-form'),
-                    'download-link' => route('ppmv-registration-inspection-report-download', $ppmv->id),
+                    'new-link' => route('facility-registration-form'),
+                    'download-link' => route('location-inspection-report-download', $registration->id),
                 ];
             }
-            if($ppmv->status == 'facility_full_recommendation'){
+            if($registration->status == 'facility_full_recommendation'){
                 return $response = [
                     'success' => true,
                     'message' => 'Recommended for Licensure',
                     'color' => 'success',
-                    'download-link' => route('ppmv-registration-inspection-report-download', $ppmv->id),
+                    'download-link' => route('location-inspection-report-download', $registration->id),
                 ];
             }
-            if($ppmv->status == 'facility_send_to_registration'){
+            if($registration->status == 'facility_send_to_registration'){
                 return $response = [
                     'success' => true,
                     'message' => 'Recommended for Facility Registration',
                     'color' => 'success',
                 ];
             }
-            if($ppmv->status == 'licence_issued'){
+            if($registration->status == 'licence_issued'){
                 return $response = [
                     'success' => true,
                     'message' => 'Licence Issued',

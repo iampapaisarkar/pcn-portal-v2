@@ -20,7 +20,7 @@ class DoumentRecommendationController extends Controller
     public function index(Request $request)
     {
         $documents = Registration::where(['payment' => true])
-        ->with('hospital_pharmacy', 'ppmv', 'user')
+        ->with('hospital_pharmacy', 'ppmv', 'other_registration', 'user')
         ->where('location_approval', false)
         ->where(function($q){
             $q->where('status', 'partial_recommendation');
@@ -191,6 +191,24 @@ class DoumentRecommendationController extends Controller
                             'status' => 'facility_send_to_registration'
                         ]);
                     }
+                    if($Registration->type == 'community_pharmacy'){
+                        Registration::where(['payment' => true, 'id' => $registration_id])
+                        ->where(function($q){
+                            $q->where('status', 'facility_full_recommendation');
+                        })
+                        ->update([
+                            'status' => 'facility_send_to_registration'
+                        ]);
+                    }
+                    if($Registration->type == 'distribution_premises'){
+                        Registration::where(['payment' => true, 'id' => $registration_id])
+                        ->where(function($q){
+                            $q->where('status', 'facility_full_recommendation');
+                        })
+                        ->update([
+                            'status' => 'facility_send_to_registration'
+                        ]);
+                    }
 
                     $adminName = Auth::user()->firstname .' '. Auth::user()->lastname;
                     $activity = 'Registry Document Facility Inspection Report Approval';
@@ -300,6 +318,131 @@ class DoumentRecommendationController extends Controller
             $adminName = Auth::user()->firstname .' '. Auth::user()->lastname;
             $activity = 'Registry Document Facility Inspection Report Approval';
             AllActivity::storeActivity($request['registration_id'], $adminName, $activity, 'ppmv');
+
+            return redirect()->route('registry-recommendation.index')->with('success', 'Registration Approved successfully done');
+        }else{
+            return abort(404);
+        }
+    }
+
+
+
+
+    public function communityRegistrationShow(Request $request){
+
+        $registration = Registration::where(['payment' => true, 'id' => $request['registration_id'], 'user_id' => $request['user_id'], 'type' => 'community_pharmacy'])
+        ->with('other_registration', 'user')
+        ->where(function($q){
+            $q->where('status', 'facility_full_recommendation');
+        })
+        ->first();
+
+        if($registration){
+            $alert = [];
+            if($registration->status == 'facility_no_recommendation'){
+                $alert = [
+                    'success' => true,
+                    'message' => 'Inspection Report: No Recommendation',
+                    'color' => 'danger',
+                    'download-link' => route('location-inspection-report-download', $registration->id),
+                ];
+            }
+            if($registration->status == 'facility_full_recommendation'){
+                $alert = [
+                    'success' => true,
+                    'message' => 'Inspection Report: Full Recommendation',
+                    'color' => 'success',
+                    'download-link' => route('location-inspection-report-download', $registration->id),
+                ];
+            }
+            return view('registry.recommendation.community-show', compact('registration', 'alert'));
+        }else{
+            return abort(404);
+        }
+    }
+
+    public function communityRegistrationApprove(Request $request){
+
+        $registration = Registration::where(['payment' => true, 'id' => $request['registration_id'], 'user_id' => $request['user_id'], 'type' => 'community_pharmacy'])
+        ->where(function($q){
+            $q->where('status', 'facility_full_recommendation');
+        })
+        ->first();
+
+        if($registration){
+            Registration::where(['payment' => true, 'id' => $request['registration_id'], 'user_id' => $request['user_id'], 'type' => 'community_pharmacy'])
+            ->where(function($q){
+                $q->where('status', 'facility_full_recommendation');
+            })
+            ->update([
+                'status' => 'facility_send_to_registration'
+            ]);
+
+            $adminName = Auth::user()->firstname .' '. Auth::user()->lastname;
+            $activity = 'Registry Document Facility Inspection Report Approval';
+            AllActivity::storeActivity($request['registration_id'], $adminName, $activity, 'community_pharmacy');
+
+            return redirect()->route('registry-recommendation.index')->with('success', 'Registration Approved successfully done');
+        }else{
+            return abort(404);
+        }
+    }
+
+
+
+    public function distributionRegistrationShow(Request $request){
+
+        $registration = Registration::where(['payment' => true, 'id' => $request['registration_id'], 'user_id' => $request['user_id'], 'type' => 'distribution_premises'])
+        ->with('other_registration', 'user')
+        ->where(function($q){
+            $q->where('status', 'facility_full_recommendation');
+        })
+        ->first();
+
+        if($registration){
+            $alert = [];
+            if($registration->status == 'facility_no_recommendation'){
+                $alert = [
+                    'success' => true,
+                    'message' => 'Inspection Report: No Recommendation',
+                    'color' => 'danger',
+                    'download-link' => route('location-inspection-report-download', $registration->id),
+                ];
+            }
+            if($registration->status == 'facility_full_recommendation'){
+                $alert = [
+                    'success' => true,
+                    'message' => 'Inspection Report: Full Recommendation',
+                    'color' => 'success',
+                    'download-link' => route('location-inspection-report-download', $registration->id),
+                ];
+            }
+            return view('registry.recommendation.distribution-show', compact('registration', 'alert'));
+        }else{
+            return abort(404);
+        }
+    }
+
+    public function distributionRegistrationApprove(Request $request){
+
+        $registration = Registration::where(['payment' => true, 'id' => $request['registration_id'], 'user_id' => $request['user_id'], 'type' => 'distribution_premises'])
+        ->where(function($q){
+            $q->where('status', 'facility_full_recommendation');
+        })
+        ->first();
+
+        if($registration){
+            Registration::where(['payment' => true, 'id' => $request['registration_id'], 'user_id' => $request['user_id'], 'type' => 'distribution_premises'])
+            ->where(function($q){
+                $q->where('status', 'facility_full_recommendation');
+            })
+            ->update([
+                'status' => 'facility_send_to_registration'
+            ]);
+
+            $adminName = Auth::user()->firstname .' '. Auth::user()->lastname;
+            $activity = 'Registry Document Facility Inspection Report Approval';
+            AllActivity::storeActivity($request['registration_id'], $adminName, $activity, 'distribution_premises');
 
             return redirect()->route('registry-recommendation.index')->with('success', 'Registration Approved successfully done');
         }else{
