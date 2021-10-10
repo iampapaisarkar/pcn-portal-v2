@@ -258,6 +258,12 @@ Route::group(['middleware' => ['auth','verified', 'can:isCPharmacy, isDPremisis'
     Route::get('/location-approval-form-edit/{id}', 'App\Http\Controllers\LocationApprovalController@locationFormEdit')->name('location-approval-form-edit');
     Route::post('/location-approval-form-update/{id}', 'App\Http\Controllers\LocationApprovalController@locationFormUpdate')->name('location-approval-form-update');
     Route::get('/location-approval-status', 'App\Http\Controllers\LocationApprovalController@locationStatus')->name('location-approval-status');
+
+    Route::get('/facility-registration-form', 'App\Http\Controllers\FacilityRegistrationController@facilityForm')->name('facility-registration-form');
+    Route::post('/facility-registration-form-submit/{id}', 'App\Http\Controllers\FacilityRegistrationController@facilityFormSubmit')->name('facility-registration-form-submit');
+    Route::get('/facility-registration-form-edit/{id}', 'App\Http\Controllers\FacilityRegistrationController@facilityFormEdit')->name('facility-registration-form-edit');
+    Route::post('/facility-registration-form-update/{id}', 'App\Http\Controllers\FacilityRegistrationController@facilityFormUpdate')->name('facility-registration-form-update');
+    Route::get('/facility-registration-status', 'App\Http\Controllers\FacilityRegistrationController@facilityStatus')->name('facility-registration-status');
 });
 
 // PPMV ROUTES 

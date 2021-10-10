@@ -302,13 +302,13 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="">
+                    <a href="{{route('facility-registration-form')}}">
                         <i class="nav-icon i-Notepad"></i>
                         <span class="item-name">Registration</span>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="">
+                    <a href="{{route('facility-registration-status')}}">
                         <i class="nav-icon i-Notepad"></i>
                         <span class="item-name">Registration Status</span>
                     </a>
@@ -349,13 +349,13 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="">
+                    <a href="{{route('facility-registration-form')}}">
                         <i class="nav-icon i-Notepad"></i>
                         <span class="item-name">Registration</span>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="">
+                    <a href="{{route('facility-registration-status')}}">
                         <i class="nav-icon i-Notepad"></i>
                         <span class="item-name">Registration Status</span>
                     </a>
