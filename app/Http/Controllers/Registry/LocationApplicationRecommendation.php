@@ -20,7 +20,7 @@ class LocationApplicationRecommendation extends Controller
     public function index(Request $request)
     {
         $applications = Registration::where(['payment' => true])
-        ->with('ppmv', 'user')
+        ->with('ppmv', 'other_registration', 'user')
         ->where('location_approval', true)
         ->where(function($q){
             $q->where('status', 'full_recommendation');
@@ -175,6 +175,24 @@ class LocationApplicationRecommendation extends Controller
                             'status' => 'inspection_approved'
                         ]);
                     }
+                    if($Registration->type == 'community_pharmacy'){
+                        Registration::where(['payment' => true, 'id' => $registration_id])
+                        ->where(function($q){
+                            $q->where('status', 'full_recommendation');
+                        })
+                        ->update([
+                            'status' => 'inspection_approved'
+                        ]);
+                    }
+                    if($Registration->type == 'distribution_premises'){
+                        Registration::where(['payment' => true, 'id' => $registration_id])
+                        ->where(function($q){
+                            $q->where('status', 'full_recommendation');
+                        })
+                        ->update([
+                            'status' => 'inspection_approved'
+                        ]);
+                    }
 
                     $adminName = Auth::user()->firstname .' '. Auth::user()->lastname;
                     $activity = 'Registry Location Inspection Report Approval';
@@ -221,6 +239,129 @@ class LocationApplicationRecommendation extends Controller
             $adminName = Auth::user()->firstname .' '. Auth::user()->lastname;
             $activity = 'Registry Location Inspection Report Approval';
             AllActivity::storeActivity($request['application_id'], $adminName, $activity, 'ppmv');
+
+            return redirect()->route('registry-location-recommendation.index')->with('success', 'Application Approved successfully done');
+        }else{
+            return abort(404);
+        }
+    }
+
+
+
+    public function communityLocationRecommendationShow(Request $request){
+
+        $application = Registration::where(['payment' => true, 'id' => $request['application_id'], 'user_id' => $request['user_id'], 'type' => 'community_pharmacy'])
+        ->with('other_registration', 'user')
+        ->where(function($q){
+            $q->where('status', 'full_recommendation');
+        })
+        ->first();
+
+        if($application){
+            if($application->status == 'no_recommendation'){
+                $alert = [
+                    'success' => true,
+                    'message' => 'Inspection Report: No Recommendation',
+                    'color' => 'danger',
+                    'download-link' => route('location-inspection-report-download', $application->id),
+                ];
+            }
+            if($application->status == 'full_recommendation'){
+                $alert = [
+                    'success' => true,
+                    'message' => 'Inspection Report: Full Recommendation',
+                    'color' => 'success',
+                    'download-link' => route('location-inspection-report-download', $application->id),
+                ];
+            }
+            return view('registry.location-recommendation.community-location-show', compact('application', 'alert'));
+        }else{
+            return abort(404);
+        }
+    }
+
+
+    public function communityLocationRecommendationApprove(Request $request){
+
+        $registration = Registration::where(['payment' => true, 'id' => $request['application_id'], 'user_id' => $request['user_id'], 'type' => 'community_pharmacy'])
+        ->where(function($q){
+            $q->where('status', 'full_recommendation');
+        })
+        ->first();
+
+        if($registration){
+            Registration::where(['payment' => true, 'id' => $request['application_id'], 'user_id' => $request['user_id'], 'type' => 'community_pharmacy'])
+            ->where(function($q){
+                $q->where('status', 'full_recommendation');
+            })
+            ->update([
+                'status' => 'inspection_approved'
+            ]);
+
+            $adminName = Auth::user()->firstname .' '. Auth::user()->lastname;
+            $activity = 'Registry Location Inspection Report Approval';
+            AllActivity::storeActivity($request['application_id'], $adminName, $activity, 'community_pharmacy');
+
+            return redirect()->route('registry-location-recommendation.index')->with('success', 'Application Approved successfully done');
+        }else{
+            return abort(404);
+        }
+    }
+
+
+    public function distributionLocationRecommendationShow(Request $request){
+
+        $application = Registration::where(['payment' => true, 'id' => $request['application_id'], 'user_id' => $request['user_id'], 'type' => 'distribution_premises'])
+        ->with('other_registration', 'user')
+        ->where(function($q){
+            $q->where('status', 'full_recommendation');
+        })
+        ->first();
+
+        if($application){
+            if($application->status == 'no_recommendation'){
+                $alert = [
+                    'success' => true,
+                    'message' => 'Inspection Report: No Recommendation',
+                    'color' => 'danger',
+                    'download-link' => route('location-inspection-report-download', $application->id),
+                ];
+            }
+            if($application->status == 'full_recommendation'){
+                $alert = [
+                    'success' => true,
+                    'message' => 'Inspection Report: Full Recommendation',
+                    'color' => 'success',
+                    'download-link' => route('location-inspection-report-download', $application->id),
+                ];
+            }
+            return view('registry.location-recommendation.distribution-location-show', compact('application', 'alert'));
+        }else{
+            return abort(404);
+        }
+    }
+
+
+    public function distributionLocationRecommendationApprove(Request $request){
+
+        $registration = Registration::where(['payment' => true, 'id' => $request['application_id'], 'user_id' => $request['user_id'], 'type' => 'distribution_premises'])
+        ->where(function($q){
+            $q->where('status', 'full_recommendation');
+        })
+        ->first();
+
+        if($registration){
+            Registration::where(['payment' => true, 'id' => $request['application_id'], 'user_id' => $request['user_id'], 'type' => 'distribution_premises'])
+            ->where(function($q){
+                $q->where('status', 'full_recommendation');
+            })
+            ->update([
+                'status' => 'inspection_approved'
+            ]);
+
+            $adminName = Auth::user()->firstname .' '. Auth::user()->lastname;
+            $activity = 'Registry Location Inspection Report Approval';
+            AllActivity::storeActivity($request['application_id'], $adminName, $activity, 'distribution_premises');
 
             return redirect()->route('registry-location-recommendation.index')->with('success', 'Application Approved successfully done');
         }else{

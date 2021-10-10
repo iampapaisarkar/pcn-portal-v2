@@ -72,7 +72,7 @@ class CommunityDistributionInfo
                     'color' => 'warning',
                 ];
             }
-            if($registration->status == 'send_to_state_office_inspection'){
+            if($registration->status == 'send_to_inspection_monitoring'){
                 return $response = [
                     'success' => true,
                     'message' => 'Inspection Pending',
@@ -84,8 +84,8 @@ class CommunityDistributionInfo
                     'success' => true,
                     'message' => 'Not Recommended for Licensure',
                     'color' => 'danger',
-                    'new-link' => route('ppmv-application-form'),
-                    'download-link' => route('ppmv-location-inspection-report-download', $registration->id),
+                    'new-link' => route('location-approval-form'),
+                    'download-link' => route('location-inspection-report-download', $registration->id),
                 ];
             }
             if($registration->status == 'full_recommendation'){
@@ -93,7 +93,7 @@ class CommunityDistributionInfo
                     'success' => true,
                     'message' => 'Recommended for Licensure',
                     'color' => 'success',
-                    'download-link' => route('ppmv-location-inspection-report-download', $registration->id),
+                    'download-link' => route('location-inspection-report-download', $registration->id),
                 ];
             }
             if($registration->status == 'inspection_approved'){

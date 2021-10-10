@@ -59,6 +59,8 @@ Route::group(['middleware' => ['auth','verified', 'CheckProfileStatus']], functi
     Route::get('ppmv-reference-letter-2-download/{id}', 'App\Http\Controllers\DownloadController@downloadPPMVReferenceLetter2')->name('ppmv-reference-letter-2-download');
     Route::get('ppmv-location-inspection-report-download/{id}', 'App\Http\Controllers\DownloadController@downloadPPMVLocationInspectionReport')->name('ppmv-location-inspection-report-download');
     Route::get('ppmv-registration-inspection-report-download/{id}', 'App\Http\Controllers\DownloadController@downloadPPMVRegistrationInspectionReport')->name('ppmv-registration-inspection-report-download');
+    Route::get('location-inspection-report-download/{id}', 'App\Http\Controllers\DownloadController@downloadPRegistrationInspectionReport')->name('location-inspection-report-download');
+    
 });
 
 
@@ -153,8 +155,12 @@ Route::group(['middleware' => ['auth','verified', 'can:isRegistry']], function (
 
     Route::resource('registry-location-recommendation', 'App\Http\Controllers\Registry\LocationApplicationRecommendation');
     Route::get('registry-location-ppmv-recommendation-show', 'App\Http\Controllers\Registry\LocationApplicationRecommendation@ppmvLocationRecommendationShow')->name('registry-location-ppmv-recommendation-show');
+    Route::get('registry-location-community-recommendation-show', 'App\Http\Controllers\Registry\LocationApplicationRecommendation@communityLocationRecommendationShow')->name('registry-location-community-recommendation-show');
+    Route::get('registry-location-distribution-recommendation-show', 'App\Http\Controllers\Registry\LocationApplicationRecommendation@distributionLocationRecommendationShow')->name('registry-location-distribution-recommendation-show');
     Route::post('registry-approve-location-recommendation-all', 'App\Http\Controllers\Registry\LocationApplicationRecommendation@ApproveAll')->name('registry-approve-location-recommendation-all');
     Route::post('registry-location-ppmv-recommendation-approve', 'App\Http\Controllers\Registry\LocationApplicationRecommendation@ppmvLocationRecommendationApprove')->name('registry-location-ppmv-recommendation-approve');
+    Route::post('registry-location-community-recommendation-approve', 'App\Http\Controllers\Registry\LocationApplicationRecommendation@communityLocationRecommendationApprove')->name('registry-location-community-recommendation-approve');
+    Route::post('registry-location-distribution-recommendation-approve', 'App\Http\Controllers\Registry\LocationApplicationRecommendation@distributionLocationRecommendationApprove')->name('registry-location-distribution-recommendation-approve');
 });
 
 // PHARMACY PRACTICE ROUTES 

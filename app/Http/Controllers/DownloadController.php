@@ -133,4 +133,25 @@ class DownloadController extends Controller
             return abort(404);
         }
     }
+
+    public function downloadPRegistrationInspectionReport(Request $request, $id){
+
+        if(Auth::user()->hasRole(['community_pharmacy'])){
+            $type = 'community_pharmacy';
+        }else if(Auth::user()->hasRole(['distribution_premisis'])){
+            $type = 'distribution_premisis';
+        }
+
+        $application = Registration::where(['payment' => true, 'id' => $id, 'type' => $type])
+        ->with('user')
+        ->first();
+
+        if($application){
+            $path = storage_path('app'. DIRECTORY_SEPARATOR . 'private' . 
+            DIRECTORY_SEPARATOR . $application->user_id . DIRECTORY_SEPARATOR . 'company' . DIRECTORY_SEPARATOR . $application->inspection_report);
+            return response()->download($path);
+        }else{
+            return abort(404);
+        }
+    }
 }
