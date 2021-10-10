@@ -22,7 +22,7 @@ class DocumentIssuedLicenceController extends Controller
     public function index(Request $request)
     {
         $documents = Registration::where(['payment' => true])
-        ->with('hospital_pharmacy', 'user')
+        ->with('hospital_pharmacy', 'other_registration',  'user')
         ->where('status', 'licence_issued');
         
         if($request->per_page){
@@ -133,6 +133,34 @@ class DocumentIssuedLicenceController extends Controller
 
         if($registration){
             return view('licencing.issued.ppmv-show', compact('registration'));
+        }else{
+            return abort(404);
+        }
+    }
+
+    public function communityShow(Request $request){
+
+        $registration = Registration::where(['payment' => true, 'id' => $request['registration_id'], 'user_id' => $request['user_id'], 'type' => 'community_pharmacy'])
+        ->with('other_registration', 'user')
+        ->where('status', 'licence_issued')
+        ->first();
+
+        if($registration){
+            return view('licencing.issued.community-show', compact('registration'));
+        }else{
+            return abort(404);
+        }
+    }
+
+    public function distributionShow(Request $request){
+
+        $registration = Registration::where(['payment' => true, 'id' => $request['registration_id'], 'user_id' => $request['user_id'], 'type' => 'distribution_premises'])
+        ->with('other_registration', 'user')
+        ->where('status', 'licence_issued')
+        ->first();
+
+        if($registration){
+            return view('licencing.issued.distribution-show', compact('registration'));
         }else{
             return abort(404);
         }

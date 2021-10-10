@@ -104,7 +104,7 @@ class HospitalRegistrationInfo
                     'success' => true,
                     'message' => 'Licence Issued ',
                     'color' => 'success',
-                    'download-licence' => route('hospital-inspection-report-download', $HospitalRegistration->id),
+                    // 'download-licence' => route('hospital-inspection-report-download', $HospitalRegistration->id),
                 ];
             }
             

@@ -494,4 +494,78 @@ class DocumentPendingLicenceController extends Controller
             return back()->with('error','There is something error, please try after some time');
         }
     }
+
+
+    public function distributionShow(Request $request){
+
+        $registration = Registration::where(['payment' => true, 'id' => $request['registration_id'], 'user_id' => $request['user_id'], 'type' => 'distribution_premises'])
+        ->with('other_registration', 'user')
+        ->where('status', 'facility_send_to_registration')
+        ->first();
+
+        if($registration){
+            return view('licencing.pending.distribution-show', compact('registration'));
+        }else{
+            return abort(404);
+        }
+    }
+
+
+    public function distributionApprove(Request $request){
+
+        try {
+            DB::beginTransaction();
+
+                $registration = Registration::where(['payment' => true, 'id' => $request['registration_id'], 'user_id' => $request['user_id'], 'type' => 'distribution_premises'])
+                ->where('status', 'facility_send_to_registration')
+                ->first();
+
+                if($registration){
+                    Registration::where(['payment' => true, 'id' => $request['registration_id'], 'user_id' => $request['user_id'], 'type' => 'distribution_premises'])
+                    ->where('status', 'facility_send_to_registration')
+                    ->update([
+                        'status' => 'licence_issued'
+                    ]);
+
+                    $OtherRegistration = OtherRegistration::where(['registration_id' => $registration->id, 'user_id' => $registration->user_id])
+                    ->with('user')
+                    ->latest()->first();
+
+                    $renewal = Renewal::create([
+                        'user_id' => $registration->user_id,
+                        'registration_id' => $registration->id,
+                        'form_id' => $OtherRegistration->id,
+                        'type' => 'distribution_premises_renewal',
+                        'renewal_year' => date('Y'),
+                        'expires_at' => \Carbon\Carbon::now()->format('Y') .'-12-31',
+                        'licence' => 'TEST2021',
+                        'status' => 'licence_issued',
+                        'renewal' => false,
+                        'inspection' => true,
+                        'payment' => true,
+                    ]);
+
+
+                    $adminName = Auth::user()->firstname .' '. Auth::user()->lastname;
+                    $activity = 'Registration & Licencing Issued Licence';
+                    AllActivity::storeActivity($request['registration_id'], $adminName, $activity, 'distribution_premises');
+
+                    // $data = [
+                    //     'user' => $registration->user,
+                    //     'registration_type' => 'distribution_premises',
+                    //     'type' => 'licencing_issued',
+                    // ];
+                    // EmailSendJOB::dispatch($data);
+
+                }else{
+                    return abort(404);
+                }
+
+        DB::commit();
+            return redirect()->route('licence-pending.index')->with('success', 'Licence issued successfully done');
+        }catch(Exception $e) {
+            DB::rollback();
+            return back()->with('error','There is something error, please try after some time');
+        }
+    }
 }
