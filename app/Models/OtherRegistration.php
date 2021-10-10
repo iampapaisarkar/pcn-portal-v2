@@ -18,4 +18,8 @@ class OtherRegistration extends Model
         return $this->hasOne(Company::class,'id', 'company_id');
     }
 
+    public function user() {
+        return $this->hasOne(User::class,'id', 'user_id');
+    }
+
 }

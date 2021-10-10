@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Registration;
 use App\Models\HospitalRegistration;
 use App\Models\PpmvLocationApplication;
+use App\Models\OtherRegistration;
 use App\Models\Renewal;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Services\AllActivity;
@@ -210,9 +211,64 @@ class DocumentPendingLicenceController extends Controller
                         EmailSendJOB::dispatch($data);
                     }
 
+
+                    if($Registration->type == 'community_pharmacy'){
+                        $OtherRegistration = OtherRegistration::where(['registration_id' => $registration_id, 'user_id' => $Registration->user_id])
+                        ->with('user')
+                        ->latest()->first();
+
+                        $renewal = Renewal::create([
+                            'user_id' => $Registration->user_id,
+                            'registration_id' => $registration_id,
+                            'form_id' => $OtherRegistration->id,
+                            'type' => 'community_pharmacy_renewal',
+                            'renewal_year' => date('Y'),
+                            'expires_at' => \Carbon\Carbon::now()->format('Y') .'-12-31',
+                            'licence' => 'TEST2021',
+                            'status' => 'licence_issued',
+                            'renewal' => false,
+                            'inspection' => true,
+                            'payment' => true,
+                        ]);
+
+                        // $data = [
+                        //     'user' => $PpmvLocationApplication->user,
+                        //     'registration_type' => 'community_pharmacy',
+                        //     'type' => 'licencing_issued',
+                        // ];
+                        // EmailSendJOB::dispatch($data);
+                    }
+
+                    if($Registration->type == 'distribution_premises'){
+                        $OtherRegistration = OtherRegistration::where(['registration_id' => $registration_id, 'user_id' => $Registration->user_id])
+                        ->with('user')
+                        ->latest()->first();
+
+                        $renewal = Renewal::create([
+                            'user_id' => $Registration->user_id,
+                            'registration_id' => $registration_id,
+                            'form_id' => $OtherRegistration->id,
+                            'type' => 'distribution_premises_renewal',
+                            'renewal_year' => date('Y'),
+                            'expires_at' => \Carbon\Carbon::now()->format('Y') .'-12-31',
+                            'licence' => 'TEST2021',
+                            'status' => 'licence_issued',
+                            'renewal' => false,
+                            'inspection' => true,
+                            'payment' => true,
+                        ]);
+
+                        // $data = [
+                        //     'user' => $PpmvLocationApplication->user,
+                        //     'registration_type' => 'distribution_premises',
+                        //     'type' => 'licencing_issued',
+                        // ];
+                        // EmailSendJOB::dispatch($data);
+                    }
+
                     $adminName = Auth::user()->firstname .' '. Auth::user()->lastname;
                     $activity = 'Registration & Licencing Issued Licence';
-                    AllActivity::storeActivity($registration_id, $adminName, $activity, 'hospital_pharmacy');
+                    AllActivity::storeActivity($registration_id, $adminName, $activity, $Registration->type);
 
                 }
                 $response = true;
@@ -352,6 +408,80 @@ class DocumentPendingLicenceController extends Controller
                         'type' => 'licencing_issued',
                     ];
                     EmailSendJOB::dispatch($data);
+
+                }else{
+                    return abort(404);
+                }
+
+        DB::commit();
+            return redirect()->route('licence-pending.index')->with('success', 'Licence issued successfully done');
+        }catch(Exception $e) {
+            DB::rollback();
+            return back()->with('error','There is something error, please try after some time');
+        }
+    }
+
+
+    public function communityShow(Request $request){
+
+        $registration = Registration::where(['payment' => true, 'id' => $request['registration_id'], 'user_id' => $request['user_id'], 'type' => 'community_pharmacy'])
+        ->with('other_registration', 'user')
+        ->where('status', 'facility_send_to_registration')
+        ->first();
+
+        if($registration){
+            return view('licencing.pending.community-show', compact('registration'));
+        }else{
+            return abort(404);
+        }
+    }
+
+
+    public function communityApprove(Request $request){
+
+        try {
+            DB::beginTransaction();
+
+                $registration = Registration::where(['payment' => true, 'id' => $request['registration_id'], 'user_id' => $request['user_id'], 'type' => 'community_pharmacy'])
+                ->where('status', 'facility_send_to_registration')
+                ->first();
+
+                if($registration){
+                    Registration::where(['payment' => true, 'id' => $request['registration_id'], 'user_id' => $request['user_id'], 'type' => 'community_pharmacy'])
+                    ->where('status', 'facility_send_to_registration')
+                    ->update([
+                        'status' => 'licence_issued'
+                    ]);
+
+                    $OtherRegistration = OtherRegistration::where(['registration_id' => $registration->id, 'user_id' => $registration->user_id])
+                    ->with('user')
+                    ->latest()->first();
+
+                    $renewal = Renewal::create([
+                        'user_id' => $registration->user_id,
+                        'registration_id' => $registration->id,
+                        'form_id' => $OtherRegistration->id,
+                        'type' => 'community_pharmacy_renewal',
+                        'renewal_year' => date('Y'),
+                        'expires_at' => \Carbon\Carbon::now()->format('Y') .'-12-31',
+                        'licence' => 'TEST2021',
+                        'status' => 'licence_issued',
+                        'renewal' => false,
+                        'inspection' => true,
+                        'payment' => true,
+                    ]);
+
+
+                    $adminName = Auth::user()->firstname .' '. Auth::user()->lastname;
+                    $activity = 'Registration & Licencing Issued Licence';
+                    AllActivity::storeActivity($request['registration_id'], $adminName, $activity, 'community_pharmacy');
+
+                    // $data = [
+                    //     'user' => $registration->user,
+                    //     'registration_type' => 'community_pharmacy',
+                    //     'type' => 'licencing_issued',
+                    // ];
+                    // EmailSendJOB::dispatch($data);
 
                 }else{
                     return abort(404);
