@@ -29,4 +29,8 @@ class Renewal extends Model
     public function ppmv() {
         return $this->hasOne(PpmvLocationApplication::class,'id', 'form_id');
     }
+
+    public function other_registration() {
+        return $this->hasOne(OtherRegistration::class,'id', 'form_id');
+    }
 }
