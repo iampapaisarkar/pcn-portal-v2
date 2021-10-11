@@ -1,12 +1,12 @@
 @extends('layouts.app')
 
 @section('content')
-@include('layouts.navbars.breadcrumb', ['page' => 'Facility Inspection Report', 'route' => 'pharmacy-practice-reports.index'])
+@include('layouts.navbars.breadcrumb', ['page' => 'Location Inspection - Inspection List', 'route' => 'monitoring-inspection-reports.index'])
 <div class="row">
 <div class="col-lg-12 col-md-12">
     <div class="card text-left">
     <div class="card-body">
-        <h4>Facility Inspection Report</h4>
+        <h4>Location Inspection - Inspection Reports</h4>
         <div class="table-responsive">
             <div class="row m-0">
                 <div class="col-sm-12 col-md-6">
@@ -25,7 +25,7 @@
                 </div>
                 <div class="col-sm-12 col-md-6">
                     <div id="multicolumn_ordering_table_filter" class="dataTables_filter float-right">
-                    <form method="GET" action="{{ route('pharmacy-practice-reports.index') }}">
+                    <form method="GET" action="{{ route('monitoring-inspection-reports.index') }}">
                     @csrf
                         <label>Search:
                             <input name="search" value="{{Request::get('search')}}" type="text" class="form-control form-control-sm" placeholder="" aria-controls="multicolumn_ordering_table">
@@ -43,6 +43,7 @@
                         <th>Name</th>
                         <th>Type</th>
                         <th>Year</th>
+                        <th>Token</th>
                         <th>Status</th>
                         <th>Action</th>
                     </tr>
@@ -52,26 +53,27 @@
                     <tr>
                         <td>{{$document->created_at->format('d/m/Y')}}</td>
                         <td>{{$document->category}}</td>
-                        @if($document->type == 'hospital_pharmacy')
-                        <td>{{$document->user->hospital_name}}</td>
+                        <td>{{$document->other_registration->company->name}}</td>
+
+                        @if($document->type == 'community_pharmacy')
+                        <td>Community Pharmacy Location Approval Application</td>
                         @endif
-                        @if($document->type == 'hospital_pharmacy')
-                        <td>Hospital Pharmacy Registration</td>
+                        @if($document->type == 'distribution_premises')
+                        <td>Distribution Premises Location Approval Application</td>
                         @endif
+
                         <td>{{$document->registration_year}}</td>
-                        @if($document->status == 'no_recommendation')
-                        <td><span class="badge badge-pill m-1 badge-danger">NO RECOMMENDATION</span></td>
-                        @endif
-                        @if($document->status == 'partial_recommendation')
-                        <td><span class="badge badge-pill m-1 badge-warning">PARTIAL RECOMMENDATION</span></td>
-                        @endif
-                        @if($document->status == 'full_recommendation')
-                        <td><span class="badge badge-pill m-1 badge-success">FULL RECOMMENDATION</span></td>
-                        @endif
+                        <td>{{$document->token}}</td>
+                        <td><span class="badge badge-pill m-1 badge-warning">Pending</span></td>
                         <td>
-                            @if($document->type == 'hospital_pharmacy')
-                            <a href="{{ route('pharmacy-practice-reports-show') }}?registration_id={{$document->id}}&user_id={{$document->user->id}}">
-                                <button class="btn btn-success btn-sm" type="button"><i class="nav-icon i-Eye"></i></button>
+                            @if($document->type == 'community_pharmacy')
+                            <a href="{{ route('monitoring-inspection-report-community-show') }}?registration_id={{$document->id}}&user_id={{$document->user->id}}">
+                                <button class="btn btn-success btn-sm" type="button"><i class="nav-icon i-Pen-2"></i></button>
+                            </a>
+                            @endif
+                            @if($document->type == 'distribution_premises')
+                            <a href="{{ route('monitoring-inspection-report-distribution-show') }}?registration_id={{$document->id}}&user_id={{$document->user->id}}">
+                                <button class="btn btn-success btn-sm" type="button"><i class="nav-icon i-Pen-2"></i></button>
                             </a>
                             @endif
                         </td>
@@ -85,6 +87,7 @@
                         <th>Name</th>
                         <th>Type</th>
                         <th>Year</th>
+                        <th>Token</th>
                         <th>Status</th>
                         <th>Action</th>
                     </tr>

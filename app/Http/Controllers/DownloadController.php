@@ -136,13 +136,13 @@ class DownloadController extends Controller
 
     public function downloadPRegistrationInspectionReport(Request $request, $id){
 
-        if(Auth::user()->hasRole(['community_pharmacy'])){
-            $type = 'community_pharmacy';
-        }else if(Auth::user()->hasRole(['distribution_premisis'])){
-            $type = 'distribution_premisis';
-        }
+        // if(Auth::user()->hasRole(['community_pharmacy'])){
+        //     $type = 'community_pharmacy';
+        // }else if(Auth::user()->hasRole(['distribution_premisis'])){
+        //     $type = 'distribution_premisis';
+        // }
 
-        $application = Registration::where(['payment' => true, 'id' => $id, 'type' => $type])
+        $application = Registration::where(['payment' => true, 'id' => $id])
         ->with('user')
         ->first();
 

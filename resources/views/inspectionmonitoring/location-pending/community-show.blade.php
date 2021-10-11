@@ -1,11 +1,11 @@
 @extends('layouts.app')
 
 @section('content')
-@include('layouts.navbars.breadcrumb', ['page' => 'Registration - Facility Inspection', 'route' => 'pharmacy-practice-documents.index'])
+@include('layouts.navbars.breadcrumb', ['page' => 'Registration - Location Inspection', 'route' => 'monitoring-inspection.index'])
 <div class="row">
         <div class="col-lg-12 col-md-12">
             <div class="card-body">
-                <h5>Facility Inspection report - Details</h5>
+                <h5>Location Inspection report - Details</h5>
 
                 <x-location-registration-show
                 :registrationID="$registration->id" 

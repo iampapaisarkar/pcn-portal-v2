@@ -198,7 +198,8 @@ Route::group(['middleware' => ['auth','verified', 'can:isIMonitoring']], functio
     Route::post('monitoring-inspection-distribution-update', 'App\Http\Controllers\InspectionMonitoring\LocationInspectionPendingController@distributionUpdate')->name('monitoring-inspection-distribution-update');
 
     Route::resource('monitoring-inspection-reports', 'App\Http\Controllers\InspectionMonitoring\LocationInspectionApprovedController');
-    Route::get('monitoring-inspection-report-show', 'App\Http\Controllers\InspectionMonitoring\LocationInspectionApprovedController@reportShow')->name('monitoring-inspection-report-show');
+    Route::get('monitoring-inspection-report-community-show', 'App\Http\Controllers\InspectionMonitoring\LocationInspectionApprovedController@communityShow')->name('monitoring-inspection-report-community-show');
+    Route::get('monitoring-inspection-report-distribution-show', 'App\Http\Controllers\InspectionMonitoring\LocationInspectionApprovedController@distributionShow')->name('monitoring-inspection-report-distribution-show');
 
 
     Route::resource('monitoring-inspection-renewal', 'App\Http\Controllers\InspectionMonitoring\LocationInspectionRenewPendingController');

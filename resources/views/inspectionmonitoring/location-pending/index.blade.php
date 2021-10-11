@@ -1,12 +1,12 @@
 @extends('layouts.app')
 
 @section('content')
-@include('layouts.navbars.breadcrumb', ['page' => 'Facility Inspection - Inspection List', 'route' => 'pharmacy-practice-documents.index'])
+@include('layouts.navbars.breadcrumb', ['page' => 'Location Inspection - Inspection List', 'route' => 'monitoring-inspection.index'])
 <div class="row">
 <div class="col-lg-12 col-md-12">
     <div class="card text-left">
     <div class="card-body">
-        <h4>Facility Inspection - Inspection Pending</h4>
+        <h4>Location Inspection - Inspection Pending</h4>
         <div class="table-responsive">
             <div class="row m-0">
                 <div class="col-sm-12 col-md-6">
@@ -25,7 +25,7 @@
                 </div>
                 <div class="col-sm-12 col-md-6">
                     <div id="multicolumn_ordering_table_filter" class="dataTables_filter float-right">
-                    <form method="GET" action="{{ route('pharmacy-practice-documents.index') }}">
+                    <form method="GET" action="{{ route('monitoring-inspection.index') }}">
                     @csrf
                         <label>Search:
                             <input name="search" value="{{Request::get('search')}}" type="text" class="form-control form-control-sm" placeholder="" aria-controls="multicolumn_ordering_table">
