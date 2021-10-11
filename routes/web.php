@@ -191,7 +191,24 @@ Route::group(['middleware' => ['auth','verified', 'can:isPPractice']], function 
 
 // INSPECTION & MONITORING ROUTES 
 Route::group(['middleware' => ['auth','verified', 'can:isIMonitoring']], function () {
-  
+    Route::resource('monitoring-inspection', 'App\Http\Controllers\InspectionMonitoring\LocationInspectionPendingController');
+    Route::get('monitoring-inspection-community-show', 'App\Http\Controllers\InspectionMonitoring\LocationInspectionPendingController@communityShow')->name('monitoring-inspection-community-show');
+    Route::post('monitoring-inspection-community-update', 'App\Http\Controllers\InspectionMonitoring\LocationInspectionPendingController@communityUpdate')->name('monitoring-inspection-community-update');
+    Route::get('monitoring-inspection-distribution-show', 'App\Http\Controllers\InspectionMonitoring\LocationInspectionPendingController@distributionShow')->name('monitoring-inspection-distribution-show');
+    Route::post('monitoring-inspection-distribution-update', 'App\Http\Controllers\InspectionMonitoring\LocationInspectionPendingController@distributionUpdate')->name('monitoring-inspection-distribution-update');
+
+    Route::resource('monitoring-inspection-reports', 'App\Http\Controllers\InspectionMonitoring\LocationInspectionApprovedController');
+    Route::get('monitoring-inspection-report-show', 'App\Http\Controllers\InspectionMonitoring\LocationInspectionApprovedController@reportShow')->name('monitoring-inspection-report-show');
+
+
+    Route::resource('monitoring-inspection-renewal', 'App\Http\Controllers\InspectionMonitoring\LocationInspectionRenewPendingController');
+    Route::get('monitoring-inspection-renewal-community-show', 'App\Http\Controllers\InspectionMonitoring\LocationInspectionRenewPendingController@communityShow')->name('monitoring-inspection-renewal-community-show');
+    Route::post('monitoring-inspection-renewal-community-update', 'App\Http\Controllers\InspectionMonitoring\LocationInspectionRenewPendingController@communityUpdate')->name('monitoring-inspection-renewal-community-update');
+    Route::get('monitoring-inspection-renewal-distribution-show', 'App\Http\Controllers\InspectionMonitoring\LocationInspectionRenewPendingController@distributionShow')->name('monitoring-inspection-renewal-distribution-show');
+    Route::post('monitoring-inspection-renewal-distribution-update', 'App\Http\Controllers\InspectionMonitoring\LocationInspectionRenewPendingController@distributionUpdate')->name('monitoring-inspection-renewal-distribution-update');
+
+    Route::resource('monitoring-inspection-renewal-reports', 'App\Http\Controllers\InspectionMonitoring\LocationInspectionRenewApprovedController');
+    Route::get('monitoring-inspection-renewal-report-show', 'App\Http\Controllers\InspectionMonitoring\LocationInspectionRenewApprovedController@reportShow')->name('monitoring-inspection-renewal-report-show');
 });
 
 // REGISTERING & LECENCING ROUTES 
