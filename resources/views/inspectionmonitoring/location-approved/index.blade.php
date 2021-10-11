@@ -64,7 +64,14 @@
 
                         <td>{{$document->registration_year}}</td>
                         <td>{{$document->token}}</td>
-                        <td><span class="badge badge-pill m-1 badge-warning">Pending</span></td>
+
+                        @if($document->status == 'no_recommendation')
+                        <td><span class="badge badge-pill m-1 badge-danger">NO RECOMMENDATION</span></td>
+                        @endif
+                        @if($document->status == 'full_recommendation')
+                        <td><span class="badge badge-pill m-1 badge-success">FULL RECOMMENDATION</span></td>
+                        @endif
+
                         <td>
                             @if($document->type == 'community_pharmacy')
                             <a href="{{ route('monitoring-inspection-report-community-show') }}?registration_id={{$document->id}}&user_id={{$document->user->id}}">
