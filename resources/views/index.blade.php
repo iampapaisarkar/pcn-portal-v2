@@ -226,6 +226,45 @@
         @endcan
         <!-- Pharmacy practice cards end  -->
 
+         <!-- Inspection Monitoring cards start  -->
+         @can('isIMonitoring')
+        <div class="row">
+            <div class="col-lg-3 col-md-3 col-sm-6">
+                <div class="card card-icon mb-4">
+                    <div class="card-body text-center"><i class="i-Diploma-2"></i>
+                        <h3 class="text-muted mt-2 mb-2">Location Inspection Pending</h3>
+                        <p class="text-primary text-60 line-height-1 m-0">60</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-3 col-sm-6">
+                <div class="card card-icon mb-4">
+                    <div class="card-body text-center"><i class="i-Diploma-2"></i>
+                        <h3 class="text-muted mt-2 mb-2">Location Inspection Uploaded</h3>
+                        <p class="text-primary text-60 line-height-1 m-0">60</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-3 col-sm-6">
+                <div class="card card-icon mb-4">
+                    <div class="card-body text-center"><i class="i-Diploma-2"></i>
+                        <h3 class="text-muted mt-2 mb-2">Renewal Inspection Pending</h3>
+                        <p class="text-primary text-60 line-height-1 m-0">60</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-3 col-sm-6">
+                <div class="card card-icon mb-4">
+                    <div class="card-body text-center"><i class="i-Diploma-2"></i>
+                        <h3 class="text-muted mt-2 mb-2">Renewal Inspection Uploaded</h3>
+                        <p class="text-primary text-60 line-height-1 m-0">60</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        @endcan
+        <!-- Inspection Monitoring cards end  -->
+
          <!-- Community Pharmacy cards start  -->
          @can('isCPharmacy')
         <div class="row">

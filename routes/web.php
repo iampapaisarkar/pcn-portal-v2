@@ -207,8 +207,8 @@ Route::group(['middleware' => ['auth','verified', 'can:isIMonitoring']], functio
     Route::get('monitoring-inspection-renewal-distribution-show', 'App\Http\Controllers\InspectionMonitoring\LocationInspectionRenewPendingController@distributionShow')->name('monitoring-inspection-renewal-distribution-show');
     Route::post('monitoring-inspection-renewal-distribution-update', 'App\Http\Controllers\InspectionMonitoring\LocationInspectionRenewPendingController@distributionUpdate')->name('monitoring-inspection-renewal-distribution-update');
 
-    Route::resource('monitoring-inspection-renewal-reports', 'App\Http\Controllers\InspectionMonitoring\LocationInspectionRenewApprovedController');
-    Route::get('monitoring-inspection-renewal-report-show', 'App\Http\Controllers\InspectionMonitoring\LocationInspectionRenewApprovedController@reportShow')->name('monitoring-inspection-renewal-report-show');
+    Route::resource('monitoring-renewal-reports', 'App\Http\Controllers\InspectionMonitoring\LocationInspectionRenewApprovedController');
+    Route::get('monitoring-renewal-report-show', 'App\Http\Controllers\InspectionMonitoring\LocationInspectionRenewApprovedController@reportShow')->name('monitoring-renewal-report-show');
 });
 
 // REGISTERING & LECENCING ROUTES 
