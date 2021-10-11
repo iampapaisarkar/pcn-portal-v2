@@ -279,6 +279,8 @@ Route::group(['middleware' => ['auth','verified', 'can:isCPharmacy, isDPremisis'
     Route::get('/facility-registration-status', 'App\Http\Controllers\FacilityRegistrationController@facilityStatus')->name('facility-registration-status');
 
     Route::resource('cp-dp-renewals', 'App\Http\Controllers\RenewalController');
+    Route::get('/cp-dp-renewal-form', 'App\Http\Controllers\RenewalController@renewalForm')->name('cp-dp-renewal-form');
+    Route::post('/cp-dp-renewal-form-submit/{id}', 'App\Http\Controllers\RenewalController@renewalFormSubmit')->name('cp-dp-renewal-form-submit');
 });
 
 // PPMV ROUTES 
