@@ -140,4 +140,34 @@ class RenewalIssuedLicenceController extends Controller
             return abort(404);
         }
     }
+
+    public function communityShow(Request $request){
+
+        $registration = Renewal::where(['payment' => true, 'id' => $request['renewal_id'], 'user_id' => $request['user_id'], 'type' => 'community_pharmacy_renewal'])
+        ->with('ppmv', 'registration', 'user')
+        ->where('status', 'licence_issued')
+        ->where('renewal', true)
+        ->first();
+
+        if($registration){
+            return view('licencing.renewal-issued.community-show', compact('registration'));
+        }else{
+            return abort(404);
+        }
+    }
+
+    public function distributionShow(Request $request){
+
+        $registration = Renewal::where(['payment' => true, 'id' => $request['renewal_id'], 'user_id' => $request['user_id'], 'type' => 'distribution_premises_renewal'])
+        ->with('ppmv', 'registration', 'user')
+        ->where('status', 'licence_issued')
+        ->where('renewal', true)
+        ->first();
+
+        if($registration){
+            return view('licencing.renewal-issued.distribution-show', compact('registration'));
+        }else{
+            return abort(404);
+        }
+    }
 }
