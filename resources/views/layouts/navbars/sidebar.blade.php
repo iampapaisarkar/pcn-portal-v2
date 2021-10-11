@@ -223,6 +223,35 @@
                 @endcan
                 <!-- Pharmacy practice routes end  -->
 
+                 <!-- Inspection Monitoring routes start  -->
+                 @can('isIMonitoring')
+                <li class="nav-item">
+                    <a href="{{route('pharmacy-practice-documents.index')}}">
+                        <i class="nav-icon i-Receipt-4"></i>
+                        <span class="item-name">Location Inspection - Report Upload</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{route('pharmacy-practice-reports.index')}}">
+                        <i class="nav-icon i-Receipt-4"></i>
+                        <span class="item-name">Location Inspection - Reports</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{route('pharmacy-renewal-pending.index')}}">
+                        <i class="nav-icon i-Receipt-4"></i>
+                        <span class="item-name">Renewal Inspection - Report Upload</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{route('pharmacy-renewal-reports.index')}}">
+                        <i class="nav-icon i-Receipt-4"></i>
+                        <span class="item-name">Renewal Inspection - Reports</span>
+                    </a>
+                </li>
+                @endcan
+                <!-- Inspection Monitoring routes end  -->
+
                 <!-- Registration licencing routes start  -->
                 @can('isRLicencing')
                 <li class="nav-item">
