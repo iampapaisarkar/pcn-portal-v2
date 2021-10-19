@@ -1,25 +1,24 @@
 @extends('layouts.app')
 
 @section('content')
-@include('layouts.navbars.breadcrumb', ['page' => 'Licence Renewal Inspection Report - Details', 'route' => 'pharmacy-renewal-pending.index'])
+@include('layouts.navbars.breadcrumb', ['page' => 'Registration - Location Inspection', 'route' => 'monitoring-inspection-renewal.index'])
 <div class="row">
         <div class="col-lg-12 col-md-12">
             <div class="card-body">
-                <h5>Licence Renewal Inspection Report - Details</h5>
+                <h5>Location Inspection report - Details</h5>
 
-                <x-hospital-pharmacy-preview
+                <x-location-registration-show
                 :registrationID="$registration->registration->id" 
                 :userID="$registration->user_id" 
-                type="hospital_pharmacy" />
+                :type="$registration->registration->type" />
 
                 <div class="custom-separator"></div>
                 
                 <h4>Upload Inspection Report</h4>
                 <div class="row">
-                    <form action="{{route('pharmacy-renewal-hospital-inspection')}}" method="POST" id="approveForm" enctype="multipart/form-data">
+                    <form action="{{route('monitoring-inspection-renewal-community-update')}}" method="POST" id="approveForm" enctype="multipart/form-data">
                     @csrf
                     <input type="hidden" name="registration_id" value="{{$registration->registration->id}}">
-                    <input type="hidden" name="hospital_registration_id" value="{{$registration->hospital_pharmacy->id}}">
                     <input type="hidden" name="renewal_id" value="{{$registration->id}}">
                     <input type="hidden" name="user_id" value="{{$registration->user_id}}">
                         <div class="form-row">
@@ -28,7 +27,6 @@
                                 <select class="form-control @error('recommendation') is-invalid @enderror" name="recommendation">
                                     <option value="">Select Recommendation</option>
                                     <option value="no_recommendation">NO RECOMMENDATION</option>
-                                    <option value="partial_recommendation">PARTIAL RECOMMENDATION</option>
                                     <option value="full_recommendation">FULL RECOMMENDATION</option>
                                 </select>
                                 @error('recommendation')
@@ -61,7 +59,7 @@
                 <div class="custom-separator"></div>
                 <x-all-activity
                 :applicationID="$registration->registration->id" 
-                type="hospital_pharmacy" />
+                :type="$registration->registration->type" />
             </div>
         </div>
     </div>

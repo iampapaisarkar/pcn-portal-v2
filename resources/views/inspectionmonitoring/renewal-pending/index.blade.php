@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-@include('layouts.navbars.breadcrumb', ['page' => 'Licence Renewal - Inspection List', 'route' => 'pharmacy-renewal-pending.index'])
+@include('layouts.navbars.breadcrumb', ['page' => 'Licence Renewal - Inspection List', 'route' => 'monitoring-inspection-renewal.index'])
 <div class="row">
 <div class="col-lg-12 col-md-12">
     <div class="card text-left">
@@ -25,7 +25,7 @@
                 </div>
                 <div class="col-sm-12 col-md-6">
                     <div id="multicolumn_ordering_table_filter" class="dataTables_filter float-right">
-                    <form method="GET" action="{{ route('pharmacy-renewal-pending.index') }}">
+                    <form method="GET" action="{{ route('monitoring-inspection-renewal.index') }}">
                     @csrf
                         <label>Search:
                             <input name="search" value="{{Request::get('search')}}" type="text" class="form-control form-control-sm" placeholder="" aria-controls="multicolumn_ordering_table">
@@ -53,33 +53,26 @@
                     <tr>
                         <td>{{$document->created_at->format('d/m/Y')}}</td>
                         <td>{{$document->registration->category}}</td>
-                        
+                        <td>{{$document->other_registration->company->name}}</td>
 
-                        @if($document->registration->type == 'hospital_pharmacy')
-                        <td>{{$document->user->hospital_name}}</td>
+                        @if($document->registration->type == 'community_pharmacy')
+                        <td>Community Pharmacy Location Approval Application</td>
                         @endif
-                        @if($document->registration->type == 'ppmv')
-                        <td>{{$document->user->shop_name}}</td>
-                        @endif
-                        
-                        @if($document->registration->type == 'hospital_pharmacy')
-                        <td>Hospital Pharmacy Registration</td>
-                        @endif
-                        @if($document->registration->type == 'ppmv')
-                        <td>PPMV Location Approval Application</td>
+                        @if($document->registration->type == 'distribution_premises')
+                        <td>Distribution Premises Location Approval Application</td>
                         @endif
 
                         <td>{{$document->renewal_year}}</td>
                         <td>{{$document->registration->token}}</td>
                         <td><span class="badge badge-pill m-1 badge-warning">Pending</span></td>
                         <td>
-                            @if($document->registration->type == 'hospital_pharmacy')
-                            <a href="{{ route('pharmacy-renewal-pending-hospital-show') }}?renewal_id={{$document->id}}&user_id={{$document->user->id}}">
+                            @if($document->registration->type == 'community_pharmacy')
+                            <a href="{{ route('monitoring-inspection-renewal-community-show') }}?renewal_id={{$document->id}}&user_id={{$document->user->id}}">
                                 <button class="btn btn-success btn-sm" type="button"><i class="nav-icon i-Pen-2"></i></button>
                             </a>
                             @endif
-                            @if($document->registration->type == 'ppmv')
-                            <a href="{{ route('pharmacy-renewal-pending-ppmv-show') }}?renewal_id={{$document->id}}&user_id={{$document->user->id}}">
+                            @if($document->registration->type == 'distribution_premises')
+                            <a href="{{ route('monitoring-inspection-renewal-distribution-show') }}?renewal_id={{$document->id}}&user_id={{$document->user->id}}">
                                 <button class="btn btn-success btn-sm" type="button"><i class="nav-icon i-Pen-2"></i></button>
                             </a>
                             @endif
