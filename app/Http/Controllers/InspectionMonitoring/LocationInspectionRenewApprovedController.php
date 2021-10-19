@@ -147,4 +147,39 @@ class LocationInspectionRenewApprovedController extends Controller
             return abort(404);
         }
     }
+
+    public function distributionShow(Request $request){
+
+        $registration = Renewal::where(['payment' => true, 'id' => $request['renewal_id'], 'user_id' => $request['user_id'], 'type' => 'distribution_premises_renewal'])
+        ->with('other_registration', 'registration', 'user')
+        ->where(function($q){
+            $q->where('status', 'no_recommendation');
+            $q->orWhere('status', 'full_recommendation');
+        })
+        ->first();
+
+        if($registration){
+            $alert = [];
+            if($registration->status == 'no_recommendation'){
+                $alert = [
+                    'success' => true,
+                    'message' => 'Inspection Report: No Recommendation',
+                    'color' => 'danger',
+                    'download-link' => route('location-inspection-report-download', $registration->registration->id),
+                ];
+            }
+            if($registration->status == 'full_recommendation'){
+                $alert = [
+                    'success' => true,
+                    'message' => 'Inspection Report: Full Recommendation',
+                    'color' => 'success',
+                    'download-link' => route('location-inspection-report-download', $registration->registration->id),
+                ];
+            }
+
+            return view('inspectionmonitoring.renewal-approved.distribution-show', compact('registration', 'alert'));
+        }else{
+            return abort(404);
+        }
+    }
 }

@@ -281,4 +281,113 @@ class RenewalRecommendationController extends Controller
             return back()->with('error','There is something error, please try after some time');
         }
     }
+
+
+    public function communityShow(Request $request){
+
+        $registration = Renewal::where(['payment' => true, 'id' => $request['renewal_id'], 'user_id' => $request['user_id'], 'type' => 'community_pharmacy_renewal'])
+        ->with('other_registration', 'registration', 'user')
+        ->where(function($q){
+            $q->where('status', 'full_recommendation');
+        })
+        ->first();
+
+        if($registration){
+            return view('registry.renewal-recommendation.community-renewal-show', compact('registration'));
+        }else{
+            return abort(404);
+        }
+    }
+
+    public function communityApprove(Request $request){
+
+        try {
+            DB::beginTransaction();
+
+                $renewal = Renewal::where(['payment' => true, 'id' => $request['renewal_id'], 'user_id' => $request['user_id'], 'type' => 'community_pharmacy_renewal'])
+                ->with('other_registration', 'registration', 'user')
+                ->where(function($q){
+                    $q->where('status', 'full_recommendation');
+                })
+                ->first();
+
+                if($renewal){
+
+                    Renewal::where(['payment' => true, 'id' => $request['renewal_id'], 'user_id' => $request['user_id'], 'type' => 'community_pharmacy_renewal'])
+                    ->where(function($q){
+                        $q->where('status', 'full_recommendation');
+                    })
+                    ->update([
+                        'status' => 'send_to_registration'
+                    ]);
+                    
+                    $adminName = Auth::user()->firstname .' '. Auth::user()->lastname;
+                    $activity = 'Registry Document Renewal Inspection Report Approval';
+                    AllActivity::storeActivity($request['registration_id'], $adminName, $activity, 'community_pharmacy');
+
+                }else{
+                    return abort(404);
+                }
+
+        DB::commit();
+            return redirect()->route('registry-renewal-recommendation.index')->with('success', 'Licence issued successfully done');
+        }catch(Exception $e) {
+            DB::rollback();
+            return back()->with('error','There is something error, please try after some time');
+        }
+    }
+
+    public function distributionShow(Request $request){
+
+        $registration = Renewal::where(['payment' => true, 'id' => $request['renewal_id'], 'user_id' => $request['user_id'], 'type' => 'distribution_premises_renewal'])
+        ->with('other_registration', 'registration', 'user')
+        ->where(function($q){
+            $q->where('status', 'full_recommendation');
+        })
+        ->first();
+
+        if($registration){
+            return view('registry.renewal-recommendation.distribution-renewal-show', compact('registration'));
+        }else{
+            return abort(404);
+        }
+    }
+
+    public function distributionApprove(Request $request){
+
+        try {
+            DB::beginTransaction();
+
+                $renewal = Renewal::where(['payment' => true, 'id' => $request['renewal_id'], 'user_id' => $request['user_id'], 'type' => 'distribution_premises_renewal'])
+                ->with('other_registration', 'registration', 'user')
+                ->where(function($q){
+                    $q->where('status', 'full_recommendation');
+                })
+                ->first();
+
+                if($renewal){
+
+                    Renewal::where(['payment' => true, 'id' => $request['renewal_id'], 'user_id' => $request['user_id'], 'type' => 'distribution_premises_renewal'])
+                    ->where(function($q){
+                        $q->where('status', 'full_recommendation');
+                    })
+                    ->update([
+                        'status' => 'send_to_registration'
+                    ]);
+                    
+                    $adminName = Auth::user()->firstname .' '. Auth::user()->lastname;
+                    $activity = 'Registry Document Renewal Inspection Report Approval';
+                    AllActivity::storeActivity($request['registration_id'], $adminName, $activity, 'distribution_premises');
+
+                }else{
+                    return abort(404);
+                }
+
+        DB::commit();
+            return redirect()->route('registry-renewal-recommendation.index')->with('success', 'Licence issued successfully done');
+        }catch(Exception $e) {
+            DB::rollback();
+            return back()->with('error','There is something error, please try after some time');
+        }
+    }
 }

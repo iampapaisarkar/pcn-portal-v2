@@ -155,6 +155,12 @@ Route::group(['middleware' => ['auth','verified', 'can:isRegistry']], function (
     Route::get('registry-renewal-recommendation-ppmv-show', 'App\Http\Controllers\Registry\RenewalRecommendationController@ppmvShow')->name('registry-renewal-recommendation-ppmv-show');
     Route::post('registry-renewal-recommendation-ppmv-approve', 'App\Http\Controllers\Registry\RenewalRecommendationController@ppmvApprove')->name('registry-renewal-recommendation-ppmv-approve');
 
+    Route::get('registry-renewal-recommendation-community-show', 'App\Http\Controllers\Registry\RenewalRecommendationController@communityShow')->name('registry-renewal-recommendation-community-show');
+    Route::post('registry-renewal-recommendation-community-approve', 'App\Http\Controllers\Registry\RenewalRecommendationController@communityApprove')->name('registry-renewal-recommendation-community-approve');
+
+    Route::get('registry-renewal-recommendation-distribution-show', 'App\Http\Controllers\Registry\RenewalRecommendationController@distributionShow')->name('registry-renewal-recommendation-distribution-show');
+    Route::post('registry-renewal-recommendation-distribution-approve', 'App\Http\Controllers\Registry\RenewalRecommendationController@distributionApprove')->name('registry-renewal-recommendation-distribution-approve');
+
     Route::resource('registry-locations', 'App\Http\Controllers\Registry\LocationApplicationController');
     Route::get('registry-location-ppmv-show', 'App\Http\Controllers\Registry\LocationApplicationController@ppmvLocationShow')->name('registry-location-ppmv-show');
     Route::post('registry-locations-approve-all', 'App\Http\Controllers\Registry\LocationApplicationController@ApproveAll')->name('registry-locations-approve-all');
