@@ -238,6 +238,18 @@
                     </a>
                 </li>
                 <li class="nav-item">
+                    <a href="{{route('monitoring-inspection-flt.index')}}">
+                        <i class="nav-icon i-Receipt-4"></i>
+                        <span class="item-name">Facility Inspection - Report Upload</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{route('monitoring-inspection-flt-reports.index')}}">
+                        <i class="nav-icon i-Receipt-4"></i>
+                        <span class="item-name">Facility Inspection - Reports</span>
+                    </a>
+                </li>
+                <li class="nav-item">
                     <a href="{{route('monitoring-inspection-renewal.index')}}">
                         <i class="nav-icon i-Receipt-4"></i>
                         <span class="item-name">Renewal Inspection - Report Upload</span>

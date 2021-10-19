@@ -201,6 +201,16 @@ Route::group(['middleware' => ['auth','verified', 'can:isIMonitoring']], functio
     Route::get('monitoring-inspection-report-community-show', 'App\Http\Controllers\InspectionMonitoring\LocationInspectionApprovedController@communityShow')->name('monitoring-inspection-report-community-show');
     Route::get('monitoring-inspection-report-distribution-show', 'App\Http\Controllers\InspectionMonitoring\LocationInspectionApprovedController@distributionShow')->name('monitoring-inspection-report-distribution-show');
 
+    Route::resource('monitoring-inspection-flt', 'App\Http\Controllers\InspectionMonitoring\FacilityInspectionPendingController');
+    Route::get('monitoring-inspection-flt-community-show', 'App\Http\Controllers\InspectionMonitoring\FacilityInspectionPendingController@communityShow')->name('monitoring-inspection-flt-community-show');
+    Route::post('monitoring-inspection-flt-community-update', 'App\Http\Controllers\InspectionMonitoring\FacilityInspectionPendingController@communityUpdate')->name('monitoring-inspection-flt-community-update');
+    Route::get('monitoring-inspection-flt-distribution-show', 'App\Http\Controllers\InspectionMonitoring\FacilityInspectionPendingController@distributionShow')->name('monitoring-inspection-flt-distribution-show');
+    Route::post('monitoring-inspection-flt-distribution-update', 'App\Http\Controllers\InspectionMonitoring\FacilityInspectionPendingController@distributionUpdate')->name('monitoring-inspection-flt-distribution-update');
+
+    Route::resource('monitoring-inspection-flt-reports', 'App\Http\Controllers\InspectionMonitoring\FacilityInspectionApprovedController');
+    Route::get('monitoring-inspection-flt-report-community-show', 'App\Http\Controllers\InspectionMonitoring\FacilityInspectionApprovedController@communityShow')->name('monitoring-inspection-flt-report-community-show');
+    Route::get('monitoring-inspection-flt-report-distribution-show', 'App\Http\Controllers\InspectionMonitoring\FacilityInspectionApprovedController@distributionShow')->name('monitoring-inspection-flt-report-distribution-show');
+
 
     Route::resource('monitoring-inspection-renewal', 'App\Http\Controllers\InspectionMonitoring\LocationInspectionRenewPendingController');
     Route::get('monitoring-inspection-renewal-community-show', 'App\Http\Controllers\InspectionMonitoring\LocationInspectionRenewPendingController@communityShow')->name('monitoring-inspection-renewal-community-show');

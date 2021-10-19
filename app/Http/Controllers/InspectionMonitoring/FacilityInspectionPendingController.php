@@ -11,7 +11,7 @@ use App\Http\Services\AllActivity;
 use DB;
 use App\Jobs\EmailSendJOB;
 
-class LocationInspectionPendingController extends Controller
+class FacilityInspectionPendingController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -22,8 +22,8 @@ class LocationInspectionPendingController extends Controller
     {
         $documents = Registration::where(['payment' => true])
         ->with('other_registration', 'user')
-        ->where('location_approval', true)
-        ->where('status', 'send_to_inspection_monitoring');
+        ->where('location_approval', false)
+        ->where('status', 'send_to_inspection_monitoring_registration');
         
         if($request->per_page){
             $perPage = (integer) $request->per_page;
@@ -41,7 +41,7 @@ class LocationInspectionPendingController extends Controller
 
         $documents = $documents->latest()->paginate($perPage);
 
-        return view('inspectionmonitoring.location-pending.index', compact('documents'));
+        return view('inspectionmonitoring.facility-pending.index', compact('documents'));
     }
 
     /**
@@ -115,11 +115,11 @@ class LocationInspectionPendingController extends Controller
 
         $registration = Registration::where(['payment' => true, 'id' => $request['registration_id'], 'user_id' => $request['user_id'], 'type' => 'community_pharmacy'])
         ->with('other_registration', 'user')
-        ->where('status', 'send_to_inspection_monitoring')
+        ->where('status', 'send_to_inspection_monitoring_registration')
         ->first();
 
         if($registration){
-            return view('inspectionmonitoring.location-pending.community-show', compact('registration'));
+            return view('inspectionmonitoring.facility-pending.community-show', compact('registration'));
         }else{
             return abort(404);
         }
@@ -136,7 +136,7 @@ class LocationInspectionPendingController extends Controller
             DB::beginTransaction();
 
             $Registration = Registration::where(['id' => $request->registration_id, 'user_id' => $request->user_id, 'type' => 'community_pharmacy'])
-            ->where('status', 'send_to_inspection_monitoring')
+            ->where('status', 'send_to_inspection_monitoring_registration')
             ->where('payment', true)
             ->with('other_registration', 'user')
             ->first();
@@ -156,7 +156,7 @@ class LocationInspectionPendingController extends Controller
                 $file->move($private_storage_path, $file_name);
 
                 Registration::where(['id' => $request->registration_id, 'user_id' => $request->user_id, 'type' => 'community_pharmacy'])
-                ->where('status', 'send_to_inspection_monitoring')
+                ->where('status', 'send_to_inspection_monitoring_registration')
                 ->where('payment', true)
                 ->update([
                     'status' => $request->recommendation,
@@ -166,7 +166,7 @@ class LocationInspectionPendingController extends Controller
 
                 $adminName = Auth::user()->firstname .' '. Auth::user()->lastname;
 
-                if($request->recommendation == 'no_recommendation'){
+                if($request->recommendation == 'facility_no_recommendation'){
                     $activity = 'Facility Inspection Report Uploaded';
 
                     // $data = [
@@ -177,7 +177,7 @@ class LocationInspectionPendingController extends Controller
                     // ];
                     // EmailSendJOB::dispatch($data);
                 }
-                if($request->recommendation == 'full_recommendation'){
+                if($request->recommendation == 'facility_full_recommendation'){
                     $activity = 'Facility Inspection Report Uploaded';
 
                     // $data = [
@@ -196,102 +196,7 @@ class LocationInspectionPendingController extends Controller
             
             DB::commit();
 
-            return redirect()->route('monitoring-inspection.index')
-            ->with('success', 'Inspection Report updated successfully');
-
-        }catch(Exception $e) {
-            DB::rollback();
-            return back()->with('error','There is something error, please try after some time');
-        }  
-    }
-
-
-    public function distributionShow(Request $request){
-
-        $registration = Registration::where(['payment' => true, 'id' => $request['registration_id'], 'user_id' => $request['user_id'], 'type' => 'distribution_premises'])
-        ->with('other_registration', 'user')
-        ->where('status', 'send_to_inspection_monitoring')
-        ->first();
-
-        if($registration){
-            return view('inspectionmonitoring.location-pending.distribution-show', compact('registration'));
-        }else{
-            return abort(404);
-        }
-    }
-
-    public function distributionUpdate(Request $request){
-
-        $this->validate($request, [
-            'recommendation' => ['required'],
-            'report' => ['required']
-        ]);
-
-        try {
-            DB::beginTransaction();
-
-            $Registration = Registration::where(['id' => $request->registration_id, 'user_id' => $request->user_id, 'type' => 'distribution_premises'])
-            ->where('status', 'send_to_inspection_monitoring')
-            ->where('payment', true)
-            ->with('other_registration', 'user')
-            ->first();
-
-            if($Registration){
-
-                $file = $request->file('report');
-
-                $private_storage_path = storage_path(
-                    'app'. DIRECTORY_SEPARATOR . 'private' . DIRECTORY_SEPARATOR . $Registration->user_id . DIRECTORY_SEPARATOR . 'company'
-                );
-
-                if(!file_exists($private_storage_path)){
-                    \mkdir($private_storage_path, intval('755',8), true);
-                }
-                $file_name = 'user'.$Registration->user_id.'-inspection_report.'.$file->getClientOriginalExtension();
-                $file->move($private_storage_path, $file_name);
-
-                Registration::where(['id' => $request->registration_id, 'user_id' => $request->user_id, 'type' => 'distribution_premises'])
-                ->where('status', 'send_to_inspection_monitoring')
-                ->where('payment', true)
-                ->update([
-                    'status' => $request->recommendation,
-                    'inspection_report' => $file_name,
-                ]);
-
-
-                $adminName = Auth::user()->firstname .' '. Auth::user()->lastname;
-
-                if($request->recommendation == 'no_recommendation'){
-                    $activity = 'Facility Inspection Report Uploaded';
-
-                    // $data = [
-                    //     'user' => $Registration->user,
-                    //     'registration_type' => 'distribution_premises',
-                    //     'type' => 'pharmacy_recommendation',
-                    //     'status' => 'no_recommendation',
-                    // ];
-                    // EmailSendJOB::dispatch($data);
-                }
-                if($request->recommendation == 'full_recommendation'){
-                    $activity = 'Facility Inspection Report Uploaded';
-
-                    // $data = [
-                    //     'user' => $Registration->user,
-                    //     'registration_type' => 'distribution_premises',
-                    //     'type' => 'pharmacy_recommendation',
-                    //     'status' => 'full_recommendation',
-                    // ];
-                    // EmailSendJOB::dispatch($data);
-                }
-                AllActivity::storeActivity($Registration->id, $adminName, $activity, 'distribution_premises');
-
-            }else{
-                return abort(404);
-            }
-            
-            DB::commit();
-
-            return redirect()->route('monitoring-inspection.index')
+            return redirect()->route('monitoring-inspection-flt.index')
             ->with('success', 'Inspection Report updated successfully');
 
         }catch(Exception $e) {
