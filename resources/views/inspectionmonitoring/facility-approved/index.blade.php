@@ -65,22 +65,22 @@
                         <td>{{$document->registration_year}}</td>
                         <td>{{$document->token}}</td>
 
-                        @if($document->status == 'no_recommendation')
+                        @if($document->status == 'facility_no_recommendation')
                         <td><span class="badge badge-pill m-1 badge-danger">NO RECOMMENDATION</span></td>
                         @endif
-                        @if($document->status == 'full_recommendation')
+                        @if($document->status == 'facility_full_recommendation')
                         <td><span class="badge badge-pill m-1 badge-success">FULL RECOMMENDATION</span></td>
                         @endif
 
                         <td>
                             @if($document->type == 'community_pharmacy')
-                            <a href="{{ route('monitoring-inspection-report-community-show') }}?registration_id={{$document->id}}&user_id={{$document->user->id}}">
-                                <button class="btn btn-success btn-sm" type="button"><i class="nav-icon i-Pen-2"></i></button>
+                            <a href="{{ route('monitoring-inspection-flt-report-community-show') }}?registration_id={{$document->id}}&user_id={{$document->user->id}}">
+                                <button class="btn btn-success btn-sm" type="button"><i class="nav-icon i-Eye"></i></button>
                             </a>
                             @endif
                             @if($document->type == 'distribution_premises')
-                            <a href="{{ route('monitoring-inspection-report-distribution-show') }}?registration_id={{$document->id}}&user_id={{$document->user->id}}">
-                                <button class="btn btn-success btn-sm" type="button"><i class="nav-icon i-Pen-2"></i></button>
+                            <a href="{{ route('monitoring-inspection-flt-report-distribution-show') }}?registration_id={{$document->id}}&user_id={{$document->user->id}}">
+                                <button class="btn btn-success btn-sm" type="button"><i class="nav-icon i-Eye"></i></button>
                             </a>
                             @endif
                         </td>

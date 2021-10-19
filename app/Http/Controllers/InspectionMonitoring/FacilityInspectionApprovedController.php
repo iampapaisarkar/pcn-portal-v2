@@ -4,6 +4,12 @@ namespace App\Http\Controllers\InspectionMonitoring;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Registration;
+use App\Models\OtherRegistration;
+use Illuminate\Support\Facades\Auth;
+use App\Http\Services\AllActivity;
+use DB;
+use App\Jobs\EmailSendJOB;
 
 class FacilityInspectionApprovedController extends Controller
 {
@@ -12,9 +18,33 @@ class FacilityInspectionApprovedController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $documents = Registration::where(['payment' => true])
+        ->with('other_registration', 'user')
+        ->where('location_approval', false)
+        ->where(function($q){
+            $q->where('status', 'facility_no_recommendation');
+            $q->orWhere('status', 'facility_full_recommendation');
+        });
+        
+        if($request->per_page){
+            $perPage = (integer) $request->per_page;
+        }else{
+            $perPage = 10;
+        }
+
+        if(!empty($request->search)){
+            $search = $request->search;
+            $documents = $documents->where(function($q) use ($search){
+                $q->where('documents.type', 'like', '%' .$search. '%');
+                $q->orWhere('documents.category', 'like', '%' .$search. '%');
+            });
+        }
+
+        $documents = $documents->latest()->paginate($perPage);
+
+        return view('inspectionmonitoring.facility-approved.index', compact('documents'));
     }
 
     /**
@@ -81,5 +111,78 @@ class FacilityInspectionApprovedController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+
+    public function communityShow(Request $request){
+
+        $registration = Registration::where(['payment' => true, 'id' => $request['registration_id'], 'user_id' => $request['user_id'], 'type' => 'community_pharmacy'])
+        ->with('other_registration', 'user')
+        ->where(function($q){
+            $q->where('status', 'facility_no_recommendation');
+            $q->orWhere('status', 'facility_full_recommendation');
+        })
+        ->first();
+
+        if($registration){
+
+            $alert = [];
+            if($registration->status == 'facility_no_recommendation'){
+                $alert = [
+                    'success' => true,
+                    'message' => 'Inspection Report: No Recommendation',
+                    'color' => 'danger',
+                    'download-link' => route('location-inspection-report-download', $registration->id),
+                ];
+            }
+            if($registration->status == 'facility_full_recommendation'){
+                $alert = [
+                    'success' => true,
+                    'message' => 'Inspection Report: Full Recommendation',
+                    'color' => 'success',
+                    'download-link' => route('location-inspection-report-download', $registration->id),
+                ];
+            }
+
+            return view('inspectionmonitoring.facility-approved.community-show', compact('registration', 'alert'));
+        }else{
+            return abort(404);
+        }
+    }
+
+    public function distributionShow(Request $request){
+
+        $registration = Registration::where(['payment' => true, 'id' => $request['registration_id'], 'user_id' => $request['user_id'], 'type' => 'distribution_premises'])
+        ->with('other_registration', 'user')
+        ->where(function($q){
+            $q->where('status', 'facility_no_recommendation');
+            $q->orWhere('status', 'facility_full_recommendation');
+        })
+        ->first();
+
+        if($registration){
+
+            $alert = [];
+            if($registration->status == 'facility_no_recommendation'){
+                $alert = [
+                    'success' => true,
+                    'message' => 'Inspection Report: No Recommendation',
+                    'color' => 'danger',
+                    'download-link' => route('location-inspection-report-download', $registration->id),
+                ];
+            }
+            if($registration->status == 'facility_full_recommendation'){
+                $alert = [
+                    'success' => true,
+                    'message' => 'Inspection Report: Full Recommendation',
+                    'color' => 'success',
+                    'download-link' => route('location-inspection-report-download', $registration->id),
+                ];
+            }
+
+            return view('inspectionmonitoring.facility-approved.distribution-show', compact('registration', 'alert'));
+        }else{
+            return abort(404);
+        }
     }
 }
