@@ -1,16 +1,16 @@
 @extends('layouts.app')
 
 @section('content')
-@include('layouts.navbars.breadcrumb', ['page' => 'Facility Licecne ', 'route' => 'pharmacy-renewal-pending.index'])
+@include('layouts.navbars.breadcrumb', ['page' => 'Registration - Location Inspection', 'route' => 'monitoring-inspection-renewal.index'])
 <div class="row">
         <div class="col-lg-12 col-md-12">
             <div class="card-body">
-                <h5>Facility Licecne - Details</h5>
+                <h5>Location Inspection report - Details</h5>
 
-                <x-ppmv-registration-preview
-                :applicationID="$registration->registration->id" 
+                <x-location-registration-show
+                :registrationID="$registration->registration->id" 
                 :userID="$registration->user_id" 
-                type="ppmv" />
+                :type="$registration->registration->type" />
 
                 <div class="custom-separator"></div>
                 <h4>Renewal Inspection Report Recommendation</h4>
@@ -19,10 +19,10 @@
                 <a href="{{$alert['download-link']}}" target="_blank" class="btn btn-rounded btn-{{$alert['color']}} ml-3">Download Inspection Report</a>
                 </div>
                 <div class="custom-separator"></div>
-
+                
                 <x-all-activity
                 :applicationID="$registration->registration->id" 
-                type="ppmv" />
+                :type="$registration->registration->type" />
             </div>
         </div>
     </div>
@@ -33,7 +33,7 @@
 
             $.confirm({
                 title: 'Approve',
-                content: 'Are you sure want to approve this registration?',
+                content: 'Are you sure want to submit recommendation?',
                 buttons: {   
                     ok: {
                         text: "YES",
@@ -50,5 +50,15 @@
             });
 
         }
+
+        // report on upload preview 
+        inputGroupFile01.onchange = evt => {
+            const [file] = inputGroupFile01.files
+            if (file) {
+                $('#inputGroupFile01preview').attr('src', URL.createObjectURL(file));
+                $('#inputGroupFile01previewLabel').html(file.name);
+            }
+        }
+
     </script>
 @endsection

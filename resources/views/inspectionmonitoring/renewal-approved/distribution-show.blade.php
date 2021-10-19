@@ -1,16 +1,16 @@
 @extends('layouts.app')
 
 @section('content')
-@include('layouts.navbars.breadcrumb', ['page' => 'Registration - Renewal Inspection Report', 'route' => 'pharmacy-renewal-reports.index'])
+@include('layouts.navbars.breadcrumb', ['page' => 'Registration - Location Inspection', 'route' => 'monitoring-inspection-renewal.index'])
 <div class="row">
         <div class="col-lg-12 col-md-12">
             <div class="card-body">
-                <h5>Registration - Renewal Inspection Report - Details</h5>
+                <h5>Location Inspection report - Details</h5>
 
-                <x-hospital-pharmacy-preview
+                <x-location-registration-show
                 :registrationID="$registration->registration->id" 
                 :userID="$registration->user_id" 
-                type="hospital_pharmacy" />
+                :type="$registration->registration->type" />
 
                 <div class="custom-separator"></div>
                 <h4>Renewal Inspection Report Recommendation</h4>
@@ -19,10 +19,10 @@
                 <a href="{{$alert['download-link']}}" target="_blank" class="btn btn-rounded btn-{{$alert['color']}} ml-3">Download Inspection Report</a>
                 </div>
                 <div class="custom-separator"></div>
-
+                
                 <x-all-activity
                 :applicationID="$registration->registration->id" 
-                type="hospital_pharmacy" />
+                :type="$registration->registration->type" />
             </div>
         </div>
     </div>

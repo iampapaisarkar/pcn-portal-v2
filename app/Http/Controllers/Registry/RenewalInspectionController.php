@@ -173,7 +173,7 @@ class RenewalInspectionController extends Controller
                             Renewal::where(['payment' => true, 'id' => $renewal_id, 'user_id' => $renewal->user_id])
                             ->where('status', 'send_to_registry')
                             ->update([
-                                'status' => 'send_to_pharmacy_practice'
+                                'status' => 'send_to_inspection_monitoring'
                             ]);
                             
                             $adminName = Auth::user()->firstname .' '. Auth::user()->lastname;
@@ -187,7 +187,7 @@ class RenewalInspectionController extends Controller
                             Renewal::where(['payment' => true, 'id' => $renewal_id, 'user_id' => $renewal->user_id])
                             ->where('status', 'send_to_registry')
                             ->update([
-                                'status' => 'send_to_pharmacy_practice'
+                                'status' => 'send_to_inspection_monitoring'
                             ]);
                             
                             $adminName = Auth::user()->firstname .' '. Auth::user()->lastname;
