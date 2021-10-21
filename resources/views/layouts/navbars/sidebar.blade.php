@@ -37,6 +37,10 @@
                 <h6>PCN HQ Abuja</h6>
                 <p>Pharmacy Practice</p>
                 @endif
+                @if(Auth::user()->hasRole(['inspection_monitoring']))
+                <h6>PCN HQ Abuja</h6>
+                <p>Inspection Monitoring</p>
+                @endif
                 @if(Auth::user()->hasRole(['registration_licencing']))
                 <h6>PCN HQ Abuja</h6>
                 <p>Registration and Licencing</p>
@@ -46,15 +50,15 @@
                 <p>PCN Hospital Pharmacy</p>
                 @endif
                 @if(Auth::user()->hasRole(['community_pharmacy']))
-                <h6>PPMV</h6>
+                <h6>Community Pharmacy</h6>
                 <p>PCN Community Pharmacy</p>
                 @endif
                 @if(Auth::user()->hasRole(['distribution_premisis']))
-                <h6>PPMV</h6>
+                <h6>Distribution Premises</h6>
                 <p>PCN Distribution Premises</p>
                 @endif
                 @if(Auth::user()->hasRole(['manufacturing_premisis']))
-                <h6>PPMV</h6>
+                <h6>Manufacturing Premises</h6>
                 <p>PCN Manufacturing Premises</p>
                 @endif
                 @if(Auth::user()->hasRole(['ppmv']))

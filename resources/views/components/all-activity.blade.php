@@ -23,6 +23,18 @@
                         @if($activity->type == 'hospital_pharmacy')
                             Hospital Pharmacy
                         @endif
+                        @if($activity->type == 'ppmv')
+                            PPMV
+                        @endif
+                        @if($activity->type == 'community_pharmacy')
+                            Community Pharmacy
+                        @endif
+                        @if($activity->type == 'distribution_premises')
+                            Distribution Premises
+                        @endif
+                        @if($activity->type == 'manufacturing_premises')
+                            Manufacturing Premises
+                        @endif
                     </th>
                     <th scope="col">{{$activity->created_at->format('d/M/Y')}}</th>
                 </tr>
