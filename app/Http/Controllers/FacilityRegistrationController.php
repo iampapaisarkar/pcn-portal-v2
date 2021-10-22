@@ -79,7 +79,11 @@ class FacilityRegistrationController extends Controller
                     'annual_licence_no' => $request->annual_licence_no,
                 ]);
 
-                $response = Checkout::checkoutCommunitDistributionRegistration($application = ['id' => $application->id], $type);
+                if(Auth::user()->hasRole(['community_pharmacy'])){
+                    $response = Checkout::checkoutCommunityRegistration($application = ['id' => $application->id], $type);
+                }else if(Auth::user()->hasRole(['distribution_premisis'])){
+                    $response = Checkout::checkoutDistributionRegistration($application = ['id' => $application->id], $type);
+                }
 
             }
 

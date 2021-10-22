@@ -58,7 +58,11 @@ class LocationApprovalController extends Controller
                 'annual_licence_no' => $request->annual_licence_no,
             ]);
 
-            $response = Checkout::checkoutCommunitDistribution($application = ['id' => $Registration->id], $type);
+            if(Auth::user()->hasRole(['community_pharmacy'])){
+                $response = Checkout::checkoutCommunity($application = ['id' => $Registration->id], $type);
+            }else if(Auth::user()->hasRole(['distribution_premisis'])){
+                $response = Checkout::checkoutDistribution($application = ['id' => $Registration->id], $type);
+            }
 
             DB::commit();
 

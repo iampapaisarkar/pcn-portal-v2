@@ -157,7 +157,11 @@ class RenewalController extends Controller
                     // 'payment' => true,
                 ]);
 
-                $response = Checkout::checkoutCommunitDistributionRenewal($application = ['id' => $renewal->id], $type.'_renewal');
+                if(Auth::user()->hasRole(['community_pharmacy'])){
+                    $response = Checkout::checkoutCommunityRenewal($application = ['id' => $renewal->id], $type.'_renewal');
+                }else if(Auth::user()->hasRole(['distribution_premisis'])){
+                    $response = Checkout::checkoutDistributionRenewal($application = ['id' => $renewal->id], $type.'_renewal');
+                }
             }
 
             DB::commit();
@@ -227,7 +231,11 @@ class RenewalController extends Controller
                     'payment' => false,
                 ]);
 
-                $response = Checkout::checkoutCommunitDistributionRenewal($application = ['id' => $id], $type.'_renewal');
+                if(Auth::user()->hasRole(['community_pharmacy'])){
+                    $response = Checkout::checkoutCommunityRenewal($application = ['id' => $id], $type.'_renewal');
+                }else if(Auth::user()->hasRole(['distribution_premisis'])){
+                    $response = Checkout::checkoutDistributionRenewal($application = ['id' => $id], $type.'_renewal');
+                }
             }
 
             DB::commit();
