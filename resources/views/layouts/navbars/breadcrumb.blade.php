@@ -25,10 +25,10 @@
         <h1 class="mr-2">Community Pharmacy</h1>
     @endif
     @if(Auth::user()->hasRole(['distribution_premisis']))
-        <h1 class="mr-2">Premisis</h1>
+        <h1 class="mr-2">Distribution Premises</h1>
     @endif
     @if(Auth::user()->hasRole(['manufacturing_premisis']))
-        <h1 class="mr-2">Premisis</h1>
+        <h1 class="mr-2">Manufacturing Premises</h1>
     @endif
     @if(Auth::user()->hasRole(['ppmv']))
         <h1 class="mr-2">PPMV</h1>
