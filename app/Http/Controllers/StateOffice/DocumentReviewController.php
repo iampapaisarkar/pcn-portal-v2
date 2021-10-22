@@ -353,13 +353,13 @@ class DocumentReviewController extends Controller
             $activity = 'State Officer Document Verification Query';
             AllActivity::storeActivity($request['application_id'], $adminName, $activity, 'community_pharmacy');
 
-            // $data = [
-            //     'user' => $registration->user,
-            //     'registration_type' => 'community_pharmacy',
-            //     'type' => 'state_office_query',
-            //     'query' => $request['query'],
-            // ];
-            // EmailSendJOB::dispatch($data);
+            $data = [
+                'user' => $registration->user,
+                'registration_type' => 'community_pharmacy',
+                'type' => 'state_office_query',
+                'query' => $request['query'],
+            ];
+            EmailSendJOB::dispatch($data);
 
             return redirect()->route('state-office-documents.index')->with('success', 'Registration Queried successfully done');
         }else{
@@ -439,13 +439,13 @@ class DocumentReviewController extends Controller
             $activity = 'State Officer Document Verification Query';
             AllActivity::storeActivity($request['application_id'], $adminName, $activity, 'distribution_premises');
 
-            // $data = [
-            //     'user' => $registration->user,
-            //     'registration_type' => 'distribution_premises',
-            //     'type' => 'state_office_query',
-            //     'query' => $request['query'],
-            // ];
-            // EmailSendJOB::dispatch($data);
+            $data = [
+                'user' => $registration->user,
+                'registration_type' => 'distribution_premises',
+                'type' => 'state_office_query',
+                'query' => $request['query'],
+            ];
+            EmailSendJOB::dispatch($data);
 
             return redirect()->route('state-office-documents.index')->with('success', 'Registration Queried successfully done');
         }else{
