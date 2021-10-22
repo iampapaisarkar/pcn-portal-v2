@@ -175,23 +175,23 @@ class LocationInspectionRenewPendingController extends Controller
 
                 if($request->recommendation == 'no_recommendation'){
                     $activity = 'Renewal Inspection Report Uploaded';
-                    // $data = [
-                    //     'user' => $Registration->user,
-                    //     'registration_type' => 'community_pharmacy_renewal',
-                    //     'type' => 'pharmacy_recommendation',
-                    //     'status' => 'no_recommendation',
-                    // ];
-                    // EmailSendJOB::dispatch($data);
+                    $data = [
+                        'user' => $Registration->user,
+                        'registration_type' => 'community_pharmacy_renewal',
+                        'type' => 'inspection_recommendation',
+                        'status' => 'no_recommendation',
+                    ];
+                    EmailSendJOB::dispatch($data);
                 }
                 if($request->recommendation == 'full_recommendation'){
                     $activity = 'Renewal Inspection Report Uploaded';
-                    // $data = [
-                    //     'user' => $Registration->user,
-                    //     'registration_type' => 'community_pharmacy_renewal',
-                    //     'type' => 'pharmacy_recommendation',
-                    //     'status' => 'full_recommendation',
-                    // ];
-                    // EmailSendJOB::dispatch($data);
+                    $data = [
+                        'user' => $Registration->user,
+                        'registration_type' => 'community_pharmacy_renewal',
+                        'type' => 'inspection_recommendation',
+                        'status' => 'full_recommendation',
+                    ];
+                    EmailSendJOB::dispatch($data);
                 }
                 AllActivity::storeActivity($Registration->id, $adminName, $activity, 'community_pharmacy');
 
@@ -274,23 +274,23 @@ class LocationInspectionRenewPendingController extends Controller
 
                 if($request->recommendation == 'no_recommendation'){
                     $activity = 'Renewal Inspection Report Uploaded';
-                    // $data = [
-                    //     'user' => $Registration->user,
-                    //     'registration_type' => 'distribution_premises_renewal',
-                    //     'type' => 'pharmacy_recommendation',
-                    //     'status' => 'no_recommendation',
-                    // ];
-                    // EmailSendJOB::dispatch($data);
+                    $data = [
+                        'user' => $Registration->user,
+                        'registration_type' => 'distribution_premises_renewal',
+                        'type' => 'inspection_recommendation',
+                        'status' => 'no_recommendation',
+                    ];
+                    EmailSendJOB::dispatch($data);
                 }
                 if($request->recommendation == 'full_recommendation'){
                     $activity = 'Renewal Inspection Report Uploaded';
-                    // $data = [
-                    //     'user' => $Registration->user,
-                    //     'registration_type' => 'distribution_premises_renewal',
-                    //     'type' => 'pharmacy_recommendation',
-                    //     'status' => 'full_recommendation',
-                    // ];
-                    // EmailSendJOB::dispatch($data);
+                    $data = [
+                        'user' => $Registration->user,
+                        'registration_type' => 'distribution_premises_renewal',
+                        'type' => 'inspection_recommendation',
+                        'status' => 'full_recommendation',
+                    ];
+                    EmailSendJOB::dispatch($data);
                 }
                 AllActivity::storeActivity($Registration->id, $adminName, $activity, 'distribution_premises');
 

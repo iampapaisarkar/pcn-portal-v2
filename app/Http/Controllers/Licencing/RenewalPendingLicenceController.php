@@ -169,22 +169,22 @@ class RenewalPendingLicenceController extends Controller
                             ];
                             EmailSendJOB::dispatch($data);
                         }
-                        // if($renewal->type == 'community_pharmacy_renewal'){
-                        //     $data = [
-                        //         'user' => $renewal->user,
-                        //         'registration_type' => 'community_pharmacy_renewal',
-                        //         'type' => 'licencing_issued',
-                        //     ];
-                        //     EmailSendJOB::dispatch($data);
-                        // }
-                        // if($renewal->type == 'distribution_premises_renewal'){
-                        //     $data = [
-                        //         'user' => $renewal->user,
-                        //         'registration_type' => 'distribution_premises_renewal',
-                        //         'type' => 'licencing_issued',
-                        //     ];
-                        //     EmailSendJOB::dispatch($data);
-                        // }
+                        if($renewal->type == 'community_pharmacy_renewal'){
+                            $data = [
+                                'user' => $renewal->user,
+                                'registration_type' => 'community_pharmacy_renewal',
+                                'type' => 'licencing_issued',
+                            ];
+                            EmailSendJOB::dispatch($data);
+                        }
+                        if($renewal->type == 'distribution_premises_renewal'){
+                            $data = [
+                                'user' => $renewal->user,
+                                'registration_type' => 'distribution_premises_renewal',
+                                'type' => 'licencing_issued',
+                            ];
+                            EmailSendJOB::dispatch($data);
+                        }
 
                     }else{
                         return abort(404);
@@ -349,12 +349,12 @@ class RenewalPendingLicenceController extends Controller
                     $activity = 'Registration & Licencing Licence Renewal Issued';
                     AllActivity::storeActivity($request['registration_id'], $adminName, $activity, 'community_pharmacy');
 
-                    // $data = [
-                    //     'user' => $renewal->user,
-                    //     'registration_type' => 'community_pharmacy_renewal',
-                    //     'type' => 'licencing_issued',
-                    // ];
-                    // EmailSendJOB::dispatch($data);
+                    $data = [
+                        'user' => $renewal->user,
+                        'registration_type' => 'community_pharmacy_renewal',
+                        'type' => 'licencing_issued',
+                    ];
+                    EmailSendJOB::dispatch($data);
 
                 }else{
                     return abort(404);
@@ -407,12 +407,12 @@ class RenewalPendingLicenceController extends Controller
                     $activity = 'Registration & Licencing Licence Renewal Issued';
                     AllActivity::storeActivity($request['registration_id'], $adminName, $activity, 'distribution_premises');
 
-                    // $data = [
-                    //     'user' => $renewal->user,
-                    //     'registration_type' => 'distribution_premises_renewal',
-                    //     'type' => 'licencing_issued',
-                    // ];
-                    // EmailSendJOB::dispatch($data);
+                    $data = [
+                        'user' => $renewal->user,
+                        'registration_type' => 'distribution_premises_renewal',
+                        'type' => 'licencing_issued',
+                    ];
+                    EmailSendJOB::dispatch($data);
 
                 }else{
                     return abort(404);
