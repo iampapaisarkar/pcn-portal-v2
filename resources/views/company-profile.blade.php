@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-@include('layouts.navbars.breadcrumb', ['page' => 'Company Profile', 'route' => 'company-profile'])
+@include('layouts.navbars.breadcrumb', ['page' => 'Premises', 'route' => 'company-profile'])
 <div class="row">
     <div class="col-lg-12 col-md-12">
         @if (session('status'))
@@ -93,7 +93,7 @@
                 <div class="col-md-4 form-group mb-3">
                     <label for="middleName1">Category of Practise</label>
                     <input name="category" class="form-control @error('category') is-invalid @enderror" id="category1"
-                        type="text" placeholder="Enter your category" value="{{ $company ? $company->category : 'Community Pharmacy' }}" readonly/>
+                        type="text" placeholder="Enter your category" value="{{ $company ? $company->category : 'Distribution Premises' }}" readonly/>
                     @error('category')
                     <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>
