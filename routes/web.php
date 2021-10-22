@@ -33,7 +33,7 @@ Route::post('/profile-update', 'App\Http\Controllers\ProfileController@update')-
 Route::post('/profile-password-update', 'App\Http\Controllers\ProfileController@updatePassword')->name('profile-password-update')->middleware('auth', 'verified');
 // Route::post('/remove-photo', 'App\Http\Controllers\ProfileController@removeProfilePhoto')->name('remove-profile-photo')->middleware('auth', 'verified');
 
-Route::group(['middleware' => ['auth','verified', 'can:isCPharmacy, isDPremisis, isMPremisis']], function () {
+Route::group(['middleware' => ['auth','verified'], ['can:isCPharmacy,isDPremisis,isMPremisis']], function () {
     Route::get('/company-profile', 'App\Http\Controllers\CompanyProfileController@profile')->name('company-profile');
     Route::post('/company-profile-update', 'App\Http\Controllers\CompanyProfileController@profileUpdate')->name('company-profile-update');
 });
@@ -314,7 +314,7 @@ Route::group(['middleware' => ['auth','verified', 'can:isMPremisis', 'CheckProfi
 });
 
 // COMMUNITY PHARMACY ROUTES // DISTRIBUTION PREMISIS ROUTES
-Route::group(['middleware' => ['auth','verified', 'can:isCPharmacy, isDPremisis', 'CheckProfileStatus']], function () {
+Route::group(['middleware' => ['auth','verified', 'CheckProfileStatus'], ['can:isCPharmacy,isDPremisis']], function () {
     Route::get('/location-approval-form', 'App\Http\Controllers\LocationApprovalController@locationForm')->name('location-approval-form');
     Route::post('/location-approval-form-submit', 'App\Http\Controllers\LocationApprovalController@locationFormSubmit')->name('location-approval-form-submit');
     Route::get('/location-approval-form-edit/{id}', 'App\Http\Controllers\LocationApprovalController@locationFormEdit')->name('location-approval-form-edit');
