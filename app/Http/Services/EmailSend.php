@@ -61,6 +61,21 @@ class EmailSend
         }  
     }
 
+    public static function sendInspectionRecommendationEMAIL($data){
+
+        try {
+            DB::beginTransaction();
+
+            Mail::to($data['user']['email'])->send(new InspectionRecommendationEmail($data));
+
+            DB::commit();
+            return ['success' => true];
+        }catch(Exception $e) {
+            DB::rollback();
+            return ['success' => false];
+        }  
+    }
+
     public static function sendStateRecommendationEMAIL($data){
 
         try {
