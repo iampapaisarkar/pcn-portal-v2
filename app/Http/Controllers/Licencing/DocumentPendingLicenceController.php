@@ -231,12 +231,12 @@ class DocumentPendingLicenceController extends Controller
                             'payment' => true,
                         ]);
 
-                        // $data = [
-                        //     'user' => $PpmvLocationApplication->user,
-                        //     'registration_type' => 'community_pharmacy',
-                        //     'type' => 'licencing_issued',
-                        // ];
-                        // EmailSendJOB::dispatch($data);
+                        $data = [
+                            'user' => $PpmvLocationApplication->user,
+                            'registration_type' => 'community_pharmacy',
+                            'type' => 'licencing_issued',
+                        ];
+                        EmailSendJOB::dispatch($data);
                     }
 
                     if($Registration->type == 'distribution_premises'){
@@ -258,12 +258,12 @@ class DocumentPendingLicenceController extends Controller
                             'payment' => true,
                         ]);
 
-                        // $data = [
-                        //     'user' => $PpmvLocationApplication->user,
-                        //     'registration_type' => 'distribution_premises',
-                        //     'type' => 'licencing_issued',
-                        // ];
-                        // EmailSendJOB::dispatch($data);
+                        $data = [
+                            'user' => $PpmvLocationApplication->user,
+                            'registration_type' => 'distribution_premises',
+                            'type' => 'licencing_issued',
+                        ];
+                        EmailSendJOB::dispatch($data);
                     }
 
                     $adminName = Auth::user()->firstname .' '. Auth::user()->lastname;
@@ -476,12 +476,12 @@ class DocumentPendingLicenceController extends Controller
                     $activity = 'Registration & Licencing Issued Licence';
                     AllActivity::storeActivity($request['registration_id'], $adminName, $activity, 'community_pharmacy');
 
-                    // $data = [
-                    //     'user' => $registration->user,
-                    //     'registration_type' => 'community_pharmacy',
-                    //     'type' => 'licencing_issued',
-                    // ];
-                    // EmailSendJOB::dispatch($data);
+                    $data = [
+                        'user' => $registration->user,
+                        'registration_type' => 'community_pharmacy',
+                        'type' => 'licencing_issued',
+                    ];
+                    EmailSendJOB::dispatch($data);
 
                 }else{
                     return abort(404);
@@ -550,12 +550,12 @@ class DocumentPendingLicenceController extends Controller
                     $activity = 'Registration & Licencing Issued Licence';
                     AllActivity::storeActivity($request['registration_id'], $adminName, $activity, 'distribution_premises');
 
-                    // $data = [
-                    //     'user' => $registration->user,
-                    //     'registration_type' => 'distribution_premises',
-                    //     'type' => 'licencing_issued',
-                    // ];
-                    // EmailSendJOB::dispatch($data);
+                    $data = [
+                        'user' => $registration->user,
+                        'registration_type' => 'distribution_premises',
+                        'type' => 'licencing_issued',
+                    ];
+                    EmailSendJOB::dispatch($data);
 
                 }else{
                     return abort(404);
