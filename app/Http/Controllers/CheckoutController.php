@@ -129,14 +129,14 @@ class CheckoutController extends Controller
                     'payment' => true
                 ]);
 
-                // $data = [
-                //     'order_id' => $order->order_id,
-                //     'amount' => $order->amount,
-                //     'user' => Auth::user(),
-                //     'registration_type' => 'community_pharmacy',
-                //     'type' => 'payment_success',
-                // ];
-                // EmailSendJOB::dispatch($data);
+                $data = [
+                    'order_id' => $order->order_id,
+                    'amount' => $order->amount,
+                    'user' => Auth::user(),
+                    'registration_type' => 'community_pharmacy',
+                    'type' => 'payment_success',
+                ];
+                EmailSendJOB::dispatch($data);
             }
 
             if($order->service_type == 'community_pharmacy_renewal'){
@@ -144,14 +144,14 @@ class CheckoutController extends Controller
                     'payment' => true
                 ]);
 
-                // $data = [
-                //     'order_id' => $order->order_id,
-                //     'amount' => $order->amount,
-                //     'user' => Auth::user(),
-                //     'registration_type' => 'ppmv',
-                //     'type' => 'payment_success',
-                // ];
-                // EmailSendJOB::dispatch($data);
+                $data = [
+                    'order_id' => $order->order_id,
+                    'amount' => $order->amount,
+                    'user' => Auth::user(),
+                    'registration_type' => 'community_pharmacy_renewal',
+                    'type' => 'payment_success',
+                ];
+                EmailSendJOB::dispatch($data);
             }
 
             if($order->service_type == 'distribution_premises'){
@@ -159,14 +159,14 @@ class CheckoutController extends Controller
                     'payment' => true
                 ]);
 
-                // $data = [
-                //     'order_id' => $order->order_id,
-                //     'amount' => $order->amount,
-                //     'user' => Auth::user(),
-                //     'registration_type' => 'distribution_premises',
-                //     'type' => 'payment_success',
-                // ];
-                // EmailSendJOB::dispatch($data);
+                $data = [
+                    'order_id' => $order->order_id,
+                    'amount' => $order->amount,
+                    'user' => Auth::user(),
+                    'registration_type' => 'distribution_premises',
+                    'type' => 'payment_success',
+                ];
+                EmailSendJOB::dispatch($data);
             }
 
             if($order->service_type == 'community_pharmacy_registration'){
@@ -174,14 +174,14 @@ class CheckoutController extends Controller
                     'payment' => true
                 ]);
 
-                // $data = [
-                //     'order_id' => $order->order_id,
-                //     'amount' => $order->amount,
-                //     'user' => Auth::user(),
-                //     'registration_type' => 'community_pharmacy_registration',
-                //     'type' => 'payment_success',
-                // ];
-                // EmailSendJOB::dispatch($data);
+                $data = [
+                    'order_id' => $order->order_id,
+                    'amount' => $order->amount,
+                    'user' => Auth::user(),
+                    'registration_type' => 'community_pharmacy_registration',
+                    'type' => 'payment_success',
+                ];
+                EmailSendJOB::dispatch($data);
             }
 
             if($order->service_type == 'distribution_premises_registration'){
@@ -189,14 +189,14 @@ class CheckoutController extends Controller
                     'payment' => true
                 ]);
 
-                // $data = [
-                //     'order_id' => $order->order_id,
-                //     'amount' => $order->amount,
-                //     'user' => Auth::user(),
-                //     'registration_type' => 'distribution_premises_registration',
-                //     'type' => 'payment_success',
-                // ];
-                // EmailSendJOB::dispatch($data);
+                $data = [
+                    'order_id' => $order->order_id,
+                    'amount' => $order->amount,
+                    'user' => Auth::user(),
+                    'registration_type' => 'distribution_premises_registration',
+                    'type' => 'payment_success',
+                ];
+                EmailSendJOB::dispatch($data);
             }
 
             if($order->service_type == 'distribution_premises_renewal'){
@@ -204,14 +204,14 @@ class CheckoutController extends Controller
                     'payment' => true
                 ]);
 
-                // $data = [
-                //     'order_id' => $order->order_id,
-                //     'amount' => $order->amount,
-                //     'user' => Auth::user(),
-                //     'registration_type' => 'ppmv',
-                //     'type' => 'payment_success',
-                // ];
-                // EmailSendJOB::dispatch($data);
+                $data = [
+                    'order_id' => $order->order_id,
+                    'amount' => $order->amount,
+                    'user' => Auth::user(),
+                    'registration_type' => 'distribution_premises_renewal',
+                    'type' => 'payment_success',
+                ];
+                EmailSendJOB::dispatch($data);
             }
 
             return view('checkout.success', compact('order'));

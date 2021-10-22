@@ -43,6 +43,24 @@ class PaymentSuccessEmail extends Mailable
         if($this->newData['registration_type'] == 'ppmv_renewal'){
             $subject = 'PCN - Inspection Renewal Payment Notification';
         }
+        if($this->newData['registration_type'] == 'community_pharmacy'){
+            $subject = 'PCN - Inspection Payment Notification';
+        }
+        if($this->newData['registration_type'] == 'community_pharmacy_registration'){
+            $subject = 'PCN - Registration & Inspection Payment Notification';
+        }
+        if($this->newData['registration_type'] == 'community_pharmacy_renewal'){
+            $subject = 'PCN - Inspection Renewal Payment Notification';
+        }
+        if($this->newData['registration_type'] == 'distribution_premises'){
+            $subject = 'PCN - Inspection Payment Notification';
+        }
+        if($this->newData['registration_type'] == 'distribution_premises_registration'){
+            $subject = 'PCN - Registration & Inspection Payment Notification';
+        }
+        if($this->newData['registration_type'] == 'distribution_premises_renewal'){
+            $subject = 'PCN - Inspection Renewal Payment Notification';
+        }
 
         return $this->markdown('mail.payment-success',['data'=>$this->newData])->subject($subject);
     }
