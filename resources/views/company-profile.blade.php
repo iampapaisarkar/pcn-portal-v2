@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-@include('layouts.navbars.breadcrumb', ['page' => 'Premises', 'route' => 'company-profile'])
+@include('layouts.navbars.breadcrumb', ['page' => 'Company Profile', 'route' => 'company-profile'])
 <div class="row">
     <div class="col-lg-12 col-md-12">
         @if (session('status'))
