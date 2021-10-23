@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-@include('layouts.navbars.breadcrumb', ['page' => 'Location Approval', 'route' => 'location-approval-form'])
+@include('layouts.navbars.breadcrumb', ['page' => 'Registration', 'route' => 'manufacturing-registration-form'])
 <div class="row">
     <div class="col-lg-12 col-md-12">
         @if(app('App\Http\Services\ManufacturingInfo')->canSubmitRegistration()['success'] == true)
