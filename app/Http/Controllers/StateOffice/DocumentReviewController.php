@@ -371,7 +371,7 @@ class DocumentReviewController extends Controller
 
     public function distributionApprovalShow(Request $request){
 
-        $application = Registration::where(['payment' => true, 'id' => $request['application_id'], 'user_id' => $request['user_id'], 'type' => 'community_pharmacy'])
+        $application = Registration::where(['payment' => true, 'id' => $request['application_id'], 'user_id' => $request['user_id'], 'type' => 'distribution_premises'])
         ->with('other_registration.company', 'user')
         ->whereHas('other_registration.company', function($q){
             $q->where('state', Auth::user()->state);
@@ -380,7 +380,7 @@ class DocumentReviewController extends Controller
         ->first();
 
         if($application){
-            return view('stateoffice.documents.community-approval-show', compact('application'));
+            return view('stateoffice.documents.distribution-approval-show', compact('application'));
         }else{
             return abort(404);
         }
@@ -388,7 +388,6 @@ class DocumentReviewController extends Controller
 
 
     public function distributionApprove(Request $request){
-
         $registration = Registration::where(['payment' => true, 'id' => $request['application_id'], 'user_id' => $request['user_id'], 'type' => 'distribution_premises'])
         ->with('other_registration.company', 'user')
         ->whereHas('other_registration.company', function($q){

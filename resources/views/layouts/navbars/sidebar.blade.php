@@ -53,11 +53,11 @@
                 <h6>Community Pharmacy</h6>
                 <p>PCN Community Pharmacy</p>
                 @endif
-                @if(Auth::user()->hasRole(['distribution_premisis']))
+                @if(Auth::user()->hasRole(['distribution_premises']))
                 <h6>Distribution Premises</h6>
                 <p>PCN Distribution Premises</p>
                 @endif
-                @if(Auth::user()->hasRole(['manufacturing_premisis']))
+                @if(Auth::user()->hasRole(['manufacturing_premises']))
                 <h6>Manufacturing Premises</h6>
                 <p>PCN Manufacturing Premises</p>
                 @endif
@@ -374,7 +374,7 @@
                 <!-- Community Pharmacy routes end  -->
 
                 <!-- Distribution Premises routes start  -->
-                @can('isDPremisis')
+                @can('isDpremises')
                 <li class="nav-item">
                     <a href="{{route('company-profile')}}">
                         <i class="nav-icon i-Security-Settings"></i>
@@ -421,7 +421,7 @@
                 <!-- Distribution Premises routes end  -->
 
                 <!-- Manufacturing Premises routes start  -->
-                @can('isMPremisis')
+                @can('isMpremises')
                 <li class="nav-item">
                     <a href="{{route('company-profile')}}">
                         <i class="nav-icon i-Security-Settings"></i>

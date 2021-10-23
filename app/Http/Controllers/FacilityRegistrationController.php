@@ -20,8 +20,8 @@ class FacilityRegistrationController extends Controller
 
         if(Auth::user()->hasRole(['community_pharmacy'])){
             $type = 'community_pharmacy';
-        }else if(Auth::user()->hasRole(['distribution_premisis'])){
-            $type = 'distribution_premisis';
+        }else if(Auth::user()->hasRole(['distribution_premises'])){
+            $type = 'distribution_premises';
         }
 
         $application = Registration::where(['user_id' => Auth::user()->id, 'type' => $type])
@@ -42,8 +42,8 @@ class FacilityRegistrationController extends Controller
             if(Auth::user()->hasRole(['community_pharmacy'])){
                 $type = 'community_pharmacy';
                 $category = 'Community';
-            }else if(Auth::user()->hasRole(['distribution_premisis'])){
-                $type = 'distribution_premisis';
+            }else if(Auth::user()->hasRole(['distribution_premises'])){
+                $type = 'distribution_premises';
                 $category = 'Distribution';
             }
 
@@ -81,7 +81,7 @@ class FacilityRegistrationController extends Controller
 
                 if(Auth::user()->hasRole(['community_pharmacy'])){
                     $response = Checkout::checkoutCommunityRegistration($application = ['id' => $application->id], $type);
-                }else if(Auth::user()->hasRole(['distribution_premisis'])){
+                }else if(Auth::user()->hasRole(['distribution_premises'])){
                     $response = Checkout::checkoutDistributionRegistration($application = ['id' => $application->id], $type);
                 }
 

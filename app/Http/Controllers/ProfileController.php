@@ -157,7 +157,7 @@ class ProfileController extends Controller
 
             }
 
-            if(Auth::user()->hasRole(['community_pharmacy', 'distribution_premisis', 'manufacturing_premisis'])){
+            if(Auth::user()->hasRole(['community_pharmacy', 'distribution_premises', 'manufacturing_premises'])){
 
                 $this->validate($request, [
                     'firstname' => [
@@ -214,7 +214,7 @@ class ProfileController extends Controller
 
             DB::commit();
 
-            if(Auth::user()->hasRole(['hospital_pharmacy', 'community_pharmacy', 'distribution_premisis', 'manufacturing_premisis', 'ppmv'])){
+            if(Auth::user()->hasRole(['hospital_pharmacy', 'community_pharmacy', 'distribution_premises', 'manufacturing_premises', 'ppmv'])){
                 return redirect()->route('dashboard')->with('success','Profile updated successfully');
             }else{
                 return back()->with('success','Profile updated successfully');

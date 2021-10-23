@@ -29,8 +29,8 @@ class LocationApprovalController extends Controller
             if(Auth::user()->hasRole(['community_pharmacy'])){
                 $type = 'community_pharmacy';
                 $category = 'Community';
-            }else if(Auth::user()->hasRole(['distribution_premisis'])){
-                $type = 'distribution_premisis';
+            }else if(Auth::user()->hasRole(['distribution_premises'])){
+                $type = 'distribution_premises';
                 $category = 'Distribution';
             }
 
@@ -60,7 +60,7 @@ class LocationApprovalController extends Controller
 
             if(Auth::user()->hasRole(['community_pharmacy'])){
                 $response = Checkout::checkoutCommunity($application = ['id' => $Registration->id], $type);
-            }else if(Auth::user()->hasRole(['distribution_premisis'])){
+            }else if(Auth::user()->hasRole(['distribution_premises'])){
                 $response = Checkout::checkoutDistribution($application = ['id' => $Registration->id], $type);
             }
 
@@ -109,8 +109,8 @@ class LocationApprovalController extends Controller
             if(Auth::user()->hasRole(['community_pharmacy'])){
                 $type = 'community_pharmacy';
                 $category = 'Community';
-            }else if(Auth::user()->hasRole(['distribution_premisis'])){
-                $type = 'distribution_premisis';
+            }else if(Auth::user()->hasRole(['distribution_premises'])){
+                $type = 'distribution_premises';
                 $category = 'Distribution';
             }
 

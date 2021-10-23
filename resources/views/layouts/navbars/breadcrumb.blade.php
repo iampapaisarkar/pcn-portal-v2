@@ -24,10 +24,10 @@
     @if(Auth::user()->hasRole(['community_pharmacy']))
         <h1 class="mr-2">Community Pharmacy</h1>
     @endif
-    @if(Auth::user()->hasRole(['distribution_premisis']))
+    @if(Auth::user()->hasRole(['distribution_premises']))
         <h1 class="mr-2">Distribution Premises</h1>
     @endif
-    @if(Auth::user()->hasRole(['manufacturing_premisis']))
+    @if(Auth::user()->hasRole(['manufacturing_premises']))
         <h1 class="mr-2">Manufacturing Premises</h1>
     @endif
     @if(Auth::user()->hasRole(['ppmv']))

@@ -121,8 +121,8 @@ class RenewalController extends Controller
 
             if(Auth::user()->hasRole(['community_pharmacy'])){
                 $type = 'community_pharmacy';
-            }else if(Auth::user()->hasRole(['distribution_premisis'])){
-                $type = 'distribution_premisis';
+            }else if(Auth::user()->hasRole(['distribution_premises'])){
+                $type = 'distribution_premises';
             }
 
             if(Registration::where(['user_id' => Auth::user()->id, 'id' => $request->registration_id, 'type' => $type])->exists()){
@@ -159,7 +159,7 @@ class RenewalController extends Controller
 
                 if(Auth::user()->hasRole(['community_pharmacy'])){
                     $response = Checkout::checkoutCommunityRenewal($application = ['id' => $renewal->id], $type.'_renewal');
-                }else if(Auth::user()->hasRole(['distribution_premisis'])){
+                }else if(Auth::user()->hasRole(['distribution_premises'])){
                     $response = Checkout::checkoutDistributionRenewal($application = ['id' => $renewal->id], $type.'_renewal');
                 }
             }
@@ -201,8 +201,8 @@ class RenewalController extends Controller
 
             if(Auth::user()->hasRole(['community_pharmacy'])){
                 $type = 'community_pharmacy';
-            }else if(Auth::user()->hasRole(['distribution_premisis'])){
-                $type = 'distribution_premisis';
+            }else if(Auth::user()->hasRole(['distribution_premises'])){
+                $type = 'distribution_premises';
             }
 
             if(Registration::where(['user_id' => Auth::user()->id, 'id' => $request->registration_id, 'type' => $type])->exists()){
@@ -233,7 +233,7 @@ class RenewalController extends Controller
 
                 if(Auth::user()->hasRole(['community_pharmacy'])){
                     $response = Checkout::checkoutCommunityRenewal($application = ['id' => $id], $type.'_renewal');
-                }else if(Auth::user()->hasRole(['distribution_premisis'])){
+                }else if(Auth::user()->hasRole(['distribution_premises'])){
                     $response = Checkout::checkoutDistributionRenewal($application = ['id' => $id], $type.'_renewal');
                 }
             }

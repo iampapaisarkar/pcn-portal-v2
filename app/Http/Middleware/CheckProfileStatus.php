@@ -36,7 +36,7 @@ class CheckProfileStatus
                 return $next($request);
             }
             return redirect('profile')->with('status','Please update your profile to perform further action');
-        }else if(auth()->user()->hasRole(['community_pharmacy', 'distribution_premisis', 'manufacturing_premisis'])){
+        }else if(auth()->user()->hasRole(['community_pharmacy', 'distribution_premises', 'manufacturing_premises'])){
 
             if(auth()->user()->company()->first()){
                 return $next($request);

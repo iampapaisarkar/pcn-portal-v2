@@ -48,12 +48,12 @@ class RoleSeeder extends Seeder
             'code' => 'community_pharmacy',
             ],
             [
-            'role' => 'Distribution Premisis',
-            'code' => 'distribution_premisis',
+            'role' => 'Distribution premises',
+            'code' => 'distribution_premises',
             ],
             [
-            'role' => 'Manufacturing Premisis',
-            'code' => 'manufacturing_premisis',
+            'role' => 'Manufacturing premises',
+            'code' => 'manufacturing_premises',
             ],
             [
             'role' => 'PPMV',

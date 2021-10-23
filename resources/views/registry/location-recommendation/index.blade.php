@@ -94,7 +94,7 @@
                                 <button class="btn btn-success btn-sm" type="button"><i class="nav-icon i-Pen-2"></i></button>
                             </a>
                             @endif
-                            @if($application->type == 'registration_year')
+                            @if($application->type == 'distribution_premises')
                             <a href="{{ route('registry-location-distribution-recommendation-show') }}?application_id={{$application->id}}&user_id={{$application->user->id}}">
                                 <button class="btn btn-success btn-sm" type="button"><i class="nav-icon i-Pen-2"></i></button>
                             </a>

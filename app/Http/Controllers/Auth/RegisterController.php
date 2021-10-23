@@ -74,8 +74,8 @@ class RegisterController extends Controller
 
             if($data['type'] == 'hospital_pharmacy'
             || $data['type'] == 'community_pharmacy'
-            || $data['type'] == 'distribution_premisis'
-            || $data['type'] == 'manufacturing_premisis'
+            || $data['type'] == 'distribution_premises'
+            || $data['type'] == 'manufacturing_premises'
             || $data['type'] == 'ppmv'){
                 $role = Role::where('code', $data['type'])->first();
 

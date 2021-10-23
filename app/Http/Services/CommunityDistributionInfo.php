@@ -12,8 +12,8 @@ class CommunityDistributionInfo
 
         if(Auth::user()->hasRole(['community_pharmacy'])){
             $type = 'community_pharmacy';
-        }else if(Auth::user()->hasRole(['distribution_premisis'])){
-            $type = 'distribution_premisis';
+        }else if(Auth::user()->hasRole(['distribution_premises'])){
+            $type = 'distribution_premises';
         }
 
         $registration = Registration::where(['user_id' => Auth::user()->id, 'type' => $type])
@@ -41,8 +41,8 @@ class CommunityDistributionInfo
 
         if(Auth::user()->hasRole(['community_pharmacy'])){
             $type = 'community_pharmacy';
-        }else if(Auth::user()->hasRole(['distribution_premisis'])){
-            $type = 'distribution_premisis';
+        }else if(Auth::user()->hasRole(['distribution_premises'])){
+            $type = 'distribution_premises';
         }
         
         $registration = Registration::where(['user_id' => Auth::user()->id, 'type' => $type])
@@ -152,8 +152,8 @@ class CommunityDistributionInfo
 
         if(Auth::user()->hasRole(['community_pharmacy'])){
             $type = 'community_pharmacy';
-        }else if(Auth::user()->hasRole(['distribution_premisis'])){
-            $type = 'distribution_premisis';
+        }else if(Auth::user()->hasRole(['distribution_premises'])){
+            $type = 'distribution_premises';
         }
 
         $registration = Registration::where(['user_id' => Auth::user()->id, 'type' => $type])
@@ -196,8 +196,8 @@ class CommunityDistributionInfo
 
         if(Auth::user()->hasRole(['community_pharmacy'])){
             $type = 'community_pharmacy';
-        }else if(Auth::user()->hasRole(['distribution_premisis'])){
-            $type = 'distribution_premisis';
+        }else if(Auth::user()->hasRole(['distribution_premises'])){
+            $type = 'distribution_premises';
         }
 
         $registration = Registration::where(['user_id' => Auth::user()->id, 'type' => $type])

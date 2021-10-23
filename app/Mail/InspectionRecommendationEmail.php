@@ -27,7 +27,7 @@ class InspectionRecommendationEmail extends Mailable
      */
     public function build()
     {
-        if($this->newData['registration_type'] == 'community_pharmacy'){
+        if($this->newData['registration_type'] == 'community_pharmacy_registration'){
             if($this->newData['status'] == 'full_recommendation'){
                 $subject = 'Facility Inspection Application Approval';
             }
@@ -37,6 +37,42 @@ class InspectionRecommendationEmail extends Mailable
         }
 
         if($this->newData['registration_type'] == 'distribution_premises'){
+            if($this->newData['status'] == 'full_recommendation'){
+                $subject = 'Facility Inspection Application Approval';
+            }
+            if($this->newData['status'] == 'no_recommendation'){
+                $subject = 'Facility Inspection Application Query';
+            }
+        }
+
+        if($this->newData['registration_type'] == 'community_pharmacy_registration'){
+            if($this->newData['status'] == 'full_recommendation'){
+                $subject = 'Facility Inspection Application Approval';
+            }
+            if($this->newData['status'] == 'no_recommendation'){
+                $subject = 'Facility Inspection Application Query';
+            }
+        }
+
+        if($this->newData['registration_type'] == 'distribution_premises_registration'){
+            if($this->newData['status'] == 'full_recommendation'){
+                $subject = 'Facility Inspection Application Approval';
+            }
+            if($this->newData['status'] == 'no_recommendation'){
+                $subject = 'Facility Inspection Application Query';
+            }
+        }
+
+        if($this->newData['registration_type'] == 'community_pharmacy_renewal'){
+            if($this->newData['status'] == 'full_recommendation'){
+                $subject = 'Facility Inspection Application Approval';
+            }
+            if($this->newData['status'] == 'no_recommendation'){
+                $subject = 'Facility Inspection Application Query';
+            }
+        }
+
+        if($this->newData['registration_type'] == 'distribution_premises_renewal'){
             if($this->newData['status'] == 'full_recommendation'){
                 $subject = 'Facility Inspection Application Approval';
             }

@@ -21,8 +21,8 @@ class PremisesController extends Controller
         $premises = Role::where(function($q){
             $q->where('code', 'hospital_pharmacy');
             $q->orWhere('code', 'community_pharmacy');
-            $q->orWhere('code', 'distribution_premisis');
-            $q->orWhere('code', 'manufacturing_premisis');
+            $q->orWhere('code', 'distribution_premises');
+            $q->orWhere('code', 'manufacturing_premises');
             $q->orWhere('code', 'ppmv');
         })->get();
 

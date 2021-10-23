@@ -112,7 +112,7 @@
         </div>
     </div>
 </div>
-@if(Auth::user()->hasRole(['hospital_pharmacy', 'community_pharmacy', 'distribution_premisis', 'manufacturing_premisis', 'ppmv']) && $invoice->status == false)
+@if(Auth::user()->hasRole(['hospital_pharmacy', 'community_pharmacy', 'distribution_premises', 'manufacturing_premises', 'ppmv']) && $invoice->status == false)
 <script type="text/javascript" src="https://remitademo.net/payment/v1/remita-pay-inline.bundle.js"></script>
 <script>
     function makePayment() {

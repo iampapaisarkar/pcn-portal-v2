@@ -38,7 +38,7 @@ class InvoiceController extends Controller
             }
             $invoices = $invoices->latest()->paginate($perPage);
 
-        }else if($authUser->hasRole(['hospital_pharmacy', 'community_pharmacy', 'distribution_premisis', 'manufacturing_premisis', 'ppmv'])){
+        }else if($authUser->hasRole(['hospital_pharmacy', 'community_pharmacy', 'distribution_premises', 'manufacturing_premises', 'ppmv'])){
 
             $invoices = $invoices->latest()->where('vendor_id', $authUser->id)->get();
         }
@@ -62,10 +62,10 @@ class InvoiceController extends Controller
         if($authUser->hasRole(['community_pharmacy'])){
             $invoice = $invoice->where('vendor_id', $authUser->id)->first();
         }
-        if($authUser->hasRole(['distribution_premisis'])){
+        if($authUser->hasRole(['distribution_premises'])){
             $invoice = $invoice->where('vendor_id', $authUser->id)->first();
         }
-        if($authUser->hasRole(['manufacturing_premisis'])){
+        if($authUser->hasRole(['manufacturing_premises'])){
             $invoice = $invoice->where('vendor_id', $authUser->id)->first();
         }
         if($authUser->hasRole(['ppmv'])){
@@ -84,7 +84,7 @@ class InvoiceController extends Controller
         
         if($authUser->hasRole(['sadmin'])){
             $data = $data->first();
-        }else if($authUser->hasRole(['hospital_pharmacy', 'community_pharmacy', 'distribution_premisis', 'manufacturing_premisis', 'ppmv'])){
+        }else if($authUser->hasRole(['hospital_pharmacy', 'community_pharmacy', 'distribution_premises', 'manufacturing_premises', 'ppmv'])){
             $data = $data->where('vendor_id', $authUser->id)->first();
         }
 

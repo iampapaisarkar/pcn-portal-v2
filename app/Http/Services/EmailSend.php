@@ -11,6 +11,7 @@ use Mail;
 use App\Mail\PaymentSuccessEmail;
 use App\Mail\StateOfficeQueryEmail;
 use App\Mail\PharmacyRecommendationEmail;
+use App\Mail\InspectionRecommendationEmail;
 use App\Mail\StateRecommendationEmail;
 use App\Mail\LicencingIssuedEmail;
 

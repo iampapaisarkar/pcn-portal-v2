@@ -89,16 +89,16 @@ class AuthServiceProvider extends ServiceProvider
             }
         });
 
-        Gate::define('isDPremisis', function($user){
-            if($user->role->code == 'distribution_premisis'){
+        Gate::define('isDpremises', function($user){
+            if($user->role->code == 'distribution_premises'){
                 return true;
             }else{
                 return false;
             }
         });
 
-        Gate::define('isMPremisis', function($user){
-            if($user->role->code == 'manufacturing_premisis'){
+        Gate::define('isMpremises', function($user){
+            if($user->role->code == 'manufacturing_premises'){
                 return true;
             }else{
                 return false;

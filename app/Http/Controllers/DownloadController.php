@@ -138,8 +138,8 @@ class DownloadController extends Controller
 
         // if(Auth::user()->hasRole(['community_pharmacy'])){
         //     $type = 'community_pharmacy';
-        // }else if(Auth::user()->hasRole(['distribution_premisis'])){
-        //     $type = 'distribution_premisis';
+        // }else if(Auth::user()->hasRole(['distribution_premises'])){
+        //     $type = 'distribution_premises';
         // }
 
         $application = Registration::where(['payment' => true, 'id' => $id])

@@ -313,7 +313,7 @@
         <!-- Community Pharmacy cards end  -->
 
         <!-- Distribution Premises cards start  -->
-        @can('isDPremisis')
+        @can('isDpremises')
         <div class="row">
             <div class="col-lg-3 col-md-3 col-sm-6">
                 <div class="card card-icon mb-4">
@@ -360,7 +360,7 @@
         <!-- Distribution Premises cards end  -->
 
         <!-- Manufacturing Premises cards start  -->
-        @can('isMPremisis')
+        @can('isMpremises')
         <div class="row">
             <div class="col-lg-3 col-md-3 col-sm-6">
                 <div class="card card-icon mb-4">

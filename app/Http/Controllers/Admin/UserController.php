@@ -34,8 +34,8 @@ class UserController extends Controller
         ->where(function($q){
             $q->where('code', '!=', 'hospital_pharmacy');
             $q->where('code', '!=', 'community_pharmacy');
-            $q->where('code', '!=', 'distribution_premisis');
-            $q->where('code', '!=', 'manufacturing_premisis');
+            $q->where('code', '!=', 'distribution_premises');
+            $q->where('code', '!=', 'manufacturing_premises');
             $q->where('code', '!=', 'ppmv');
         })
         ->where('users.id', '!=', Auth::user()->id);
@@ -70,8 +70,8 @@ class UserController extends Controller
         $roles = Role::where(function($q){
             $q->where('code', '!=', 'hospital_pharmacy');
             $q->where('code', '!=', 'community_pharmacy');
-            $q->where('code', '!=', 'distribution_premisis');
-            $q->where('code', '!=', 'manufacturing_premisis');
+            $q->where('code', '!=', 'distribution_premises');
+            $q->where('code', '!=', 'manufacturing_premises');
             $q->where('code', '!=', 'ppmv');
         })->get();
 
@@ -154,8 +154,8 @@ class UserController extends Controller
         $roles = Role::where(function($q){
             $q->where('code', '!=', 'hospital_pharmacy');
             $q->where('code', '!=', 'community_pharmacy');
-            $q->where('code', '!=', 'distribution_premisis');
-            $q->where('code', '!=', 'manufacturing_premisis');
+            $q->where('code', '!=', 'distribution_premises');
+            $q->where('code', '!=', 'manufacturing_premises');
             $q->where('code', '!=', 'ppmv');
         })->get();
 
