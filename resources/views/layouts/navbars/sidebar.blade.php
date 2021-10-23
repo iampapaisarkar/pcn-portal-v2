@@ -58,8 +58,8 @@
                 <p>PCN Distribution Premises</p>
                 @endif
                 @if(Auth::user()->hasRole(['manufacturing_premises']))
-                <h6>Manufacturing Premises</h6>
-                <p>PCN Manufacturing Premises</p>
+                <h6>Pharmaceutical Manufacturing Premises</h6>
+                <p>Pharmaceutical Manufacturing Premises</p>
                 @endif
                 @if(Auth::user()->hasRole(['ppmv']))
                 <h6>PPMV</h6>
@@ -429,25 +429,13 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="">
-                        <i class="nav-icon i-Map2"></i>
-                        <span class="item-name">Location Approval</span>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="">
-                        <i class="nav-icon i-Map2"></i>
-                        <span class="item-name">Location Approval Status</span>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="">
+                    <a href="{{route('manufacturing-registration-form')}}">
                         <i class="nav-icon i-Notepad"></i>
                         <span class="item-name">Registration</span>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="">
+                    <a href="{{route('manufacturing-registration-status')}}">
                         <i class="nav-icon i-Notepad"></i>
                         <span class="item-name">Registration Status</span>
                     </a>

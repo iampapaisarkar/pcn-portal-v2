@@ -298,19 +298,14 @@ Route::group(['middleware' => ['auth','verified', 'can:isHPharmacy', 'CheckProfi
     Route::post('/hospital-renewal-update/{id}', 'App\Http\Controllers\HospitalPharmacy\RenewalController@renewalUpdate')->name('hospital-renewal-update');
 });
 
-// COMMUNITY PHARMACY ROUTES 
-Route::group(['middleware' => ['auth','verified', 'can:isCPharmacy', 'CheckProfileStatus']], function () {
-    // Route::get('/company-profile', 'App\Http\Controllers\CompanyProfileController@profile')->name('company-profile');
-});
-
-// DISTRIBUTION premises ROUTES 
-Route::group(['middleware' => ['auth','verified', 'can:isDpremises', 'CheckProfileStatus']], function () {
-  
-});
-
 // MANUFACTURING premises ROUTES 
 Route::group(['middleware' => ['auth','verified', 'can:isMpremises', 'CheckProfileStatus']], function () {
-  
+    Route::get('/manufacturing-registration-form', 'App\Http\Controllers\Manufacturing\RegistrationController@registrationForm')->name('manufacturing-registration-form');
+    Route::post('/manufacturing-registration-submit', 'App\Http\Controllers\Manufacturing\RegistrationController@registrationSubmit')->name('manufacturing-registration-submit');
+    Route::get('/manufacturing-registration-edit/{id}', 'App\Http\Controllers\Manufacturing\RegistrationController@registrationEdit')->name('manufacturing-registration-edit');
+    Route::post('/manufacturing-registration-update/{id}', 'App\Http\Controllers\Manufacturing\RegistrationController@registrationUpdate')->name('manufacturing-registration-update');
+    
+    Route::get('/manufacturing-registration-status', 'App\Http\Controllers\Manufacturing\RegistrationController@registrationStatus')->name('manufacturing-registration-status');
 });
 
 // COMMUNITY PHARMACY ROUTES // DISTRIBUTION premises ROUTES

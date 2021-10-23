@@ -1,14 +1,10 @@
 @extends('layouts.app')
 
 @section('content')
-@include('layouts.navbars.breadcrumb', ['page' => 'Company Profile', 'route' => 'company-profile'])
+@include('layouts.navbars.breadcrumb', ['page' => 'Location Approval', 'route' => 'location-approval-form'])
 <div class="row">
     <div class="col-lg-12 col-md-12">
-        @if (session('status'))
-        <div class="alert alert-warning">
-            {{ session('status') }}
-        </div>
-        @endif
+        @if(app('App\Http\Services\ManufacturingInfo')->canSubmitRegistration()['success'] == true)
         @php 
             $company = Auth::user()->company()->first();
             $company_state = Auth::user()->company()->first() ? Auth::user()->company()->first()->company_state()->first() : null;
@@ -17,7 +13,7 @@
             $director = Auth::user()->company()->first() ? Auth::user()->company()->first()->director()->get() : null;
             $other_director = Auth::user()->company()->first() ? Auth::user()->company()->first()->other_director()->get() : null;
         @endphp
-        <form method="POST" action="{{route('company-profile-update')}}" enctype="multipart/form-data" novalidate>
+        <form method="POST" action="{{route('manufacturing-registration-submit')}}" enctype="multipart/form-data" novalidate>
             @csrf
             <div class="row">
                 <div class="col-md-12 form-group mb-3">
@@ -25,32 +21,22 @@
                 </div>
                 <div class="col-md-4 form-group mb-3">
                     <label for="name">Company name</label>
-                    <input name="company_name" class="form-control @error('company_name') is-invalid @enderror"
+                    <input readonly class="form-control"
                         id="company_name1" type="text" placeholder="Enter your company name"
                         value="{{ $company ? $company->name : old('company_name')}}" />
-                    @error('company_name')
-                    <span class="invalid-feedback" role="alert">
-                        <strong>{{ $message }}</strong>
-                    </span>
-                    @enderror
                 </div>
                 <div class="col-md-8 form-group mb-3">
                     <label for="copmany_address1">Company Address</label>
-                    <input name="copmany_address" class="form-control @error('copmany_address') is-invalid @enderror" id="copmany_address1"
+                    <input readonly class="form-control" id="copmany_address1"
                         type="text" placeholder="Enter your company address" value="{{ $company ? $company->address : old('company_address')}}" />
-                    @error('copmany_address')
-                    <span class="invalid-feedback" role="alert">
-                        <strong>{{ $message }}</strong>
-                    </span>
-                    @enderror
                 </div>
                 <div class="col-md-4 form-group mb-3">
                     @php
                     $states = app('App\Http\Services\BasicInformation')->states();
                     @endphp
                     <label for="picker1">State</label>
-                    <select id="stateField" required name="state"
-                        class="form-control @error('state') is-invalid @enderror">
+                    <select readonly id="stateField" required
+                        class="form-control ">
                         @if($company_state)
                         <option hidden selected value="{{$company_state->id}}">
                             {{$company_state->name}}</option>
@@ -60,19 +46,14 @@
                         <option value="{{$state->id}}">{{$state->name}}</option>
                         @endforeach
                     </select>
-                    @error('state')
-                    <span class="invalid-feedback" role="alert">
-                        <strong>{{ $message }}</strong>
-                    </span>
-                    @enderror
                 </div>
                 <div class="col-md-4 form-group mb-3">
                     @php
                     $lgas = app('App\Http\Services\BasicInformation')->lgas();
                     @endphp
                     <label for="picker1">LGA</label>
-                    <select {{!$company_lga ? 'disabled' : ''}} id="lgaField" required name="lga"
-                        class="form-control @error('lga') is-invalid @enderror">
+                    <select readonly {{!$company_lga ? 'disabled' : ''}} id="lgaField" required
+                        class="form-control">
                         @if($company_lga)
                         <option hidden selected value="{{$company_lga->id}}">{{$company_lga->name}}
                         </option>
@@ -84,74 +65,34 @@
                             @endforeach
                         @endif
                     </select>
-                    @error('lga')
-                    <span class="invalid-feedback" role="alert">
-                        <strong>{{ $message }}</strong>
-                    </span>
-                    @enderror
                 </div>
                 <div class="col-md-4 form-group mb-3">
                     <label for="middleName1">Category of Practise</label>
-                    <input name="category" class="form-control @error('category') is-invalid @enderror" id="category1"
-                        type="text" placeholder="Enter your category" value="{{ $company ? $company->category : 'Manufacturing Premises' }}" readonly/>
-                    @error('category')
-                    <span class="invalid-feedback" role="alert">
-                        <strong>{{ $message }}</strong>
-                    </span>
-                    @enderror
+                    <input readonly class="form-control" id="category1"
+                        type="text" placeholder="Enter your category" value="{{ $company ? $company->category : 'Community Pharmacy' }}" readonly/>
                 </div>
             </div>
-            
+            <div class="custom-separator"></div>
+
             <div class="row">
                 <div class="col-md-12 form-group mb-3">
                     <h3>Pharmacist In Control of Business</h3>
                 </div>
-                <div class="col-md-6 form-group mb-3">
+                <div class="col-md-4 form-group mb-3">
                     <label for="pharmacist_name1">Name of Pharmacist:</label>
-                    <input name="pharmacist_name" class="form-control @error('pharmacist_name') is-invalid @enderror"
+                    <input readonly class="form-control"
                         id="pharmacist_name1" type="text" placeholder="Enter your company name"
                         value="{{ $business ? $business->name : old('pharmacist_name')}}" />
-                    @error('pharmacist_name')
-                    <span class="invalid-feedback" role="alert">
-                        <strong>{{ $message }}</strong>
-                    </span>
-                    @enderror
                 </div>
-                <div class="col-md-6 form-group mb-3">
+                <div class="col-md-4 form-group mb-3">
                     <label for="pharmacist_registration_number1">Full Registration Number:</label>
-                    <input name="pharmacist_registration_number" class="form-control @error('pharmacist_registration_number') is-invalid @enderror" id="pharmacist_registration_number1"
+                    <input readonly class="form-control" id="pharmacist_registration_number1"
                         type="text" placeholder="Enter your company address" value="{{ $business ? $business->registration_number : old('pharmacist_registration_number')}}" />
-                    @error('pharmacist_registration_number')
-                    <span class="invalid-feedback" role="alert">
-                        <strong>{{ $message }}</strong>
-                    </span>
-                    @enderror
                 </div>
 
-                <div class="form-group col-md-6">
-                    <label for="picker1">Upload Supporting Documents (PDF):</label>
-                    <div class="custom-file mb-3">
-                        <input name="supporting_document" type="file" name="color_passportsize" class="custom-file-input
-                        @error('supporting_document') is-invalid @enderror" accept="application/pdf"
-                            id="supporting_document">
-                        <label class="custom-file-label " for="supporting_document"
-                            aria-describedby="supporting_document" id="supporting_documentpreviewLabel">{{ $business ? $business->supporting_document : 'Choose file'}}</label>
-                        @error('supporting_document')
-                        <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                        @enderror
-                    </div>
-                </div>
 
-                <div class="col-md-6 form-group mb-3">
+                <div class="col-md-4 form-group mb-3">
                     <label for="picker1">Upload Passport Photo of Pharmacist:</label>
-                    <div class="custom-file mb-3">
-                        <input name="passport" type="file" name="color_passportsize" class="custom-file-input"
-                            id="inputGroupFile02" accept="image/*">
-                        <label class="custom-file-label " for="inputGroupFile02"
-                            aria-describedby="inputGroupFileAddon02">Choose file</label>
-                    </div>
                     <div class="profilePreview">
                         <img id="profile-pic-new-preview" src="" alt="" class="w-25">
                         <img id="profile-pic-old-preview" src="{{ $business ? asset('images/' . $business->passport) : ''}}" alt=""
@@ -159,98 +100,188 @@
                     </div>
                 </div>
             </div>
+            <div class="custom-separator"></div>
 
             <div class="row">
-                <div class="col-md-6 form-group mb-3">
+                <div class="col-md-12 form-group mb-3">
                     <h3>Pharmacist Directors (as in CAC Form C.O.7)</h3>
-                </div>
-                <div class="col-md-6 form-group mb-3 d-flex justify-content-end">
-                    <button type="button" onclick="addDirectorRow()" class="btn btn-primary">Add row</button>
                 </div>
                 
                 <div class="col-12" id="directorRow">
-                    @if(!empty($director))
                     @foreach($director as $key => $direct)
                     <div class="row directorRow" id="directorID_{{$key}}">
-                        <div class="col-md-3 form-group mb-3">
+                        <div class="col-md-4 form-group mb-3">
                             <label for="director_name1">Full name</label>
-                            <input name="director[{{$key}}][director_name]" class="form-control @error('director_name') is-invalid @enderror"
+                            <input readonly class="form-control "
                                 id="director_name1" type="text" placeholder="Enter full name of director"
                                 value="{{ $director ? $director[$key]['name'] : old('director[$key][director_name]')}}" />
-                            @error('director_name')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                            @enderror
                         </div>
-                        <div class="col-md-3 form-group mb-3">
+                        <div class="col-md-4 form-group mb-3">
                             <label for="director_registration_number1">Full Registration Number:</label>
-                            <input name="director[{{$key}}][director_registration_number]" class="form-control @error('director_registration_number') is-invalid @enderror" id="director_registration_number1"
+                            <input readonly class="form-control " id="director_registration_number1"
                                 type="text" placeholder="Enter full registration number" value="{{ $director ? $director[$key]['registration_number'] : old('director[$key][director_registration_number]')}}" />
-                            @error('director_registration_number')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                            @enderror
                         </div>
                         <div class="col-md-4 form-group mb-3">
                             <label for="director_licence_number">Current Annual Licence Number:</label>
-                            <input name="director[{{$key}}][director_licence_number]" class="form-control @error('director_licence_number') is-invalid @enderror" id="director_licence_number1"
+                            <input readonly class="form-control " id="director_licence_number1"
                                 type="text" placeholder="Enter current annual licence number" value="{{ $director ? $director[$key]['licence_number'] : old('director[$key][director_licence_number]')}}" />
-                            @error('director_licence_number')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                            @enderror
-                        </div>
-                        <div class="col-md-2 form-group mb-3 d-flex align-items-center">
-                            <button type="button" class="btn btn-sm btn-secondary mt-3" id="deleteDirectorRow_{{$key}}" onclick="deleteDirectorRow({{$key}})">Delete</button>
                         </div>
                     </div>
                     @endforeach
-                    @endif
                 </div>
             </div>
+            <div class="custom-separator"></div>
 
             <div class="row">
-                <div class="col-md-6 form-group mb-3">
+                <div class="col-md-12 form-group mb-3">
                     <h3>Other Directors (as in CAC Form C.O.7)</h3>
-                </div>
-                <div class="col-md-6 form-group mb-3 d-flex justify-content-end">
-                    <button type="button" onclick="addOtherDirectorRow()" class="btn btn-primary">Add row</button>
                 </div>
 
                 <div class="col-12" id="otherDirectorRow">
-                    @if(!empty($director))
                     @foreach($other_director as $key => $other)
                     <div class="row otherDirectorRow" id="otherDirectorID_{{$key}}">
-                        <div class="col-md-5 form-group mb-3">
+                        <div class="col-md-6 form-group mb-3">
                             <label for="other_director_name1">Full name</label>
-                            <input name="other_director[{{$key}}][other_director_name]" class="form-control"
+                            <input readonly class="form-control"
                             id="other_director_name1" type="text" placeholder="Enter full name of director"
                             value="{{ $other_director ? $other_director[$key]['name'] : old('other_director[$key][other_director_name]')}}" />
                         </div>
-                        <div class="col-md-5 form-group mb-3">
+                        <div class="col-md-6 form-group mb-3">
                             <label for="other_director_profession1">Profession:</label>
-                            <input name="other_director[{{$key}}][other_director_profession]" class="form-control" id="other_director_profession1"
+                            <input readonly class="form-control" id="other_director_profession1"
                             type="text" placeholder="Enter profession"
                             value="{{ $other_director ? $other_director[$key]['profession'] : old('other_director[$key][other_director_profession]')}}" />
                         </div>
-                        <div class="col-md-2 form-group mb-3 d-flex align-items-center">
-                           <button type="button" class="btn btn-sm btn-secondary mt-3" id="deleteOtherDirectorRow_{{$key}}" onclick="deleteOtherDirectorRow({{$key}})">Delete</button>
-                        </div>
                     </div>
                     @endforeach
-                    @endif
                 </div>
             </div>
+            <div class="custom-separator"></div>
+
+            <div class="row">
+                <div class="col-md-12 form-group mb-3">
+                    <h3>Superintendent Pharmacist</h3>
+                </div>
+                <div class="col-md-4 form-group mb-3">
+                    <label for="firstname1">First name</label>
+                    <input name="firstname" class="form-control @error('firstname') is-invalid @enderror"
+                        id="firstname1" type="text" placeholder="Enter your first name"/>
+                    @error('firstname')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                    @enderror
+                </div>
+                <div class="col-md-4 form-group mb-3">
+                    <label for="middlename1">Middle name (Optional)</label>
+                    <input name="middlename" class="form-control @error('middlename') is-invalid @enderror" id="middlename1"
+                        type="text" placeholder="Enter your middle name" />
+                    @error('middlename')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                    @enderror
+                </div>
+                <div class="col-md-4 form-group mb-3">
+                    <label for="surname1">Surname</label>
+                    <input name="surname" class="form-control @error('surname') is-invalid @enderror" id="surname1"
+                        type="text" placeholder="Enter your sur name" />
+                    @error('surname')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                    @enderror
+                </div>
+
+                <div class="col-md-4 form-group mb-3">
+                    <label for="email1">Email address</label>
+                    <input name="email" class="form-control @error('email') is-invalid @enderror"
+                        id="email1" type="email" placeholder="Enter your email address"/>
+                    @error('email')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                    @enderror
+                </div>
+                <div class="col-md-4 form-group mb-3">
+                    <label for="phone1">Phone</label>
+                    <input name="phone" class="form-control @error('phone') is-invalid @enderror" id="phone1"
+                        type="text" placeholder="Enter your phone" />
+                    @error('phone')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                    @enderror
+                </div>
+                <div class="col-md-4 form-group mb-3">
+                    <label for="gender1">Gender</label>
+                    <select class="form-control @error('gender') is-invalid @enderror" name="gender">
+                        <option selected="" hidden>Select Gender</option>
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                    </select>
+                    @error('gender')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                    @enderror
+                </div>
+
+                <div class="col-md-4 form-group mb-3">
+                    <label for="doq1">Date of Qualification</label>
+                    <input name="doq" class="form-control @error('doq') is-invalid @enderror"
+                        id="doq1" type="date" placeholder="Enter your date of qualification"/>
+                    @error('doq')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                    @enderror
+                </div>
+                <div class="col-md-4 form-group mb-3">
+                    <label for="residental_address1">Current Residential Address:</label>
+                    <input name="residental_address" class="form-control @error('residental_address') is-invalid @enderror" id="residental_address1"
+                        type="text" placeholder="Enter your residental address" />
+                    @error('residental_address')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                    @enderror
+                </div>
+                <div class="col-md-4 form-group mb-3">
+                    <label for="annual_licence_no1">Last Annual licence no</label>
+                    <input name="annual_licence_no" class="form-control @error('annual_licence_no') is-invalid @enderror" id="annual_licence_no1"
+                        type="text" placeholder="Enter your annual licence no" />
+                    @error('annual_licence_no')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                    @enderror
+                </div>
+            </div>
+
+            <div class="custom-separator"></div>
+
+            <div class="form-row">                   
+                <p>Note :</p>
+                <div class="form-group col-md-12">
+                        <p>(a) The Registrar should be notified immediately of any change in address of permises or any change of pharmacist in person control of the buissness.</p>
+                </div>
+                <div class="form-group col-md-12">
+                        <p>(b)Take notice that the Pharmacists Council of Nigeria (PCN) shall make a claim and recover all cost of litigation incurred by it in defence of any court action instituted against it at the instance of any registred Pharmacist and/or registred Pharmaceutical premises and whereby the suit is struck out , withdrawn or the pharmacist or the pharmaceutical premises loses the case.</p>
+                </div>
+            </div>
+
             <div class="row">
                 <div class="col-md-12">
-                    <button type="submit" class="btn btn-primary">Submit</button>
+                    <button type="submit" class="btn btn-primary">Submit Registration Application</button>
                 </div>
             </div>
         </form>
-
+        @else
+            <div class="alert alert-card alert-warning" role="alert">
+                {{app('App\Http\Services\ManufacturingInfo')->canSubmitRegistration()['message']}}
+            </div>
+        @endif
     </div>
 </div>
 <script>

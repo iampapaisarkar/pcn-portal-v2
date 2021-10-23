@@ -28,7 +28,7 @@
         <h1 class="mr-2">Distribution Premises</h1>
     @endif
     @if(Auth::user()->hasRole(['manufacturing_premises']))
-        <h1 class="mr-2">Manufacturing Premises</h1>
+        <h1 class="mr-2">Pharmaceutical Manufacturing Premises</h1>
     @endif
     @if(Auth::user()->hasRole(['ppmv']))
         <h1 class="mr-2">PPMV</h1>
