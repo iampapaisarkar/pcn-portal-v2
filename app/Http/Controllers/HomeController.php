@@ -177,23 +177,108 @@ class HomeController extends Controller
         }
         if(Auth::user()->hasRole(['pharmacy_practice'])){
             $data= [];
-        }
-        if(Auth::user()->hasRole(['registration_licencing'])){
-            $totalPendingPPMV = PPMVRenewal::where('status', 'recommended')->count();
 
-            $totalApprovedPPMV = PPMVRenewal::where('status', 'licence_issued')->count();
+            $facility_inspection = Registration::where(['payment' => true])
+            ->where('status', 'send_to_pharmacy_practice')
+            ->where('location_approval', false)
+            ->count();
+
+            $facility_report = Registration::where(['payment' => true])
+            ->where(function($q){
+                $q->where('status', 'no_recommendation');
+                $q->orWhere('status', 'partial_recommendation');
+                $q->orWhere('status', 'full_recommendation');
+            })
+            ->where('location_approval', false)
+            ->count();
+
+            $renewal_inspection = Renewal::where(['payment' => true])
+            ->where('status', 'send_to_pharmacy_practice')
+            ->count();
+
+            $renewal_report = Renewal::where(['payment' => true])
+            ->where(function($q){
+                $q->where('status', 'no_recommendation');
+                $q->orWhere('status', 'partial_recommendation');
+                $q->orWhere('status', 'full_recommendation');
+            })
+            ->count();
 
             $data = [
-                'ppmv_pending' => [
-                    'status' => 'Licence Pending',
-                    'type' => 'Tiered PPMV Registration',
-                    'total' => $totalPendingPPMV
-                ],
-                'ppmv_approved' => [
-                    'status' => 'Licence Approved',
-                    'type' => 'Tiered PPMV Registration',
-                    'total' => $totalApprovedPPMV
-                ]
+                'facility_inspection' => $facility_inspection,
+                'facility_report' => $facility_report,
+                'renewal_inspection' => $renewal_inspection,
+                'renewal_report' => $renewal_report,
+            ];
+        }
+        if(Auth::user()->hasRole(['inspection_monitoring'])){
+            $data= [];
+
+            $location_inspection = Registration::where(['payment' => true])
+            ->where('location_approval', true)
+            ->where('status', 'send_to_inspection_monitoring')
+            ->count();
+
+            $location_report = Registration::where(['payment' => true])
+            ->where(function($q){
+                $q->where('status', 'no_recommendation');
+            $q->orWhere('status', 'full_recommendation');
+            })
+            ->where('location_approval', true)
+            ->count();
+
+            $facility_inspection = Registration::where(['payment' => true])
+            ->where('status', 'send_to_inspection_monitoring_registration')
+            ->where('location_approval', false)
+            ->count();
+
+            $facility_report = Registration::where(['payment' => true])
+            ->where(function($q){
+                $q->where('status', 'no_recommendation');
+            $q->orWhere('status', 'full_recommendation');
+            })
+            ->where('location_approval', false)
+            ->count();
+
+            $renewal_inspection = Renewal::where(['payment' => true])
+            ->where('status', 'send_to_inspection_monitoring')
+            ->count();
+
+            $renewal_report = Renewal::where(['payment' => true])
+            ->where(function($q){
+                $q->where('status', 'no_recommendation');
+                $q->orWhere('status', 'full_recommendation');
+            })
+            ->count();
+
+            $data = [
+                'location_inspection' => $location_inspection,
+                'location_report' => $location_report,
+                'facility_inspection' => $facility_inspection,
+                'facility_report' => $facility_report,
+                'renewal_inspection' => $renewal_inspection,
+                'renewal_report' => $renewal_report,
+            ];
+        }
+        if(Auth::user()->hasRole(['registration_licencing'])){
+            $data= [];
+
+            $licence_pending = Renewal::where(['payment' => true])
+            ->where(function($q){
+                $q->where('status', 'send_to_registration');
+                $q->orWhere('status', 'facility_send_to_registration');
+            })
+            ->count();
+
+            $licence_issued = Renewal::where(['payment' => true])
+            ->where(function($q){
+                $q->where('status', 'licence_issued');
+            })
+            ->count();
+
+            $data = [
+                'licence_pending' => $licence_pending,
+                'licence_issued' => $licence_issued,
             ];
         }
         if(Auth::user()->hasRole(['vendor'])){
