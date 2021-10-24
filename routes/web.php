@@ -267,6 +267,7 @@ Route::group(['middleware' => ['auth','verified', 'can:isRLicencing']], function
     Route::get('licence-issued-ppmv-show', 'App\Http\Controllers\Licencing\DocumentIssuedLicenceController@ppmvShow')->name('licence-issued-ppmv-show');
     Route::get('licence-issued-community-show', 'App\Http\Controllers\Licencing\DocumentIssuedLicenceController@communityShow')->name('licence-issued-community-show');
     Route::get('licence-issued-distribution-show', 'App\Http\Controllers\Licencing\DocumentIssuedLicenceController@distributionShow')->name('licence-issued-distribution-show');
+    Route::get('licence-issued-manufacturing-show', 'App\Http\Controllers\Licencing\DocumentIssuedLicenceController@manufacturingShow')->name('licence-issued-manufacturing-show');
 
     Route::resource('renewal-pending', 'App\Http\Controllers\Licencing\RenewalPendingLicenceController');
     Route::get('renewal-pending-hospital-show', 'App\Http\Controllers\Licencing\RenewalPendingLicenceController@hospitalPharmacyShow')->name('renewal-pending-hospital-show');

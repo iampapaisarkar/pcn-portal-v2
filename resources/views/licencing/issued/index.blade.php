@@ -63,6 +63,9 @@
                         @if($document->type == 'distribution_premises')
                         <td>{{$document->other_registration->company->name}}</td>
                         @endif
+                        @if($document->type == 'manufacturing_premises')
+                        <td>{{$document->other_registration->company->name}}</td>
+                        @endif
 
                         @if($document->type == 'hospital_pharmacy')
                         <td>Hospital Pharmacy Registration</td>
@@ -74,6 +77,9 @@
                         <td>Community Pharmacy Location Approval Application</td>
                         @endif
                         @if($document->type == 'distribution_premises')
+                        <td>Distribution Premises Location Approval Application</td>
+                        @endif
+                        @if($document->type == 'manufacturing_premises')
                         <td>Distribution Premises Location Approval Application</td>
                         @endif
 
@@ -97,6 +103,11 @@
                             @endif
                             @if($document->type == 'distribution_premises')
                             <a href="{{ route('licence-issued-distribution-show') }}?registration_id={{$document->id}}&user_id={{$document->user->id}}">
+                                <button class="btn btn-success btn-sm" type="button"><i class="nav-icon i-Eye"></i></button>
+                            </a>
+                            @endif
+                            @if($document->type == 'manufacturing_premises')
+                            <a href="{{ route('licence-issued-manufacturing-show') }}?registration_id={{$document->id}}&user_id={{$document->user->id}}">
                                 <button class="btn btn-success btn-sm" type="button"><i class="nav-icon i-Eye"></i></button>
                             </a>
                             @endif

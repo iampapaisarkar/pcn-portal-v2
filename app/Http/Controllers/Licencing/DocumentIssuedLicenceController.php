@@ -165,4 +165,18 @@ class DocumentIssuedLicenceController extends Controller
             return abort(404);
         }
     }
+
+    public function manufacturingShow(Request $request){
+
+        $registration = Registration::where(['payment' => true, 'id' => $request['registration_id'], 'user_id' => $request['user_id'], 'type' => 'manufacturing_premises'])
+        ->with('other_registration', 'user')
+        ->where('status', 'licence_issued')
+        ->first();
+
+        if($registration){
+            return view('licencing.issued.manufacturing-show', compact('registration'));
+        }else{
+            return abort(404);
+        }
+    }
 }
