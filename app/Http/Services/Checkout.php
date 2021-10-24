@@ -680,10 +680,9 @@ class Checkout
         try {
             DB::beginTransaction();
 
-            $Registration = Registration::where(['id' => $application['id'], 'payment' => false, 'type' => $type])->first(); 
-            $OtherRegistration = OtherRegistration::where(['registration_id' => $application['id']])->first(); 
+            $Renewal = Renewal::where(['id' => $application['id'], 'payment' => false, 'type' => $type])->first(); 
 
-            if($Registration){
+            if($Renewal){
                 $service = ChildService::where('id', 11)
                 ->with('netFees')
                 ->first();
@@ -724,6 +723,6 @@ class Checkout
         }catch(Exception $e) {
             DB::rollback();
             return ['success' => false];
-        }  
+        }     
     }
 }

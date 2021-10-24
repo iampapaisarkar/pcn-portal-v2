@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-@include('layouts.navbars.breadcrumb', ['page' => 'Renewals', 'route' => 'hospital-renewals.index'])
+@include('layouts.navbars.breadcrumb', ['page' => 'Renewals', 'route' => 'cp-dp-renewals.index'])
 <div class="row">
     <div class="col-lg-12 col-md-12">
         <div class="card text-left">
@@ -9,7 +9,7 @@
             @if(app('App\Http\Services\ManufacturingInfo')->canAccessRenewalPage()['response'])
                 <h2 class=" mb-6">Renewals</h2>
                 @if(app('App\Http\Services\ManufacturingInfo')->licenceRenewalYearCheck()['response'])
-                <a href="{{route('mp-renewal-form')}}"><button class="btn btn-primary" type="button">RENEW LICENCE</button></a>
+                <a href="{{route('cp-dp-renewal-form')}}"><button class="btn btn-primary" type="button">RENEW LICENCE</button></a>
                 @else
                     @if(isset(app('App\Http\Services\ManufacturingInfo')->licenceRenewalYearCheck()['renewal_date']))
                     <h5>You can renwal on {{app('App\Http\Services\ManufacturingInfo')->licenceRenewalYearCheck()['renewal_date']}}</h5>
@@ -58,7 +58,7 @@
                                 </td>
                                 <td>
                                 @if($renewal->status == 'no_recommendation')
-                                <a href="{{route('mp-renewal-form-edit', $renewal->id)}}"><button class="btn btn-info btn-icon btn-sm m-0" type="button">UPDATE APPLICATION</button></a>
+                                <a href="{{route('cp-dp-renewal-form-edit', $renewal->id)}}"><button class="btn btn-info btn-icon btn-sm m-0" type="button">UPDATE APPLICATION</button></a>
                                 @endif
                                 @if($renewal->status == 'licence_issued')
                                 <a target="_blank" href=""><button class="btn btn-info btn-icon btn-sm m-0" type="button"> <span class="ul-btn__icon"><i class="i-Gear-2"></i></span> <span class="ul-btn__text">LICENCE</span></button></a>

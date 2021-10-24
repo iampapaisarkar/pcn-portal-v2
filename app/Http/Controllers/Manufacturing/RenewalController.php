@@ -96,4 +96,77 @@ class RenewalController extends Controller
     {
         //
     }
+
+    public function renewalForm(){
+
+        $registration = Renewal::where('user_id', Auth::user()->id)
+        ->with('other_registration', 'registration', 'user')
+        ->orderBy('renewal_year', 'desc')
+        ->latest()->first();
+
+
+        if($registration){
+            if(($registration && $registration->status == 'licence_issued') && (date('Y-m-d') > \Carbon\Carbon::createFromFormat('Y-m-d', $registration->expires_at)->addDays(1)->format('Y-m-d'))){
+                return view('manufacturingpremises.renewal-form', compact('registration'));
+            }else{
+                return abort(404);
+            }
+        }else{
+            return abort(404);
+        }
+    }
+
+    public function renewalFormSubmit(Request $request){
+        try {
+            DB::beginTransaction();
+
+            if(Registration::where(['user_id' => Auth::user()->id, 'id' => $request->registration_id, 'type' => 'manufacturing_premises'])->exists()){
+
+                $Registration = Registration::where(['user_id' => Auth::user()->id, 'id' => $request->registration_id, 'type' => 'manufacturing_premises'])->first();
+
+                $previousRenwal = Renewal::where('user_id', Auth::user()->id)->orderBy('renewal_year', 'desc')->first();
+
+                OtherRegistration::where(['user_id' => Auth::user()->id, 'registration_id' => $request->registration_id])->update([
+                    'firstname' =>$request->firstname,
+                    'middlename' => $request->middlename,
+                    'surname' => $request->surname,
+                    'email' => $request->email,
+                    'phone' => $request->phone,
+                    'gender' => $request->gender,
+                    'doq' => $request->doq,
+                    'residental_address' => $request->residental_address,
+                    'annual_licence_no' => $request->annual_licence_no,
+                ]);
+
+                $renewal = Renewal::create([
+                    'user_id' => Auth::user()->id,
+                    'registration_id' => $request->registration_id,
+                    'form_id' => $previousRenwal->form_id,
+                    'type' => 'manufacturing_premises_renewal',
+                    'renewal_year' => date('Y'),
+                    'expires_at' => \Carbon\Carbon::now()->format('Y') .'-12-31',
+                    // 'licence' => 'TEST2021',
+                    'status' => $previousRenwal->inspection == true ? 'send_to_registration' : 'send_to_registry',
+                    // 'renewal' => true,
+                    'inspection' => $previousRenwal->inspection == true ? false : true,
+                    // 'payment' => true,
+                ]);
+
+                $response = Checkout::checkoutManufacturingRenewal($application = ['id' => $renewal->id], 'manufacturing_premises_renewal');
+            }
+
+            DB::commit();
+
+            if($response['success']){
+                return redirect()->route('invoices.show', ['id' => $response['id']])
+                ->with('success', 'Renewal Application successfully submitted. Please pay amount for further action');
+            }else{
+                return back()->with('error','There is something error, please try after some time');
+            }
+
+        }catch(Exception $e) {
+            DB::rollback();
+            return back()->with('error','There is something error, please try after some time');
+        }  
+    }
 }

@@ -214,6 +214,36 @@ class CheckoutController extends Controller
                 EmailSendJOB::dispatch($data);
             }
 
+            if($order->service_type == 'manufacturing_premises'){
+                Registration::where(['id' => $order->application_id, 'user_id' => Auth::user()->id, 'type' => 'manufacturing_premises'])->update([
+                    'payment' => true
+                ]);
+
+                $data = [
+                    'order_id' => $order->order_id,
+                    'amount' => $order->amount,
+                    'user' => Auth::user(),
+                    'registration_type' => 'manufacturing_premises',
+                    'type' => 'payment_success',
+                ];
+                EmailSendJOB::dispatch($data);
+            }
+
+            if($order->service_type == 'manufacturing_premises_renewal'){
+                Renewal::where(['id' => $order->application_id, 'user_id' => Auth::user()->id, 'type' => 'manufacturing_premises_renewal'])->update([
+                    'payment' => true
+                ]);
+
+                $data = [
+                    'order_id' => $order->order_id,
+                    'amount' => $order->amount,
+                    'user' => Auth::user(),
+                    'registration_type' => 'manufacturing_premises_renewal',
+                    'type' => 'payment_success',
+                ];
+                EmailSendJOB::dispatch($data);
+            }
+
             return view('checkout.success', compact('order'));
         }else{
             return abort(404);

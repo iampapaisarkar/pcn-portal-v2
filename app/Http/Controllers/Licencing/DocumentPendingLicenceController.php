@@ -232,7 +232,7 @@ class DocumentPendingLicenceController extends Controller
                         ]);
 
                         $data = [
-                            'user' => $PpmvLocationApplication->user,
+                            'user' => $OtherRegistration->user,
                             'registration_type' => 'community_pharmacy',
                             'type' => 'licencing_issued',
                         ];
@@ -259,7 +259,7 @@ class DocumentPendingLicenceController extends Controller
                         ]);
 
                         $data = [
-                            'user' => $PpmvLocationApplication->user,
+                            'user' => $OtherRegistration->user,
                             'registration_type' => 'distribution_premises',
                             'type' => 'licencing_issued',
                         ];
@@ -286,7 +286,7 @@ class DocumentPendingLicenceController extends Controller
                         ]);
 
                         $data = [
-                            'user' => $PpmvLocationApplication->user,
+                            'user' => $OtherRegistration->user,
                             'registration_type' => 'manufacturing_premises',
                             'type' => 'licencing_issued',
                         ];
