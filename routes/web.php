@@ -243,10 +243,13 @@ Route::group(['middleware' => ['auth','verified', 'can:isIMonitoring']], functio
     Route::post('monitoring-inspection-renewal-community-update', 'App\Http\Controllers\InspectionMonitoring\LocationInspectionRenewPendingController@communityUpdate')->name('monitoring-inspection-renewal-community-update');
     Route::get('monitoring-inspection-renewal-distribution-show', 'App\Http\Controllers\InspectionMonitoring\LocationInspectionRenewPendingController@distributionShow')->name('monitoring-inspection-renewal-distribution-show');
     Route::post('monitoring-inspection-renewal-distribution-update', 'App\Http\Controllers\InspectionMonitoring\LocationInspectionRenewPendingController@distributionUpdate')->name('monitoring-inspection-renewal-distribution-update');
+    Route::get('monitoring-inspection-renewal-manufacturing-show', 'App\Http\Controllers\InspectionMonitoring\LocationInspectionRenewPendingController@manufacturingShow')->name('monitoring-inspection-renewal-manufacturing-show');
+    Route::post('monitoring-inspection-renewal-manufacturing-update', 'App\Http\Controllers\InspectionMonitoring\LocationInspectionRenewPendingController@manufacturingUpdate')->name('monitoring-inspection-renewal-manufacturing-update');
 
     Route::resource('monitoring-renewal-reports', 'App\Http\Controllers\InspectionMonitoring\LocationInspectionRenewApprovedController');
     Route::get('monitoring-renewal-community-report-show', 'App\Http\Controllers\InspectionMonitoring\LocationInspectionRenewApprovedController@communityShow')->name('monitoring-renewal-community-report-show');
-    Route::get('monitoring-renewal-distribution-report-show', 'App\Http\Controllers\InspectionMonitoring\LocationInspectionRenewApprovedController@rdistributionShow')->name('monitoring-renewal-distribution-report-show');
+    Route::get('monitoring-renewal-distribution-report-show', 'App\Http\Controllers\InspectionMonitoring\LocationInspectionRenewApprovedController@distributionShow')->name('monitoring-renewal-distribution-report-show');
+    Route::get('monitoring-renewal-manufacturing-report-show', 'App\Http\Controllers\InspectionMonitoring\LocationInspectionRenewApprovedController@manufacturingShow')->name('monitoring-renewal-manufacturing-report-show');
 });
 
 // REGISTERING & LECENCING ROUTES 

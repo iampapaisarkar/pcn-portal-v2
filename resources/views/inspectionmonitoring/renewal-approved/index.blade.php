@@ -60,6 +60,9 @@
                         @if($document->registration->type == 'distribution_premises')
                         <td>Distribution Premises Location Approval Application</td>
                         @endif
+                        @if($document->registration->type == 'manufacturing_premises')
+                        <td>Pharmaceutical Manufacturing Premises Renewal Approval Application</td>
+                        @endif
 
                         <td>{{$document->renewal_year}}</td>
 
@@ -78,6 +81,11 @@
                             @endif
                             @if($document->registration->type == 'distribution_premises')
                             <a href="{{ route('monitoring-renewal-distribution-report-show') }}?renewal_id={{$document->id}}&user_id={{$document->user->id}}">
+                                <button class="btn btn-success btn-sm" type="button"><i class="nav-icon i-Eye"></i></button>
+                            </a>
+                            @endif
+                            @if($document->registration->type == 'manufacturing_premises')
+                            <a href="{{ route('monitoring-renewal-manufacturing-report-show') }}?renewal_id={{$document->id}}&user_id={{$document->user->id}}">
                                 <button class="btn btn-success btn-sm" type="button"><i class="nav-icon i-Eye"></i></button>
                             </a>
                             @endif
