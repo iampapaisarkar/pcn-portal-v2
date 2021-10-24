@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
+use App\Models\Registration;
+use App\Models\Renewal;
 class HomeController extends Controller
 {
     /**
@@ -44,42 +46,134 @@ class HomeController extends Controller
             ];
         }
         if(Auth::user()->hasRole(['state_office'])){
-            $totalPendingMEPTP = MEPTPApplication::where(['state' => Auth::user()->state])->where('status', 'send_to_state_office')->count();
-            $totalApprovedMEPTP = MEPTPApplication::where(['state' => Auth::user()->state])->where('status', 'send_to_pharmacy_practice')->count();
-
-            $totalPendingPPMV = PPMVRenewal::whereHas('user', function($q){
+            $pending_document = Registration::where(['payment' => true])
+            ->whereHas('user', function($q){
                 $q->where('state', Auth::user()->state);
             })
-            ->where('status', 'send_to_state_office')->count();
-
-            $totalApprovedPPMV = PPMVRenewal::whereHas('user', function($q){
+            ->orWhereHas('other_registration.company', function($q){
                 $q->where('state', Auth::user()->state);
             })
-            ->where('status', 'approved')->count();
+            ->where('status', 'send_to_state_office')
+            ->count();
+
+            $approved_document = Registration::where(['payment' => true])
+            ->whereHas('user', function($q){
+                $q->where('state', Auth::user()->state);
+            })
+            ->orWhereHas('other_registration.company', function($q){
+                $q->where('state', Auth::user()->state);
+            })
+            ->where('status', 'send_to_registry')
+            ->count();
+
+            $pending_inspection = Registration::where(['payment' => true])
+            ->whereHas('user', function($q){
+                $q->where('state', Auth::user()->state);
+            })
+            ->orWhereHas('other_registration.company', function($q){
+                $q->where('state', Auth::user()->state);
+            })
+            ->where('status', 'send_to_state_office_inspection')
+            ->where('location_approval', true)
+            ->count();
+
+            $report_inspection = Registration::where(['payment' => true])
+            ->whereHas('user', function($q){
+                $q->where('state', Auth::user()->state);
+            })
+            ->orWhereHas('other_registration.company', function($q){
+                $q->where('state', Auth::user()->state);
+            })
+            ->where(function($q){
+                $q->where('status', 'no_recommendation');
+                $q->orWhere('status', 'partial_recommendation');
+                $q->orWhere('status', 'full_recommendation');
+            })
+            ->where('location_approval', true)
+            ->count();
+
+
+            $pending_facility = Registration::where(['payment' => true])
+            ->whereHas('user', function($q){
+                $q->where('state', Auth::user()->state);
+            })
+            ->orWhereHas('other_registration.company', function($q){
+                $q->where('state', Auth::user()->state);
+            })
+            ->where('status', 'send_to_state_office_registration')
+            ->where('location_approval', false)
+            ->count();
+
+            $report_facility = Registration::where(['payment' => true])
+            ->whereHas('user', function($q){
+                $q->where('state', Auth::user()->state);
+            })
+            ->orWhereHas('other_registration.company', function($q){
+                $q->where('state', Auth::user()->state);
+            })
+            ->where(function($q){
+                $q->where('status', 'facility_no_recommendation');
+                $q->orWhere('status', 'facility_full_recommendation');
+            })
+            ->where('location_approval', false)
+            ->count();
 
             $data = [
-                'meptp_pending' => [
-                    'status' => 'Document Verification Pending',
-                    'type' => 'METPT',
-                    'total' => $totalPendingMEPTP
-                ],
-                'meptp_approved' => [
-                    'status' => 'Document Verification Approved',
-                    'type' => 'METPT',
-                    'total' => $totalApprovedMEPTP
-                ],
-                'ppmv_pending' => [
-                    'status' => 'Document Verification Approved',
-                    'type' => 'Tiered PPMV Registration',
-                    'total' => $totalPendingPPMV
-                ],
-                'ppmv_approved' => [
-                    'status' => 'Document Verification Approved',
-                    'type' => 'Tiered PPMV Registration',
-                    'total' => $totalApprovedPPMV
-                ]
+                'pending_document' => $pending_document,
+                'approved_document' => $approved_document,
+                'pending_inspection' => $pending_inspection,
+                'report_inspection' => $report_inspection,
+                'pending_facility' => $pending_facility,
+                'report_facility' => $report_facility,
             ];
                 
+        }
+        if(Auth::user()->hasRole(['registry'])){
+            $data= [];
+
+            $location_inspection = Registration::where(['payment' => true])
+            ->where('location_approval', true)
+            ->where('status', 'send_to_registry')
+            ->count();
+
+            $location_report = Registration::where(['payment' => true])
+            ->where(function($q){
+                $q->where('status', 'full_recommendation');
+            })
+            ->where('location_approval', true)
+            ->count();
+
+            $facility_inspection = Registration::where(['payment' => true])
+            ->where('status', 'send_to_registry')
+            ->where('location_approval', false)
+            ->count();
+
+            $facility_report = Registration::where(['payment' => true])
+            ->where(function($q){
+                $q->where('status', 'full_recommendation');
+            })
+            ->where('location_approval', false)
+            ->count();
+
+            $renewal_inspection = Renewal::where(['payment' => true])
+            ->where('status', 'send_to_registry')
+            ->count();
+
+            $renewal_report = Renewal::where(['payment' => true])
+            ->where(function($q){
+                $q->where('status', 'partial_recommendation');
+                $q->orWhere('status', 'full_recommendation');
+            })
+            ->count();
+
+            $data = [
+                'location_inspection' => $location_inspection,
+                'location_report' => $location_report,
+                'facility_inspection' => $facility_inspection,
+                'facility_report' => $facility_report,
+                'renewal_inspection' => $renewal_inspection,
+                'renewal_report' => $renewal_report,
+            ];
         }
         if(Auth::user()->hasRole(['pharmacy_practice'])){
             $data= [];

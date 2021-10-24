@@ -36,7 +36,7 @@
                 <div class="card card-icon mb-4">
                     <div class="card-body text-center"><i class="i-Diploma"></i>
                         <h3 class="text-muted mt-2 mb-2">Doc. Verification Pending</h3>
-                        <p class="text-primary text-60 line-height-1 m-0">60</p>
+                        <p class="text-primary text-60 line-height-1 m-0">{{$data['pending_document']}}</p>
                     </div>
                 </div>
             </div>
@@ -44,7 +44,7 @@
                 <div class="card card-icon mb-4">
                     <div class="card-body text-center"><i class="i-Diploma"></i>
                         <h3 class="text-muted mt-2 mb-2">Doc. Verification Approved</h3>
-                        <p class="text-primary text-60 line-height-1 m-0">60</p>
+                        <p class="text-primary text-60 line-height-1 m-0">{{$data['approved_document']}}</p>
                     </div>
                 </div>
             </div>
@@ -52,7 +52,7 @@
                 <div class="card card-icon mb-4">
                     <div class="card-body text-center"><i class="i-Diploma-2"></i>
                         <h3 class="text-muted mt-2 mb-2">Location Inspection Pending</h3>
-                        <p class="text-primary text-60 line-height-1 m-0">60</p>
+                        <p class="text-primary text-60 line-height-1 m-0">{{$data['pending_inspection']}}</p>
                     </div>
                 </div>
             </div>
@@ -60,7 +60,7 @@
                 <div class="card card-icon mb-4">
                     <div class="card-body text-center"><i class="i-Diploma-2"></i>
                         <h3 class="text-muted mt-2 mb-2">Location Inspection Uploaded</h3>
-                        <p class="text-primary text-60 line-height-1 m-0">60</p>
+                        <p class="text-primary text-60 line-height-1 m-0">{{$data['report_inspection']}}</p>
                     </div>
                 </div>
             </div>
@@ -68,7 +68,7 @@
                 <div class="card card-icon mb-4">
                     <div class="card-body text-center"><i class="i-Diploma-2"></i>
                         <h3 class="text-muted mt-2 mb-2">Facility Inspection Pending</h3>
-                        <p class="text-primary text-60 line-height-1 m-0">60</p>
+                        <p class="text-primary text-60 line-height-1 m-0">{{$data['pending_facility']}}</p>
                     </div>
                 </div>
             </div>
@@ -76,23 +76,7 @@
                 <div class="card card-icon mb-4">
                     <div class="card-body text-center"><i class="i-Diploma-2"></i>
                         <h3 class="text-muted mt-2 mb-2">Facility Inspection Uploaded</h3>
-                        <p class="text-primary text-60 line-height-1 m-0">60</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-3 col-sm-6">
-                <div class="card card-icon mb-4">
-                    <div class="card-body text-center"><i class="i-Diploma-2"></i>
-                        <h3 class="text-muted mt-2 mb-2">Renewal Inspection Pending</h3>
-                        <p class="text-primary text-60 line-height-1 m-0">60</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-3 col-sm-6">
-                <div class="card card-icon mb-4">
-                    <div class="card-body text-center"><i class="i-Diploma-2"></i>
-                        <h3 class="text-muted mt-2 mb-2">Renewal Inspection Uploaded</h3>
-                        <p class="text-primary text-60 line-height-1 m-0">60</p>
+                        <p class="text-primary text-60 line-height-1 m-0">{{$data['report_facility']}}</p>
                     </div>
                 </div>
             </div>
@@ -107,7 +91,7 @@
                 <div class="card card-icon mb-4">
                     <div class="card-body text-center"><i class="i-Diploma"></i>
                         <h3 class="text-muted mt-2 mb-2">Location Approval Inspection Pending</h3>
-                        <p class="text-primary text-60 line-height-1 m-0">60</p>
+                        <p class="text-primary text-60 line-height-1 m-0">{{$data['location_inspection']}}</p>
                     </div>
                 </div>
             </div>
@@ -115,23 +99,7 @@
                 <div class="card card-icon mb-4">
                     <div class="card-body text-center"><i class="i-Diploma"></i>
                         <h3 class="text-muted mt-2 mb-2">Location Approval Inspection Approved</h3>
-                        <p class="text-primary text-60 line-height-1 m-0">60</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-3 col-sm-6">
-                <div class="card card-icon mb-4">
-                    <div class="card-body text-center"><i class="i-Diploma-2"></i>
-                        <h3 class="text-muted mt-2 mb-2">Location Approval Recommendation Pending</h3>
-                        <p class="text-primary text-60 line-height-1 m-0">60</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-3 col-sm-6">
-                <div class="card card-icon mb-4">
-                    <div class="card-body text-center"><i class="i-Diploma-2"></i>
-                        <h3 class="text-muted mt-2 mb-2">Location Approval Recommendation Approved</h3>
-                        <p class="text-primary text-60 line-height-1 m-0">60</p>
+                        <p class="text-primary text-60 line-height-1 m-0">{{$data['location_report']}}</p>
                     </div>
                 </div>
             </div>
@@ -139,7 +107,7 @@
                 <div class="card card-icon mb-4">
                     <div class="card-body text-center"><i class="i-Diploma-2"></i>
                         <h3 class="text-muted mt-2 mb-2">Facility Inspection Pending</h3>
-                        <p class="text-primary text-60 line-height-1 m-0">60</p>
+                        <p class="text-primary text-60 line-height-1 m-0">{{$data['facility_inspection']}}</p>
                     </div>
                 </div>
             </div>
@@ -147,23 +115,7 @@
                 <div class="card card-icon mb-4">
                     <div class="card-body text-center"><i class="i-Diploma-2"></i>
                         <h3 class="text-muted mt-2 mb-2">Facility Inspection Approved</h3>
-                        <p class="text-primary text-60 line-height-1 m-0">60</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-3 col-sm-6">
-                <div class="card card-icon mb-4">
-                    <div class="card-body text-center"><i class="i-Diploma-2"></i>
-                        <h3 class="text-muted mt-2 mb-2">Facility Inspection Recommendation Pending</h3>
-                        <p class="text-primary text-60 line-height-1 m-0">60</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-3 col-sm-6">
-                <div class="card card-icon mb-4">
-                    <div class="card-body text-center"><i class="i-Diploma-2"></i>
-                        <h3 class="text-muted mt-2 mb-2">Facility Inspection Recommendation Approved</h3>
-                        <p class="text-primary text-60 line-height-1 m-0">60</p>
+                        <p class="text-primary text-60 line-height-1 m-0">{{$data['facility_report']}}</p>
                     </div>
                 </div>
             </div>
@@ -171,7 +123,7 @@
                 <div class="card card-icon mb-4">
                     <div class="card-body text-center"><i class="i-Diploma-2"></i>
                         <h3 class="text-muted mt-2 mb-2">Renewal Inspection Pending</h3>
-                        <p class="text-primary text-60 line-height-1 m-0">60</p>
+                        <p class="text-primary text-60 line-height-1 m-0">{{$data['renewal_inspection']}}</p>
                     </div>
                 </div>
             </div>
@@ -179,7 +131,7 @@
                 <div class="card card-icon mb-4">
                     <div class="card-body text-center"><i class="i-Diploma-2"></i>
                         <h3 class="text-muted mt-2 mb-2">Renewal Inspection Uploaded</h3>
-                        <p class="text-primary text-60 line-height-1 m-0">60</p>
+                        <p class="text-primary text-60 line-height-1 m-0">{{$data['renewal_report']}}</p>
                     </div>
                 </div>
             </div>
