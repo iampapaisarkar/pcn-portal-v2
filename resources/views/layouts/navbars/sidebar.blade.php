@@ -441,7 +441,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="">
+                    <a href="{{route('mp-renewals.index')}}">
                         <i class="nav-icon i-Notepad"></i>
                         <span class="item-name">Renewal</span>
                     </a>

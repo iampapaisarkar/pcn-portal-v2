@@ -317,6 +317,13 @@ Route::group(['middleware' => ['auth','verified', 'can:isMpremises', 'CheckProfi
     Route::post('/manufacturing-registration-update/{id}', 'App\Http\Controllers\Manufacturing\RegistrationController@registrationUpdate')->name('manufacturing-registration-update');
     
     Route::get('/manufacturing-registration-status', 'App\Http\Controllers\Manufacturing\RegistrationController@registrationStatus')->name('manufacturing-registration-status');
+
+    Route::resource('mp-renewals', 'App\Http\Controllers\Manufacturing\RenewalController');
+    Route::get('/mp-renewal-form', 'App\Http\Controllers\Manufacturing\RenewalController@renewalForm')->name('mp-renewal-form');
+    Route::post('/mp-renewal-form-submit/{id}', 'App\Http\Controllers\Manufacturing\RenewalController@renewalFormSubmit')->name('mp-renewal-form-submit');
+
+    Route::get('/mp-renewal-form-edit/{id}', 'App\Http\Controllers\Manufacturing\RenewalController@renewalFormEdit')->name('mp-renewal-form-edit');
+    Route::post('/mp-renewal-form-update/{id}', 'App\Http\Controllers\Manufacturing\RenewalController@renewalFormUpdate')->name('mp-renewal-form-update');
 });
 
 // COMMUNITY PHARMACY ROUTES // DISTRIBUTION premises ROUTES

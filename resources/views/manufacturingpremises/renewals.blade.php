@@ -6,13 +6,13 @@
     <div class="col-lg-12 col-md-12">
         <div class="card text-left">
             <div class="card-body">
-            @if(app('App\Http\Services\ManufacturingInfo')->canAccessRenewalPage()['response'])
+            @if(app('App\Http\Services\CommunityDistributionInfo')->canAccessRenewalPage()['response'])
                 <h2 class=" mb-6">Renewals</h2>
-                @if(app('App\Http\Services\ManufacturingInfo')->licenceRenewalYearCheck()['response'])
-                <a href="{{route('mp-renewal-form')}}"><button class="btn btn-primary" type="button">RENEW LICENCE</button></a>
+                @if(app('App\Http\Services\CommunityDistributionInfo')->licenceRenewalYearCheck()['response'])
+                <a href="{{route('cp-dp-renewal-form')}}"><button class="btn btn-primary" type="button">RENEW LICENCE</button></a>
                 @else
-                    @if(isset(app('App\Http\Services\ManufacturingInfo')->licenceRenewalYearCheck()['renewal_date']))
-                    <h5>You can renwal on {{app('App\Http\Services\ManufacturingInfo')->licenceRenewalYearCheck()['renewal_date']}}</h5>
+                    @if(isset(app('App\Http\Services\CommunityDistributionInfo')->licenceRenewalYearCheck()['renewal_date']))
+                    <h5>You can renwal on {{app('App\Http\Services\CommunityDistributionInfo')->licenceRenewalYearCheck()['renewal_date']}}</h5>
                     @endif
                 @endif
                 <div class="custom-separator"></div>
@@ -58,7 +58,7 @@
                                 </td>
                                 <td>
                                 @if($renewal->status == 'no_recommendation')
-                                <a href="{{route('mp-renewal-form-edit', $renewal->id)}}"><button class="btn btn-info btn-icon btn-sm m-0" type="button">UPDATE APPLICATION</button></a>
+                                <a href="{{route('cp-dp-renewal-form-edit', $renewal->id)}}"><button class="btn btn-info btn-icon btn-sm m-0" type="button">UPDATE APPLICATION</button></a>
                                 @endif
                                 @if($renewal->status == 'licence_issued')
                                 <a target="_blank" href=""><button class="btn btn-info btn-icon btn-sm m-0" type="button"> <span class="ul-btn__icon"><i class="i-Gear-2"></i></span> <span class="ul-btn__text">LICENCE</span></button></a>
@@ -71,8 +71,8 @@
                     </table>
                 </div>
             @else
-            <div class="alert alert-card alert-{{app('App\Http\Services\ManufacturingInfo')->canAccessRenewalPage()['color']}}" role="alert">
-                {{app('App\Http\Services\ManufacturingInfo')->canAccessRenewalPage()['message']}}
+            <div class="alert alert-card alert-{{app('App\Http\Services\CommunityDistributionInfo')->canAccessRenewalPage()['color']}}" role="alert">
+                {{app('App\Http\Services\CommunityDistributionInfo')->canAccessRenewalPage()['message']}}
             </div>
             @endif
             </div>
