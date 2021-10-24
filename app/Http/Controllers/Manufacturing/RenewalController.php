@@ -169,4 +169,67 @@ class RenewalController extends Controller
             return back()->with('error','There is something error, please try after some time');
         }  
     }
+
+    public function renewalFormEdit($id){
+
+        $registration = Renewal::where('user_id', Auth::user()->id)
+        ->where('id', $id)
+        ->with('other_registration', 'registration', 'user')
+        ->orderBy('renewal_year', 'desc')
+        ->latest()->first();
+
+        if($registration){
+            return view('manufacturingpremises.renewal-form-edit', compact('registration'));
+        }else{
+            return abort(404);
+        }
+    }
+
+    public function renewalFormUpdate(Request $request, $id){
+        try {
+            DB::beginTransaction();
+
+            if(Registration::where(['user_id' => Auth::user()->id, 'id' => $request->registration_id, 'type' => 'manufacturing_premises'])->exists()){
+
+                $Registration = Registration::where(['user_id' => Auth::user()->id, 'id' => $request->registration_id, 'type' => 'manufacturing_premises'])->first();
+
+                $previousRenwal = Renewal::where('user_id', Auth::user()->id)->orderBy('renewal_year', 'desc')->first();
+
+                OtherRegistration::where(['user_id' => Auth::user()->id, 'registration_id' => $request->registration_id])->update([
+                    'firstname' =>$request->firstname,
+                    'middlename' => $request->middlename,
+                    'surname' => $request->surname,
+                    'email' => $request->email,
+                    'phone' => $request->phone,
+                    'gender' => $request->gender,
+                    'doq' => $request->doq,
+                    'residental_address' => $request->residental_address,
+                    'annual_licence_no' => $request->annual_licence_no,
+                ]);
+
+
+                Renewal::where(['user_id' => Auth::user()->id, 'id' => $id, 'type' => 'manufacturing_premises_renewal'])
+                ->where('status', 'no_recommendation')
+                ->update([
+                    'status' => 'send_to_registry',
+                    'payment' => false,
+                ]);
+
+                $response = Checkout::checkoutManufacturingRenewal($application = ['id' => $id], 'manufacturing_premises_renewal');
+            }
+
+            DB::commit();
+
+            if($response['success']){
+                return redirect()->route('invoices.show', ['id' => $response['id']])
+                ->with('success', 'Renewal Application successfully submitted. Please pay amount for further action');
+            }else{
+                return back()->with('error','There is something error, please try after some time');
+            }
+
+        }catch(Exception $e) {
+            DB::rollback();
+            return back()->with('error','There is something error, please try after some time');
+        }  
+    }
 }

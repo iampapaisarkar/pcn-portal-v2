@@ -158,9 +158,35 @@ class RenewalRecommendationController extends Controller
                             'status' => 'send_to_registration'
                         ]);
                         
-                        $adminName = Auth::user()->firstname .' '. Auth::user()->lastname;
-                        $activity = 'Registry Document Renewal Inspection Report Approval';
-                        AllActivity::storeActivity($renewal_id, $adminName, $activity, 'hospital_pharmacy');
+                        if($renewal->type == 'hospital_pharmacy_renewal'){
+                            $adminName = Auth::user()->firstname .' '. Auth::user()->lastname;
+                            $activity = 'Registry Document Renewal Inspection Report Approval';
+                            AllActivity::storeActivity($renewal_id, $adminName, $activity, 'hospital_pharmacy');
+                        }
+
+                        if($renewal->type == 'ppmv_renewal'){
+                            $adminName = Auth::user()->firstname .' '. Auth::user()->lastname;
+                            $activity = 'Registry Document Renewal Inspection Report Approval';
+                            AllActivity::storeActivity($renewal_id, $adminName, $activity, 'ppmv');
+                        }
+
+                        if($renewal->type == 'community_pharmacy_renewal'){
+                            $adminName = Auth::user()->firstname .' '. Auth::user()->lastname;
+                            $activity = 'Registry Document Renewal Inspection Report Approval';
+                            AllActivity::storeActivity($renewal_id, $adminName, $activity, 'community_pharmacy');
+                        }
+
+                        if($renewal->type == 'distribution_premises_renewal'){
+                            $adminName = Auth::user()->firstname .' '. Auth::user()->lastname;
+                            $activity = 'Registry Document Renewal Inspection Report Approval';
+                            AllActivity::storeActivity($renewal_id, $adminName, $activity, 'distribution_premises');
+                        }
+
+                        if($renewal->type == 'manufacturing_premises_renewal'){
+                            $adminName = Auth::user()->firstname .' '. Auth::user()->lastname;
+                            $activity = 'Registry Document Renewal Inspection Report Approval';
+                            AllActivity::storeActivity($renewal_id, $adminName, $activity, 'manufacturing_premises');
+                        }
 
                     }else{
                         return abort(404);
@@ -378,6 +404,60 @@ class RenewalRecommendationController extends Controller
                     $adminName = Auth::user()->firstname .' '. Auth::user()->lastname;
                     $activity = 'Registry Document Renewal Inspection Report Approval';
                     AllActivity::storeActivity($request['registration_id'], $adminName, $activity, 'distribution_premises');
+
+                }else{
+                    return abort(404);
+                }
+
+        DB::commit();
+            return redirect()->route('registry-renewal-recommendation.index')->with('success', 'Licence issued successfully done');
+        }catch(Exception $e) {
+            DB::rollback();
+            return back()->with('error','There is something error, please try after some time');
+        }
+    }
+
+    public function manufacturingShow(Request $request){
+
+        $registration = Renewal::where(['payment' => true, 'id' => $request['renewal_id'], 'user_id' => $request['user_id'], 'type' => 'manufacturing_premises_renewal'])
+        ->with('other_registration', 'registration', 'user')
+        ->where(function($q){
+            $q->where('status', 'full_recommendation');
+        })
+        ->first();
+
+        if($registration){
+            return view('registry.renewal-recommendation.manufacturing-renewal-show', compact('registration'));
+        }else{
+            return abort(404);
+        }
+    }
+
+    public function manufacturingApprove(Request $request){
+
+        try {
+            DB::beginTransaction();
+
+                $renewal = Renewal::where(['payment' => true, 'id' => $request['renewal_id'], 'user_id' => $request['user_id'], 'type' => 'manufacturing_premises_renewal'])
+                ->with('other_registration', 'registration', 'user')
+                ->where(function($q){
+                    $q->where('status', 'full_recommendation');
+                })
+                ->first();
+
+                if($renewal){
+
+                    Renewal::where(['payment' => true, 'id' => $request['renewal_id'], 'user_id' => $request['user_id'], 'type' => 'manufacturing_premises_renewal'])
+                    ->where(function($q){
+                        $q->where('status', 'full_recommendation');
+                    })
+                    ->update([
+                        'status' => 'send_to_registration'
+                    ]);
+                    
+                    $adminName = Auth::user()->firstname .' '. Auth::user()->lastname;
+                    $activity = 'Registry Document Renewal Inspection Report Approval';
+                    AllActivity::storeActivity($request['registration_id'], $adminName, $activity, 'manufacturing_premises');
 
                 }else{
                     return abort(404);

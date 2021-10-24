@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-@include('layouts.navbars.breadcrumb', ['page' => 'Renewal', 'route' => 'cp-dp-renewal-form'])
+@include('layouts.navbars.breadcrumb', ['page' => 'Renewal', 'route' => 'mp-renewal-form'])
 <div class="row">
     <div class="col-lg-12 col-md-12">
         @php 
@@ -12,7 +12,7 @@
             $director = Auth::user()->company()->first() ? Auth::user()->company()->first()->director()->get() : null;
             $other_director = Auth::user()->company()->first() ? Auth::user()->company()->first()->other_director()->get() : null;
         @endphp
-        <form method="POST" action="{{route('cp-dp-renewal-form-update', $registration->id)}}" enctype="multipart/form-data" novalidate>
+        <form method="POST" action="{{route('mp-renewal-form-update', $registration->id)}}" enctype="multipart/form-data" novalidate>
             @csrf
 
             <input type="hidden" name="registration_id" value="{{ $registration->registration->id }}" />
