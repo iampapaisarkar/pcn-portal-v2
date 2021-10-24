@@ -147,7 +147,8 @@ class DocumentInspectionController extends Controller
                         Registration::where(['payment' => true, 'id' => $registration_id])
                         ->where('status', 'send_to_registry')
                         ->update([
-                            'status' => 'send_to_inspection_monitoring'
+                            'token' => md5(uniqid(rand(), true)),
+                            'status' => 'send_to_inspection_monitoring_registration'
                         ]);
                     }
 
@@ -224,12 +225,13 @@ class DocumentInspectionController extends Controller
             Registration::where(['payment' => true, 'id' => $request['registration_id'], 'user_id' => $request['user_id'], 'type' => 'manufacturing_premises'])
             ->where('status', 'send_to_registry')
             ->update([
-                'status' => 'send_to_inspection_monitoring'
+                'token' => md5(uniqid(rand(), true)),
+                'status' => 'send_to_inspection_monitoring_registration'
             ]);
 
             $adminName = Auth::user()->firstname .' '. Auth::user()->lastname;
             $activity = 'Registry Document Facility Inspection Approval';
-            AllActivity::storeActivity($request['registration_id'], $adminName, $activity, 'hospital_pharmacy');
+            AllActivity::storeActivity($request['registration_id'], $adminName, $activity, 'manufacturing_premises');
 
             return redirect()->route('registry-documents.index')->with('success', 'Registration Approved successfully done');
         }else{

@@ -185,4 +185,40 @@ class FacilityInspectionApprovedController extends Controller
             return abort(404);
         }
     }
+
+    public function manufacturingShow(Request $request){
+
+        $registration = Registration::where(['payment' => true, 'id' => $request['registration_id'], 'user_id' => $request['user_id'], 'type' => 'manufacturing_premises'])
+        ->with('other_registration', 'user')
+        ->where(function($q){
+            $q->where('status', 'facility_no_recommendation');
+            $q->orWhere('status', 'facility_full_recommendation');
+        })
+        ->first();
+
+        if($registration){
+
+            $alert = [];
+            if($registration->status == 'facility_no_recommendation'){
+                $alert = [
+                    'success' => true,
+                    'message' => 'Inspection Report: No Recommendation',
+                    'color' => 'danger',
+                    'download-link' => route('location-inspection-report-download', $registration->id),
+                ];
+            }
+            if($registration->status == 'facility_full_recommendation'){
+                $alert = [
+                    'success' => true,
+                    'message' => 'Inspection Report: Full Recommendation',
+                    'color' => 'success',
+                    'download-link' => route('location-inspection-report-download', $registration->id),
+                ];
+            }
+
+            return view('inspectionmonitoring.facility-approved.manufacturing-show', compact('registration', 'alert'));
+        }else{
+            return abort(404);
+        }
+    }
 }

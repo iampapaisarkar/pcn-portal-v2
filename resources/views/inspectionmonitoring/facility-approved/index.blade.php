@@ -56,10 +56,13 @@
                         <td>{{$document->other_registration->company->name}}</td>
 
                         @if($document->type == 'community_pharmacy')
-                        <td>Community Pharmacy Location Approval Application</td>
+                        <td>Community Pharmacy Registration Approval Application</td>
                         @endif
                         @if($document->type == 'distribution_premises')
-                        <td>Distribution Premises Location Approval Application</td>
+                        <td>Distribution Premises Registration Approval Application</td>
+                        @endif
+                        @if($document->type == 'manufacturing_premises')
+                        <td>Pharmaceutical Manufacturing Premises Registration Application</td>
                         @endif
 
                         <td>{{$document->registration_year}}</td>
@@ -80,6 +83,11 @@
                             @endif
                             @if($document->type == 'distribution_premises')
                             <a href="{{ route('monitoring-inspection-flt-report-distribution-show') }}?registration_id={{$document->id}}&user_id={{$document->user->id}}">
+                                <button class="btn btn-success btn-sm" type="button"><i class="nav-icon i-Eye"></i></button>
+                            </a>
+                            @endif
+                            @if($document->type == 'manufacturing_premises')
+                            <a href="{{ route('monitoring-inspection-flt-report-manufacturing-show') }}?registration_id={{$document->id}}&user_id={{$document->user->id}}">
                                 <button class="btn btn-success btn-sm" type="button"><i class="nav-icon i-Eye"></i></button>
                             </a>
                             @endif

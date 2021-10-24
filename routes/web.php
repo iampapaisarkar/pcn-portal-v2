@@ -221,10 +221,13 @@ Route::group(['middleware' => ['auth','verified', 'can:isIMonitoring']], functio
     Route::post('monitoring-inspection-flt-community-update', 'App\Http\Controllers\InspectionMonitoring\FacilityInspectionPendingController@communityUpdate')->name('monitoring-inspection-flt-community-update');
     Route::get('monitoring-inspection-flt-distribution-show', 'App\Http\Controllers\InspectionMonitoring\FacilityInspectionPendingController@distributionShow')->name('monitoring-inspection-flt-distribution-show');
     Route::post('monitoring-inspection-flt-distribution-update', 'App\Http\Controllers\InspectionMonitoring\FacilityInspectionPendingController@distributionUpdate')->name('monitoring-inspection-flt-distribution-update');
+    Route::get('monitoring-inspection-flt-manufacturing-show', 'App\Http\Controllers\InspectionMonitoring\FacilityInspectionPendingController@manufacturingShow')->name('monitoring-inspection-flt-manufacturing-show');
+    Route::post('monitoring-inspection-flt-manufacturing-update', 'App\Http\Controllers\InspectionMonitoring\FacilityInspectionPendingController@manufacturingUpdate')->name('monitoring-inspection-flt-manufacturing-update');
 
     Route::resource('monitoring-inspection-flt-reports', 'App\Http\Controllers\InspectionMonitoring\FacilityInspectionApprovedController');
     Route::get('monitoring-inspection-flt-report-community-show', 'App\Http\Controllers\InspectionMonitoring\FacilityInspectionApprovedController@communityShow')->name('monitoring-inspection-flt-report-community-show');
     Route::get('monitoring-inspection-flt-report-distribution-show', 'App\Http\Controllers\InspectionMonitoring\FacilityInspectionApprovedController@distributionShow')->name('monitoring-inspection-flt-report-distribution-show');
+    Route::get('monitoring-inspection-flt-report-manufacturing-show', 'App\Http\Controllers\InspectionMonitoring\FacilityInspectionApprovedController@manufacturingShow')->name('monitoring-inspection-flt-report-manufacturing-show');
 
 
     Route::resource('monitoring-inspection-renewal', 'App\Http\Controllers\InspectionMonitoring\LocationInspectionRenewPendingController');

@@ -14,7 +14,7 @@ class ManufacturingInfo
         ->with('other_registration')->latest()->first();
 
         if($registration){
-            if($registration->status == 'no_recommendation'){
+            if($registration->status == 'facility_no_recommendation'){
                 return $response = [
                     'success' => true,
                 ];
@@ -51,16 +51,16 @@ class ManufacturingInfo
                     'color' => 'warning',
                 ];
             }
-            if($registration->status == 'no_recommendation'){
+            if($registration->status == 'facility_no_recommendation'){
                 return $response = [
                     'success' => true,
                     'message' => 'Not Recommended for Licensure',
                     'color' => 'danger',
-                    'new-link' => route('location-approval-form'),
+                    'new-link' => route('manufacturing-registration-form'),
                     'download-link' => route('location-inspection-report-download', $registration->id),
                 ];
             }
-            if($registration->status == 'full_recommendation'){
+            if($registration->status == 'facility_full_recommendation'){
                 return $response = [
                     'success' => true,
                     'message' => 'Recommended for Licensure',

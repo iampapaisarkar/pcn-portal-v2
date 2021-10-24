@@ -299,4 +299,98 @@ class FacilityInspectionPendingController extends Controller
             return back()->with('error','There is something error, please try after some time');
         }  
     }
+
+    public function manufacturingShow(Request $request){
+
+        $registration = Registration::where(['payment' => true, 'id' => $request['registration_id'], 'user_id' => $request['user_id'], 'type' => 'manufacturing_premises'])
+        ->with('other_registration', 'user')
+        ->where('status', 'send_to_inspection_monitoring_registration')
+        ->first();
+
+        if($registration){
+            return view('inspectionmonitoring.facility-pending.manufacturing-show', compact('registration'));
+        }else{
+            return abort(404);
+        }
+    }
+
+    public function manufacturingUpdate(Request $request){
+
+        $this->validate($request, [
+            'recommendation' => ['required'],
+            'report' => ['required']
+        ]);
+
+        try {
+            DB::beginTransaction();
+
+            $Registration = Registration::where(['id' => $request->registration_id, 'user_id' => $request->user_id, 'type' => 'manufacturing_premises'])
+            ->where('status', 'send_to_inspection_monitoring_registration')
+            ->where('payment', true)
+            ->with('other_registration', 'user')
+            ->first();
+
+            if($Registration){
+
+                $file = $request->file('report');
+
+                $private_storage_path = storage_path(
+                    'app'. DIRECTORY_SEPARATOR . 'private' . DIRECTORY_SEPARATOR . $Registration->user_id . DIRECTORY_SEPARATOR . 'company'
+                );
+
+                if(!file_exists($private_storage_path)){
+                    \mkdir($private_storage_path, intval('755',8), true);
+                }
+                $file_name = 'user'.$Registration->user_id.'-inspection_report.'.$file->getClientOriginalExtension();
+                $file->move($private_storage_path, $file_name);
+
+                Registration::where(['id' => $request->registration_id, 'user_id' => $request->user_id, 'type' => 'manufacturing_premises'])
+                ->where('status', 'send_to_inspection_monitoring_registration')
+                ->where('payment', true)
+                ->update([
+                    'status' => $request->recommendation,
+                    'inspection_report' => $file_name,
+                ]);
+
+
+                $adminName = Auth::user()->firstname .' '. Auth::user()->lastname;
+
+                if($request->recommendation == 'facility_no_recommendation'){
+                    $activity = 'Facility Inspection Report Uploaded';
+
+                    $data = [
+                        'user' => $Registration->user,
+                        'registration_type' => 'manufacturing_premises_registration',
+                        'type' => 'inspection_recommendation',
+                        'status' => 'no_recommendation',
+                    ];
+                    EmailSendJOB::dispatch($data);
+                }
+                if($request->recommendation == 'facility_full_recommendation'){
+                    $activity = 'Facility Inspection Report Uploaded';
+
+                    $data = [
+                        'user' => $Registration->user,
+                        'registration_type' => 'manufacturing_premises_registration',
+                        'type' => 'inspection_recommendation',
+                        'status' => 'full_recommendation',
+                    ];
+                    EmailSendJOB::dispatch($data);
+                }
+                AllActivity::storeActivity($Registration->id, $adminName, $activity, 'manufacturing_premises');
+
+            }else{
+                return abort(404);
+            }
+            
+            DB::commit();
+
+            return redirect()->route('monitoring-inspection-flt.index')
+            ->with('success', 'Inspection Report updated successfully');
+
+        }catch(Exception $e) {
+            DB::rollback();
+            return back()->with('error','There is something error, please try after some time');
+        }  
+    }
 }

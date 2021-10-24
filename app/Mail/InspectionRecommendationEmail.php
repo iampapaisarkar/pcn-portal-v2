@@ -81,6 +81,15 @@ class InspectionRecommendationEmail extends Mailable
             }
         }
 
+        if($this->newData['registration_type'] == 'manufacturing_premises_registration'){
+            if($this->newData['status'] == 'full_recommendation'){
+                $subject = 'Facility Inspection Application Approval';
+            }
+            if($this->newData['status'] == 'no_recommendation'){
+                $subject = 'Facility Inspection Application Query';
+            }
+        }
+
         return $this->markdown('mail.inspection-recommendation',['data'=>$this->newData])->subject($subject);
     }
 }
