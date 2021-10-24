@@ -68,7 +68,7 @@ class ManufacturingInfo
                     'download-link' => route('location-inspection-report-download', $registration->id),
                 ];
             }
-            if($registration->status == 'inspection_approved'){
+            if($registration->status == 'facility_send_to_registration'){
                 return $response = [
                     'success' => true,
                     'message' => 'Recommended for Facility Registration',
