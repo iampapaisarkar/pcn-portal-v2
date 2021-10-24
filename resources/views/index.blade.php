@@ -12,7 +12,7 @@
                 <div class="card card-icon mb-4">
                     <div class="card-body text-center"><i class="i-Professor"></i>
                         <p class="text-muted mt-2 mb-2">ADMIN USERS</p>
-                        <p class="text-primary text-20 line-height-1 m-0">52</p>
+                        <p class="text-primary text-20 line-height-1 m-0">{{$data['admin_users']}}</p>
                     </div>
                 </div>
             </div>
@@ -21,7 +21,7 @@
                 <div class="card card-icon mb-4">
                     <div class="card-body text-center"><i class="i-MaleFemale"></i>
                         <p class="text-muted mt-2 mb-2">USER PROFILES</p>
-                        <p class="text-primary text-20 line-height-1 m-0">PENDING</p>
+                        <p class="text-primary text-20 line-height-1 m-0">{{$data['vendor_users']}}</p>
                     </div>
                 </div>
             </div>
