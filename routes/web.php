@@ -135,6 +135,8 @@ Route::group(['middleware' => ['auth','verified', 'can:isRegistry']], function (
     Route::post('registry-recommendation-community-approve', 'App\Http\Controllers\Registry\DoumentRecommendationController@communityRegistrationApprove')->name('registry-recommendation-community-approve');
     Route::get('registry-recommendation-distribution-show', 'App\Http\Controllers\Registry\DoumentRecommendationController@distributionRegistrationShow')->name('registry-recommendation-distribution-show');
     Route::post('registry-recommendation-distribution-approve', 'App\Http\Controllers\Registry\DoumentRecommendationController@distributionRegistrationApprove')->name('registry-recommendation-distribution-approve');
+    Route::get('registry-recommendation-manufacturing-show', 'App\Http\Controllers\Registry\DoumentRecommendationController@manufacturingRegistrationShow')->name('registry-recommendation-manufacturing-show');
+    Route::post('registry-recommendation-manufacturing-approve', 'App\Http\Controllers\Registry\DoumentRecommendationController@manufacturingRegistrationApprove')->name('registry-recommendation-manufacturing-approve');
 
 
     Route::resource('registry-renewal-pending', 'App\Http\Controllers\Registry\RenewalInspectionController');
