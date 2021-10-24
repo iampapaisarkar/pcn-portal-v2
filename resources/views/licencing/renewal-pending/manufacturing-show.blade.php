@@ -6,8 +6,7 @@
         <div class="col-lg-12 col-md-12">
             <div class="card-body">
                 <h5>Facility Licecne - Details</h5>
-
-                <x-location-registration-show
+                <x-manufacturing-registration-show
                 :registrationID="$registration->registration->id" 
                 :userID="$registration->registration->user_id" 
                 :type="$registration->registration->type" />
@@ -15,7 +14,7 @@
                 <div class="custom-separator"></div>
 
                 <div class="row">
-                    <form action="{{route('licence-renewal-pending-distribution-approve')}}" method="POST" id="approveForm">
+                    <form action="{{route('licence-renewal-pending-manufacturing-approve')}}" method="POST" id="approveForm">
                     @csrf
                         <input type="hidden" name="renewal_id" value="{{$registration->id}}">
                         <input type="hidden" name="registration_id" value="{{$registration->registration->id}}">

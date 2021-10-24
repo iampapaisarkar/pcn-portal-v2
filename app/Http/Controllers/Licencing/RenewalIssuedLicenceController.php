@@ -170,4 +170,19 @@ class RenewalIssuedLicenceController extends Controller
             return abort(404);
         }
     }
+
+    public function manufacturingShow(Request $request){
+
+        $registration = Renewal::where(['payment' => true, 'id' => $request['renewal_id'], 'user_id' => $request['user_id'], 'type' => 'manufacturing_premises_renewal'])
+        ->with('ppmv', 'registration', 'user')
+        ->where('status', 'licence_issued')
+        ->where('renewal', true)
+        ->first();
+
+        if($registration){
+            return view('licencing.renewal-issued.manufacturing-show', compact('registration'));
+        }else{
+            return abort(404);
+        }
+    }
 }

@@ -282,11 +282,15 @@ Route::group(['middleware' => ['auth','verified', 'can:isRLicencing']], function
     Route::get('renewal-pending-distribution-show', 'App\Http\Controllers\Licencing\RenewalPendingLicenceController@distributionShow')->name('renewal-pending-distribution-show');
     Route::post('licence-renewal-pending-distribution-approve', 'App\Http\Controllers\Licencing\RenewalPendingLicenceController@distributionApprove')->name('licence-renewal-pending-distribution-approve');
 
+    Route::get('renewal-pending-manufacturing-show', 'App\Http\Controllers\Licencing\RenewalPendingLicenceController@manufacturingShow')->name('renewal-pending-manufacturing-show');
+    Route::post('licence-renewal-pending-manufacturing-approve', 'App\Http\Controllers\Licencing\RenewalPendingLicenceController@manufacturingApprove')->name('licence-renewal-pending-manufacturing-approve');
+
     Route::resource('renewal-issued', 'App\Http\Controllers\Licencing\RenewalIssuedLicenceController');
     Route::get('renewal-issued-hospital-show', 'App\Http\Controllers\Licencing\RenewalIssuedLicenceController@hospitalPharmacyShow')->name('renewal-issued-hospital-show');
     Route::get('renewal-issued-ppmv-show', 'App\Http\Controllers\Licencing\RenewalIssuedLicenceController@ppmvShow')->name('renewal-issued-ppmv-show');
     Route::get('renewal-issued-community-show', 'App\Http\Controllers\Licencing\RenewalIssuedLicenceController@communityShow')->name('renewal-issued-community-show');
     Route::get('renewal-issued-distribution-show', 'App\Http\Controllers\Licencing\RenewalIssuedLicenceController@distributionShow')->name('renewal-issued-distribution-show');
+    Route::get('renewal-issued-manufacturing-show', 'App\Http\Controllers\Licencing\RenewalIssuedLicenceController@manufacturingShow')->name('renewal-issued-manufacturing-show');
 
 });
 

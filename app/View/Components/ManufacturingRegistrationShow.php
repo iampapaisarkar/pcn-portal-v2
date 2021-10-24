@@ -37,7 +37,7 @@ class ManufacturingRegistrationShow extends Component
         'other_registration.company.other_director',
         'user')
         ->first();
-
+        
         return view('components.manufacturing-registration-show', compact('registration'));
     }
 }

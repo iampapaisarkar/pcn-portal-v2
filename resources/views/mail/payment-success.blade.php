@@ -69,6 +69,24 @@ This is to acknowledge your application and payment of the sum of N{{$data['amou
 This is to acknowledge your application and payment of the sum of N{{$data['amount']}} being made for VENDOR RENEWAL & LICENCE FEES.
 @endif
 
+@if($data['registration_type'] == 'manufacturing_premises')
+# PCN - Inspection Payment Notification - {{env('APP_NAME')}}
+<div>Hello {{$data['user']['firstname']}} {{$data['user']['lastname']}}, <br>
+This is to acknowledge your application and payment of the sum of N{{$data['amount']}} being made for LOCATION INSPECTION FEES.
+@endif
+
+@if($data['registration_type'] == 'manufacturing_premises_registration')
+# PCN - Registration & Licence Payment Notification - {{env('APP_NAME')}}
+<div>Hello {{$data['user']['firstname']}} {{$data['user']['lastname']}}, <br>
+This is to acknowledge your application and payment of the sum of N{{$data['amount']}} being made for VENDOR REGISTRATION & LICENCE FEES.
+@endif
+
+@if($data['registration_type'] == 'manufacturing_premises_renewal')
+# PCN - Inspection Renewal Payment Notification - {{env('APP_NAME')}}
+<div>Hello {{$data['user']['firstname']}} {{$data['user']['lastname']}}, <br>
+This is to acknowledge your application and payment of the sum of N{{$data['amount']}} being made for VENDOR RENEWAL & LICENCE FEES.
+@endif
+
 </div>
 <div>Kindly log in to the portal to view status and application progress.</div>
 <div>Thank you.</div>

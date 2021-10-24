@@ -185,6 +185,14 @@ class RenewalPendingLicenceController extends Controller
                             ];
                             EmailSendJOB::dispatch($data);
                         }
+                        if($renewal->type == 'manufacturing_premises_renewal'){
+                            $data = [
+                                'user' => $renewal->user,
+                                'registration_type' => 'manufacturing_premises_renewal',
+                                'type' => 'licencing_issued',
+                            ];
+                            EmailSendJOB::dispatch($data);
+                        }
 
                     }else{
                         return abort(404);
@@ -410,6 +418,63 @@ class RenewalPendingLicenceController extends Controller
                     $data = [
                         'user' => $renewal->user,
                         'registration_type' => 'distribution_premises_renewal',
+                        'type' => 'licencing_issued',
+                    ];
+                    EmailSendJOB::dispatch($data);
+
+                }else{
+                    return abort(404);
+                }
+
+        DB::commit();
+            return redirect()->route('licence-pending.index')->with('success', 'Licence issued successfully done');
+        }catch(Exception $e) {
+            DB::rollback();
+            return back()->with('error','There is something error, please try after some time');
+        }
+    }
+
+    public function manufacturingShow(Request $request){
+
+        $registration = Renewal::where(['payment' => true, 'id' => $request['renewal_id'], 'user_id' => $request['user_id'], 'type' => 'manufacturing_premises_renewal'])
+        ->with('other_registration', 'registration', 'user')
+        ->where('status', 'send_to_registration')
+        ->first();
+        
+
+        if($registration){
+            return view('licencing.renewal-pending.manufacturing-show', compact('registration'));
+        }else{
+            return abort(404);
+        }
+    }
+
+    public function manufacturingApprove(Request $request){
+
+        try {
+            DB::beginTransaction();
+
+                $renewal = Renewal::where(['payment' => true, 'id' => $request['renewal_id'], 'user_id' => $request['user_id'], 'type' => 'manufacturing_premises_renewal'])
+                ->with('other_registration', 'registration', 'user')
+                ->where('status', 'send_to_registration')
+                ->first();
+
+                if($renewal){
+
+                    Renewal::where(['payment' => true, 'id' => $request['renewal_id'], 'user_id' => $request['user_id'], 'type' => 'manufacturing_premises_renewal'])
+                    ->where('status', 'send_to_registration')
+                    ->update([
+                        'licence' => 'TEST2021',
+                        'status' => 'licence_issued'
+                    ]);
+                    
+                    $adminName = Auth::user()->firstname .' '. Auth::user()->lastname;
+                    $activity = 'Registration & Licencing Licence Renewal Issued';
+                    AllActivity::storeActivity($request['registration_id'], $adminName, $activity, 'manufacturing_premises');
+
+                    $data = [
+                        'user' => $renewal->user,
+                        'registration_type' => 'manufacturing_premises_renewal',
                         'type' => 'licencing_issued',
                     ];
                     EmailSendJOB::dispatch($data);
