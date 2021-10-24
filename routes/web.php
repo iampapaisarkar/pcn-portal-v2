@@ -153,6 +153,9 @@ Route::group(['middleware' => ['auth','verified', 'can:isRegistry']], function (
     Route::get('registry-renewal-pending-distribution-show', 'App\Http\Controllers\Registry\RenewalInspectionController@distributionShow')->name('registry-renewal-pending-distribution-show');
     Route::post('registry-renewal-pending-distribution-approve', 'App\Http\Controllers\Registry\RenewalInspectionController@distributionApprove')->name('registry-renewal-pending-distribution-approve');
 
+    Route::get('registry-renewal-pending-manufacturing-show', 'App\Http\Controllers\Registry\RenewalInspectionController@manufacturingShow')->name('registry-renewal-pending-manufacturing-show');
+    Route::post('registry-renewal-pending-manufacturing-approve', 'App\Http\Controllers\Registry\RenewalInspectionController@manufacturingApprove')->name('registry-renewal-pending-manufacturing-approve');
+
     Route::resource('registry-renewal-recommendation', 'App\Http\Controllers\Registry\RenewalRecommendationController');
     Route::get('registry-renewal-recommendation-show', 'App\Http\Controllers\Registry\RenewalRecommendationController@hospitalPharmacyShow')->name('registry-renewal-recommendation-show');
     Route::post('registry-renewal-recommendation-approve-all', 'App\Http\Controllers\Registry\RenewalRecommendationController@ApproveAll')->name('registry-renewal-recommendation-approve-all');
@@ -165,6 +168,9 @@ Route::group(['middleware' => ['auth','verified', 'can:isRegistry']], function (
 
     Route::get('registry-renewal-recommendation-distribution-show', 'App\Http\Controllers\Registry\RenewalRecommendationController@distributionShow')->name('registry-renewal-recommendation-distribution-show');
     Route::post('registry-renewal-recommendation-distribution-approve', 'App\Http\Controllers\Registry\RenewalRecommendationController@distributionApprove')->name('registry-renewal-recommendation-distribution-approve');
+
+    Route::get('registry-renewal-recommendation-manufacturing-show', 'App\Http\Controllers\Registry\RenewalRecommendationController@manufacturingShow')->name('registry-renewal-recommendation-manufacturing-show');
+    Route::post('registry-renewal-recommendation-manufacturing-approve', 'App\Http\Controllers\Registry\RenewalRecommendationController@manufacturingApprove')->name('registry-renewal-recommendation-manufacturing-approve');
 
     Route::resource('registry-locations', 'App\Http\Controllers\Registry\LocationApplicationController');
     Route::get('registry-location-ppmv-show', 'App\Http\Controllers\Registry\LocationApplicationController@ppmvLocationShow')->name('registry-location-ppmv-show');

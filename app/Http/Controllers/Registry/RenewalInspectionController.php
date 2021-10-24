@@ -193,7 +193,19 @@ class RenewalInspectionController extends Controller
                             $adminName = Auth::user()->firstname .' '. Auth::user()->lastname;
                             $activity = 'Registry Renewal Inspection Approve';
                             AllActivity::storeActivity($renewal_id, $adminName, $activity, 'distribution_premises');
+                        }
 
+                        if($renewal->type == 'manufacturing_premises_renewal'){
+
+                            Renewal::where(['payment' => true, 'id' => $renewal_id, 'user_id' => $renewal->user_id])
+                            ->where('status', 'send_to_registry')
+                            ->update([
+                                'status' => 'send_to_inspection_monitoring'
+                            ]);
+                            
+                            $adminName = Auth::user()->firstname .' '. Auth::user()->lastname;
+                            $activity = 'Registry Renewal Inspection Approve';
+                            AllActivity::storeActivity($renewal_id, $adminName, $activity, 'manufacturing_premises');
                         }
 
 
@@ -388,6 +400,54 @@ class RenewalInspectionController extends Controller
                     $adminName = Auth::user()->firstname .' '. Auth::user()->lastname;
                     $activity = 'Registry Renewal Inspection Approve';
                     AllActivity::storeActivity($request['registration_id'], $adminName, $activity, 'distribution_premises');
+
+                }else{
+                    return abort(404);
+                }
+
+        DB::commit();
+            return redirect()->route('registry-renewal-pending.index')->with('success', 'Licence issued successfully done');
+        }catch(Exception $e) {
+            DB::rollback();
+            return back()->with('error','There is something error, please try after some time');
+        }
+    }
+
+    public function manufacturingShow(Request $request){
+
+        $registration = Renewal::where(['payment' => true, 'id' => $request['renewal_id'], 'user_id' => $request['user_id'], 'type' => 'manufacturing_premises_renewal'])
+        ->with('registration', 'other_registration', 'user')
+        ->where('status', 'send_to_registry')
+        ->first();
+        
+        if($registration){
+            return view('registry.renewal-pending.manufacturing-renewal-show', compact('registration'));
+        }else{
+            return abort(404);
+        }
+    }
+
+    public function manufacturingApprove(Request $request){
+
+        try {
+            DB::beginTransaction();
+
+                $renewal = Renewal::where(['payment' => true, 'id' => $request['renewal_id'], 'user_id' => $request['user_id'], 'type' => 'manufacturing_premises_renewal'])
+                ->with('ppmv', 'registration', 'user')
+                ->where('status', 'send_to_registry')
+                ->first();
+
+                if($renewal){
+
+                    Renewal::where(['payment' => true, 'id' => $request['renewal_id'], 'user_id' => $request['user_id'], 'type' => 'manufacturing_premises_renewal'])
+                    ->where('status', 'send_to_registry')
+                    ->update([
+                        'status' => 'send_to_inspection_monitoring'
+                    ]);
+                    
+                    $adminName = Auth::user()->firstname .' '. Auth::user()->lastname;
+                    $activity = 'Registry Renewal Inspection Approve';
+                    AllActivity::storeActivity($request['registration_id'], $adminName, $activity, 'manufacturing_premises');
 
                 }else{
                     return abort(404);

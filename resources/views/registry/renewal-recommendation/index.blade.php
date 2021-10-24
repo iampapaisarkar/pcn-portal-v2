@@ -71,6 +71,10 @@
                         @if($document->registration->type == 'distribution_premise')
                         <td>{{$document->other_registration->company->name}}</td>
                         @endif
+                        @if($document->registration->type == 'manufacturing_premises')
+                        <td>{{$document->other_registration->company->name}}</td>
+                        @endif
+
 
                         @if($document->registration->type == 'hospital_pharmacy')
                         <td>Hospital Pharmacy Registration</td>
@@ -82,6 +86,9 @@
                         <td>Community Pharmacy Location Approval Application</td>
                         @endif
                         @if($document->registration->type == 'distribution_premise')
+                        <td>Distribution Premises Location Approval Application</td>
+                        @endif
+                        @if($document->registration->type == 'manufacturing_premises')
                         <td>Distribution Premises Location Approval Application</td>
                         @endif
 
@@ -105,6 +112,11 @@
                             @endif
                             @if($document->registration->type == 'distribution_premises')
                             <a href="{{ route('registry-renewal-recommendation-distribution-show') }}?renewal_id={{$document->id}}&user_id={{$document->user->id}}">
+                                <button class="btn btn-success btn-sm" type="button"><i class="nav-icon i-Pen-2"></i></button>
+                            </a>
+                            @endif
+                            @if($document->registration->type == 'manufacturing_premises')
+                            <a href="{{ route('registry-renewal-recommendation-manufacturing-show') }}?renewal_id={{$document->id}}&user_id={{$document->user->id}}">
                                 <button class="btn btn-success btn-sm" type="button"><i class="nav-icon i-Pen-2"></i></button>
                             </a>
                             @endif
