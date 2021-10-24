@@ -20,7 +20,7 @@ class DocumentInspectionController extends Controller
     public function index(Request $request)
     {
         $documents = Registration::where(['payment' => true])
-        ->with('hospital_pharmacy', 'user')
+        ->with('hospital_pharmacy', 'user', 'other_registration')
         ->where('location_approval', false)
         ->where('status', 'send_to_registry');
         
@@ -136,11 +136,20 @@ class DocumentInspectionController extends Controller
                     ->where('status', 'send_to_registry')
                     ->first();
 
-                    Registration::where(['payment' => true, 'id' => $registration_id])
-                    ->where('status', 'send_to_registry')
-                    ->update([
-                        'status' => 'send_to_pharmacy_practice'
-                    ]);
+                    if($Registration->type == 'hospital_pharmacy'){
+                        Registration::where(['payment' => true, 'id' => $registration_id])
+                        ->where('status', 'send_to_registry')
+                        ->update([
+                            'status' => 'send_to_pharmacy_practice'
+                        ]);
+                    }
+                    if($Registration->type == 'manufacturing_premises'){
+                        Registration::where(['payment' => true, 'id' => $registration_id])
+                        ->where('status', 'send_to_registry')
+                        ->update([
+                            'status' => 'send_to_inspection_monitoring'
+                        ]);
+                    }
 
                     $adminName = Auth::user()->firstname .' '. Auth::user()->lastname;
                     $activity = 'Registry Document Facility Inspection Approval';
@@ -178,6 +187,44 @@ class DocumentInspectionController extends Controller
             ->where('status', 'send_to_registry')
             ->update([
                 'status' => 'send_to_pharmacy_practice'
+            ]);
+
+            $adminName = Auth::user()->firstname .' '. Auth::user()->lastname;
+            $activity = 'Registry Document Facility Inspection Approval';
+            AllActivity::storeActivity($request['registration_id'], $adminName, $activity, 'hospital_pharmacy');
+
+            return redirect()->route('registry-documents.index')->with('success', 'Registration Approved successfully done');
+        }else{
+            return abort(404);
+        }
+    }
+
+
+    public function manufacturingShow(Request $request){
+
+        $registration = Registration::where(['payment' => true, 'id' => $request['registration_id'], 'user_id' => $request['user_id'], 'type' => 'manufacturing_premises'])
+        ->with('other_registration', 'user')
+        ->where('status', 'send_to_registry')
+        ->first();
+
+        if($registration){
+            return view('registry.documents.manufacturing-show', compact('registration'));
+        }else{
+            return abort(404);
+        }
+    }
+
+    public function manufacturingApprove(Request $request){
+
+        $registration = Registration::where(['payment' => true, 'id' => $request['registration_id'], 'user_id' => $request['user_id'], 'type' => 'manufacturing_premises'])
+        ->where('status', 'send_to_registry')
+        ->first();
+
+        if($registration){
+            Registration::where(['payment' => true, 'id' => $request['registration_id'], 'user_id' => $request['user_id'], 'type' => 'manufacturing_premises'])
+            ->where('status', 'send_to_registry')
+            ->update([
+                'status' => 'send_to_inspection_monitoring'
             ]);
 
             $adminName = Auth::user()->firstname .' '. Auth::user()->lastname;

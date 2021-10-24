@@ -120,6 +120,9 @@ Route::group(['middleware' => ['auth','verified', 'can:isRegistry']], function (
     Route::post('registry-documents-approve-all', 'App\Http\Controllers\Registry\DocumentInspectionController@ApproveAll')->name('registry-documents-approve-all');
     Route::post('registry-documents-hospital-approve', 'App\Http\Controllers\Registry\DocumentInspectionController@hospitalPharmacyApprove')->name('registry-documents-hospital-approve');
 
+    Route::get('registry-documents-manufacturing-show', 'App\Http\Controllers\Registry\DocumentInspectionController@manufacturingShow')->name('registry-documents-manufacturing-show');
+    Route::post('registry-documents-manufacturing-approve', 'App\Http\Controllers\Registry\DocumentInspectionController@manufacturingApprove')->name('registry-documents-manufacturing-approve');
+
     Route::resource('registry-recommendation', 'App\Http\Controllers\Registry\DoumentRecommendationController');
     Route::get('registry-recommendation-show', 'App\Http\Controllers\Registry\DoumentRecommendationController@hospitalPharmacyShow')->name('registry-recommendation-show');
     Route::post('registry-approve-recommendation-all', 'App\Http\Controllers\Registry\DoumentRecommendationController@ApproveAll')->name('registry-approve-recommendation-all');

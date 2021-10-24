@@ -63,14 +63,26 @@
                         @if($document->type == 'hospital_pharmacy')
                         <td>{{$document->user->hospital_name}}</td>
                         @endif
+                        @if($document->type == 'manufacturing_premises')
+                        <td>{{$document->other_registration->company->name}}</td>
+                        @endif
+
                         @if($document->type == 'hospital_pharmacy')
                         <td>Hospital Pharmacy Registration</td>
+                        @endif
+                        @if($document->type == 'manufacturing_premises')
+                        <td>Pharmaceutical Manufacturing Premises Registration</td>
                         @endif
                         <td>{{$document->registration_year}}</td>
                         <td><span class="badge badge-pill m-1 badge-warning">Pending</span></td>
                         <td>
                             @if($document->type == 'hospital_pharmacy')
                             <a href="{{ route('registry-documents-hospital-show') }}?registration_id={{$document->id}}&user_id={{$document->user->id}}">
+                                <button class="btn btn-success btn-sm" type="button"><i class="nav-icon i-Pen-2"></i></button>
+                            </a>
+                            @endif
+                            @if($document->type == 'manufacturing_premises')
+                            <a href="{{ route('registry-documents-manufacturing-show') }}?registration_id={{$document->id}}&user_id={{$document->user->id}}">
                                 <button class="btn btn-success btn-sm" type="button"><i class="nav-icon i-Pen-2"></i></button>
                             </a>
                             @endif
