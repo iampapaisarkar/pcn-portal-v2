@@ -96,10 +96,10 @@
                             $category = 'Community Pharmacy';
                         }
                         if(Auth::user()->hasRole(['distribution_premises'])){
-                            $category = 'Community Pharmacy';
+                            $category = 'Distribution Premises';
                         }
                         if(Auth::user()->hasRole(['manufacturing_premises'])){
-                            $category = 'Community Pharmacy';
+                            $category = 'Manufacturing Premises';
                         }
                     @endphp
                     <label for="middleName1">Category of Practise</label>
