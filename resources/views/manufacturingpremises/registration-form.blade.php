@@ -69,7 +69,7 @@
                 <div class="col-md-4 form-group mb-3">
                     <label for="middleName1">Category of Practise</label>
                     <input readonly class="form-control" id="category1"
-                        type="text" placeholder="Enter your category" value="{{ $company ? $company->category : 'Community Pharmacy' }}" readonly/>
+                        type="text" placeholder="Enter your category" value="{{ $company ? $company->category : 'Manufacturing Premises' }}" readonly/>
                 </div>
             </div>
             <div class="custom-separator"></div>

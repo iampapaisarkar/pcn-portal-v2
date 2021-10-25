@@ -91,9 +91,20 @@
                     @enderror
                 </div>
                 <div class="col-md-4 form-group mb-3">
+                    @php
+                        if(Auth::user()->hasRole(['community_pharmacy'])){
+                            $category = 'Community Pharmacy';
+                        }
+                        if(Auth::user()->hasRole(['distribution_premises'])){
+                            $category = 'Community Pharmacy';
+                        }
+                        if(Auth::user()->hasRole(['manufacturing_premises'])){
+                            $category = 'Community Pharmacy';
+                        }
+                    @endphp
                     <label for="middleName1">Category of Practise</label>
                     <input name="category" class="form-control @error('category') is-invalid @enderror" id="category1"
-                        type="text" placeholder="Enter your category" value="{{ $company ? $company->category : 'Manufacturing Premises' }}" readonly/>
+                        type="text" placeholder="Enter your category" value="{{ $company ? $company->category : $category }}" readonly/>
                     @error('category')
                     <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>
