@@ -26,7 +26,7 @@
                 <div class="custom-separator"></div>
                 <x-all-activity
                 :applicationID="$application->id" 
-                :ssstype="$application->type" />
+                :type="$application->type" />
             </div>
         </div>
     </div>
