@@ -413,7 +413,7 @@ class DocumentReviewController extends Controller
         }
     }
 
-    public function distributioneject(Request $request){
+    public function distributionReject(Request $request){
 
         $registration = Registration::where(['payment' => true, 'id' => $request['application_id'], 'user_id' => $request['user_id'], 'type' => 'distribution_premises'])
         ->with('other_registration.company', 'user')
