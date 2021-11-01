@@ -80,7 +80,7 @@ class InvoiceController extends Controller
     public function downloadInvoice($id){
         $authUser = Auth::user();
 
-        $data = Payment::with('user.user_state', 'user.user_lga', 'service.netFees')->where('id', $id);
+        $data = Payment::with('user.user_state', 'user.user_lga', 'service.netFees', 'user.role', 'user.company.company_state', 'user.company.company_lga')->where('id', $id);
         
         if($authUser->hasRole(['sadmin'])){
             $data = $data->first();
@@ -96,14 +96,28 @@ class InvoiceController extends Controller
                     'Address'        => 'Plot 7/9 Industrial Layout, Idu, P.M.B. 415 Garki, Abuja, Nigeria',
                 ],
             ]);
+            
+            if($data->user->role == 'hospital_pharmacy' || $data->user->role == 'ppmv'){
 
-            $customer = new Party([
-                'name'          => $data->user->firstname  .' '. $data->user->lastname,
-                'custom_fields' => [
-                    'State' => $data->user->user_state->name,
-                    'LGA' => $data->user->user_lga->name,
-                ],
-            ]);
+                $customer = new Party([
+                    'name'          => $data->user->firstname  .' '. $data->user->lastname,
+                    'custom_fields' => [
+                        'State' => $data->user->user_state->name,
+                        'LGA' => $data->user->user_lga->name,
+                    ]
+                ]);
+            }
+            if($data->user->role == 'community_pharmacy' || $data->user->role == 'distribution_premises' || $data->user->role == 'manufacturing_premises'){
+
+                $customer = new Party([
+                    'name'          => $data->user->firstname  .' '. $data->user->lastname,
+                    'custom_fields' => [
+                        'State' => $data->user->company->company_state->name,
+                        'LGA' => $data->user->company->company_lga->name,
+                    ]
+                ]);
+            }
+
 
             if($data->service_type == 'hospital_pharmacy'){
                 $title = 'Hospital Pharmacy Registration Fees';
