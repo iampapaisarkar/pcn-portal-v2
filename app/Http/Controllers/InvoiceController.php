@@ -97,7 +97,7 @@ class InvoiceController extends Controller
                 ],
             ]);
             
-            if($data->user->role == 'hospital_pharmacy' || $data->user->role == 'ppmv'){
+            if($data->user->role->code == 'hospital_pharmacy' || $data->user->role->code == 'ppmv'){
 
                 $customer = new Party([
                     'name'          => $data->user->firstname  .' '. $data->user->lastname,
@@ -107,7 +107,7 @@ class InvoiceController extends Controller
                     ]
                 ]);
             }
-            if($data->user->role == 'community_pharmacy' || $data->user->role == 'distribution_premises' || $data->user->role == 'manufacturing_premises'){
+            if($data->user->role->code == 'community_pharmacy' || $data->user->role->code == 'distribution_premises' || $data->user->role->code == 'manufacturing_premises'){
 
                 $customer = new Party([
                     'name'          => $data->user->firstname  .' '. $data->user->lastname,
