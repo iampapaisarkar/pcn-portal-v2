@@ -134,6 +134,33 @@ class InvoiceController extends Controller
             if($data->service_type == 'ppmv_renewal'){
                 $title = 'PPMV Renewal Fees';
             }
+            if($data->service_type == 'community_pharmacy'){
+                $title = 'Community Pharmacy Location Approval Fees';
+            }
+            if($data->service_type == 'community_pharmacy_registration'){
+                $title = 'Community Pharmacy Facility Inspection Registration Fees';
+            }
+            if($data->service_type == 'community_pharmacy_renewal'){
+                $title = 'Community Pharmacy Renewal Fees';
+            }
+            if($data->service_type == 'distribution_premises'){
+                $title = 'Distribution Premises Location Approval Fees';
+            }
+            if($data->service_type == 'distribution_premises_registration'){
+                $title = 'Distribution Premises Facility Inspection Registration Fees';
+            }
+            if($data->service_type == 'distribution_premises_renewal'){
+                $title = 'Distribution Premises Renewal Fees';
+            }
+            if($data->service_type == 'manufacturing_premises'){
+                $title = 'Manufacturing Premises Location Approval Fees';
+            }
+            if($data->service_type == 'manufacturing_premises_registration'){
+                $title = 'Manufacturing Premises Facility Inspection Registration Fees';
+            }
+            if($data->service_type == 'manufacturing_premises_renewal'){
+                $title = 'Manufacturing Premises Renewal Fees';
+            }
 
             $items = [
                 (new InvoiceItem())->title($title)->pricePerUnit($data->amount)->units($data->service->netFees),
