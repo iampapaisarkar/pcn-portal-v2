@@ -135,25 +135,28 @@ class RenewalPendingLicenceController extends Controller
 
 
                     $renewal = Renewal::where(['payment' => true, 'id' => $renewal_id])
-                    ->with('hospital_pharmacy', 'registration', 'user')
+                    ->with('hospital_pharmacy', 'registration', 'ppmv', 'other_registration.company.company_state', 'user.user_state')
                     ->where('status', 'send_to_registration')
                     ->first();
 
+                    $count = Renewal::where('user_id', $renewal->user->id)->count();
+
                     if($renewal){
-
-                        Renewal::where(['payment' => true, 'id' => $renewal_id, 'user_id' => $renewal->user_id])
-                        ->where('status', 'send_to_registration')
-                        ->update([
-                            'licence' => 'TEST2021',
-                            'status' => 'licence_issued'
-                        ]);
-
-                        
-                        $adminName = Auth::user()->firstname .' '. Auth::user()->lastname;
-                        $activity = 'Registration & Licencing Licence Renewal Issued';
-                        AllActivity::storeActivity($renewal_id, $adminName, $activity, 'hospital_pharmacy');
-                        
                         if($renewal->type == 'hospital_pharmacy_renewal'){
+
+                            $licenceNumber = ucwords($renewal->user->user_state->state_code) . date('Y') . 'HPS' . str_pad($count+1, 4, '0', STR_PAD_LEFT);
+
+                            Renewal::where(['payment' => true, 'id' => $renewal_id, 'user_id' => $renewal->user_id])
+                            ->where('status', 'send_to_registration')
+                            ->update([
+                                'licence' => $licenceNumber,
+                                'status' => 'licence_issued'
+                            ]);
+
+                            $adminName = Auth::user()->firstname .' '. Auth::user()->lastname;
+                            $activity = 'Registration & Licencing Licence Renewal Issued';
+                            AllActivity::storeActivity($renewal_id, $adminName, $activity, 'hospital_pharmacy');
+
                             $data = [
                                 'user' => $renewal->user,
                                 'registration_type' => 'hospital_pharmacy_renewal',
@@ -162,6 +165,20 @@ class RenewalPendingLicenceController extends Controller
                             EmailSendJOB::dispatch($data);
                         }
                         if($renewal->type == 'ppmv_renewal'){
+
+                            $licenceNumber = ucwords($renewal->user->user_state->state_code) . date('Y') . 'PPS' . str_pad($count+1, 4, '0', STR_PAD_LEFT);
+
+                            Renewal::where(['payment' => true, 'id' => $renewal_id, 'user_id' => $renewal->user_id])
+                            ->where('status', 'send_to_registration')
+                            ->update([
+                                'licence' => $licenceNumber,
+                                'status' => 'licence_issued'
+                            ]);
+
+                            $adminName = Auth::user()->firstname .' '. Auth::user()->lastname;
+                            $activity = 'Registration & Licencing Licence Renewal Issued';
+                            AllActivity::storeActivity($renewal_id, $adminName, $activity, 'ppmv');
+                            
                             $data = [
                                 'user' => $renewal->user,
                                 'registration_type' => 'ppmv_renewal',
@@ -170,6 +187,20 @@ class RenewalPendingLicenceController extends Controller
                             EmailSendJOB::dispatch($data);
                         }
                         if($renewal->type == 'community_pharmacy_renewal'){
+
+                            $licenceNumber = ucwords($renewal->other_registration->company->company_state->state_code) . date('Y') . 'CPS' . str_pad($count+1, 4, '0', STR_PAD_LEFT);
+
+                            Renewal::where(['payment' => true, 'id' => $renewal_id, 'user_id' => $renewal->user_id])
+                            ->where('status', 'send_to_registration')
+                            ->update([
+                                'licence' => $licenceNumber,
+                                'status' => 'licence_issued'
+                            ]);
+
+                            $adminName = Auth::user()->firstname .' '. Auth::user()->lastname;
+                            $activity = 'Registration & Licencing Licence Renewal Issued';
+                            AllActivity::storeActivity($renewal_id, $adminName, $activity, 'community_pharmacy');
+
                             $data = [
                                 'user' => $renewal->user,
                                 'registration_type' => 'community_pharmacy_renewal',
@@ -178,6 +209,20 @@ class RenewalPendingLicenceController extends Controller
                             EmailSendJOB::dispatch($data);
                         }
                         if($renewal->type == 'distribution_premises_renewal'){
+
+                            $licenceNumber = ucwords($renewal->other_registration->company->company_state->state_code) . date('Y') . 'DPS' . str_pad($count+1, 4, '0', STR_PAD_LEFT);
+
+                            Renewal::where(['payment' => true, 'id' => $renewal_id, 'user_id' => $renewal->user_id])
+                            ->where('status', 'send_to_registration')
+                            ->update([
+                                'licence' => $licenceNumber,
+                                'status' => 'licence_issued'
+                            ]);
+
+                            $adminName = Auth::user()->firstname .' '. Auth::user()->lastname;
+                            $activity = 'Registration & Licencing Licence Renewal Issued';
+                            AllActivity::storeActivity($renewal_id, $adminName, $activity, 'distribution_premises');
+
                             $data = [
                                 'user' => $renewal->user,
                                 'registration_type' => 'distribution_premises_renewal',
@@ -186,6 +231,20 @@ class RenewalPendingLicenceController extends Controller
                             EmailSendJOB::dispatch($data);
                         }
                         if($renewal->type == 'manufacturing_premises_renewal'){
+
+                            $licenceNumber = ucwords($renewal->other_registration->company->company_state->state_code) . date('Y') . 'MPS' . str_pad($count+1, 4, '0', STR_PAD_LEFT);
+
+                            Renewal::where(['payment' => true, 'id' => $renewal_id, 'user_id' => $renewal->user_id])
+                            ->where('status', 'send_to_registration')
+                            ->update([
+                                'licence' => $licenceNumber,
+                                'status' => 'licence_issued'
+                            ]);
+
+                            $adminName = Auth::user()->firstname .' '. Auth::user()->lastname;
+                            $activity = 'Registration & Licencing Licence Renewal Issued';
+                            AllActivity::storeActivity($renewal_id, $adminName, $activity, 'manufacturing_premises');
+
                             $data = [
                                 'user' => $renewal->user,
                                 'registration_type' => 'manufacturing_premises_renewal',
@@ -231,10 +290,14 @@ class RenewalPendingLicenceController extends Controller
 
                 if($renewal){
 
+                    $count = Renewal::where('user_id', $renewal->user->id)->count();
+
+                    $licenceNumber = ucwords($renewal->user->user_state->state_code) . date('Y') . 'HPS' . str_pad($count+1, 4, '0', STR_PAD_LEFT);
+
                     Renewal::where(['payment' => true, 'id' => $request['renewal_id'], 'user_id' => $request['user_id'], 'type' => 'hospital_pharmacy_renewal'])
                     ->where('status', 'send_to_registration')
                     ->update([
-                        'licence' => 'TEST2021',
+                        'licence' => $licenceNumber,
                         'status' => 'licence_issued'
                     ]);
                     
@@ -289,10 +352,14 @@ class RenewalPendingLicenceController extends Controller
 
                 if($renewal){
 
+                    $count = Renewal::where('user_id', $renewal->user->id)->count();
+
+                    $licenceNumber = ucwords($renewal->user->user_state->state_code) . date('Y') . 'PPS' . str_pad($count+1, 4, '0', STR_PAD_LEFT);
+
                     Renewal::where(['payment' => true, 'id' => $request['renewal_id'], 'user_id' => $request['user_id'], 'type' => 'ppmv_renewal'])
                     ->where('status', 'send_to_registration')
                     ->update([
-                        'licence' => 'TEST2021',
+                        'licence' => $licenceNumber,
                         'status' => 'licence_issued'
                     ]);
                     
@@ -340,16 +407,20 @@ class RenewalPendingLicenceController extends Controller
             DB::beginTransaction();
 
                 $renewal = Renewal::where(['payment' => true, 'id' => $request['renewal_id'], 'user_id' => $request['user_id'], 'type' => 'community_pharmacy_renewal'])
-                ->with('other_registration', 'registration', 'user')
+                ->with('other_registration.company.company_state', 'registration', 'user')
                 ->where('status', 'send_to_registration')
                 ->first();
 
                 if($renewal){
 
+                    $count = Renewal::where('user_id', $renewal->user->id)->count();
+
+                    $licenceNumber = ucwords($renewal->other_registration->company->company_state->state_code) . date('Y') . 'CPS' . str_pad($count+1, 4, '0', STR_PAD_LEFT);
+
                     Renewal::where(['payment' => true, 'id' => $request['renewal_id'], 'user_id' => $request['user_id'], 'type' => 'community_pharmacy_renewal'])
                     ->where('status', 'send_to_registration')
                     ->update([
-                        'licence' => 'TEST2021',
+                        'licence' => $licenceNumber,
                         'status' => 'licence_issued'
                     ]);
                     
@@ -398,16 +469,20 @@ class RenewalPendingLicenceController extends Controller
             DB::beginTransaction();
 
                 $renewal = Renewal::where(['payment' => true, 'id' => $request['renewal_id'], 'user_id' => $request['user_id'], 'type' => 'distribution_premises_renewal'])
-                ->with('other_registration', 'registration', 'user')
+                ->with('other_registration.company.company_state', 'registration', 'user')
                 ->where('status', 'send_to_registration')
                 ->first();
 
                 if($renewal){
 
+                    $count = Renewal::where('user_id', $renewal->user->id)->count();
+
+                    $licenceNumber = ucwords($renewal->other_registration->company->company_state->state_code) . date('Y') . 'DPS' . str_pad($count+1, 4, '0', STR_PAD_LEFT);
+
                     Renewal::where(['payment' => true, 'id' => $request['renewal_id'], 'user_id' => $request['user_id'], 'type' => 'distribution_premises_renewal'])
                     ->where('status', 'send_to_registration')
                     ->update([
-                        'licence' => 'TEST2021',
+                        'licence' => $licenceNumber,
                         'status' => 'licence_issued'
                     ]);
                     
@@ -455,16 +530,20 @@ class RenewalPendingLicenceController extends Controller
             DB::beginTransaction();
 
                 $renewal = Renewal::where(['payment' => true, 'id' => $request['renewal_id'], 'user_id' => $request['user_id'], 'type' => 'manufacturing_premises_renewal'])
-                ->with('other_registration', 'registration', 'user')
+                ->with('other_registration.company.company_state', 'registration', 'user')
                 ->where('status', 'send_to_registration')
                 ->first();
 
                 if($renewal){
 
+                    $count = Renewal::where('user_id', $renewal->user->id)->count();
+
+                    $licenceNumber = ucwords($renewal->other_registration->company->company_state->state_code) . date('Y') . 'MPS' . str_pad($count+1, 4, '0', STR_PAD_LEFT);
+
                     Renewal::where(['payment' => true, 'id' => $request['renewal_id'], 'user_id' => $request['user_id'], 'type' => 'manufacturing_premises_renewal'])
                     ->where('status', 'send_to_registration')
                     ->update([
-                        'licence' => 'TEST2021',
+                        'licence' => $licenceNumber,
                         'status' => 'licence_issued'
                     ]);
                     
