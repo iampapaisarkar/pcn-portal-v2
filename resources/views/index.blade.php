@@ -264,29 +264,21 @@
                     <div class="col-lg-6 col-md-6 col-sm-6">
                         <div class="card card-icon mb-4">
                             <div class="card-body text-center"><i class="i-Diploma-2"></i>
-                                <p class="text-muted mt-2 mb-2">REGISTRATION</p>
-                                <p class="text-primary text-20 line-height-1 m-0">DOCS. REVIEW PENDING</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-6 col-md-6 col-sm-6">
-                        <div class="card card-icon mb-4">
-                            <div class="card-body text-center"><i class="i-Diploma-2"></i>
-                                <p class="text-muted mt-2 mb-2">REGISTRATION</p>
-                                <p class="text-primary text-20 line-height-1 m-0">DOCS. REVIEW PENDING</p>
+                                <p class="text-muted mt-2 mb-2">{{$data['title']}}</p>
+                                <p class="text-primary text-20 line-height-1 m-0">{{$data['status']}}</p>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="col-lg-4 col-md-4 col-sm-4">
+            <!-- <div class="col-lg-4 col-md-4 col-sm-4">
                 <div class="card mb-4">
                     <div class="card-body p-0">
                         <h5 class="card-title m-0 p-3">Sales</h5>
                         <div id="echart4" style="height: 300px; -webkit-tap-highlight-color: transparent; user-select: none; position: relative;" _echarts_instance_="ec_1631296578561"><div style="position: relative; overflow: hidden; width: 310px; height: 300px; padding: 0px; margin: 0px; border-width: 0px; cursor: default;"><canvas data-zr-dom-id="zr_0" width="310" height="300" style="position: absolute; left: 0px; top: 0px; width: 310px; height: 300px; user-select: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); padding: 0px; margin: 0px; border-width: 0px;"></canvas></div><div></div></div>
                     </div>
                 </div>
-            </div>
+            </div> -->
         </div>
         @endcan
         <!-- Hospital Pharmacy cards end  -->
@@ -297,40 +289,8 @@
             <div class="col-lg-3 col-md-3 col-sm-6">
                 <div class="card card-icon mb-4">
                     <div class="card-body text-center"><i class="i-Diploma-2"></i>
-                        <p class="text-muted mt-2 mb-2">LOCATION APPROVAL</p>
-                        <p class="text-primary text-20 line-height-1 m-0">DOCS. REVIEW PENDING</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-3 col-sm-6">
-                <div class="card card-icon mb-4">
-                    <div class="card-body text-center"><i class="i-Diploma-2"></i>
-                        <p class="text-muted mt-2 mb-2">LOCATION APPROVAL</p>
-                        <p class="text-primary text-20 line-height-1 m-0">DOCS. REVIEW QUERIED</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-3 col-sm-6">
-                <div class="card card-icon mb-4">
-                    <div class="card-body text-center"><i class="i-Diploma-2"></i>
-                        <p class="text-muted mt-2 mb-2">LOCATION APPROVAL</p>
-                        <p class="text-primary text-20 line-height-1 m-0">RECOMMENDED</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-3 col-sm-6">
-                <div class="card card-icon mb-4">
-                    <div class="card-body text-center"><i class="i-Diploma-2"></i>
-                        <p class="text-muted mt-2 mb-2">REGISTRATION AND LICENCING</p>
-                        <p class="text-primary text-20 line-height-1 m-0">PENDING</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-3 col-sm-6">
-                <div class="card card-icon mb-4">
-                    <div class="card-body text-center"><i class="i-Diploma-2"></i>
-                        <p class="text-muted mt-2 mb-2">REGISTRATION AND LICENCING</p>
-                        <p class="text-primary text-20 line-height-1 m-0">LICENCE ISSUSED</p>
+                        <p class="text-muted mt-2 mb-2">{{$data['title']}}</p>
+                        <p class="text-primary text-20 line-height-1 m-0">{{$data['status']}}</p>
                     </div>
                 </div>
             </div>
@@ -344,40 +304,8 @@
             <div class="col-lg-3 col-md-3 col-sm-6">
                 <div class="card card-icon mb-4">
                     <div class="card-body text-center"><i class="i-Diploma-2"></i>
-                        <p class="text-muted mt-2 mb-2">LOCATION APPROVAL</p>
-                        <p class="text-primary text-20 line-height-1 m-0">DOCS. REVIEW PENDING</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-3 col-sm-6">
-                <div class="card card-icon mb-4">
-                    <div class="card-body text-center"><i class="i-Diploma-2"></i>
-                        <p class="text-muted mt-2 mb-2">LOCATION APPROVAL</p>
-                        <p class="text-primary text-20 line-height-1 m-0">DOCS. REVIEW QUERIED</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-3 col-sm-6">
-                <div class="card card-icon mb-4">
-                    <div class="card-body text-center"><i class="i-Diploma-2"></i>
-                        <p class="text-muted mt-2 mb-2">LOCATION APPROVAL</p>
-                        <p class="text-primary text-20 line-height-1 m-0">RECOMMENDED</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-3 col-sm-6">
-                <div class="card card-icon mb-4">
-                    <div class="card-body text-center"><i class="i-Diploma-2"></i>
-                        <p class="text-muted mt-2 mb-2">REGISTRATION AND LICENCING</p>
-                        <p class="text-primary text-20 line-height-1 m-0">PENDING</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-3 col-sm-6">
-                <div class="card card-icon mb-4">
-                    <div class="card-body text-center"><i class="i-Diploma-2"></i>
-                        <p class="text-muted mt-2 mb-2">REGISTRATION AND LICENCING</p>
-                        <p class="text-primary text-20 line-height-1 m-0">LICENCE ISSUSED</p>
+                        <p class="text-muted mt-2 mb-2">{{$data['title']}}</p>
+                        <p class="text-primary text-20 line-height-1 m-0">{{$data['status']}}</p>
                     </div>
                 </div>
             </div>
@@ -391,16 +319,8 @@
             <div class="col-lg-3 col-md-3 col-sm-6">
                 <div class="card card-icon mb-4">
                     <div class="card-body text-center"><i class="i-Diploma-2"></i>
-                        <p class="text-muted mt-2 mb-2">REGISTRATION APPROVAL</p>
-                        <p class="text-primary text-20 line-height-1 m-0">RECOMMENDED</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-3 col-sm-6">
-                <div class="card card-icon mb-4">
-                    <div class="card-body text-center"><i class="i-Diploma-2"></i>
-                        <p class="text-muted mt-2 mb-2">REGISTRATION AND LICENCING</p>
-                        <p class="text-primary text-20 line-height-1 m-0">PENDING</p>
+                        <p class="text-muted mt-2 mb-2">{{$data['title']}}</p>
+                        <p class="text-primary text-20 line-height-1 m-0">{{$data['status']}}</p>
                     </div>
                 </div>
             </div>
@@ -416,68 +336,8 @@
                     <div class="col-lg-6 col-md-6 col-sm-6">
                         <div class="card card-icon mb-4">
                             <div class="card-body text-center"><i class="i-Map2"></i>
-                                <p class="text-muted mt-2 mb-2">LOCATION APPROVAL</p>
-                                <p class="text-primary text-20 line-height-1 m-0">DOCS. REVIEW PENDING</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-6 col-md-6 col-sm-6">
-                        <div class="card card-icon mb-4">
-                            <div class="card-body text-center"><i class="i-Map2"></i>
-                                <p class="text-muted mt-2 mb-2">LOCATION APPROVAL</p>
-                                <p class="text-primary text-20 line-height-1 m-0">DOCS. REVIEW QUERIED</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-8 col-md-8 col-sm-8">
-                <div class="row">
-                    <div class="col-lg-6 col-md-6 col-sm-6">
-                        <div class="card card-icon mb-4">
-                            <div class="card-body text-center"><i class="i-Map2"></i>
-                                <p class="text-muted mt-2 mb-2">LOCATION APPROVAL</p>
-                                <p class="text-primary text-20 line-height-1 m-0">INSPECTION PENDING</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-6 col-md-6 col-sm-6">
-                        <div class="card card-icon mb-4">
-                            <div class="card-body text-center"><i class="i-Map2"></i>
-                                <p class="text-muted mt-2 mb-2">LOCATION APPROVAL</p>
-                                <p class="text-primary text-20 line-height-1 m-0">NOT RECOMMENDED</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-8 col-md-8 col-sm-8">
-                <div class="row">
-                    <div class="col-lg-6 col-md-6 col-sm-6">
-                        <div class="card card-icon mb-4">
-                            <div class="card-body text-center"><i class="i-Map2"></i>
-                                <p class="text-muted mt-2 mb-2">LOCATION APPROVAL</p>
-                                <p class="text-primary text-20 line-height-1 m-0">RECOMMENDED</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-6 col-md-6 col-sm-6">
-                        <div class="card card-icon mb-4">
-                            <div class="card-body text-center"><i class="i-Diploma-2"></i>
-                                <p class="text-muted mt-2 mb-2">REGISTRATION AND LICENCING</p>
-                                <p class="text-primary text-20 line-height-1 m-0">PENDING</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-8 col-md-8 col-sm-8">
-                <div class="row">
-                    <div class="col-lg-6 col-md-6 col-sm-6">
-                        <div class="card card-icon mb-4">
-                            <div class="card-body text-center"><i class="i-Diploma-2"></i>
-                                <p class="text-muted mt-2 mb-2">REGISTRATION AND LICENCING</p>
-                                <p class="text-primary text-20 line-height-1 m-0">LICENCE ISSUSED</p>
+                                <p class="text-muted mt-2 mb-2">{{$data['title']}}</p>
+                                <p class="text-primary text-20 line-height-1 m-0">{{$data['status']}}</p>
                             </div>
                         </div>
                     </div>

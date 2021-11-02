@@ -282,19 +282,391 @@ class HomeController extends Controller
             ];
         }
         if(Auth::user()->hasRole(['hospital_pharmacy'])){
+            $data= [];
+
+            $registration = Registration::where(['payment' => true])
+            ->where('type', 'hospital_pharmacy')
+            ->latest()
+            ->first();
+
+            if($registration){
+                if($registration->status == 'send_to_state_office'){
+                    $data = [
+                        'title' => 'REGISTRATION REVIEW',
+                        'status' => 'DOC. REVIEW PENDING',
+                    ];
+                }
+                if($registration->status == 'queried_by_state_office'){
+                    $data = [
+                        'title' => 'REGISTRATION REVIEW',
+                        'status' => 'DOC. REVIEW QUERIED',
+                    ];
+                }
+                if($registration->status == 'send_to_registry'){
+                    $data = [
+                        'title' => 'REGISTRATION REVIEW',
+                        'status' => 'DOC. REVIEW PENDING',
+                    ];
+                }
+                if($registration->status == 'send_to_pharmacy_practice'){
+                    $data = [
+                        'title' => 'REGISTRATION REVIEW',
+                        'status' => 'DOC. REVIEW PENDING',
+                    ];
+                }
+                if($registration->status == 'no_recommendation'){
+                    $data = [
+                        'title' => 'REGISTRATION REVIEW',
+                        'status' => 'DOC. REVIEW NOT RECOMMENDED',
+                    ];
+                }
+                if($registration->status == 'partial_recommendation'){
+                    $data = [
+                        'title' => 'REGISTRATION REVIEW',
+                        'status' => 'DOC. REVIEW PARTIAL RECOMMENDED',
+                    ];
+                }
+                if($registration->status == 'full_recommendation'){
+                    $data = [
+                        'title' => 'REGISTRATION REVIEW',
+                        'status' => 'DOC. REVIEW FULL RECOMMENDED',
+                    ];
+                }
+                if($registration->status == 'send_to_registration'){
+                    $data = [
+                        'title' => 'REGISTRATION REVIEW',
+                        'status' => 'DOC. APPROVED FOR LICENCING',
+                    ];
+                }
+                if($registration->status == 'licence_issued'){
+                    $data = [
+                        'title' => 'REGISTRATION LICENCING',
+                        'status' => 'LICENCE ISSUED',
+                    ];
+                }
+            }else{
+                $data = [
+                    'title' => 'NO DATA FOUND',
+                    'status' => '-',
+                ];
+            }
             
         }
         if(Auth::user()->hasRole(['community_pharmacy'])){
-            
+            $data= [];
+
+            $registration = Registration::where(['payment' => true])
+            ->where('type', 'community_pharmacy')
+            ->latest()
+            ->first();
+
+            if($registration){
+                if($registration->status == 'send_to_state_office'){
+                    $data = [
+                        'title' => 'LOCATION APPLICATION REVIEW',
+                        'status' => 'DOC. REVIEW PENDING',
+                    ];
+                }
+                if($registration->status == 'queried_by_state_office'){
+                    $data = [
+                        'title' => 'LOCATION APPLICATION REVIEW',
+                        'status' => 'DOC. REVIEW QUERIED',
+                    ];
+                }
+                if($registration->status == 'send_to_registry'){
+                    $data = [
+                        'title' => 'LOCATION APPLICATION REVIEW',
+                        'status' => 'DOC. REVIEW PENDING',
+                    ];
+                }
+                if($registration->status == 'send_to_inspection_monitoring'){
+                    $data = [
+                        'title' => 'LOCATION APPLICATION REVIEW',
+                        'status' => 'DOC. REVIEW PENDING',
+                    ];
+                }
+                if($registration->status == 'no_recommendation'){
+                    $data = [
+                        'title' => 'LOCATION APPLICATION REVIEW',
+                        'status' => 'DOC. REVIEW NOT RECOMMENDED',
+                    ];
+                }
+                if($registration->status == 'full_recommendation'){
+                    $data = [
+                        'title' => 'LOCATION APPLICATION REVIEW',
+                        'status' => 'DOC. REVIEW FULL RECOMMENDED',
+                    ];
+                }
+                if($registration->status == 'inspection_approved'){
+                    $data = [
+                        'title' => 'LOCATION APPLICATION REVIEW',
+                        'status' => 'DOC. APPROVED OFR REGISTRATION',
+                    ];
+                }
+                if($registration->status == 'send_to_inspection_monitoring_registration'){
+                    $data = [
+                        'title' => 'REGISTRATION REVIEW',
+                        'status' => 'DOC. REVIEW PENDING',
+                    ];
+                }
+                if($registration->status == 'facility_no_recommendation'){
+                    $data = [
+                        'title' => 'REGISTRATION REVIEW',
+                        'status' => 'DOC. REGISTRATION NOT RECOMMENDED',
+                    ];
+                }
+                if($registration->status == 'facility_full_recommendation'){
+                    $data = [
+                        'title' => 'REGISTRATION REVIEW',
+                        'status' => 'DOC. REGISTRATION FULL RECOMMENDED',
+                    ];
+                }
+                if($registration->status == 'facility_inspection_approved'){
+                    $data = [
+                        'title' => 'REGISTRATION REVIEW',
+                        'status' => 'DOC. APPROVED FOR LICENCING',
+                    ];
+                }
+                if($registration->status == 'licence_issued'){
+                    $data = [
+                        'title' => 'REGISTRATION LICENCING',
+                        'status' => 'LICENCE ISSUED',
+                    ];
+                }
+            }else{
+                $data = [
+                    'title' => 'NO DATA FOUND',
+                    'status' => '-',
+                ];
+            }
         }
         if(Auth::user()->hasRole(['distribution_premises'])){
-            
+            $data= [];
+
+            $registration = Registration::where(['payment' => true])
+            ->where('type', 'distribution_premises')
+            ->latest()
+            ->first();
+
+            if($registration){
+                if($registration->status == 'send_to_state_office'){
+                    $data = [
+                        'title' => 'LOCATION APPLICATION REVIEW',
+                        'status' => 'DOC. REVIEW PENDING',
+                    ];
+                }
+                if($registration->status == 'queried_by_state_office'){
+                    $data = [
+                        'title' => 'LOCATION APPLICATION REVIEW',
+                        'status' => 'DOC. REVIEW QUERIED',
+                    ];
+                }
+                if($registration->status == 'send_to_registry'){
+                    $data = [
+                        'title' => 'LOCATION APPLICATION REVIEW',
+                        'status' => 'DOC. REVIEW PENDING',
+                    ];
+                }
+                if($registration->status == 'send_to_inspection_monitoring'){
+                    $data = [
+                        'title' => 'LOCATION APPLICATION REVIEW',
+                        'status' => 'DOC. REVIEW PENDING',
+                    ];
+                }
+                if($registration->status == 'no_recommendation'){
+                    $data = [
+                        'title' => 'LOCATION APPLICATION REVIEW',
+                        'status' => 'DOC. REVIEW NOT RECOMMENDED',
+                    ];
+                }
+                if($registration->status == 'full_recommendation'){
+                    $data = [
+                        'title' => 'LOCATION APPLICATION REVIEW',
+                        'status' => 'DOC. REVIEW FULL RECOMMENDED',
+                    ];
+                }
+                if($registration->status == 'inspection_approved'){
+                    $data = [
+                        'title' => 'LOCATION APPLICATION REVIEW',
+                        'status' => 'DOC. APPROVED OFR REGISTRATION',
+                    ];
+                }
+                if($registration->status == 'send_to_inspection_monitoring_registration'){
+                    $data = [
+                        'title' => 'REGISTRATION REVIEW',
+                        'status' => 'DOC. REVIEW PENDING',
+                    ];
+                }
+                if($registration->status == 'facility_no_recommendation'){
+                    $data = [
+                        'title' => 'REGISTRATION REVIEW',
+                        'status' => 'DOC. REGISTRATION NOT RECOMMENDED',
+                    ];
+                }
+                if($registration->status == 'facility_full_recommendation'){
+                    $data = [
+                        'title' => 'REGISTRATION REVIEW',
+                        'status' => 'DOC. REGISTRATION FULL RECOMMENDED',
+                    ];
+                }
+                if($registration->status == 'facility_inspection_approved'){
+                    $data = [
+                        'title' => 'REGISTRATION REVIEW',
+                        'status' => 'DOC. APPROVED FOR LICENCING',
+                    ];
+                }
+                if($registration->status == 'licence_issued'){
+                    $data = [
+                        'title' => 'REGISTRATION LICENCING',
+                        'status' => 'LICENCE ISSUED',
+                    ];
+                }
+            }else{
+                $data = [
+                    'title' => 'NO DATA FOUND',
+                    'status' => '-',
+                ];
+            }
         }
         if(Auth::user()->hasRole(['manufacturing_premises'])){
-            
+            $data= [];
+
+            $registration = Registration::where(['payment' => false])
+            ->where('type', 'community_pharmacy')
+            ->latest()
+            ->first();
+
+            if($registration){
+                if($registration->status == 'send_to_registry'){
+                    $data = [
+                        'title' => 'REGISTRATION REVIEW',
+                        'status' => 'DOC. REVIEW PENDING',
+                    ];
+                }
+                if($registration->status == 'send_to_inspection_monitoring'){
+                    $data = [
+                        'title' => 'REGISTRATION REVIEW',
+                        'status' => 'DOC. REVIEW PENDING',
+                    ];
+                }
+                if($registration->status == 'facility_no_recommendation'){
+                    $data = [
+                        'title' => 'REGISTRATION REVIEW',
+                        'status' => 'DOC. REGISTRATION NOT RECOMMENDED',
+                    ];
+                }
+                if($registration->status == 'facility_full_recommendation'){
+                    $data = [
+                        'title' => 'REGISTRATION REVIEW',
+                        'status' => 'DOC. REGISTRATION FULL RECOMMENDED',
+                    ];
+                }
+                if($registration->status == 'facility_send_to_registration'){
+                    $data = [
+                        'title' => 'REGISTRATION REVIEW',
+                        'status' => 'DOC. APPROVED FOR LICENCING',
+                    ];
+                }
+                if($registration->status == 'licence_issued'){
+                    $data = [
+                        'title' => 'REGISTRATION LICENCING',
+                        'status' => 'LICENCE ISSUED',
+                    ];
+                }
+            }else{
+                $data = [
+                    'title' => 'NO DATA FOUND',
+                    'status' => '-',
+                ];
+            }
         }
         if(Auth::user()->hasRole(['ppmv'])){
-            
+            $data= [];
+
+            $registration = Registration::where(['payment' => true])
+            ->where('type', 'community_pharmacy')
+            ->latest()
+            ->first();
+
+            if($registration){
+                if($registration->status == 'send_to_state_office'){
+                    $data = [
+                        'title' => 'LOCATION APPLICATION REVIEW',
+                        'status' => 'DOC. REVIEW PENDING',
+                    ];
+                }
+                if($registration->status == 'queried_by_state_office'){
+                    $data = [
+                        'title' => 'LOCATION APPLICATION REVIEW',
+                        'status' => 'DOC. REVIEW QUERIED',
+                    ];
+                }
+                if($registration->status == 'send_to_registry'){
+                    $data = [
+                        'title' => 'LOCATION APPLICATION REVIEW',
+                        'status' => 'DOC. REVIEW PENDING',
+                    ];
+                }
+                if($registration->status == 'send_to_state_office_inspection'){
+                    $data = [
+                        'title' => 'LOCATION APPLICATION REVIEW',
+                        'status' => 'DOC. REVIEW PENDING',
+                    ];
+                }
+                if($registration->status == 'no_recommendation'){
+                    $data = [
+                        'title' => 'LOCATION APPLICATION REVIEW',
+                        'status' => 'DOC. REVIEW NOT RECOMMENDED',
+                    ];
+                }
+                if($registration->status == 'full_recommendation'){
+                    $data = [
+                        'title' => 'LOCATION APPLICATION REVIEW',
+                        'status' => 'DOC. REVIEW FULL RECOMMENDED',
+                    ];
+                }
+                if($registration->status == 'inspection_approved'){
+                    $data = [
+                        'title' => 'LOCATION APPLICATION REVIEW',
+                        'status' => 'DOC. APPROVED OFR REGISTRATION',
+                    ];
+                }
+                if($registration->status == 'send_to_state_office_registration'){
+                    $data = [
+                        'title' => 'REGISTRATION REVIEW',
+                        'status' => 'DOC. REVIEW PENDING',
+                    ];
+                }
+                if($registration->status == 'facility_no_recommendation'){
+                    $data = [
+                        'title' => 'REGISTRATION REVIEW',
+                        'status' => 'DOC. REGISTRATION NOT RECOMMENDED',
+                    ];
+                }
+                if($registration->status == 'facility_full_recommendation'){
+                    $data = [
+                        'title' => 'REGISTRATION REVIEW',
+                        'status' => 'DOC. REGISTRATION FULL RECOMMENDED',
+                    ];
+                }
+                if($registration->status == 'facility_inspection_approved'){
+                    $data = [
+                        'title' => 'REGISTRATION REVIEW',
+                        'status' => 'DOC. APPROVED FOR LICENCING',
+                    ];
+                }
+                if($registration->status == 'licence_issued'){
+                    $data = [
+                        'title' => 'REGISTRATION LICENCING',
+                        'status' => 'LICENCE ISSUED',
+                    ];
+                }
+            }else{
+                $data = [
+                    'title' => 'NO DATA FOUND',
+                    'status' => '-',
+                ];
+            }
         }
         return view('index', compact('data'));
     }
