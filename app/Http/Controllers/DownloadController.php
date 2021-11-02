@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Registration;
 use App\Models\HospitalRegistration;
+use App\Models\OtherRegistration;
+use App\Models\Renewal;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Services\AllActivity;
 use DB;
@@ -150,6 +152,84 @@ class DownloadController extends Controller
             $path = storage_path('app'. DIRECTORY_SEPARATOR . 'private' . 
             DIRECTORY_SEPARATOR . $application->user_id . DIRECTORY_SEPARATOR . 'company' . DIRECTORY_SEPARATOR . $application->inspection_report);
             return response()->download($path);
+        }else{
+            return abort(404);
+        }
+    }
+
+    public function downloadLicence($id){
+
+        if(Auth::user()->hasRole(['community_pharmacy'])){
+            $type = 'community_pharmacy_renewal';
+        }else if(Auth::user()->hasRole(['distribution_premises'])){
+            $type = 'distribution_premises_renewal';
+        }else if(Auth::user()->hasRole(['manufacturing_premises'])){
+            $type = 'manufacturing_premises_renewal';
+        }
+
+        if(Renewal::where('vendor_id',  Auth::user()->id)
+        ->where('id',  $id)
+        ->where('type', $type)
+        ->where('status', 'licence_issued')->exists()){
+
+            $data = Renewal::where('vendor_id',  Auth::user()->id)
+            ->where('id',  $id)
+            ->where('status', 'licence_issued')
+            ->where('type', $type)
+            ->with('registration', 'other_registration.company', 'user')
+            ->first();
+
+            $backgroundURL = env('APP_URL') . '/admin/dist-assets/images/licence-bg.jpg';
+            $profilePhoto = Auth::user()->photo ? env('APP_URL') . '/images/'. Auth::user()->photo : env('APP_URL') . '/admin/dist-assets/images/avatar.jpg';
+
+            $pdf = PDF::loadView('pdf.CP-DP-MP-licence', ['data' => $data, 'background' => $backgroundURL, 'photo' => $profilePhoto]);
+            return $pdf->stream();
+        }else{
+            return abort(404);
+        }
+    }
+    public function hpDownloadLicence($id){
+
+        if(Renewal::where('vendor_id',  Auth::user()->id)
+        ->where('id',  $id)
+        ->where('type', 'hospital_pharmacy_renewal')
+        ->where('status', 'licence_issued')->exists()){
+
+            $data = Renewal::where('vendor_id',  Auth::user()->id)
+            ->where('id',  $id)
+            ->where('status', 'licence_issued')
+            ->where('type', 'hospital_pharmacy_renewal')
+            ->with('registration', 'hospital_pharmacy', 'user')
+            ->first();
+
+            $backgroundURL = env('APP_URL') . '/admin/dist-assets/images/licence-bg.jpg';
+            $profilePhoto = Auth::user()->photo ? env('APP_URL') . '/images/'. Auth::user()->photo : env('APP_URL') . '/admin/dist-assets/images/avatar.jpg';
+
+            $pdf = PDF::loadView('pdf.HP-licence', ['data' => $data, 'background' => $backgroundURL, 'photo' => $profilePhoto]);
+            return $pdf->stream();
+        }else{
+            return abort(404);
+        }
+    }
+    public function ppmvDownloadLicence($id){
+
+        if(Renewal::where('vendor_id',  Auth::user()->id)
+        ->where('id',  $id)
+        ->where('type', 'ppmv_renewal')
+        ->where('status', 'licence_issued')->exists()){
+
+            $data = Renewal::where('vendor_id',  Auth::user()->id)
+            ->where('id',  $id)
+            ->where('status', 'licence_issued')
+            ->where('type', 'ppmv_renewal')
+            ->with('registration', 'ppmv', 'user')
+            ->first();
+
+            $backgroundURL = env('APP_URL') . '/admin/dist-assets/images/licence-bg.jpg';
+            $profilePhoto = Auth::user()->photo ? env('APP_URL') . '/images/'. Auth::user()->photo : env('APP_URL') . '/admin/dist-assets/images/avatar.jpg';
+
+            $pdf = PDF::loadView('pdf.PPMV-licence', ['data' => $data, 'background' => $backgroundURL, 'photo' => $profilePhoto]);
+            return $pdf->stream();
         }else{
             return abort(404);
         }

@@ -67,7 +67,7 @@
                                 <a href="{{route('hospital-renewal-edit', $renewal->id)}}"><button class="btn btn-info btn-icon btn-sm m-0" type="button">UPDATE APPLICATION</button></a>
                                 @endif
                                 @if($renewal->status == 'licence_issued')
-                                <a target="_blank" href=""><button class="btn btn-info btn-icon btn-sm m-0" type="button"> <span class="ul-btn__icon"><i class="i-Gear-2"></i></span> <span class="ul-btn__text">LICENCE</span></button></a>
+                                <a target="_blank" href="{{route('hp-download-licence', $renewal->id)}}"><button class="btn btn-info btn-icon btn-sm m-0" type="button"> <span class="ul-btn__icon"><i class="i-Gear-2"></i></span> <span class="ul-btn__text">LICENCE</span></button></a>
                                 @endif
                                 </td>
                             </tr>

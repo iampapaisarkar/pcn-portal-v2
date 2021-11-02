@@ -49,7 +49,7 @@ Route::group(['middleware' => ['auth','verified', 'CheckProfileStatus']], functi
     Route::get('/payment-failed/{token}', 'App\Http\Controllers\CheckoutController@paymentError')->name('payment-failed');
     Route::get('/payment-success/{token}', 'App\Http\Controllers\CheckoutController@paymentSuccess')->name('payment-success');
 
-    // Donwload routes
+    // Download routes
     Route::get('hospital-inspection-report-download/{id}', 'App\Http\Controllers\DownloadController@downloadHospitalInspectionReport')->name('hospital-inspection-report-download');
     Route::get('ppmv-birth-certificate-download/{id}', 'App\Http\Controllers\DownloadController@downloadPPMVBirthCertificate')->name('ppmv-birth-certificate-download');
     Route::get('ppmv-education-certificate-download/{id}', 'App\Http\Controllers\DownloadController@downloadPPMVEducationCertificate')->name('ppmv-education-certificate-download');
@@ -61,6 +61,11 @@ Route::group(['middleware' => ['auth','verified', 'CheckProfileStatus']], functi
     Route::get('ppmv-registration-inspection-report-download/{id}', 'App\Http\Controllers\DownloadController@downloadPPMVRegistrationInspectionReport')->name('ppmv-registration-inspection-report-download');
     Route::get('location-inspection-report-download/{id}', 'App\Http\Controllers\DownloadController@downloadPRegistrationInspectionReport')->name('location-inspection-report-download');
     
+
+    // Download Licence 
+    Route::get('download-licence/{id}', 'App\Http\Controllers\DownloadController@downloadLicence')->name('download-licence');
+    Route::get('hp-download-licence/{id}', 'App\Http\Controllers\DownloadController@hpDownloadLicence')->name('hp-download-licence');
+    Route::get('ppmv-download-licence/{id}', 'App\Http\Controllers\DownloadController@ppmvDownloadLicence')->name('ppmv-download-licence');
 });
 
 

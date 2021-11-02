@@ -119,6 +119,7 @@ class InvoiceController extends Controller
             }
 
 
+
             if($data->service_type == 'hospital_pharmacy'){
                 $title = 'Hospital Pharmacy Registration Fees';
             }
