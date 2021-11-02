@@ -10,6 +10,7 @@ use App\Models\Renewal;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Services\AllActivity;
 use DB;
+use PDF;
 use App\Models\PpmvLocationApplication;
 
 class DownloadController extends Controller
@@ -167,12 +168,12 @@ class DownloadController extends Controller
             $type = 'manufacturing_premises_renewal';
         }
 
-        if(Renewal::where('vendor_id',  Auth::user()->id)
+        if(Renewal::where('user_id',  Auth::user()->id)
         ->where('id',  $id)
         ->where('type', $type)
         ->where('status', 'licence_issued')->exists()){
 
-            $data = Renewal::where('vendor_id',  Auth::user()->id)
+            $data = Renewal::where('user_id',  Auth::user()->id)
             ->where('id',  $id)
             ->where('status', 'licence_issued')
             ->where('type', $type)
@@ -190,12 +191,12 @@ class DownloadController extends Controller
     }
     public function hpDownloadLicence($id){
 
-        if(Renewal::where('vendor_id',  Auth::user()->id)
+        if(Renewal::where('user_id',  Auth::user()->id)
         ->where('id',  $id)
         ->where('type', 'hospital_pharmacy_renewal')
         ->where('status', 'licence_issued')->exists()){
 
-            $data = Renewal::where('vendor_id',  Auth::user()->id)
+            $data = Renewal::where('user_id',  Auth::user()->id)
             ->where('id',  $id)
             ->where('status', 'licence_issued')
             ->where('type', 'hospital_pharmacy_renewal')
@@ -213,12 +214,12 @@ class DownloadController extends Controller
     }
     public function ppmvDownloadLicence($id){
 
-        if(Renewal::where('vendor_id',  Auth::user()->id)
+        if(Renewal::where('user_id',  Auth::user()->id)
         ->where('id',  $id)
         ->where('type', 'ppmv_renewal')
         ->where('status', 'licence_issued')->exists()){
 
-            $data = Renewal::where('vendor_id',  Auth::user()->id)
+            $data = Renewal::where('user_id',  Auth::user()->id)
             ->where('id',  $id)
             ->where('status', 'licence_issued')
             ->where('type', 'ppmv_renewal')
