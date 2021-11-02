@@ -200,7 +200,7 @@ class DownloadController extends Controller
             ->where('id',  $id)
             ->where('status', 'licence_issued')
             ->where('type', 'hospital_pharmacy_renewal')
-            ->with('registration', 'hospital_pharmacy', 'user')
+            ->with('registration', 'hospital_pharmacy', 'ppmv', 'other_registration', 'user.user_state', 'user.user_lga')
             ->first();
 
             $backgroundURL = env('APP_URL') . '/admin/dist-assets/images/licence-bg.jpg';
