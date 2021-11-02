@@ -35,7 +35,7 @@
             <div style="margin-bottom: 20px; font-size: 14px; text-align: center;"><span>applied to be registered by</span></div>
             <div style="margin-bottom: 20px; font-size: 18px; text-align: center; color: #bb1c25; font-weight: bold;"><span>Pharm. {{ucwords($data['user']['firstname'])}} {{ucwords($data['user']['lastname'])}}</span></div>
             
-            <div style="font-size: 14px; text-align: center;"><span>was on {{strtoupper($data['updated_at']->format('jS'))}} DAY OF  {{strtoupper($data['updated_at']->format('M'))}}, {{$data['updated_at']->format('Y')}} duly registered for the purpose of mixing,compounding, preparing, dispensing, procuring of drugs and poisons,counselling and pharmaceutical care in accordance with provisions of thePharmacists Council of Nigeria Act, Cap P17, LFN, 2004.</span></div>
+            <div style="font-size: 14px; text-align: center;"><span>was on <strong>{{strtoupper($data['updated_at']->format('jS'))}} DAY OF  {{strtoupper($data['updated_at']->format('M'))}}, {{$data['updated_at']->format('Y')}}</strong> duly registered for the purpose of mixing,compounding, preparing, dispensing, procuring of drugs and poisons,counselling and pharmaceutical care in accordance with provisions of thePharmacists Council of Nigeria Act, Cap P17, LFN, 2004.</span></div>
         </div>
         
         <div style="position: absolute; top: 760px;">

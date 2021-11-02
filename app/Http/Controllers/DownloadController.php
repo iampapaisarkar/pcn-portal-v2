@@ -177,13 +177,13 @@ class DownloadController extends Controller
             ->where('id',  $id)
             ->where('status', 'licence_issued')
             ->where('type', $type)
-            ->with('registration', 'other_registration.company', 'user')
+            ->with('registration', 'other_registration.company.company_state', 'other_registration.company.company_lga', 'user.user_state', 'user.user_lga')
             ->first();
 
             $backgroundURL = env('APP_URL') . '/admin/dist-assets/images/licence-bg.jpg';
             $profilePhoto = Auth::user()->photo ? env('APP_URL') . '/images/'. Auth::user()->photo : env('APP_URL') . '/admin/dist-assets/images/avatar.jpg';
 
-            $pdf = PDF::loadView('pdf.CP-DP-MP-licence', ['data' => $data, 'background' => $backgroundURL, 'photo' => $profilePhoto]);
+            $pdf = PDF::loadView('pdf.CP-DP-MP-licence', ['data' => $data, 'background' => $backgroundURL, 'photo' => $profilePhoto, 'type' => $type]);
             return $pdf->stream();
         }else{
             return abort(404);
@@ -200,7 +200,7 @@ class DownloadController extends Controller
             ->where('id',  $id)
             ->where('status', 'licence_issued')
             ->where('type', 'hospital_pharmacy_renewal')
-            ->with('registration', 'hospital_pharmacy', 'ppmv', 'other_registration', 'user.user_state', 'user.user_lga')
+            ->with('registration', 'hospital_pharmacy', 'user.user_state', 'user.user_lga')
             ->first();
 
             $backgroundURL = env('APP_URL') . '/admin/dist-assets/images/licence-bg.jpg';
@@ -223,7 +223,7 @@ class DownloadController extends Controller
             ->where('id',  $id)
             ->where('status', 'licence_issued')
             ->where('type', 'ppmv_renewal')
-            ->with('registration', 'ppmv', 'user')
+            ->with('registration', 'ppmv', 'user.user_state', 'user.user_lga')
             ->first();
 
             $backgroundURL = env('APP_URL') . '/admin/dist-assets/images/licence-bg.jpg';
