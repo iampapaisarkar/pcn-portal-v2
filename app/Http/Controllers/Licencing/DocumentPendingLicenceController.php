@@ -250,7 +250,7 @@ class DocumentPendingLicenceController extends Controller
                         ->with('user', 'company.company_state')
                         ->latest()->first();
 
-                        $licenceNumber = ucwords($OtherRegistration->company->company_state->state_code) . date('Y') . 'CPS' . str_pad("1", 4, '0', STR_PAD_LEFT);
+                        $licenceNumber = ucwords($OtherRegistration->company->company_state->state_code) . date('Y') . 'DPS' . str_pad("1", 4, '0', STR_PAD_LEFT);
 
                         $renewal = Renewal::create([
                             'user_id' => $Registration->user_id,
@@ -279,7 +279,7 @@ class DocumentPendingLicenceController extends Controller
                         ->with('user', 'company.company_state')
                         ->latest()->first();
 
-                        $licenceNumber = ucwords($OtherRegistration->company->company_state->state_code) . date('Y') . 'CPS' . str_pad("1", 4, '0', STR_PAD_LEFT);
+                        $licenceNumber = ucwords($OtherRegistration->company->company_state->state_code) . date('Y') . 'MPS' . str_pad("1", 4, '0', STR_PAD_LEFT);
 
                         $renewal = Renewal::create([
                             'user_id' => $Registration->user_id,
@@ -345,7 +345,11 @@ class DocumentPendingLicenceController extends Controller
                         'status' => 'licence_issued'
                     ]);
 
-                    $HospitalRegistration = HospitalRegistration::where(['registration_id' => $request['registration_id'], 'user_id' => $request['user_id']])->latest()->first();
+                    $HospitalRegistration = HospitalRegistration::where(['registration_id' => $request['registration_id'], 'user_id' => $request['user_id']])
+                    ->with('user.user_state')
+                    ->latest()->first();
+
+                    $licenceNumber = ucwords($HospitalRegistration->user->user_state->state_code) . date('Y') . 'HPS' . str_pad("1", 4, '0', STR_PAD_LEFT);
 
                     $renewal = Renewal::create([
                         'user_id' => $registration->user_id,
@@ -354,7 +358,7 @@ class DocumentPendingLicenceController extends Controller
                         'type' => 'hospital_pharmacy_renewal',
                         'renewal_year' => date('Y'),
                         'expires_at' => \Carbon\Carbon::now()->format('Y') .'-12-31',
-                        'licence' => 'TEST2021',
+                        'licence' => $licenceNumber,
                         'status' => 'licence_issued',
                         // 'renewal' => true,
                         // 'inspection' => true,
@@ -417,8 +421,10 @@ class DocumentPendingLicenceController extends Controller
                     ]);
 
                     $PpmvLocationApplication = PpmvLocationApplication::where(['registration_id' => $registration->id, 'user_id' => $registration->user_id])
-                    ->with('user')
+                    ->with('user.user_state')
                     ->latest()->first();
+
+                    $licenceNumber = ucwords($PpmvLocationApplication->user->user_state->state_code) . date('Y') . 'PPS' . str_pad("1", 4, '0', STR_PAD_LEFT);
 
                     $renewal = Renewal::create([
                         'user_id' => $registration->user_id,
@@ -427,7 +433,7 @@ class DocumentPendingLicenceController extends Controller
                         'type' => 'ppmv_renewal',
                         'renewal_year' => date('Y'),
                         'expires_at' => \Carbon\Carbon::now()->format('Y') .'-12-31',
-                        'licence' => 'TEST2021',
+                        'licence' => $licenceNumber,
                         'status' => 'licence_issued',
                         'renewal' => false,
                         'inspection' => true,
@@ -491,8 +497,10 @@ class DocumentPendingLicenceController extends Controller
                     ]);
 
                     $OtherRegistration = OtherRegistration::where(['registration_id' => $registration->id, 'user_id' => $registration->user_id])
-                    ->with('user')
+                    ->with('user', 'company.company_state')
                     ->latest()->first();
+
+                    $licenceNumber = ucwords($OtherRegistration->company->company_state->state_code) . date('Y') . 'CPS' . str_pad("1", 4, '0', STR_PAD_LEFT);
 
                     $renewal = Renewal::create([
                         'user_id' => $registration->user_id,
@@ -501,7 +509,7 @@ class DocumentPendingLicenceController extends Controller
                         'type' => 'community_pharmacy_renewal',
                         'renewal_year' => date('Y'),
                         'expires_at' => \Carbon\Carbon::now()->format('Y') .'-12-31',
-                        'licence' => 'TEST2021',
+                        'licence' => $licenceNumber,
                         'status' => 'licence_issued',
                         'renewal' => false,
                         'inspection' => true,
@@ -565,8 +573,10 @@ class DocumentPendingLicenceController extends Controller
                     ]);
 
                     $OtherRegistration = OtherRegistration::where(['registration_id' => $registration->id, 'user_id' => $registration->user_id])
-                    ->with('user')
+                    ->with('user', 'company.company_state')
                     ->latest()->first();
+
+                    $licenceNumber = ucwords($OtherRegistration->company->company_state->state_code) . date('Y') . 'DPS' . str_pad("1", 4, '0', STR_PAD_LEFT);
 
                     $renewal = Renewal::create([
                         'user_id' => $registration->user_id,
@@ -575,7 +585,7 @@ class DocumentPendingLicenceController extends Controller
                         'type' => 'distribution_premises_renewal',
                         'renewal_year' => date('Y'),
                         'expires_at' => \Carbon\Carbon::now()->format('Y') .'-12-31',
-                        'licence' => 'TEST2021',
+                        'licence' =>  $licenceNumber,
                         'status' => 'licence_issued',
                         'renewal' => false,
                         'inspection' => true,
@@ -639,8 +649,10 @@ class DocumentPendingLicenceController extends Controller
                     ]);
 
                     $OtherRegistration = OtherRegistration::where(['registration_id' => $registration->id, 'user_id' => $registration->user_id])
-                    ->with('user')
+                    ->with('user', 'company.company_state')
                     ->latest()->first();
+
+                    $licenceNumber = ucwords($OtherRegistration->company->company_state->state_code) . date('Y') . 'MPS' . str_pad("1", 4, '0', STR_PAD_LEFT);
 
                     $renewal = Renewal::create([
                         'user_id' => $registration->user_id,
@@ -649,7 +661,7 @@ class DocumentPendingLicenceController extends Controller
                         'type' => 'manufacturing_premises_renewal',
                         'renewal_year' => date('Y'),
                         'expires_at' => \Carbon\Carbon::now()->format('Y') .'-12-31',
-                        'licence' => 'TEST2021',
+                        'licence' =>  $licenceNumber,
                         'status' => 'licence_issued',
                         'renewal' => false,
                         'inspection' => true,
