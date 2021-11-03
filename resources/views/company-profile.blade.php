@@ -163,7 +163,7 @@
                         <label class="custom-file-label " for="inputGroupFile02"
                             aria-describedby="inputGroupFileAddon02">Choose file</label>
                     </div>
-                    <div class="profilePreview">
+                    <div class="">
                         <img id="profile-pic-new-preview" src="" alt="" class="w-25">
                         <img id="profile-pic-old-preview" src="{{ $business ? asset('images/' . $business->passport) : ''}}" alt=""
                             class="w-25">
@@ -421,7 +421,7 @@ function deleteOtherDirectorRow(id){
 
 </script>
 <style>
-.profilePreview img {
+. img {
     border-radius: 100%;
 }
 </style>
