@@ -10,6 +10,6 @@ class ServiceFeeMeta extends Model
     use HasFactory;
 
     protected $fillable = [
-        'service_id', 'description', 'amount', 'registration_fee', 'inspection_fee', 'status'
+        'service_id', 'description', 'amount', 'registration_fee', 'inspection_fee', 'location_fee', 'renewal_fee', 'status'
     ];
 }

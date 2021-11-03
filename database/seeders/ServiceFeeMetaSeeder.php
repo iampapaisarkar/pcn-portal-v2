@@ -21,6 +21,8 @@ class ServiceFeeMetaSeeder extends Seeder
             'amount' => 5000,
             'registration_fee' => null,
             'inspection_fee' => null,
+            'location_fee' => null,
+            'renewal_fee' => null,
             'status' => true,
             'updated_at' => now()
             ],
@@ -30,6 +32,8 @@ class ServiceFeeMetaSeeder extends Seeder
             'amount' => 2500,
             'registration_fee' => null,
             'inspection_fee' => null,
+            'location_fee' => null,
+            'renewal_fee' => null,
             'status' => true,
             'updated_at' => now()
             ],
@@ -39,6 +43,8 @@ class ServiceFeeMetaSeeder extends Seeder
             'amount' => 3000,
             'registration_fee' => null,
             'inspection_fee' => null,
+            'location_fee' => null,
+            'renewal_fee' => null,
             'status' => false,
             'updated_at' => now()
             ],
@@ -49,6 +55,8 @@ class ServiceFeeMetaSeeder extends Seeder
             'amount' => 5000,
             'registration_fee' => null,
             'inspection_fee' => null,
+            'location_fee' => null,
+            'renewal_fee' => null,
             'status' => true,
             'updated_at' => now()
             ],
@@ -58,6 +66,8 @@ class ServiceFeeMetaSeeder extends Seeder
             'amount' => 2500,
             'registration_fee' => null,
             'inspection_fee' => null,
+            'location_fee' => null,
+            'renewal_fee' => null,
             'status' => true,
             'updated_at' => now()
             ],
@@ -67,6 +77,8 @@ class ServiceFeeMetaSeeder extends Seeder
             'amount' => 3000,
             'registration_fee' => null,
             'inspection_fee' => null,
+            'location_fee' => null,
+            'renewal_fee' => null,
             'status' => false,
             'updated_at' => now()
             ],
@@ -77,6 +89,8 @@ class ServiceFeeMetaSeeder extends Seeder
             'amount' => 5000,
             'registration_fee' => null,
             'inspection_fee' => null,
+            'location_fee' => null,
+            'renewal_fee' => null,
             'status' => true,
             'updated_at' => now()
             ],
@@ -86,6 +100,8 @@ class ServiceFeeMetaSeeder extends Seeder
             'amount' => 2500,
             'registration_fee' => null,
             'inspection_fee' => null,
+            'location_fee' => null,
+            'renewal_fee' => null,
             'status' => true,
             'updated_at' => now()
             ],
@@ -95,6 +111,8 @@ class ServiceFeeMetaSeeder extends Seeder
             'amount' => 3000,
             'registration_fee' => null,
             'inspection_fee' => null,
+            'location_fee' => null,
+            'renewal_fee' => null,
             'status' => false,
             'updated_at' => now()
             ],
@@ -105,6 +123,8 @@ class ServiceFeeMetaSeeder extends Seeder
             'amount' => 5000,
             'registration_fee' => null,
             'inspection_fee' => null,
+            'location_fee' => null,
+            'renewal_fee' => null,
             'status' => true,
             'updated_at' => now()
             ],
@@ -114,6 +134,8 @@ class ServiceFeeMetaSeeder extends Seeder
             'amount' => 2500,
             'registration_fee' => null,
             'inspection_fee' => null,
+            'location_fee' => null,
+            'renewal_fee' => null,
             'status' => true,
             'updated_at' => now()
             ],
@@ -123,6 +145,8 @@ class ServiceFeeMetaSeeder extends Seeder
             'amount' => 3000,
             'registration_fee' => null,
             'inspection_fee' => null,
+            'location_fee' => null,
+            'renewal_fee' => null,
             'status' => false,
             'updated_at' => now()
             ],
@@ -133,6 +157,8 @@ class ServiceFeeMetaSeeder extends Seeder
             'amount' => 5000,
             'registration_fee' => null,
             'inspection_fee' => null,
+            'location_fee' => null,
+            'renewal_fee' => null,
             'status' => true,
             'updated_at' => now()
             ],
@@ -142,6 +168,8 @@ class ServiceFeeMetaSeeder extends Seeder
             'amount' => 2500,
             'registration_fee' => null,
             'inspection_fee' => null,
+            'location_fee' => null,
+            'renewal_fee' => null,
             'status' => true,
             'updated_at' => now()
             ],
@@ -151,6 +179,8 @@ class ServiceFeeMetaSeeder extends Seeder
             'amount' => 3000,
             'registration_fee' => null,
             'inspection_fee' => null,
+            'location_fee' => null,
+            'renewal_fee' => null,
             'status' => false,
             'updated_at' => now()
             ],
@@ -161,6 +191,8 @@ class ServiceFeeMetaSeeder extends Seeder
             'amount' => 5000,
             'registration_fee' => null,
             'inspection_fee' => null,
+            'location_fee' => null,
+            'renewal_fee' => null,
             'status' => true,
             'updated_at' => now()
             ],
@@ -170,6 +202,8 @@ class ServiceFeeMetaSeeder extends Seeder
             'amount' => 2500,
             'registration_fee' => null,
             'inspection_fee' => null,
+            'location_fee' => null,
+            'renewal_fee' => null,
             'status' => true,
             'updated_at' => now()
             ],
@@ -179,6 +213,8 @@ class ServiceFeeMetaSeeder extends Seeder
             'amount' => 3000,
             'registration_fee' => null,
             'inspection_fee' => null,
+            'location_fee' => null,
+            'renewal_fee' => null,
             'status' => false,
             'updated_at' => now()
             ],
@@ -189,6 +225,8 @@ class ServiceFeeMetaSeeder extends Seeder
             'amount' => 5000,
             'registration_fee' => null,
             'inspection_fee' => null,
+            'location_fee' => null,
+            'renewal_fee' => null,
             'status' => true,
             'updated_at' => now()
             ],
@@ -198,6 +236,8 @@ class ServiceFeeMetaSeeder extends Seeder
             'amount' => 2500,
             'registration_fee' => null,
             'inspection_fee' => null,
+            'location_fee' => null,
+            'renewal_fee' => null,
             'status' => true,
             'updated_at' => now()
             ],
@@ -207,6 +247,8 @@ class ServiceFeeMetaSeeder extends Seeder
             'amount' => 3000,
             'registration_fee' => null,
             'inspection_fee' => null,
+            'location_fee' => null,
+            'renewal_fee' => null,
             'status' => false,
             'updated_at' => now()
             ],
@@ -217,6 +259,8 @@ class ServiceFeeMetaSeeder extends Seeder
             'amount' => 5000,
             'registration_fee' => null,
             'inspection_fee' => null,
+            'location_fee' => null,
+            'renewal_fee' => null,
             'status' => true,
             'updated_at' => now()
             ],
@@ -226,6 +270,8 @@ class ServiceFeeMetaSeeder extends Seeder
             'amount' => 2500,
             'registration_fee' => null,
             'inspection_fee' => null,
+            'location_fee' => null,
+            'renewal_fee' => null,
             'status' => true,
             'updated_at' => now()
             ],
@@ -235,6 +281,8 @@ class ServiceFeeMetaSeeder extends Seeder
             'amount' => 3000,
             'registration_fee' => null,
             'inspection_fee' => null,
+            'location_fee' => null,
+            'renewal_fee' => null,
             'status' => false,
             'updated_at' => now()
             ],
@@ -245,6 +293,8 @@ class ServiceFeeMetaSeeder extends Seeder
             'amount' => 5000,
             'registration_fee' => null,
             'inspection_fee' => null,
+            'location_fee' => null,
+            'renewal_fee' => null,
             'status' => true,
             'updated_at' => now()
             ],
@@ -254,6 +304,8 @@ class ServiceFeeMetaSeeder extends Seeder
             'amount' => 2500,
             'registration_fee' => null,
             'inspection_fee' => null,
+            'location_fee' => null,
+            'renewal_fee' => null,
             'status' => true,
             'updated_at' => now()
             ],
@@ -263,6 +315,8 @@ class ServiceFeeMetaSeeder extends Seeder
             'amount' => 3000,
             'registration_fee' => null,
             'inspection_fee' => null,
+            'location_fee' => null,
+            'renewal_fee' => null,
             'status' => false,
             'updated_at' => now()
             ],
@@ -273,6 +327,8 @@ class ServiceFeeMetaSeeder extends Seeder
             'amount' => 5000,
             'registration_fee' => null,
             'inspection_fee' => null,
+            'location_fee' => null,
+            'renewal_fee' => null,
             'status' => true,
             'updated_at' => now()
             ],
@@ -282,6 +338,8 @@ class ServiceFeeMetaSeeder extends Seeder
             'amount' => 2500,
             'registration_fee' => null,
             'inspection_fee' => null,
+            'location_fee' => null,
+            'renewal_fee' => null,
             'status' => true,
             'updated_at' => now()
             ],
@@ -291,6 +349,8 @@ class ServiceFeeMetaSeeder extends Seeder
             'amount' => 3000,
             'registration_fee' => null,
             'inspection_fee' => null,
+            'location_fee' => null,
+            'renewal_fee' => null,
             'status' => false,
             'updated_at' => now()
             ],
@@ -301,6 +361,8 @@ class ServiceFeeMetaSeeder extends Seeder
             'amount' => 5000,
             'registration_fee' => null,
             'inspection_fee' => null,
+            'location_fee' => null,
+            'renewal_fee' => null,
             'status' => true,
             'updated_at' => now()
             ],
@@ -310,6 +372,8 @@ class ServiceFeeMetaSeeder extends Seeder
             'amount' => 2500,
             'registration_fee' => null,
             'inspection_fee' => null,
+            'location_fee' => null,
+            'renewal_fee' => null,
             'status' => true,
             'updated_at' => now()
             ],
@@ -319,6 +383,8 @@ class ServiceFeeMetaSeeder extends Seeder
             'amount' => 3000,
             'registration_fee' => null,
             'inspection_fee' => null,
+            'location_fee' => null,
+            'renewal_fee' => null,
             'status' => false,
             'updated_at' => now()
             ],
@@ -329,6 +395,8 @@ class ServiceFeeMetaSeeder extends Seeder
             'amount' => 5000,
             'registration_fee' => null,
             'inspection_fee' => null,
+            'location_fee' => null,
+            'renewal_fee' => null,
             'status' => true,
             'updated_at' => now()
             ],
@@ -338,6 +406,8 @@ class ServiceFeeMetaSeeder extends Seeder
             'amount' => 2500,
             'registration_fee' => null,
             'inspection_fee' => null,
+            'location_fee' => null,
+            'renewal_fee' => null,
             'status' => true,
             'updated_at' => now()
             ],
@@ -347,6 +417,8 @@ class ServiceFeeMetaSeeder extends Seeder
             'amount' => 3000,
             'registration_fee' => null,
             'inspection_fee' => null,
+            'location_fee' => null,
+            'renewal_fee' => null,
             'status' => false,
             'updated_at' => now()
             ],
@@ -357,6 +429,8 @@ class ServiceFeeMetaSeeder extends Seeder
             'amount' => 5000,
             'registration_fee' => null,
             'inspection_fee' => null,
+            'location_fee' => null,
+            'renewal_fee' => null,
             'status' => true,
             'updated_at' => now()
             ],
@@ -366,6 +440,8 @@ class ServiceFeeMetaSeeder extends Seeder
             'amount' => 2500,
             'registration_fee' => null,
             'inspection_fee' => null,
+            'location_fee' => null,
+            'renewal_fee' => null,
             'status' => true,
             'updated_at' => now()
             ],
@@ -375,6 +451,8 @@ class ServiceFeeMetaSeeder extends Seeder
             'amount' => 3000,
             'registration_fee' => null,
             'inspection_fee' => null,
+            'location_fee' => null,
+            'renewal_fee' => null,
             'status' => false,
             'updated_at' => now()
             ],
@@ -385,6 +463,8 @@ class ServiceFeeMetaSeeder extends Seeder
             'amount' => 5000,
             'registration_fee' => null,
             'inspection_fee' => null,
+            'location_fee' => null,
+            'renewal_fee' => null,
             'status' => true,
             'updated_at' => now()
             ],
@@ -394,6 +474,8 @@ class ServiceFeeMetaSeeder extends Seeder
             'amount' => 2500,
             'registration_fee' => null,
             'inspection_fee' => null,
+            'location_fee' => null,
+            'renewal_fee' => null,
             'status' => true,
             'updated_at' => now()
             ],
@@ -403,6 +485,8 @@ class ServiceFeeMetaSeeder extends Seeder
             'amount' => 3000,
             'registration_fee' => null,
             'inspection_fee' => null,
+            'location_fee' => null,
+            'renewal_fee' => null,
             'status' => false,
             'updated_at' => now()
             ],
@@ -412,6 +496,8 @@ class ServiceFeeMetaSeeder extends Seeder
             'amount' => null,
             'registration_fee' => 10000,
             'inspection_fee' => 10000,
+            'location_fee' => null,
+            'renewal_fee' => null,
             'status' => true,
             'updated_at' => now()
             ],
@@ -421,6 +507,8 @@ class ServiceFeeMetaSeeder extends Seeder
             'amount' => null,
             'registration_fee' => 20000,
             'inspection_fee' => 20000,
+            'location_fee' => null,
+            'renewal_fee' => null,
             'status' => true,
             'updated_at' => now()
             ],
@@ -430,6 +518,8 @@ class ServiceFeeMetaSeeder extends Seeder
             'amount' => null,
             'registration_fee' => 30000,
             'inspection_fee' => 30000,
+            'location_fee' => null,
+            'renewal_fee' => null,
             'status' => true,
             'updated_at' => now()
             ],
@@ -439,6 +529,8 @@ class ServiceFeeMetaSeeder extends Seeder
             'amount' => null,
             'registration_fee' => 40000,
             'inspection_fee' => 40000,
+            'location_fee' => null,
+            'renewal_fee' => null,
             'status' => true,
             'updated_at' => now()
             ],
@@ -448,6 +540,8 @@ class ServiceFeeMetaSeeder extends Seeder
             'amount' => null,
             'registration_fee' => 50000,
             'inspection_fee' => 50000,
+            'location_fee' => null,
+            'renewal_fee' => null,
             'status' => true,
             'updated_at' => now()
             ],
@@ -457,6 +551,8 @@ class ServiceFeeMetaSeeder extends Seeder
             'amount' => null,
             'registration_fee' => 60000,
             'inspection_fee' => 60000,
+            'location_fee' => null,
+            'renewal_fee' => null,
             'status' => true,
             'updated_at' => now()
             ],
@@ -466,6 +562,143 @@ class ServiceFeeMetaSeeder extends Seeder
             'amount' => null,
             'registration_fee' => 100000,
             'inspection_fee' => 100000,
+            'location_fee' => null,
+            'renewal_fee' => null,
+            'status' => true,
+            'updated_at' => now()
+            ],
+
+            [
+            'service_id' => 16,
+            'description' => 'Importation - Category A1 (20+ Products)',
+            'amount' => null,
+            'registration_fee' => 350000,
+            'inspection_fee' => 300000,
+            'location_fee' => 200000,
+            'renewal_fee' => 200000,
+            'status' => true,
+            'updated_at' => now()
+            ],
+            [
+            'service_id' => 16,
+            'description' => 'Importation - Category A2 (10 - 19 Products)',
+            'amount' => null,
+            'registration_fee' => 200000,
+            'inspection_fee' => 150000,
+            'location_fee' => 200000,
+            'renewal_fee' => 150000,
+            'status' => true,
+            'updated_at' => now()
+            ],
+            [
+            'service_id' => 16,
+            'description' => 'Importation - Category A3 (1 -9 Products / Scientific Office)',
+            'amount' => null,
+            'registration_fee' => 150000,
+            'inspection_fee' => 200000,
+            'location_fee' => 100000,
+            'renewal_fee' => 100000,
+            'status' => true,
+            'updated_at' => now()
+            ],
+            [
+            'service_id' => 16,
+            'description' => 'Category B1(a): Coordinated Wholesale Centre Facility',
+            'amount' => null,
+            'registration_fee' => 1000000,
+            'inspection_fee' => 10000000,
+            'location_fee' => 200000,
+            'renewal_fee' => 500000,
+            'status' => true,
+            'updated_at' => now()
+            ],
+            [
+            'service_id' => 16,
+            'description' => 'Category B1(b): Coordinated Wholesale Centre Facility Unit',
+            'amount' => null,
+            'registration_fee' => 500000,
+            'inspection_fee' => null,
+            'location_fee' => null,
+            'renewal_fee' => 350000,
+            'status' => true,
+            'updated_at' => now()
+            ],
+            [
+            'service_id' => 16,
+            'description' => 'Category B2: Mega Drugs distribution Centre',
+            'amount' => null,
+            'registration_fee' => 500000,
+            'inspection_fee' => 500000,
+            'location_fee' => 200000,
+            'renewal_fee' => 350000,
+            'status' => true,
+            'updated_at' => now()
+            ],
+            [
+            'service_id' => 16,
+            'description' => 'Category B3: State Drugs distribution Centre',
+            'amount' => null,
+            'registration_fee' => 500000,
+            'inspection_fee' => 300000,
+            'location_fee' => 200000,
+            'renewal_fee' => 200000,
+            'status' => true,
+            'updated_at' => now()
+            ],
+            [
+            'service_id' => 16,
+            'description' => 'Category C: Wholesales/Distribution',
+            'amount' => null,
+            'registration_fee' => 200000,
+            'inspection_fee' => 100000,
+            'location_fee' => 200000,
+            'renewal_fee' => 100000,
+            'status' => true,
+            'updated_at' => now()
+            ],
+            [
+            'service_id' => 16,
+            'description' => 'Category D: Retails',
+            'amount' => null,
+            'registration_fee' => 15000,
+            'inspection_fee' => 15000,
+            'location_fee' => 15000,
+            'renewal_fee' => 7500,
+            'status' => true,
+            'updated_at' => now()
+            ],
+
+
+            [
+            'service_id' => 17,
+            'description' => 'Category A: Manufacturing (3 or more product line)',
+            'amount' => null,
+            'registration_fee' => 300000,
+            'inspection_fee' => 250000,
+            'location_fee' => 200000,
+            'renewal_fee' => null,
+            'status' => true,
+            'updated_at' => now()
+            ],
+            [
+            'service_id' => 17,
+            'description' => 'Category B: Manufacturing (2 product line)',
+            'amount' => null,
+            'registration_fee' => 200000,
+            'inspection_fee' => 200000,
+            'location_fee' => 150000,
+            'renewal_fee' => null,
+            'status' => true,
+            'updated_at' => now()
+            ],
+            [
+            'service_id' => 17,
+            'description' => 'Category C: Manufacturing (1 product line)',
+            'amount' => null,
+            'registration_fee' => 100000,
+            'inspection_fee' => 100000,
+            'location_fee' => 100000,
+            'renewal_fee' => null,
             'status' => true,
             'updated_at' => now()
             ],

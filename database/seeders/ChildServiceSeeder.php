@@ -90,6 +90,16 @@ class ChildServiceSeeder extends Seeder
             'description' => 'Appropriate Bed Capacity Fees',
             'updated_at' => now()
             ],
+            [
+            'service_id' => 3,
+            'description' => 'Category Fees',
+            'updated_at' => now()
+            ],
+            [
+            'service_id' => 4,
+            'description' => 'Category Fees',
+            'updated_at' => now()
+            ],
         ];
 
         ChildService::insert($services);

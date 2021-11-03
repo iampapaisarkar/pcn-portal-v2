@@ -17,6 +17,16 @@
                                 @if(Request::get('service') == 15)
                                 <th>Registration Fee</th>
                                 <th>Inspection Fee</th>
+                                @elseif(Request::get('service') == 16)
+                                <th>Registration Fee</th>
+                                <th>Inspection Fee</th>
+                                <th>Renewal Fee</th>
+                                <th>Location Fee</th>
+                                @elseif(Request::get('service') == 17)
+                                <th>Registration Fee</th>
+                                <th>Inspection Fee</th>
+                                <th>Renewal Fee</th>
+                                <th>Location Fee</th>
                                 @else
                                 <th>Amount</th>
                                 @endif
@@ -31,6 +41,36 @@
                                     <td>{{$fee->description}}</td>
                                     <td>N{{number_format($fee->registration_fee)}}</td>
                                     <td>N{{number_format($fee->inspection_fee)}}</td>
+                                    <td><p><span
+                                    class="badge badge-pill m-1 {{ $fee->status ? 'badge-success' : 'badge-warning' }}">
+                                    {{ $fee->status ? 'ACTIVE' : 'DISABLED' }}
+                                    </span></p></td>
+                                    <td><a href="{{route('services-fee.show', $fee->id)}}?service={{$service->id}}"><button class="btn btn-info" type="button">VIEW</button></a></td>
+                                </tr>
+                                @endforeach
+                                @elseif(Request::get('service') == 16)
+                                @foreach($service->fees as $fee)
+                                <tr>
+                                    <td>{{$fee->description}}</td>
+                                    <td>N{{number_format($fee->registration_fee)}}</td>
+                                    <td>N{{number_format($fee->inspection_fee)}}</td>
+                                    <td>N{{number_format($fee->renewal_fee)}}</td>
+                                    <td>N{{number_format($fee->location_fee)}}</td>
+                                    <td><p><span
+                                    class="badge badge-pill m-1 {{ $fee->status ? 'badge-success' : 'badge-warning' }}">
+                                    {{ $fee->status ? 'ACTIVE' : 'DISABLED' }}
+                                    </span></p></td>
+                                    <td><a href="{{route('services-fee.show', $fee->id)}}?service={{$service->id}}"><button class="btn btn-info" type="button">VIEW</button></a></td>
+                                </tr>
+                                @endforeach
+                                @elseif(Request::get('service') == 17)
+                                @foreach($service->fees as $fee)
+                                <tr>
+                                    <td>{{$fee->description}}</td>
+                                    <td>N{{number_format($fee->registration_fee)}}</td>
+                                    <td>N{{number_format($fee->inspection_fee)}}</td>
+                                    <td>N{{number_format($fee->renewal_fee)}}</td>
+                                    <td>N{{number_format($fee->location_fee)}}</td>
                                     <td><p><span
                                     class="badge badge-pill m-1 {{ $fee->status ? 'badge-success' : 'badge-warning' }}">
                                     {{ $fee->status ? 'ACTIVE' : 'DISABLED' }}
