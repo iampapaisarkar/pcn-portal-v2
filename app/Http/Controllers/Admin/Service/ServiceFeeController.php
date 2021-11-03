@@ -142,6 +142,26 @@ class ServiceFeeController extends Controller
                         'inspection_fee' => $request->inspection_fee,
                         'status' => $request->status == 'on' ? true : false,
                     ]);
+                }
+                else if($request->service == 16){
+                    ServiceFeeMeta::where(['service_id' => $request->service, 'id' => $id])->update([
+                        'description' => $request->description,
+                        'registration_fee' => $request->registration_fee,
+                        'inspection_fee' => $request->inspection_fee,
+                        'renewal_fee' => $request->renewal_fee,
+                        'location_fee' => $request->location_fee,
+                        'status' => $request->status == 'on' ? true : false,
+                    ]);
+                }
+                else if($request->service == 17){
+                    ServiceFeeMeta::where(['service_id' => $request->service, 'id' => $id])->update([
+                        'description' => $request->description,
+                        'registration_fee' => $request->registration_fee,
+                        'inspection_fee' => $request->inspection_fee,
+                        'renewal_fee' => $request->renewal_fee,
+                        'location_fee' => $request->location_fee,
+                        'status' => $request->status == 'on' ? true : false,
+                    ]);
                 }else{
                     ServiceFeeMeta::where(['service_id' => $request->service, 'id' => $id])->update([
                         'description' => $request->description,

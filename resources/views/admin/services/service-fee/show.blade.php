@@ -46,6 +46,116 @@
                     <button type="submit" class="btn btn-primary">Submit</button>
                 </div>
             </div>
+            @elseif(Request::get('service') == 16)
+            <div class="row">
+                <div class="col-md-6 form-group mb-3">
+                    <label for="description1">Fee Description</label>
+                    <input value="{{ $fee->description }}" name="description" class="form-control @error('description') is-invalid @enderror" id="description1" type="text" placeholder="Enter description" />
+                    @error('description')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
+                </div>
+                <div class="col-md-6 form-group mb-3">
+                    <label for="amount1">Registration Fee</label>
+                    <input min="10" max="1000000" type="number" value="{{ $fee->registration_fee }}" name="registration_fee" class="form-control @error('amount') is-invalid @enderror" id="amount1" type="text" placeholder="Enter amount" />
+                    @error('amount')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
+                </div>
+                <div class="col-md-6 form-group mb-3">
+                    <label for="amount1">Inspection Fee</label>
+                    <input min="10" max="1000000" type="number" value="{{ $fee->inspection_fee }}" name="inspection_fee" class="form-control @error('amount') is-invalid @enderror" id="amount1" type="text" placeholder="Enter amount" />
+                    @error('amount')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
+                </div>
+                <div class="col-md-6 form-group mb-3">
+                    <label for="amount1">Renewal Fee</label>
+                    <input min="10" max="1000000" type="number" value="{{ $fee->renewal_fee }}" name="renewal_fee" class="form-control @error('amount') is-invalid @enderror" id="amount1" type="text" placeholder="Enter amount" />
+                    @error('amount')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
+                </div>
+                <div class="col-md-6 form-group mb-3">
+                    <label for="amount1">Location Fee</label>
+                    <input min="10" max="1000000" type="number" value="{{ $fee->location_fee }}" name="location_fee" class="form-control @error('amount') is-invalid @enderror" id="amount1" type="text" placeholder="Enter amount" />
+                    @error('amount')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
+                </div>
+                <div class="col-md-6 form-group mb-3">
+                    <label for="">Status</label> <br>
+                    <input name="status" {{$fee->status == true ? 'checked' : ''}} class="text-white" type="checkbox" data-toggle="toggle" data-on="ACTIVE" data-off="DISABLED" data-onstyle="success" data-offstyle="warning">
+                </div>
+                <div class="col-md-12">
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
+            </div>
+            @elseif(Request::get('service') == 17)
+            <div class="row">
+                <div class="col-md-6 form-group mb-3">
+                    <label for="description1">Fee Description</label>
+                    <input value="{{ $fee->description }}" name="description" class="form-control @error('description') is-invalid @enderror" id="description1" type="text" placeholder="Enter description" />
+                    @error('description')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
+                </div>
+                <div class="col-md-6 form-group mb-3">
+                    <label for="amount1">Registration Fee</label>
+                    <input min="10" max="1000000" type="number" value="{{ $fee->registration_fee }}" name="registration_fee" class="form-control @error('amount') is-invalid @enderror" id="amount1" type="text" placeholder="Enter amount" />
+                    @error('amount')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
+                </div>
+                <div class="col-md-6 form-group mb-3">
+                    <label for="amount1">Inspection Fee</label>
+                    <input min="10" max="1000000" type="number" value="{{ $fee->inspection_fee }}" name="inspection_fee" class="form-control @error('amount') is-invalid @enderror" id="amount1" type="text" placeholder="Enter amount" />
+                    @error('amount')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
+                </div>
+                <div class="col-md-6 form-group mb-3">
+                    <label for="amount1">Renewal Fee</label>
+                    <input min="10" max="1000000" type="number" value="{{ $fee->renewal_fee }}" name="renewal_fee" class="form-control @error('amount') is-invalid @enderror" id="amount1" type="text" placeholder="Enter amount" />
+                    @error('amount')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
+                </div>
+                <div class="col-md-6 form-group mb-3">
+                    <label for="amount1">Location Fee</label>
+                    <input min="10" max="1000000" type="number" value="{{ $fee->location_fee }}" name="location_fee" class="form-control @error('amount') is-invalid @enderror" id="amount1" type="text" placeholder="Enter amount" />
+                    @error('amount')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
+                </div>
+                <div class="col-md-6 form-group mb-3">
+                    <label for="">Status</label> <br>
+                    <input name="status" {{$fee->status == true ? 'checked' : ''}} class="text-white" type="checkbox" data-toggle="toggle" data-on="ACTIVE" data-off="DISABLED" data-onstyle="success" data-offstyle="warning">
+                </div>
+                <div class="col-md-12">
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
+            </div>
             @else
             <div class="row">
                 <div class="col-md-6 form-group mb-3">
