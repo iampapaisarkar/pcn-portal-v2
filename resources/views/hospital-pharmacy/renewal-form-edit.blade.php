@@ -75,16 +75,12 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach(config('custom.beds') as $bed)
-                            @if($bed['id'] == $registration->hospital_pharmacy->bed_capacity)
                             <tr>
-                                <td><input name="bed_capacity" {{ $registration->hospital_pharmacy->bed_capacity == $bed['id'] ? 'checked' : '' }} type="radio" value="{{$bed['id']}}"></td>
-                                <td>{{$bed['bed_capacity']}}</td>
-                                <td>NGN {{number_format($bed['registration_fee'])}}</td>
-                                <td>NGN {{number_format($bed['inspection_fee'])}}</td>
+                                <td><input name="bed_capacity" checked type="radio" value="{{App\Models\ServiceFeeMeta::where('id',  $registration->hospital_pharmacy->bed_capacity)->first()->id}}"></td>
+                                <td>{{App\Models\ServiceFeeMeta::where('id',  $registration->hospital_pharmacy->bed_capacity)->first()->description}}</td>
+                                <td>NGN {{number_format(App\Models\ServiceFeeMeta::where('id',  $registration->hospital_pharmacy->bed_capacity)->first()->registration_fee)}}</td>
+                                <td>NGN {{number_format(App\Models\ServiceFeeMeta::where('id',  $registration->hospital_pharmacy->bed_capacity)->first()->inspection_fee)}}</td>
                             </tr>
-                            @endif
-                            @endforeach
                         </tbody>
                     </table>
                 </div>
