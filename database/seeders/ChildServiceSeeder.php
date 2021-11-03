@@ -84,7 +84,12 @@ class ChildServiceSeeder extends Seeder
             'service_id' => 5,
             'description' => 'PPMV Licence Renewal Fees',
             'updated_at' => now()
-            ]
+            ],
+            [
+            'service_id' => 1,
+            'description' => 'Appropriate Bed Capacity Fees',
+            'updated_at' => now()
+            ],
         ];
 
         ChildService::insert($services);

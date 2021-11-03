@@ -17,7 +17,9 @@ class CreateServiceFeeMetasTable extends Migration
             $table->id();
             $table->integer('service_id');
             $table->string('description');
-            $table->float('amount', 10, 2);
+            $table->float('amount', 10, 2)->nullable();
+            $table->float('registration_fee', 10, 2)->nullable();
+            $table->float('inspection_fee', 10, 2)->nullable();
             $table->boolean('status')->default(true);
             $table->timestamps();
         });
