@@ -68,15 +68,10 @@
                                     @endforeach
                                     @if($invoice->service_type == 'hospital_pharmacy' && $invoice->extra_service_id != null)
                                         @php 
-                                            $extraServices = config('custom.beds');
-                                            $extra_service = null;
-                                            foreach ($extraServices as $key => $extraService) {
-                                                if($invoice->extra_service_id == $extraService['id']){
-                                                    $extra_service =  $extraService;
-                                                }
-                                            }
+                                            $extraService = App\Models\ServiceFeeMeta::where('id', $invoice->extra_service_id)->first();
+                                            $extra_service =  $extraService;
                                         @endphp
-                                        <div>{{$extra_service['bed_capacity']}}: Registration Fee N{{number_format($extra_service['registration_fee'])}} : Inspection Fee N{{number_format($extra_service['inspection_fee'])}}</div>
+                                        <div>{{$extra_service->description}}: Registration Fee N{{number_format($extra_service->registration_fee)}} : Inspection Fee N{{number_format($extra_service->inspection_fee)}}</div>
                                     @endif
                                     @if($invoice->service_type == 'ppmv_registration')
                                             @foreach (config('custom.ppmv-registration-fees') as $key => $extraService)

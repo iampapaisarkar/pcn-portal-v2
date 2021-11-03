@@ -32,14 +32,9 @@ class Checkout
                     $totalAmount += $fee->amount;
                 }
 
-                $extraServices = config('custom.beds');
-                $extra_service_id = null;
-                foreach ($extraServices as $key => $extraService) {
-                    if($HospitalRegistration->bed_capacity == $extraService['id']){
-                        $extra_service_id =  $extraService['id'];
-                        $totalAmount += (floatval($extraService['registration_fee']) + floatval($extraService['inspection_fee']));
-                    }
-                }
+                $extraService = ServiceFeeMeta::where('id', $HospitalRegistration->bed_capacity)->first();
+                $extra_service_id =  $extraService->id;
+                $totalAmount += (floatval($extraService->registration_fee) + floatval($extraService->inspection_fee));
 
                 $token = md5(uniqid(rand(), true));
                 $order_id = date('m-Y') . '-' .rand(10,1000);

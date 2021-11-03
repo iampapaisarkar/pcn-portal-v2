@@ -37,6 +37,7 @@ class RegistrationController extends Controller
                 'status' => 'send_to_state_office',
             ]);
 
+
             HospitalRegistration::create([
                 'registration_id' => $Registration->id,
                 'user_id' => Auth::user()->id,

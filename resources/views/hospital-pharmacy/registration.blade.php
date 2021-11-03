@@ -72,10 +72,10 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach(config('custom.beds') as $bed)
+                            @foreach(App\Models\ServiceFeeMeta::where('service_id', 15)->get() as $bed)
                             <tr>
                                 <td><input name="bed_capacity" type="radio" value="{{$bed['id']}}"></td>
-                                <td>{{$bed['bed_capacity']}}</td>
+                                <td>{{$bed['description']}}</td>
                                 <td>NGN {{number_format($bed['registration_fee'])}}</td>
                                 <td>NGN {{number_format($bed['inspection_fee'])}}</td>
                             </tr>
