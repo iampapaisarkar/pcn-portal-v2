@@ -162,6 +162,12 @@ class DocumentPendingLicenceController extends Controller
                         ->latest()->first();
 
                         $licenceNumber = ucwords($HospitalRegistration->user->user_state->state_code) . date('Y') . 'HPS' . str_pad("1", 4, '0', STR_PAD_LEFT);
+
+                        if($Registration->recommendation_status == 'partial_recommendation'){
+                            $inspectionYear = \Carbon\Carbon::now()->addYears(2)->format('Y');
+                        }else if($Registration->recommendation_status == 'full_recommendation'){
+                            $inspectionYear = \Carbon\Carbon::now()->addYears(5)->format('Y');
+                        }
                         
                         $renewal = Renewal::create([
                             'user_id' => $Registration->user_id,
@@ -174,6 +180,7 @@ class DocumentPendingLicenceController extends Controller
                             'status' => 'licence_issued',
                             'renewal' => false,
                             'inspection' => true,
+                            'inspection_year' => $inspectionYear,
                             'payment' => true,
                             'recommendation_status' => $Registration->recommendation_status
                         ]);
@@ -357,7 +364,7 @@ class DocumentPendingLicenceController extends Controller
                     }else if($registration->recommendation_status == 'full_recommendation'){
                         $inspectionYear = \Carbon\Carbon::now()->addYears(5)->format('Y');
                     }
-                    
+
                     $renewal = Renewal::create([
                         'user_id' => $registration->user_id,
                         'registration_id' => $registration->id,

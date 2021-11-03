@@ -164,6 +164,12 @@ class RenewalController extends Controller
                     $renewalStatus = 'send_to_registration';
                     $renewalInspection = false;
                 }
+
+                if($previousRenwal->recommendation_status == 'partial_recommendation'){
+                    $inspectionYear = \Carbon\Carbon::now()->addYears(2)->format('Y');
+                }else if($previousRenwal->recommendation_status == 'full_recommendation'){
+                    $inspectionYear = \Carbon\Carbon::now()->addYears(5)->format('Y');
+                }
                 
                 $renewal = Renewal::create([
                     'user_id' => Auth::user()->id,
@@ -174,8 +180,9 @@ class RenewalController extends Controller
                     'expires_at' => \Carbon\Carbon::now()->format('Y') .'-12-31',
                     // 'status' => $previousRenwal->inspection == true ? 'send_to_registration' : 'send_to_registry',
                     // 'inspection' => $previousRenwal->inspection == true ? false : true,
-                     'status' => $renewalStatus,
+                    'status' => $renewalStatus,
                     'inspection' => $renewalInspection,
+                    'inspection_year' => $inspectionYear,
                 ]);
 
                 $response = Checkout::checkoutHospitalPharmacyRenewal($application = ['id' => $renewal->id], 'hospital_pharmacy_renewal');
