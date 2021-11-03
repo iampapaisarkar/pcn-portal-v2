@@ -25,6 +25,7 @@ class CreateRegistrationsTable extends Migration
             $table->longtext('query')->nullable();
             $table->boolean('payment')->default(false);
             $table->boolean('location_approval')->default(false);
+            $table->string('recommendation_status')->nullable();
             $table->timestamps();
         });
     }

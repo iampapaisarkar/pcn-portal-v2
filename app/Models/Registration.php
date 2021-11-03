@@ -10,7 +10,7 @@ class Registration extends Model
     use HasFactory;
 
     protected $fillable = [
-        'user_id', 'registration_year', 'type', 'category', 'token', 'status', 'query', 'payment', 'inspection_report', 'location_approval'
+        'user_id', 'registration_year', 'type', 'category', 'token', 'status', 'query', 'payment', 'inspection_report', 'location_approval', 'recommendation_status'
     ];
 
     public function user() {

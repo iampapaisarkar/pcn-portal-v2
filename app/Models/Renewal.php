@@ -11,7 +11,7 @@ class Renewal extends Model
 
     protected $fillable = [
         'user_id', 'registration_id', 'form_id', 'type', 'renewal_year', 'expires_at',
-        'licence', 'status', 'renewal', 'inspection', 'payment', 'query', 'token'
+        'licence', 'status', 'renewal', 'inspection', 'inspection_year', 'payment', 'query', 'token', 'recommendation_status'
     ];
 
     public function user() {

@@ -156,7 +156,15 @@ class RenewalController extends Controller
                 ]);
 
                 $previousRenwal = Renewal::where('user_id', Auth::user()->id)->orderBy('renewal_year', 'desc')->first();
-
+                
+                if($previousRenwal->inspection_year == \Carbon\Carbon::now()->format('Y')){
+                    $renewalStatus = 'send_to_registry';
+                    $renewalInspection = true;
+                }else{
+                    $renewalStatus = 'send_to_registration';
+                    $renewalInspection = false;
+                }
+                
                 $renewal = Renewal::create([
                     'user_id' => Auth::user()->id,
                     'registration_id' => $request->registration_id,
@@ -164,11 +172,10 @@ class RenewalController extends Controller
                     'type' => 'hospital_pharmacy_renewal',
                     'renewal_year' => date('Y'),
                     'expires_at' => \Carbon\Carbon::now()->format('Y') .'-12-31',
-                    // 'licence' => 'TEST2021',
-                    'status' => $previousRenwal->inspection == true ? 'send_to_registration' : 'send_to_registry',
-                    // 'renewal' => true,
-                    'inspection' => $previousRenwal->inspection == true ? false : true,
-                    // 'payment' => true,
+                    // 'status' => $previousRenwal->inspection == true ? 'send_to_registration' : 'send_to_registry',
+                    // 'inspection' => $previousRenwal->inspection == true ? false : true,
+                     'status' => $renewalStatus,
+                    'inspection' => $renewalInspection,
                 ]);
 
                 $response = Checkout::checkoutHospitalPharmacyRenewal($application = ['id' => $renewal->id], 'hospital_pharmacy_renewal');

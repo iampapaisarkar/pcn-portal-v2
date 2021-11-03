@@ -166,7 +166,8 @@ class RenewalInspectionController extends Controller
                 Renewal::where(['payment' => true, 'id' => $request['renewal_id'], 'user_id' => $request['user_id'], 'type' => 'hospital_pharmacy_renewal'])
                 ->where('status', 'send_to_pharmacy_practice')
                 ->update([
-                    'status' => $request->recommendation
+                    'status' => $request->recommendation,
+                    'recommendation_status' => $request->recommendation
                 ]);
 
                 $adminName = Auth::user()->firstname .' '. Auth::user()->lastname;

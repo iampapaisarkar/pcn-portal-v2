@@ -25,9 +25,11 @@ class CreateRenewalsTable extends Migration
             $table->string('status');
             $table->string('renewal')->default(true);
             $table->string('inspection')->default(false);
+            $table->integer('inspection_year')->nullable();
             $table->boolean('payment')->default(false);
             $table->longtext('query')->nullable();
             $table->string('token')->nullable();
+            $table->string('recommendation_status')->nullable();
             $table->timestamps();
         });
     }

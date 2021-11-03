@@ -159,6 +159,7 @@ class DocumentInspectionController extends Controller
                 ->where('payment', true)
                 ->update([
                     'status' => $request->recommendation,
+                    'recommendation_status' => $request->recommendation,
                     'inspection_report' => $file_name,
                 ]);
 
