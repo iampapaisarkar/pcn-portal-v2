@@ -412,7 +412,7 @@ class ServiceFeeMetaSeeder extends Seeder
             'amount' => null,
             'registration_fee' => 10000,
             'inspection_fee' => 10000,
-            'status' => false,
+            'status' => true,
             'updated_at' => now()
             ],
             [
@@ -421,7 +421,7 @@ class ServiceFeeMetaSeeder extends Seeder
             'amount' => null,
             'registration_fee' => 20000,
             'inspection_fee' => 20000,
-            'status' => false,
+            'status' => true,
             'updated_at' => now()
             ],
             [
@@ -430,7 +430,7 @@ class ServiceFeeMetaSeeder extends Seeder
             'amount' => null,
             'registration_fee' => 30000,
             'inspection_fee' => 30000,
-            'status' => false,
+            'status' => true,
             'updated_at' => now()
             ],
             [
@@ -439,7 +439,7 @@ class ServiceFeeMetaSeeder extends Seeder
             'amount' => null,
             'registration_fee' => 40000,
             'inspection_fee' => 40000,
-            'status' => false,
+            'status' => true,
             'updated_at' => now()
             ],
             [
@@ -448,7 +448,7 @@ class ServiceFeeMetaSeeder extends Seeder
             'amount' => null,
             'registration_fee' => 50000,
             'inspection_fee' => 50000,
-            'status' => false,
+            'status' => true,
             'updated_at' => now()
             ],
             [
@@ -457,7 +457,7 @@ class ServiceFeeMetaSeeder extends Seeder
             'amount' => null,
             'registration_fee' => 60000,
             'inspection_fee' => 60000,
-            'status' => false,
+            'status' => true,
             'updated_at' => now()
             ],
             [
@@ -466,7 +466,7 @@ class ServiceFeeMetaSeeder extends Seeder
             'amount' => null,
             'registration_fee' => 100000,
             'inspection_fee' => 100000,
-            'status' => false,
+            'status' => true,
             'updated_at' => now()
             ],
         ];

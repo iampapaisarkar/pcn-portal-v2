@@ -135,11 +135,21 @@ class ServiceFeeController extends Controller
             try {
                 DB::beginTransaction();
 
-                ServiceFeeMeta::where(['service_id' => $request->service, 'id' => $id])->update([
-                    'description' => $request->description,
-                    'amount' => $request->amount,
-                    'status' => $request->status == 'on' ? true : false,
-                ]);
+                if($request->service == 15){
+                    ServiceFeeMeta::where(['service_id' => $request->service, 'id' => $id])->update([
+                        'description' => $request->description,
+                        'registration_fee' => $request->registration_fee,
+                        'inspection_fee' => $request->inspection_fee,
+                        'status' => $request->status == 'on' ? true : false,
+                    ]);
+                }else{
+                    ServiceFeeMeta::where(['service_id' => $request->service, 'id' => $id])->update([
+                        'description' => $request->description,
+                        'amount' => $request->amount,
+                        'status' => $request->status == 'on' ? true : false,
+                    ]);
+                }
+                
 
                 ChildService::where('id', $request->service)->update([
                     'updated_at' => now()

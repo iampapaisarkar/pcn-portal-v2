@@ -14,12 +14,31 @@
                         <thead>
                             <tr>
                                 <th>Description</th>
+                                @if(Request::get('service') == 15)
+                                <th>Registration Fee</th>
+                                <th>Inspection Fee</th>
+                                @else
                                 <th>Amount</th>
+                                @endif
                                 <th>Status</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
+                                @if(Request::get('service') == 15)
+                                @foreach($service->fees as $fee)
+                                <tr>
+                                    <td>{{$fee->description}}</td>
+                                    <td>N{{number_format($fee->registration_fee)}}</td>
+                                    <td>N{{number_format($fee->inspection_fee)}}</td>
+                                    <td><p><span
+                                    class="badge badge-pill m-1 {{ $fee->status ? 'badge-success' : 'badge-warning' }}">
+                                    {{ $fee->status ? 'ACTIVE' : 'DISABLED' }}
+                                    </span></p></td>
+                                    <td><a href="{{route('services-fee.show', $fee->id)}}?service={{$service->id}}"><button class="btn btn-info" type="button">VIEW</button></a></td>
+                                </tr>
+                                @endforeach
+                                @else
                                 @foreach($service->fees as $fee)
                                 <tr>
                                     <td>{{$fee->description}}</td>
@@ -31,6 +50,7 @@
                                     <td><a href="{{route('services-fee.show', $fee->id)}}?service={{$service->id}}"><button class="btn btn-info" type="button">VIEW</button></a></td>
                                 </tr>
                                 @endforeach
+                                @endif
                         </tbody>
                     </table>
                 </div>
