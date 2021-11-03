@@ -32,18 +32,10 @@
                 </tr>
             </thead>
             <tbody>
-                @php
-                    $bed = [];
-                    foreach ( config('custom.beds') as $beds ) {
-                    if ( $beds['id'] == $registration->hospital_pharmacy->bed_capacity ) {
-                        $bed = $beds;
-                    }
-                }
-                @endphp
                 <tr>
-                    <td>{{$bed['bed_capacity']}}</td>
-                    <td>NGN {{number_format($bed['registration_fee'])}}</td>
-                    <td>NGN {{number_format($bed['inspection_fee'])}}</td>
+                    <td>{{App\Models\ServiceFeeMeta::where('id',  $registration->hospital_pharmacy->bed_capacity)->first()->description}}</td>
+                    <td>NGN {{number_format(App\Models\ServiceFeeMeta::where('id',  $registration->hospital_pharmacy->bed_capacity)->first()->registration_fee)}}</td>
+                    <td>NGN {{number_format(App\Models\ServiceFeeMeta::where('id',  $registration->hospital_pharmacy->bed_capacity)->first()->inspection_fee)}}</td>
                 </tr>
             </tbody>
         </table>
