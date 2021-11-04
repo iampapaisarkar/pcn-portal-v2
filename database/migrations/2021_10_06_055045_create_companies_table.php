@@ -21,6 +21,7 @@ class CreateCompaniesTable extends Migration
             $table->string('state');
             $table->string('lga');
             $table->string('category');
+            $table->string('sub_category')->nullable();
             $table->timestamps();
         });
     }

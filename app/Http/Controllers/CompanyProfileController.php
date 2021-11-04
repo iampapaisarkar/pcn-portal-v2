@@ -83,14 +83,34 @@ class CompanyProfileController extends Controller
             if(Company::where('user_id', $authUser->id)->exists()){
                 $company = Company::where('user_id', $authUser->id)->first();
 
-                // Update company 
-                Company::where(['user_id' => $authUser->id, 'id' => $company->id])->update([
-                    'name' => $request->company_name,
-                    'address' => $request->copmany_address,
-                    'state' => $request->state,
-                    'lga' => $request->lga,
-                    'category' => $request->category
-                ]);
+                if($authUser->hasRole(['distribution_premises']) || $authUser->hasRole(['manufacturing_premises'])){
+                    $validator = Validator::make($request->all(), [
+                        'sub_category' => 'required'
+                    ]);
+                    if ($validator->fails()) {
+                        return back()->with('error','Sub Category field is required');
+                    }
+                    // Update company 
+                    Company::where(['user_id' => $authUser->id, 'id' => $company->id])->update([
+                        'name' => $request->company_name,
+                        'address' => $request->copmany_address,
+                        'state' => $request->state,
+                        'lga' => $request->lga,
+                        'category' => $request->category,
+                        'sub_category' => $request->sub_category
+                    ]);
+                }else{
+                    // Update company 
+                    Company::where(['user_id' => $authUser->id, 'id' => $company->id])->update([
+                        'name' => $request->company_name,
+                        'address' => $request->copmany_address,
+                        'state' => $request->state,
+                        'lga' => $request->lga,
+                        'category' => $request->category
+                    ]);
+                }
+
+                
 
                 // Update Business 
                 Business::where(['company_id' => $company->id])->update([
@@ -131,15 +151,37 @@ class CompanyProfileController extends Controller
                 }
                 
             }else{
-                // Create company 
-                $company = Company::create([
-                    'user_id' => $authUser->id,
-                    'name' => $request->company_name,
-                    'address' => $request->copmany_address,
-                    'state' => $request->state,
-                    'lga' => $request->lga,
-                    'category' => $request->category
-                ]);
+
+                if($authUser->hasRole(['distribution_premises']) || $authUser->hasRole(['manufacturing_premises'])){
+                    $validator = Validator::make($request->all(), [
+                        'sub_category' => 'required'
+                    ]);
+                    if ($validator->fails()) {
+                        return back()->with('error','Sub Category field is required');
+                    }
+                    // Create company 
+                    $company = Company::create([
+                        'user_id' => $authUser->id,
+                        'name' => $request->company_name,
+                        'address' => $request->copmany_address,
+                        'state' => $request->state,
+                        'lga' => $request->lga,
+                        'category' => $request->category,
+                        'sub_category' => $request->sub_category
+                    ]);
+                }else{
+                    // Create company 
+                    $company = Company::create([
+                        'user_id' => $authUser->id,
+                        'name' => $request->company_name,
+                        'address' => $request->copmany_address,
+                        'state' => $request->state,
+                        'lga' => $request->lga,
+                        'category' => $request->category
+                    ]);
+                }
+
+                
 
                 // Create Business 
                 Business::create([

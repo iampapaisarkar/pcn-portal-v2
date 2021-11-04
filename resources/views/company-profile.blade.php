@@ -111,6 +111,46 @@
                     </span>
                     @enderror
                 </div>
+                @if(Auth::user()->hasRole(['distribution_premises']))
+                <div class="col-md-12 form-group mb-3">
+                    <label for="middleName1">Sub-Category</label>
+                    <select id="sub_categoryField" required name="sub_category"
+                        class="form-control @error('sub_category') is-invalid @enderror">
+                        <option value="">Select</option>
+                        @if($company)
+                        <option selected hidden value="{{App\Models\ServiceFeeMeta::where('id', $company->sub_category)->first()->id}}">{{App\Models\ServiceFeeMeta::where('id', $company->sub_category)->first()->description}}</option>
+                        @endif
+                        @foreach(App\Models\ServiceFeeMeta::where('service_id', 16)->get() as $category)
+                            <option value="{{$category->id}}">{{$category->description}}</option>
+                        @endforeach
+                    </select>
+                    @error('sub_category')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                    @enderror
+                </div>
+                @endif
+                @if(Auth::user()->hasRole(['manufacturing_premises']))
+                <div class="col-md-12 form-group mb-3">
+                    <label for="middleName1">Sub-Category</label>
+                    <select id="sub_categoryField" required name="sub_category"
+                        class="form-control @error('sub_category') is-invalid @enderror">
+                        <option value="">Select</option>
+                        @if($company)
+                        <option selected hidden value="{{App\Models\ServiceFeeMeta::where('id', $company->sub_category)->first()->id}}">{{App\Models\ServiceFeeMeta::where('id', $company->sub_category)->first()->description}}</option>
+                        @endif
+                        @foreach(App\Models\ServiceFeeMeta::where('service_id', 17)->get() as $category)
+                            <option value="{{$category->id}}">{{$category->description}}</option>
+                        @endforeach
+                    </select>
+                    @error('sub_category')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                    @enderror
+                </div>
+                @endif
             </div>
             
             <div class="row">
