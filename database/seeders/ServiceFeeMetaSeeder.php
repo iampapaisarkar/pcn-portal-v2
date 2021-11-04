@@ -675,8 +675,8 @@ class ServiceFeeMetaSeeder extends Seeder
             'amount' => null,
             'registration_fee' => 300000,
             'inspection_fee' => 250000,
-            'location_fee' => 200000,
-            'renewal_fee' => null,
+            'location_fee' => null,
+            'renewal_fee' => 200000,
             'status' => true,
             'updated_at' => now()
             ],
@@ -686,8 +686,8 @@ class ServiceFeeMetaSeeder extends Seeder
             'amount' => null,
             'registration_fee' => 200000,
             'inspection_fee' => 200000,
-            'location_fee' => 150000,
-            'renewal_fee' => null,
+            'location_fee' => null,
+            'renewal_fee' => 150000,
             'status' => true,
             'updated_at' => now()
             ],
@@ -697,8 +697,8 @@ class ServiceFeeMetaSeeder extends Seeder
             'amount' => null,
             'registration_fee' => 100000,
             'inspection_fee' => 100000,
-            'location_fee' => 100000,
-            'renewal_fee' => null,
+            'location_fee' => null,
+            'renewal_fee' => 100000,
             'status' => true,
             'updated_at' => now()
             ],
