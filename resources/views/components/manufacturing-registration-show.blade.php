@@ -28,7 +28,11 @@
                 <label for="inputEmail3" class="ul-form__label"><strong>LGA: </strong></label>
                 <div>{{$registration->other_registration->company->company_state->name}}</div>
                 
-        </div>
+            </div>
+            <div class="form-group col-md-12">
+                <label for="inputEmail3" class="ul-form__label"><strong>Sub Category: </strong></label>
+                <div>{{App\Models\ServiceFeeMeta::where('id', $registration->other_registration->company->sub_category)->first()->description}}</div>
+            </div>
         </div>
         
         <div class="custom-separator"></div>

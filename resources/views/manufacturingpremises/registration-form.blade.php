@@ -71,6 +71,11 @@
                     <input readonly class="form-control" id="category1"
                         type="text" placeholder="Enter your category" value="{{ $company ? $company->category : 'Manufacturing Premises' }}" readonly/>
                 </div>
+                <div class="col-md-12 form-group mb-3">
+                    <label for="middleName1">Sub Category</label>
+                    <input readonly class="form-control" id="category1"
+                        type="text" placeholder="Enter your category" value="{{App\Models\ServiceFeeMeta::where('id', $company->sub_category)->first()->description}}" readonly/>
+                </div>
             </div>
             <div class="custom-separator"></div>
 

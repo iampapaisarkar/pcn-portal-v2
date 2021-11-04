@@ -72,6 +72,12 @@
                     <input readonly class="form-control" id="category1"
                         type="text" placeholder="Enter your category" value="{{ $company ? $company->category : 'Community Pharmacy' }}" readonly/>
                 </div>
+                @if(Auth::user()->hasRole(['distribution_premises']))
+                <div class="form-group col-md-12">
+                    <label for="inputEmail3" class="ul-form__label"><strong>Sub Catrgory: </strong></label>
+                    <div>{{App\Models\ServiceFeeMeta::where('id', $company->sub_category)->first()->description}}</div>
+                </div>
+                @endif
             </div>
             <div class="custom-separator"></div>
 
