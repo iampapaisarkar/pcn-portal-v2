@@ -186,7 +186,7 @@ class RenewalController extends Controller
                     'inspection_year' => $inspectionYear,
                 ]);
 
-                $response = Checkout::checkoutHospitalPharmacyRenewal($application = ['id' => $renewal->id], 'hospital_pharmacy_renewal');
+                $response = Checkout::checkoutHospitalPharmacyRenewal($application = ['id' => $renewal->id], 'hospital_pharmacy_renewal', $renewalInspection);
             }
 
             DB::commit();

@@ -72,7 +72,7 @@ class Checkout
     }
 
 
-    public static function checkoutHospitalPharmacyRenewal($application, $type){
+    public static function checkoutHospitalPharmacyRenewal($application, $type, $renewalInspection){
 
         try {
             DB::beginTransaction();
@@ -91,20 +91,14 @@ class Checkout
                     $totalAmount += $fee->amount;
                 }
 
-
                 $extraService = ServiceFeeMeta::where('id', $HospitalRegistration->bed_capacity)->first();
                 $extra_service_id =  $extraService->id;
-                $totalAmount += (floatval($extraService->registration_fee) + floatval($extraService->inspection_fee));
 
-                // $extraServices = config('custom.beds');
-                // $extra_service_id = null;
-                // foreach ($extraServices as $key => $extraService) {
-                //     if($HospitalRegistration->bed_capacity == $extraService['id']){
-                //         $extra_service_id =  $extraService['id'];
-                //         $totalAmount += (floatval($extraService['registration_fee']) + floatval($extraService['inspection_fee']));
-                //     }
-                // }
-
+                if($renewalInspection == true){
+                    $totalAmount += (floatval($extraService->registration_fee) + floatval($extraService->inspection_fee));
+                }else{
+                    $totalAmount += floatval($extraService->registration_fee);
+                }
 
                 $token = md5(uniqid(rand(), true));
                 $order_id = date('m-Y') . '-' .rand(10,1000);
