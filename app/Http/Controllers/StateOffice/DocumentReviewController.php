@@ -25,8 +25,8 @@ class DocumentReviewController extends Controller
         ->leftjoin('other_registrations', 'other_registrations.registration_id', 'registrations.id')
         ->leftjoin('companies', 'other_registrations.company_id', 'companies.id')
         ->where(function($q){
-            // $q->where('users.state', Auth::user()->state);
-            $q->where('companies.state', Auth::user()->state);
+            $q->where('users.state', Auth::user()->state);
+            $q->orWhere('companies.state', Auth::user()->state);
         })
         ->select('registrations.*');
         // ->where('status', 'send_to_state_office')
