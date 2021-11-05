@@ -29,7 +29,7 @@ class DocumentReviewController extends Controller
             $q->where('state', Auth::user()->state);
         });
 
-        dd($documents->latest()->paginate($perPage););
+        dd($documents->latest()->paginate($perPage));
         
         if($request->per_page){
             $perPage = (integer) $request->per_page;
