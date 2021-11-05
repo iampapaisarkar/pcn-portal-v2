@@ -27,7 +27,7 @@ class InspectionRecommendationEmail extends Mailable
      */
     public function build()
     {
-        if($this->newData['registration_type'] == 'community_pharmacy_registration'){
+        if($this->newData['registration_type'] == 'community_pharmacy'){
             if($this->newData['status'] == 'full_recommendation'){
                 $subject = 'Facility Inspection Application Approval';
             }
