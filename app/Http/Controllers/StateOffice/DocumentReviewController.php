@@ -28,6 +28,8 @@ class DocumentReviewController extends Controller
         ->orWhereHas('other_registration.company', function($q){
             $q->where('state', Auth::user()->state);
         });
+
+        dd($documents->latest()->paginate($perPage););
         
         if($request->per_page){
             $perPage = (integer) $request->per_page;
