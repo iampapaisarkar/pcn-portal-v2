@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-@include('layouts.navbars.breadcrumb', ['page' => 'Tiered PPMV - Invoices', 'route' => 'invoices.index'])
+@include('layouts.navbars.breadcrumb', ['page' => 'PPMV - Invoices', 'route' => 'invoices.index'])
 <div class="row">
     <div class="col-lg-12 col-md-12">
         <div class="d-sm-flex mb-5" data-view="print"><span class="m-auto"></span>

@@ -11,21 +11,21 @@
 @if($data['registration_type'] == 'ppmv')
 # Facility Inspection Application Document Review Query - {{env('APP_NAME')}}
 <div>Hello {{$data['user']['firstname']}} {{$data['user']['lastname']}}, <br>
-<div>There was an issue found in the documentation you provided for the VENDOR LOCATON INSPECTION APPLICATION. </div>
+<div>There was an issue found in the documentation you provided for the FACILITY LOCATON INSPECTION APPLICATION. </div>
 <div>REASON: {{$data['query']}}</div>
 @endif
 
 @if($data['registration_type'] == 'community_pharmacy')
 # Facility Inspection Application Document Review Query - {{env('APP_NAME')}}
 <div>Hello {{$data['user']['firstname']}} {{$data['user']['lastname']}}, <br>
-<div>There was an issue found in the documentation you provided for the VENDOR LOCATON INSPECTION APPLICATION. </div>
+<div>There was an issue found in the documentation you provided for the FACILITY LOCATON INSPECTION APPLICATION. </div>
 <div>REASON: {{$data['query']}}</div>
 @endif
 
 @if($data['registration_type'] == 'distribution_premises')
 # Facility Inspection Application Document Review Query - {{env('APP_NAME')}}
 <div>Hello {{$data['user']['firstname']}} {{$data['user']['lastname']}}, <br>
-<div>There was an issue found in the documentation you provided for the VENDOR LOCATON INSPECTION APPLICATION. </div>
+<div>There was an issue found in the documentation you provided for the FACILITY LOCATON INSPECTION APPLICATION. </div>
 <div>REASON: {{$data['query']}}</div>
 @endif
 
