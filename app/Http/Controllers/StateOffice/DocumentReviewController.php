@@ -19,9 +19,15 @@ class DocumentReviewController extends Controller
      */
     public function index(Request $request)
     {
-        $documents = Registration::where(['payment' => true])
+        $documents = Registration::where(['payment' => true, 'status' => 'send_to_state_office'])
         ->with('hospital_pharmacy', 'other_registration.company', 'user')
-        ->where('status', 'send_to_state_office');
+        // ->where('status', 'send_to_state_office')
+        ->whereHas('user', function($q){
+            $q->where('state', Auth::user()->state);
+        })
+        ->orWhereHas('other_registration.company', function($q){
+            $q->where('state', Auth::user()->state);
+        });
         
         if($request->per_page){
             $perPage = (integer) $request->per_page;
