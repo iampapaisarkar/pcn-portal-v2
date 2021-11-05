@@ -21,7 +21,7 @@ class DocumentReviewController extends Controller
     {
         $documents = Registration::where(['payment' => true])
         ->with('hospital_pharmacy', 'other_registration.company', 'user')
-        ->where('status', 'send_to_state_office')
+        // ->where('status', 'send_to_state_office')
         ->whereHas('user', function($q){
             $q->where('state', Auth::user()->state);
         })
