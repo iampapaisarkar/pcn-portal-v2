@@ -44,6 +44,13 @@ class ManufacturingInfo
                     'color' => 'warning',
                 ];
             }
+            if($registration->status == 'send_to_inspection_monitoring_registration'){
+                return $response = [
+                    'success' => true,
+                    'message' => 'Inspection Pending',
+                    'color' => 'warning',
+                ];
+            }
             if($registration->status == 'send_to_inspection_monitoring'){
                 return $response = [
                     'success' => true,
