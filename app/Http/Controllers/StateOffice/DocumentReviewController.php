@@ -21,13 +21,7 @@ class DocumentReviewController extends Controller
     {
         $documents = Registration::where(['payment' => true])
         ->with('hospital_pharmacy', 'other_registration.company', 'user')
-        // ->where('status', 'send_to_state_office')
-        ->whereHas('user', function($q){
-            $q->where('state', Auth::user()->state);
-        })
-        ->orWhereHas('other_registration.company', function($q){
-            $q->where('state', Auth::user()->state);
-        });
+        ->where('status', 'send_to_state_office');
         
         if($request->per_page){
             $perPage = (integer) $request->per_page;
