@@ -19,13 +19,24 @@ class DocumentReviewController extends Controller
      */
     public function index(Request $request)
     {
-        $documents = Registration::where(['payment' => true, 'status' => 'send_to_state_office'])
+        $documents = Registration::where(['registrations.payment' => true, 'registrations.status' => 'send_to_state_office'])
         ->with('hospital_pharmacy', 'other_registration.company', 'user')
+        ->leftjoin('users', 'users.id', 'registrations.user_id')
+        ->leftjoin('other_registrations', 'other_registrations.registration_id', 'registrations.id')
+        ->leftjoin('companies', 'other_registrations.company_id', 'companies.id')
+        ->where(function($q){
+            $q->where('users.state', Auth::user()->state);
+            $q->orWhere('companies.sate', Auth::user()->state);
+        })
+        ->select('registrations.*');
         // ->where('status', 'send_to_state_office')
-        ;
+        // ->whereHas('user', function($q){
+        //     $q->where('state', Auth::user()->state);
+        // })
+        // ->orWhereHas('other_registration.company', function($q){
+        //     $q->where('state', Auth::user()->state);
+        // });
 
-        dd($documents->latest()->paginate(10));
-        
         if($request->per_page){
             $perPage = (integer) $request->per_page;
         }else{
@@ -35,8 +46,8 @@ class DocumentReviewController extends Controller
         if(!empty($request->search)){
             $search = $request->search;
             $documents = $documents->where(function($q) use ($search){
-                $q->where('documents.type', 'like', '%' .$search. '%');
-                $q->orWhere('documents.category', 'like', '%' .$search. '%');
+                $q->where('registrations.type', 'like', '%' .$search. '%');
+                $q->orWhere('registrations.category', 'like', '%' .$search. '%');
             });
         }
 
