@@ -36,8 +36,10 @@ class Checkout
                 $extra_service_id =  $extraService->id;
                 $totalAmount += (floatval($extraService->registration_fee) + floatval($extraService->inspection_fee));
 
-                $token = md5(uniqid(rand(), true));
-                $order_id = date('m-Y') . '-' .rand(10,1000);
+                $invoiceCount = Payment::count();
+                // $token = md5(uniqid(rand(), true));
+                // $order_id = date('m-Y') . '-' .rand(10,1000);
+                $order_id = date('m-Y') . '-' .$invoiceCount+1;
 
                 $payment = Payment::create([
                     'vendor_id' => Auth::user()->id,
@@ -100,8 +102,10 @@ class Checkout
                     $totalAmount += floatval($extraService->registration_fee);
                 }
 
-                $token = md5(uniqid(rand(), true));
-                $order_id = date('m-Y') . '-' .rand(10,1000);
+                $invoiceCount = Payment::count();
+                // $token = md5(uniqid(rand(), true));
+                // $order_id = date('m-Y') . '-' .rand(10,1000);
+                $order_id = date('m-Y') . '-' .$invoiceCount+1;
 
                 $payment = Payment::create([
                     'vendor_id' => Auth::user()->id,
@@ -152,8 +156,10 @@ class Checkout
                     $totalAmount += $fee->amount;
                 }
 
-                $token = md5(uniqid(rand(), true));
-                $order_id = date('m-Y') . '-' .rand(10,1000);
+                $invoiceCount = Payment::count();
+                // $token = md5(uniqid(rand(), true));
+                // $order_id = date('m-Y') . '-' .rand(10,1000);
+                $order_id = date('m-Y') . '-' .$invoiceCount+1;
 
                 $payment = Payment::create([
                     'vendor_id' => Auth::user()->id,
@@ -211,8 +217,10 @@ class Checkout
                     $extra_service_amount += $extraService['fee'];
                 }
 
-                $token = md5(uniqid(rand(), true));
-                $order_id = date('m-Y') . '-' .rand(10,1000);
+                $invoiceCount = Payment::count();
+                // $token = md5(uniqid(rand(), true));
+                // $order_id = date('m-Y') . '-' .rand(10,1000);
+                $order_id = date('m-Y') . '-' .$invoiceCount+1;
 
                 $payment = Payment::create([
                     'vendor_id' => Auth::user()->id,
@@ -268,8 +276,10 @@ class Checkout
                     $extra_service_amount += $extraService['fee'];
                 }
 
-                $token = md5(uniqid(rand(), true));
-                $order_id = date('m-Y') . '-' .rand(10,1000);
+                $invoiceCount = Payment::count();
+                // $token = md5(uniqid(rand(), true));
+                // $order_id = date('m-Y') . '-' .rand(10,1000);
+                $order_id = date('m-Y') . '-' .$invoiceCount+1;
 
                 $payment = Payment::create([
                     'vendor_id' => Auth::user()->id,
@@ -321,8 +331,10 @@ class Checkout
                     $totalAmount += $fee->amount;
                 }
 
-                $token = md5(uniqid(rand(), true));
-                $order_id = date('m-Y') . '-' .rand(10,1000);
+                $invoiceCount = Payment::count();
+                // $token = md5(uniqid(rand(), true));
+                // $order_id = date('m-Y') . '-' .rand(10,1000);
+                $order_id = date('m-Y') . '-' .$invoiceCount+1;
 
                 $payment = Payment::create([
                     'vendor_id' => Auth::user()->id,
@@ -377,8 +389,10 @@ class Checkout
                 $extra_service_id =  $extraService->id;
                 $totalAmount += floatval($extraService->location_fee);
 
-                $token = md5(uniqid(rand(), true));
-                $order_id = date('m-Y') . '-' .rand(10,1000);
+                $invoiceCount = Payment::count();
+                // $token = md5(uniqid(rand(), true));
+                // $order_id = date('m-Y') . '-' .rand(10,1000);
+                $order_id = date('m-Y') . '-' .$invoiceCount+1;
 
                 $payment = Payment::create([
                     'vendor_id' => Auth::user()->id,
@@ -431,8 +445,10 @@ class Checkout
                     $totalAmount += $fee->amount;
                 }
 
-                $token = md5(uniqid(rand(), true));
-                $order_id = date('m-Y') . '-' .rand(10,1000);
+                $invoiceCount = Payment::count();
+                // $token = md5(uniqid(rand(), true));
+                // $order_id = date('m-Y') . '-' .rand(10,1000);
+                $order_id = date('m-Y') . '-' .$invoiceCount+1;
 
                 $payment = Payment::create([
                     'vendor_id' => Auth::user()->id,
@@ -487,8 +503,10 @@ class Checkout
                 $extra_service_id =  $extraService->id;
                 $totalAmount += (floatval($extraService->registration_fee) + floatval($extraService->inspection_fee));
 
-                $token = md5(uniqid(rand(), true));
-                $order_id = date('m-Y') . '-' .rand(10,1000);
+                $invoiceCount = Payment::count();
+                // $token = md5(uniqid(rand(), true));
+                // $order_id = date('m-Y') . '-' .rand(10,1000);
+                $order_id = date('m-Y') . '-' .$invoiceCount+1;
 
                 $payment = Payment::create([
                     'vendor_id' => Auth::user()->id,
@@ -540,8 +558,10 @@ class Checkout
                     $totalAmount += $fee->amount;
                 }
 
-                $token = md5(uniqid(rand(), true));
-                $order_id = date('m-Y') . '-' .rand(10,1000);
+                $invoiceCount = Payment::count();
+                // $token = md5(uniqid(rand(), true));
+                // $order_id = date('m-Y') . '-' .rand(10,1000);
+                $order_id = date('m-Y') . '-' .$invoiceCount+1;
 
                 $payment = Payment::create([
                     'vendor_id' => Auth::user()->id,
@@ -599,8 +619,10 @@ class Checkout
                     $totalAmount += (floatval($extraService->renewal_fee) + floatval($extraService->inspection_fee));
                 }
 
-                $token = md5(uniqid(rand(), true));
-                $order_id = date('m-Y') . '-' .rand(10,1000);
+                $invoiceCount = Payment::count();
+                // $token = md5(uniqid(rand(), true));
+                // $order_id = date('m-Y') . '-' .rand(10,1000);
+                $order_id = date('m-Y') . '-' .$invoiceCount+1;
 
                 $payment = Payment::create([
                     'vendor_id' => Auth::user()->id,
@@ -658,8 +680,10 @@ class Checkout
                 $totalAmount += (floatval($extraService->registration_fee) + floatval($extraService->inspection_fee));
 
 
-                $token = md5(uniqid(rand(), true));
-                $order_id = date('m-Y') . '-' .rand(10,1000);
+                $invoiceCount = Payment::count();
+                // $token = md5(uniqid(rand(), true));
+                // $order_id = date('m-Y') . '-' .rand(10,1000);
+                $order_id = date('m-Y') . '-' .$invoiceCount+1;
 
                 $payment = Payment::create([
                     'vendor_id' => Auth::user()->id,
@@ -718,8 +742,10 @@ class Checkout
                     $totalAmount += (floatval($extraService->renewal_fee) + floatval($extraService->inspection_fee));
                 }
 
-                $token = md5(uniqid(rand(), true));
-                $order_id = date('m-Y') . '-' .rand(10,1000);
+                $invoiceCount = Payment::count();
+                // $token = md5(uniqid(rand(), true));
+                // $order_id = date('m-Y') . '-' .rand(10,1000);
+                $order_id = date('m-Y') . '-' .$invoiceCount+1;
 
                 $payment = Payment::create([
                     'vendor_id' => Auth::user()->id,
