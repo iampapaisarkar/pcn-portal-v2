@@ -7,7 +7,7 @@
         <div class="card text-left">
             <div class="card-body">
                 <!-- <a href="{{route('services-fee.create', 'service=' . $service->id)}}"><button class="btn btn-primary" type="button">ADD FEE</button></a> -->
-                <hr>
+                <!-- <hr> -->
                 @if(!$service->fees->isEmpty())
                 <div class="table-responsive">
                     <table class="display table table-striped table-bordered" style="width:100%">
