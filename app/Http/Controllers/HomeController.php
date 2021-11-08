@@ -532,7 +532,7 @@ class HomeController extends Controller
             $data= [];
 
             $registration = Registration::where(['payment' => false])
-            ->where('type', 'community_pharmacy')
+            ->where('type', 'manufacturing_premises')
             ->latest()
             ->first();
 
@@ -584,7 +584,7 @@ class HomeController extends Controller
             $data= [];
 
             $registration = Registration::where(['payment' => true])
-            ->where('type', 'community_pharmacy')
+            ->where('type', 'ppmv')
             ->latest()
             ->first();
 
