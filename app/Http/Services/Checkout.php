@@ -159,7 +159,7 @@ class Checkout
                 $invoiceCount = Payment::count();
                 // $token = md5(uniqid(rand(), true));
                 // $order_id = date('m-Y') . '-' .rand(10,1000);
-                $order_id = date('m-Y') . '-' .$invoiceCount+1;
+                $order_id = date('m-Y') . '-' . intval($invoiceCount)+1;
 
                 $payment = Payment::create([
                     'vendor_id' => Auth::user()->id,
