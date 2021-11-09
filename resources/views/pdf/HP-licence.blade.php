@@ -37,13 +37,13 @@
         
         <div style="position: absolute; top: 240px;">
             <div style="font-family: 'OLDENGL'; margin-bottom: 20px; font-size: 38px; text-align: center;  color: #bb1c25;"><span>Certificate of Registration/Retention ofName of Hospital Pharmacy</span></div>
-            <div style="margin-bottom: 20px; font-size: 25px; text-align: center;  color: #bb1c25; font-weight: bold;">{{ucwords($data['user']['hospital_name'])}}</div>
+            <div style="margin-bottom: 14px; font-size: 25px; text-align: center;  color: #bb1c25; font-weight: bold;">{{ucwords($data['user']['hospital_name'])}}</div>
             
-            <div style="margin-bottom: 20px; font-size: 14px; text-align: center;"><span>Situated at:</span></div>
-            <div style="margin-bottom: 20px; font-size: 18px; text-align: center; color: #bb1c25; font-weight: bold;"><span>{{ucwords($data['hospital_pharmacy']['pharmacist_name'])}}</span></div>
+            <div style="margin-bottom: 14px; font-size: 14px; text-align: center;"><span>Situated at:</span></div>
+            <div style="margin-bottom: 14px; font-size: 18px; text-align: center; color: #bb1c25; font-weight: bold;"><span>{{ucwords($data['hospital_pharmacy']['pharmacist_name'])}}</span></div>
             
-            <div style="margin-bottom: 20px; font-size: 14px; text-align: center;"><span>applied to be registered by</span></div>
-            <div style="margin-bottom: 20px; font-size: 18px; text-align: center; color: #bb1c25; font-weight: bold;"><span>Pharm. {{ucwords($data['user']['firstname'])}} {{ucwords($data['user']['lastname'])}}</span></div>
+            <div style="margin-bottom: 14px; font-size: 14px; text-align: center;"><span>applied to be registered by</span></div>
+            <div style="margin-bottom: 14px; font-size: 18px; text-align: center; color: #bb1c25; font-weight: bold;"><span>Pharm. {{ucwords($data['user']['firstname'])}} {{ucwords($data['user']['lastname'])}}</span></div>
             
             <div style="font-size: 14px; text-align: center;"><span>was on <strong>{{strtoupper($data['updated_at']->format('jS'))}} DAY OF  {{strtoupper($data['updated_at']->format('M'))}}, {{$data['updated_at']->format('Y')}}</strong> duly registered for the purpose of mixing,compounding, preparing, dispensing, procuring of drugs and poisons,counselling and pharmaceutical care in accordance with provisions of thePharmacists Council of Nigeria Act, Cap P17, LFN, 2004.</span></div>
         </div>
