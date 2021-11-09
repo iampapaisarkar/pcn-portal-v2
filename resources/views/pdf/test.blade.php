@@ -23,7 +23,6 @@
         }
     </style>
 <body style="background-image: url({{$background}}); width: 100%; height: 100%;">
-{{ storage_path('fonts/OLDENGL.TTF') }}
     <div style="padding-top: 32px;padding-left: 70px;padding-right: 70px;">
         <div style="text-align: center; font-weight: bold; font-size: 30px;"><span>PHARMACISTS COUNCIL OF NIGERIA</span></div>
         
@@ -37,7 +36,7 @@
         </div>
         
         <div style="position: absolute; top: 250px;">
-            <div style="font-family: 'OLDENGL'; margin-bottom: 20px; font-size: 35px; text-align: center;  color: #bb1c25;"><span>Certificate of Registration/Retention of Name of Hospital Pharmacy</span></div>
+            <div style="font-family: 'OLDENGL'; margin-bottom: 20px; font-size: 40px; text-align: center;  color: #bb1c25;"><span>Certificate of Registration/Retention of Name of Hospital Pharmacy</span></div>
             <div style="margin-bottom: 20px; font-size: 25px; text-align: center;  color: #bb1c25; font-weight: bold;">ucwords($data['user']['hospital_name'])</div>
             
             <div style="margin-bottom: 20px; font-size: 14px; text-align: center;"><span>Situated at:</span></div>
