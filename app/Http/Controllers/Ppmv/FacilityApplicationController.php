@@ -26,7 +26,7 @@ class FacilityApplicationController extends Controller
         ->with('other_registration')->latest()->first();
         if($isRegistration && $isRegistration->status != 'inspection_approved'){
             return redirect()->route('ppmv-facility-application-form');
-        }else if($isRegistration && $isRegistration->status != 'facility_no_recommendation' && $isRegistration->status != 'inspection_approved'){
+        }else if($isRegistration && ($isRegistration->status != 'facility_no_recommendation' || $isRegistration->status != 'inspection_approved')){
             return redirect()->route('ppmv-facility-application-form');
         }
         
