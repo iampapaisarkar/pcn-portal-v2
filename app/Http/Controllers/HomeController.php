@@ -421,6 +421,12 @@ class HomeController extends Controller
                         'status' => 'DOC. REGISTRATION FULL RECOMMENDED',
                     ];
                 }
+                if($registration->status == 'facility_send_to_registration'){
+                    $data = [
+                        'title' => 'REGISTRATION REVIEW',
+                        'status' => 'DOC. APPROVED FOR LICENCING',
+                    ];
+                }
                 if($registration->status == 'facility_inspection_approved'){
                     $data = [
                         'title' => 'REGISTRATION REVIEW',
@@ -507,6 +513,12 @@ class HomeController extends Controller
                     $data = [
                         'title' => 'REGISTRATION REVIEW',
                         'status' => 'DOC. REGISTRATION FULL RECOMMENDED',
+                    ];
+                }
+                if($registration->status == 'facility_send_to_registration'){
+                    $data = [
+                        'title' => 'REGISTRATION REVIEW',
+                        'status' => 'DOC. APPROVED FOR LICENCING',
                     ];
                 }
                 if($registration->status == 'facility_inspection_approved'){
