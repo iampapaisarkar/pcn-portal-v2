@@ -35,7 +35,7 @@
             <div style="text-align: right; font-size: 20px; color: #bb1c25;"><span>$data['licence']</span></div>
         </div>
         
-        <div style="position: absolute; top: 250px;">
+        <div style="position: absolute; top: 240px;">
             <div style="font-family: 'OLDENGL'; margin-bottom: 20px; font-size: 40px; text-align: center;  color: #bb1c25;"><span>Certificate of Registration/Retention of Name of Hospital Pharmacy</span></div>
             <div style="margin-bottom: 20px; font-size: 25px; text-align: center;  color: #bb1c25; font-weight: bold;">ucwords($data['user']['hospital_name'])</div>
             
