@@ -41,7 +41,7 @@ class Checkout
                 // $order_id = date('m-Y') . '-' .rand(10,1000);
                 // $order_id = date('m-Y') . '-' .$invoiceCount+1;
                 // $order_id = strtotime(date('m-Y')) . '-' . $invoiceCount+1;
-                $order_id =  \Carbon\Carbon::today()->toDateString()->format('m-Y') . '-' . $invoiceCount+1;
+                $order_id =  \Carbon\Carbon::today()->format('m-Y') . '-' . $invoiceCount+1;
 
                 $payment = Payment::create([
                     'vendor_id' => Auth::user()->id,
@@ -109,7 +109,7 @@ class Checkout
                 // $order_id = date('m-Y') . '-' .rand(10,1000);
                 // $order_id = date('m-Y') . '-' .$invoiceCount+1;
                 // $order_id = strtotime(date('m-Y')) . '-' . $invoiceCount+1;
-                $order_id =  \Carbon\Carbon::today()->toDateString()->format('m-Y') . '-' . $invoiceCount+1;
+                $order_id =  \Carbon\Carbon::today()->format('m-Y') . '-' . $invoiceCount+1;
 
                 $payment = Payment::create([
                     'vendor_id' => Auth::user()->id,
@@ -164,7 +164,7 @@ class Checkout
                 $token = md5(uniqid(rand(), true));
                 // $order_id = date('m-Y') . '-' . $invoiceCount+1;
                 // $order_id = strtotime(date('m-Y')) . '-' . $invoiceCount+1;
-                $order_id =  \Carbon\Carbon::today()->toDateString()->format('m-Y') . '-' . $invoiceCount+1;
+                $order_id =  \Carbon\Carbon::today()->format('m-Y') . '-' . $invoiceCount+1;
 
                 $payment = Payment::create([
                     'vendor_id' => Auth::user()->id,
@@ -227,7 +227,7 @@ class Checkout
                 // $order_id = date('m-Y') . '-' .rand(10,1000);
                 // $order_id = date('m-Y') . '-' .$invoiceCount+1;
                 // $order_id = strtotime(date('m-Y')) . '-' . $invoiceCount+1;
-                $order_id =  \Carbon\Carbon::today()->toDateString()->format('m-Y') . '-' . $invoiceCount+1;
+                $order_id =  \Carbon\Carbon::today()->format('m-Y') . '-' . $invoiceCount+1;
 
                 $payment = Payment::create([
                     'vendor_id' => Auth::user()->id,
@@ -288,7 +288,7 @@ class Checkout
                 // $order_id = date('m-Y') . '-' .rand(10,1000);
                 // $order_id = date('m-Y') . '-' .$invoiceCount+1;
                 // $order_id = strtotime(date('m-Y')) . '-' . $invoiceCount+1;
-                $order_id =  \Carbon\Carbon::today()->toDateString()->format('m-Y') . '-' . $invoiceCount+1;
+                $order_id =  \Carbon\Carbon::today()->format('m-Y') . '-' . $invoiceCount+1;
 
                 $payment = Payment::create([
                     'vendor_id' => Auth::user()->id,
@@ -345,7 +345,7 @@ class Checkout
                 // $order_id = date('m-Y') . '-' .rand(10,1000);
                 // $order_id = date('m-Y') . '-' .$invoiceCount+1;
                 // $order_id = strtotime(date('m-Y')) . '-' . $invoiceCount+1;
-                $order_id =  \Carbon\Carbon::today()->toDateString()->format('m-Y') . '-' . $invoiceCount+1;
+                $order_id =  \Carbon\Carbon::today()->format('m-Y') . '-' . $invoiceCount+1;
 
                 $payment = Payment::create([
                     'vendor_id' => Auth::user()->id,
@@ -405,7 +405,7 @@ class Checkout
                 // $order_id = date('m-Y') . '-' .rand(10,1000);
                 // $order_id = date('m-Y') . '-' .$invoiceCount+1;
                 // $order_id = strtotime(date('m-Y')) . '-' . $invoiceCount+1;
-                $order_id =  \Carbon\Carbon::today()->toDateString()->format('m-Y') . '-' . $invoiceCount+1;
+                $order_id =  \Carbon\Carbon::today()->format('m-Y') . '-' . $invoiceCount+1;
 
                 $payment = Payment::create([
                     'vendor_id' => Auth::user()->id,
@@ -463,7 +463,7 @@ class Checkout
                 // $order_id = date('m-Y') . '-' .rand(10,1000);
                 // $order_id = date('m-Y') . '-' .$invoiceCount+1;
                 // $order_id = strtotime(date('m-Y')) . '-' . $invoiceCount+1;
-                $order_id =  \Carbon\Carbon::today()->toDateString()->format('m-Y') . '-' . $invoiceCount+1;
+                $order_id =  \Carbon\Carbon::today()->format('m-Y') . '-' . $invoiceCount+1;
 
                 $payment = Payment::create([
                     'vendor_id' => Auth::user()->id,
@@ -523,7 +523,7 @@ class Checkout
                 // $order_id = date('m-Y') . '-' .rand(10,1000);
                 // $order_id = date('m-Y') . '-' .$invoiceCount+1;
                 // $order_id = strtotime(date('m-Y')) . '-' . $invoiceCount+1;
-                $order_id =  \Carbon\Carbon::today()->toDateString()->format('m-Y') . '-' . $invoiceCount+1;
+                $order_id =  \Carbon\Carbon::today()->format('m-Y') . '-' . $invoiceCount+1;
 
                 $payment = Payment::create([
                     'vendor_id' => Auth::user()->id,
@@ -580,7 +580,7 @@ class Checkout
                 // $order_id = date('m-Y') . '-' .rand(10,1000);
                 // $order_id = date('m-Y') . '-' .$invoiceCount+1;
                 // $order_id = strtotime(date('m-Y')) . '-' . $invoiceCount+1;
-                $order_id =  \Carbon\Carbon::today()->toDateString()->format('m-Y') . '-' . $invoiceCount+1;
+                $order_id =  \Carbon\Carbon::today()->format('m-Y') . '-' . $invoiceCount+1;
 
                 $payment = Payment::create([
                     'vendor_id' => Auth::user()->id,
@@ -643,7 +643,7 @@ class Checkout
                 // $order_id = date('m-Y') . '-' .rand(10,1000);
                 // $order_id = date('m-Y') . '-' .$invoiceCount+1;
                 // $order_id = strtotime(date('m-Y')) . '-' . $invoiceCount+1;
-                $order_id =  \Carbon\Carbon::today()->toDateString()->format('m-Y') . '-' . $invoiceCount+1;
+                $order_id =  \Carbon\Carbon::today()->format('m-Y') . '-' . $invoiceCount+1;
 
                 $payment = Payment::create([
                     'vendor_id' => Auth::user()->id,
@@ -706,7 +706,7 @@ class Checkout
                 // $order_id = date('m-Y') . '-' .rand(10,1000);
                 // $order_id = date('m-Y') . '-' .$invoiceCount+1;
                 // $order_id = strtotime(date('m-Y')) . '-' . $invoiceCount+1;
-                $order_id =  \Carbon\Carbon::today()->toDateString()->format('m-Y') . '-' . $invoiceCount+1;
+                $order_id =  \Carbon\Carbon::today()->format('m-Y') . '-' . $invoiceCount+1;
 
                 $payment = Payment::create([
                     'vendor_id' => Auth::user()->id,
@@ -770,7 +770,7 @@ class Checkout
                 // $order_id = date('m-Y') . '-' .rand(10,1000);
                 // $order_id = date('m-Y') . '-' .$invoiceCount+1;
                 // $order_id = strtotime(date('m-Y')) . '-' . $invoiceCount+1;
-                $order_id =  \Carbon\Carbon::today()->toDateString()->format('m-Y') . '-' . $invoiceCount+1;
+                $order_id =  \Carbon\Carbon::today()->format('m-Y') . '-' . $invoiceCount+1;
 
                 $payment = Payment::create([
                     'vendor_id' => Auth::user()->id,
