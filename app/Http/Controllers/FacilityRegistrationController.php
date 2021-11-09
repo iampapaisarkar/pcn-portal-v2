@@ -48,11 +48,12 @@ class FacilityRegistrationController extends Controller
         $isRegistration = Registration::where(['user_id' => Auth::user()->id, 'type' => $type])
         ->with('other_registration')->latest()->first();
 
-        if($isRegistration && ($isRegistration->status != 'inspection_approved')){
-            return redirect()->route('facility-registration-form');
-        }else if($isRegistration && $isRegistration->status != 'facility_no_recommendation' && $isRegistration->status != 'inspection_approved'){
+        if(($isRegistration) && ($isRegistration->status != 'inspection_approved' && $isRegistration->status != 'facility_no_recommendation')){
             return redirect()->route('facility-registration-form');
         }
+        // else if($isRegistration && $isRegistration->status != 'facility_no_recommendation' && $isRegistration->status != 'inspection_approved'){
+        //     return redirect()->route('facility-registration-form');
+        // }
 
         try {
             DB::beginTransaction();
