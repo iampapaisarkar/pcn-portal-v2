@@ -24,6 +24,13 @@ class ApplicationController extends Controller
 
     public function applicationFormSubmit(PpmvLocationStoreRequest $request){
 
+        $isRegistration = Registration::where(['user_id' => Auth::user()->id, 'type' => 'ppmv'])
+        ->with('other_registration')->latest()->first();
+
+        if($isRegistration && $isRegistration->status != 'no_recommendation'){
+            return redirect()->route('ppmv-application-form');
+        }
+
         try {
             DB::beginTransaction();
 

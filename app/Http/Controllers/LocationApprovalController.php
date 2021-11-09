@@ -23,16 +23,23 @@ class LocationApprovalController extends Controller
 
     public function locationFormSubmit(LocationRequest $request){
 
+        if(Auth::user()->hasRole(['community_pharmacy'])){
+            $type = 'community_pharmacy';
+            $category = 'Community';
+        }else if(Auth::user()->hasRole(['distribution_premises'])){
+            $type = 'distribution_premises';
+            $category = 'Distribution';
+        }
+
+        $isRegistration = Registration::where(['user_id' => Auth::user()->id, 'type' => $type])
+        ->with('other_registration')->latest()->first();
+
+        if($isRegistration && $isRegistration->status != 'no_recommendation'){
+            return redirect()->route('location-approval-form');
+        }
+
         try {
             DB::beginTransaction();
-
-            if(Auth::user()->hasRole(['community_pharmacy'])){
-                $type = 'community_pharmacy';
-                $category = 'Community';
-            }else if(Auth::user()->hasRole(['distribution_premises'])){
-                $type = 'distribution_premises';
-                $category = 'Distribution';
-            }
 
             $Registration = Registration::create([
                 'user_id' => Auth::user()->id,

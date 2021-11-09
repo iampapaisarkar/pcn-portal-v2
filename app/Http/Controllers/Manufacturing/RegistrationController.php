@@ -23,6 +23,13 @@ class RegistrationController extends Controller
 
     public function registrationSubmit(LocationRequest $request){
 
+        $isRegistration = Registration::where(['user_id' => Auth::user()->id, 'type' => 'manufacturing_premises'])
+        ->with('other_registration')->latest()->first();
+
+        if($isRegistration && $isRegistration->status != 'facility_no_recommendation'){
+            return redirect()->route('manufacturing-registration-form');
+        }
+
         try {
             DB::beginTransaction();
 

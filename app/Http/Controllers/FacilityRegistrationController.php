@@ -36,16 +36,25 @@ class FacilityRegistrationController extends Controller
     }
 
     public function facilityFormSubmit(LocationRequest $request, $id){
+
+        if(Auth::user()->hasRole(['community_pharmacy'])){
+            $type = 'community_pharmacy';
+            $category = 'Community';
+        }else if(Auth::user()->hasRole(['distribution_premises'])){
+            $type = 'distribution_premises';
+            $category = 'Distribution';
+        }
+
+        $isRegistration = Registration::where(['user_id' => Auth::user()->id, 'type' => $type])
+        ->with('other_registration')->latest()->first();
+
+        if($isRegistration && ($isRegistration->status != 'inspection_approved' || 
+        $isRegistration->status != 'facility_no_recommendation')){
+            return redirect()->route('facility-registration-form');
+        }
+
         try {
             DB::beginTransaction();
-
-            if(Auth::user()->hasRole(['community_pharmacy'])){
-                $type = 'community_pharmacy';
-                $category = 'Community';
-            }else if(Auth::user()->hasRole(['distribution_premises'])){
-                $type = 'distribution_premises';
-                $category = 'Distribution';
-            }
 
             $application = Registration::where(['user_id' => Auth::user()->id, 'id' => $id, 'type' => $type])
             ->where(function($q){
