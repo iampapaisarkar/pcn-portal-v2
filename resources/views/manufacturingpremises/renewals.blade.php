@@ -6,13 +6,13 @@
     <div class="col-lg-12 col-md-12">
         <div class="card text-left">
             <div class="card-body">
-            @if(app('App\Http\Services\CommunityDistributionInfo')->canAccessRenewalPage()['response'])
+            @if(app('App\Http\Services\ManufacturingInfo')->canAccessRenewalPage()['response'])
                 <h2 class=" mb-6">Renewals</h2>
-                @if(app('App\Http\Services\CommunityDistributionInfo')->licenceRenewalYearCheck()['response'])
+                @if(app('App\Http\Services\ManufacturingInfo')->licenceRenewalYearCheck()['response'])
                 <a href="{{route('mp-renewal-form')}}"><button class="btn btn-primary" type="button">RENEW LICENCE</button></a>
                 @else
-                    @if(isset(app('App\Http\Services\CommunityDistributionInfo')->licenceRenewalYearCheck()['renewal_date']))
-                    <h5>You can renwal on {{app('App\Http\Services\CommunityDistributionInfo')->licenceRenewalYearCheck()['renewal_date']}}</h5>
+                    @if(isset(app('App\Http\Services\ManufacturingInfo')->licenceRenewalYearCheck()['renewal_date']))
+                    <h5>You can renwal on {{app('App\Http\Services\ManufacturingInfo')->licenceRenewalYearCheck()['renewal_date']}}</h5>
                     @endif
                 @endif
                 <div class="custom-separator"></div>
@@ -71,8 +71,8 @@
                     </table>
                 </div>
             @else
-            <div class="alert alert-card alert-{{app('App\Http\Services\CommunityDistributionInfo')->canAccessRenewalPage()['color']}}" role="alert">
-                {{app('App\Http\Services\CommunityDistributionInfo')->canAccessRenewalPage()['message']}}
+            <div class="alert alert-card alert-{{app('App\Http\Services\ManufacturingInfo')->canAccessRenewalPage()['color']}}" role="alert">
+                {{app('App\Http\Services\ManufacturingInfo')->canAccessRenewalPage()['message']}}
             </div>
             @endif
             </div>
