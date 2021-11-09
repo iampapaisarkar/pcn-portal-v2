@@ -243,9 +243,10 @@ class DownloadController extends Controller
 
         // dd($order_id);
         $backgroundURL = env('APP_URL') . '/admin/dist-assets/images/licence-bg.jpg';
+        $fontURL = env('APP_URL') . '/admin/dist-assets/fonts/OLD.ttf';
         $profilePhoto = Auth::user()->photo ? env('APP_URL') . '/images/'. Auth::user()->photo : env('APP_URL') . '/admin/dist-assets/images/avatar.jpg';
 
-        $pdf = PDF::loadView('pdf.test', ['background' => $backgroundURL, 'photo' => $profilePhoto]);
+        $pdf = PDF::loadView('pdf.test', ['background' => $backgroundURL, 'photo' => $profilePhoto, 'fontURL' => $fontURL]);
         return $pdf->stream();
         
     }

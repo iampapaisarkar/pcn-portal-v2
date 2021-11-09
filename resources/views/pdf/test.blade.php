@@ -12,7 +12,7 @@
         }
         @font-face {
             font-family: 'OLD';
-            src: url({{ storage_path('admin/dist-assets/fonts/OLD.ttf') }}) format("truetype");
+            src: url({{$fontURL}}) format("truetype");
             font-weight: 400;
             font-style: normal;
         }
@@ -36,7 +36,7 @@
         </div>
         
         <div style="position: absolute; top: 250px;">
-            <div style="font-family: 'OLD'; margin-bottom: 20px; font-size: 35px; text-align: center;  color: #bb1c25;"><span>Certificate of Registration/Retention ofName of Hospital Pharmacy</span></div>
+            <div style="font-family: 'OLD'; margin-bottom: 20px; font-size: 35px; text-align: center;  color: #bb1c25;"><span>Certificate of Registration/Retention of Name of Hospital Pharmacy</span></div>
             <div style="margin-bottom: 20px; font-size: 25px; text-align: center;  color: #bb1c25; font-weight: bold;">ucwords($data['user']['hospital_name'])</div>
             
             <div style="margin-bottom: 20px; font-size: 14px; text-align: center;"><span>Situated at:</span></div>
