@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin\Service;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\ChildService;
+use App\Models\Service;
 
 class ChildServiceController extends Controller
 {
@@ -17,9 +18,20 @@ class ChildServiceController extends Controller
     {   
         if(isset($request->service) && $request->service){
             $services = ChildService::where('service_id', $request->service)->get();
+            $single_service = Service::where('id', $request->service)->first();
 
+            $breads = [
+                [
+                    'page' => 'Services',
+                    'route' => route('services.index')
+                ],
+                [
+                    'page' => $single_service->description . ' Services',
+                    'route' => route('child-services.index') . '?service='.$single_service->id
+                ]
+            ];
             if($services){
-                return view('admin.services.child-service', compact('services'));
+                return view('admin.services.child-service', compact('services', 'breads'));
             }else{
                 return abort(404);
             }

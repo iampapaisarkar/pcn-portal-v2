@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-@include('layouts.navbars.breadcrumb', ['page' => 'Service Fee', 'route' => 'services-fee.create'])
+@include('layouts.navbars.breadcrumb', ['breads' => $breads])
 <div class="row">
 <div class="col-lg-12 col-md-12">
     <div class="card-body">

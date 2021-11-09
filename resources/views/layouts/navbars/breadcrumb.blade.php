@@ -33,8 +33,16 @@
     @if(Auth::user()->hasRole(['ppmv']))
         <h1 class="mr-2">PPMV</h1>
     @endif
+    @if(isset($breads))
+    <ul>
+        @foreach($breads as $bread)
+        <li><a href="{{$bread['route']}}">{{$bread['page']}}</a></li>
+        @endforeach
+    </ul>
+    @else
     <ul>
         <li><a href="{{route($route)}}">{{$page}}</a></li>
     </ul>
+    @endif
 </div>
 <div class="separator-breadcrumb border-top"></div>

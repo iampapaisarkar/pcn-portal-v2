@@ -20,9 +20,24 @@ class ServiceFeeController extends Controller
     {
         if(isset($request->service) && ChildService::where('id', $request->service)->exists()){
 
-            $service = ChildService::with('fees')->where('id', $request->service)->first();
+            $service = ChildService::with('fees', 'parentService')->where('id', $request->service)->first();
 
-            return view('admin.services.service-fee.index', compact('service'));
+            $breads = [
+                [
+                    'page' => 'Services',
+                    'route' => route('services.index')
+                ],
+                [
+                    'page' => $service->parentService->description . ' Services',
+                    'route' => route('child-services.index') . '?service='.$service->service_id
+                ],
+                [
+                    'page' => $service->description,
+                    'route' => route('services-fee.index') . '?service='.$service->id
+                ]
+            ];
+
+            return view('admin.services.service-fee.index', compact('service', 'breads'));
         }else{
             return abort(404);
         }
@@ -97,10 +112,29 @@ class ServiceFeeController extends Controller
         if(isset($request->service) && ChildService::where('id', $request->service)->exists()
         && ServiceFeeMeta::where('service_id', $request->service)->where('id', $id)->exists()){
 
-            $service = ChildService::where('id', $request->service)->first();
+            $service = ChildService::where('id', $request->service)->with('parentService')->first();
             $fee = ServiceFeeMeta::where('id', $id)->first();
 
-            return view('admin.services.service-fee.show', compact('service', 'fee'));
+            $breads = [
+                [
+                    'page' => 'Services',
+                    'route' => route('services.index')
+                ],
+                [
+                    'page' => $service->parentService->description . ' Services',
+                    'route' => route('child-services.index') . '?service='.$service->service_id
+                ],
+                [
+                    'page' => $service->description,
+                    'route' => route('services-fee.index') . '?service='.$service->id
+                ],
+                [
+                    'page' => $fee->description,
+                    'route' => route('services-fee.show', $fee->id) . '?service='.$service->id
+                ]
+            ];
+
+            return view('admin.services.service-fee.show', compact('service', 'fee', 'breads'));
         }else{
             return abort(404);
         }

@@ -18,6 +18,10 @@ class ChildService extends Model
         return $this->hasMany(ServiceFeeMeta::class,'service_id', 'id');
     }
 
+    public function parentService() {
+        return $this->hasOne(Service::class,'id', 'service_id');
+    }
+
     public function fees() {
         return $this->hasMany(ServiceFeeMeta::class,'service_id', 'id');
     }
