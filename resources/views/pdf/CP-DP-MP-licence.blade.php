@@ -10,6 +10,12 @@
         body{
                 font-family: sans-serif;
         }
+        @font-face {
+            font-family: 'OLDENGL';
+            src: url('{{ storage_path('fonts/OLDENGL.TTF') }}') format("truetype");
+            font-weight: 400;
+            font-style: normal;
+        }
         @page { 
             size: 570pt 800pt; 
             padding: 0;
@@ -29,15 +35,15 @@
             <div style="text-align: right; font-size: 20px; color: #bb1c25;"><span>{{$data['licence']}}</span></div>
         </div>
         
-        <div style="position: absolute; top: 250px;">
+        <div style="position: absolute; top: 240px;">
             @if($type == 'community_pharmacy_renewal')
-            <div style="margin-bottom: 20px; font-size: 35px; text-align: center;  color: #bb1c25;"><span>Certificate of Registration/Retention of Community Pharmacy Premises</span></div>
+            <div style="font-family: 'OLDENGL'; margin-bottom: 20px; font-size: 38px; text-align: center;  color: #bb1c25;"><span>Certificate of Registration/Retention of Community Pharmacy Premises</span></div>
             @endif
             @if($type == 'distribution_premises_renewal')
-            <div style="margin-bottom: 20px; font-size: 35px; text-align: center;  color: #bb1c25;"><span>Certificate of Registration/Retention of Distribution Premises</span></div>
+            <div style="font-family: 'OLDENGL'; margin-bottom: 20px; font-size: 38px; text-align: center;  color: #bb1c25;"><span>Certificate of Registration/Retention of Distribution Premises</span></div>
             @endif
             @if($type == 'manufacturing_premises_renewal')
-            <div style="margin-bottom: 20px; font-size: 35px; text-align: center;  color: #bb1c25;"><span>Certificate of Registration/Retention ofManufacturing Premises</span></div>
+            <div style="font-family: 'OLDENGL'; margin-bottom: 20px; font-size: 38px; text-align: center;  color: #bb1c25;"><span>Certificate of Registration/Retention ofManufacturing Premises</span></div>
             @endif
 
             <div style="margin-bottom: 20px; font-size: 14px; text-align: center;"><span>The premises situated at:</span></div>

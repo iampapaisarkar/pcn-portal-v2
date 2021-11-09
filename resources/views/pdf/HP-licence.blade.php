@@ -10,6 +10,12 @@
         body{
                 font-family: sans-serif;
         }
+        @font-face {
+            font-family: 'OLDENGL';
+            src: url('{{ storage_path('fonts/OLDENGL.TTF') }}') format("truetype");
+            font-weight: 400;
+            font-style: normal;
+        }
         @page { 
             size: 570pt 800pt; 
             padding: 0;
@@ -29,8 +35,8 @@
             <div style="text-align: right; font-size: 20px; color: #bb1c25;"><span>{{$data['licence']}}</span></div>
         </div>
         
-        <div style="position: absolute; top: 250px;">
-            <div style="margin-bottom: 20px; font-size: 35px; text-align: center;  color: #bb1c25;"><span>Certificate of Registration/Retention ofName of Hospital Pharmacy</span></div>
+        <div style="position: absolute; top: 240px;">
+            <div style="font-family: 'OLDENGL'; margin-bottom: 20px; font-size: 38px; text-align: center;  color: #bb1c25;"><span>Certificate of Registration/Retention ofName of Hospital Pharmacy</span></div>
             <div style="margin-bottom: 20px; font-size: 25px; text-align: center;  color: #bb1c25; font-weight: bold;">{{ucwords($data['user']['hospital_name'])}}</div>
             
             <div style="margin-bottom: 20px; font-size: 14px; text-align: center;"><span>Situated at:</span></div>

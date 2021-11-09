@@ -36,7 +36,7 @@
         </div>
         
         <div style="position: absolute; top: 240px;">
-            <div style="font-family: 'OLDENGL'; margin-bottom: 20px; font-size: 40px; text-align: center;  color: #bb1c25;"><span>Certificate of Registration/Retention of Name of Hospital Pharmacy</span></div>
+            <div style="font-family: 'OLDENGL'; margin-bottom: 20px; font-size: 38px; text-align: center;  color: #bb1c25;"><span>Certificate of Registration/Retention of Name of Hospital Pharmacy</span></div>
             <div style="margin-bottom: 20px; font-size: 25px; text-align: center;  color: #bb1c25; font-weight: bold;">ucwords($data['user']['hospital_name'])</div>
             
             <div style="margin-bottom: 20px; font-size: 14px; text-align: center;"><span>Situated at:</span></div>
