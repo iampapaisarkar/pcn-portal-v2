@@ -6,7 +6,6 @@
     <div class="col-lg-12 col-md-12">
         <div class="card text-left">
             <div class="card-body">
-                {{date('Y-m-d')}}
             @if(app('App\Http\Services\ManufacturingInfo')->canAccessRenewalPage()['response'])
                 <h2 class=" mb-6">Renewals</h2>
                 @if(app('App\Http\Services\ManufacturingInfo')->licenceRenewalYearCheck()['response'])
