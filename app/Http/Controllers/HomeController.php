@@ -285,6 +285,7 @@ class HomeController extends Controller
             $data= [];
 
             $registration = Registration::where('type', 'hospital_pharmacy')
+            ->where('user_id', Auth::user()->id)
             ->latest()
             ->first();
 
@@ -355,6 +356,7 @@ class HomeController extends Controller
             $data= [];
 
             $registration = Registration::where('type', 'community_pharmacy')
+            ->where('user_id', Auth::user()->id)
             ->latest()
             ->first();
 
@@ -448,6 +450,7 @@ class HomeController extends Controller
             $data= [];
 
             $registration = Registration::where('type', 'distribution_premises')
+            ->where('user_id', Auth::user()->id)
             ->latest()
             ->first();
 
@@ -541,6 +544,7 @@ class HomeController extends Controller
             $data= [];
 
             $registration = Registration::where('type', 'manufacturing_premises')
+            ->where('user_id', Auth::user()->id)
             ->latest()
             ->first();
 
@@ -592,6 +596,7 @@ class HomeController extends Controller
             $data= [];
 
             $registration = Registration::where('type', 'ppmv')
+            ->where('user_id', Auth::user()->id)
             ->latest()
             ->first();
 
