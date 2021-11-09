@@ -24,8 +24,10 @@ class FacilityApplicationController extends Controller
 
         $isRegistration = Registration::where(['user_id' => Auth::user()->id, 'type' => 'ppmv'])
         ->with('other_registration')->latest()->first();
-        dd($isRegistration);
         if($isRegistration && ($isRegistration->status != 'inspection_approved' || $isRegistration->status != 'facility_no_recommendation')){
+
+        dd($isRegistration);
+
             return redirect()->route('ppmv-facility-application-form');
         }
         
