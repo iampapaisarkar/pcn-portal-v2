@@ -400,7 +400,7 @@ class HomeController extends Controller
                 if($registration->status == 'inspection_approved'){
                     $data = [
                         'title' => 'LOCATION APPLICATION REVIEW',
-                        'status' => 'DOC. APPROVED OFR REGISTRATION',
+                        'status' => 'DOC. APPROVED FOR REGISTRATION',
                     ];
                 }
                 if($registration->status == 'send_to_inspection_monitoring_registration'){
@@ -494,7 +494,7 @@ class HomeController extends Controller
                 if($registration->status == 'inspection_approved'){
                     $data = [
                         'title' => 'LOCATION APPLICATION REVIEW',
-                        'status' => 'DOC. APPROVED OFR REGISTRATION',
+                        'status' => 'DOC. APPROVED FOR REGISTRATION',
                     ];
                 }
                 if($registration->status == 'send_to_inspection_monitoring_registration'){
@@ -640,7 +640,7 @@ class HomeController extends Controller
                 if($registration->status == 'inspection_approved'){
                     $data = [
                         'title' => 'LOCATION APPLICATION REVIEW',
-                        'status' => 'DOC. APPROVED OFR REGISTRATION',
+                        'status' => 'DOC. APPROVED FOR REGISTRATION',
                     ];
                 }
                 if($registration->status == 'send_to_state_office_registration'){
