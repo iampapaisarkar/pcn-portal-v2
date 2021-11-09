@@ -12,7 +12,7 @@
         }
         @font-face {
             font-family: 'OLD';
-            src: url({{ storage_path('fonts\your-custom-font.ttf') }}) format("truetype");
+            src: url({{ storage_path('fonts\OLDENGL.TTF') }}) format("truetype");
             font-weight: 400;
             font-style: normal;
         }
