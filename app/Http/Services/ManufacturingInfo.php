@@ -120,7 +120,7 @@ class ManufacturingInfo
     public function licenceRenewalYearCheck(){
 
         $renwal = Renewal::where('user_id', Auth::user()->id)->orderBy('renewal_year', 'desc')->first();
-
+        dd($renwal);
         if($renwal && $renwal->status == 'send_to_registry'){
             return [
                 'response' => false
