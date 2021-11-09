@@ -237,13 +237,16 @@ class DownloadController extends Controller
         }
     }
 
-    // public function testLicence(){
+    public function testLicence(){
 
-    //     $backgroundURL = env('APP_URL') . '/admin/dist-assets/images/licence-bg.jpg';
-    //     $profilePhoto = Auth::user()->photo ? env('APP_URL') . '/images/'. Auth::user()->photo : env('APP_URL') . '/admin/dist-assets/images/avatar.jpg';
+        // $order_id = strtotime(date('m-Y')) . '-' . (0 + 1);
 
-    //     $pdf = PDF::loadView('pdf.test', ['background' => $backgroundURL, 'photo' => $profilePhoto]);
-    //     return $pdf->stream();
+        // dd($order_id);
+        // $backgroundURL = env('APP_URL') . '/admin/dist-assets/images/licence-bg.jpg';
+        // $profilePhoto = Auth::user()->photo ? env('APP_URL') . '/images/'. Auth::user()->photo : env('APP_URL') . '/admin/dist-assets/images/avatar.jpg';
+
+        // $pdf = PDF::loadView('pdf.test', ['background' => $backgroundURL, 'photo' => $profilePhoto]);
+        // return $pdf->stream();
         
-    // }
+    }
 }
