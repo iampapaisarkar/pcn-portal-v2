@@ -46,14 +46,14 @@
             <div style="font-family: 'OLDENGL'; margin-bottom: 20px; font-size: 38px; text-align: center;  color: #bb1c25;"><span>Certificate of Registration/Retention ofManufacturing Premises</span></div>
             @endif
 
-            <div style="margin-bottom: 20px; font-size: 14px; text-align: center;"><span>The premises situated at:</span></div>
-            <div style="margin-bottom: 20px; font-size: 18px; text-align: center; color: #bb1c25; font-weight: bold;"><span>{{ucwords($data['other_registration']['company']['address'])}} ,{{ucwords($data['other_registration']['company']['company_lga']['name'])}}, {{ucwords($data['other_registration']['company']['company_state']['name'])}}</span></div>
+            <div style="margin-bottom: 14px; font-size: 14px; text-align: center;"><span>The premises situated at:</span></div>
+            <div style="margin-bottom: 14px; font-size: 18px; text-align: center; color: #bb1c25; font-weight: bold;"><span>{{ucwords($data['other_registration']['company']['address'])}} ,{{ucwords($data['other_registration']['company']['company_lga']['name'])}}, {{ucwords($data['other_registration']['company']['company_state']['name'])}}</span></div>
 
-            <div style="margin-bottom: 20px; font-size: 14px; text-align: center;"><span>and owned by,</span></div>
-            <div style="margin-bottom: 20px; font-size: 18px; text-align: center; color: #bb1c25; font-weight: bold;"><span>{{ucwords($data['other_registration']['company']['name'])}}</span></div>
+            <div style="margin-bottom: 14px; font-size: 14px; text-align: center;"><span>and owned by,</span></div>
+            <div style="margin-bottom: 14px; font-size: 18px; text-align: center; color: #bb1c25; font-weight: bold;"><span>{{ucwords($data['other_registration']['company']['name'])}}</span></div>
 
-            <div style="margin-bottom: 20px; font-size: 14px; text-align: center;"><span>under Superintendent Pharmacist:</span></div>
-            <div style="margin-bottom: 20px; font-size: 18px; text-align: center; color: #bb1c25; font-weight: bold;"><span>Pharm. {{ucwords($data['user']['firstname'])}} {{ucwords($data['user']['lastname'])}}</span></div>
+            <div style="margin-bottom: 14px; font-size: 14px; text-align: center;"><span>under Superintendent Pharmacist:</span></div>
+            <div style="margin-bottom: 14px; font-size: 18px; text-align: center; color: #bb1c25; font-weight: bold;"><span>Pharm. {{ucwords($data['user']['firstname'])}} {{ucwords($data['user']['lastname'])}}</span></div>
         
             @if($type == 'community_pharmacy_renewal')
             <div style="margin-bottom: 20px; font-size: 19px; text-align: center;  color: #505050;"><span>was on <span style="font-weight: bold;">{{strtoupper($data['updated_at']->format('jS'))}} DAY OF  {{strtoupper($data['updated_at']->format('M'))}}, {{$data['updated_at']->format('Y')}}</span> duly registered for the purpose of mixing, compounding, preparing, counselling and selling of drugs, medicines and poisons to patients in accordance with the provisions of the Pharmacists Council of Nigeria Act, Cap P17, LFN, 2004.</span></div>
