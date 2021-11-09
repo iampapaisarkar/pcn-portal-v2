@@ -177,11 +177,11 @@ class DownloadController extends Controller
             ->where('id',  $id)
             ->where('status', 'licence_issued')
             ->where('type', $type)
-            ->with('registration', 'other_registration.company.company_state', 'other_registration.company.company_lga', 'user.user_state', 'user.user_lga')
+            ->with('registration', 'other_registration.company.company_state', 'other_registration.company.company_lga', 'other_registration.company.business', 'user.user_state', 'user.user_lga')
             ->first();
 
             $backgroundURL = env('APP_URL') . '/admin/dist-assets/images/licence-bg.jpg';
-            $profilePhoto = Auth::user()->photo ? env('APP_URL') . '/images/'. Auth::user()->photo : env('APP_URL') . '/admin/dist-assets/images/avatar.jpg';
+            $profilePhoto = $data->other_registration->company->business->passport ? env('APP_URL') . '/images/'. $data->other_registration->company->business->passport : env('APP_URL') . '/admin/dist-assets/images/avatar.jpg';
 
             $pdf = PDF::loadView('pdf.CP-DP-MP-licence', ['data' => $data, 'background' => $backgroundURL, 'photo' => $profilePhoto, 'type' => $type]);
             return $pdf->stream();
@@ -204,7 +204,8 @@ class DownloadController extends Controller
             ->first();
 
             $backgroundURL = env('APP_URL') . '/admin/dist-assets/images/licence-bg.jpg';
-            $profilePhoto = Auth::user()->photo ? env('APP_URL') . '/images/'. Auth::user()->photo : env('APP_URL') . '/admin/dist-assets/images/avatar.jpg';
+            // $profilePhoto = Auth::user()->photo ? env('APP_URL') . '/images/'. Auth::user()->photo : env('APP_URL') . '/admin/dist-assets/images/avatar.jpg';
+            $profilePhoto = $data->hospital_pharmacy->passport ? env('APP_URL') . '/images/'. $data->hospital_pharmacy->passport : env('APP_URL') . '/admin/dist-assets/images/avatar.jpg';
 
             $pdf = PDF::loadView('pdf.HP-licence', ['data' => $data, 'background' => $backgroundURL, 'photo' => $profilePhoto]);
             return $pdf->stream();
