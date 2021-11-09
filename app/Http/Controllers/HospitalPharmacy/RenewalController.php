@@ -178,7 +178,7 @@ class RenewalController extends Controller
                     'type' => 'hospital_pharmacy_renewal',
                     'renewal_year' => date('Y'),
                     // 'expires_at' => \Carbon\Carbon::now()->format('Y') .'-12-31',
-                    'expires_at' => \Carbon\Carbon::now()->format('Y-m-d'),
+                    'expires_at' => \Carbon\Carbon::now()->addDays(1)->format('Y-m-d'),
                     // 'status' => $previousRenwal->inspection == true ? 'send_to_registration' : 'send_to_registry',
                     // 'inspection' => $previousRenwal->inspection == true ? false : true,
                     'status' => $renewalStatus,
