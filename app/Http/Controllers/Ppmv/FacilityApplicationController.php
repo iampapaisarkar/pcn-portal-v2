@@ -24,11 +24,12 @@ class FacilityApplicationController extends Controller
 
         $isRegistration = Registration::where(['user_id' => Auth::user()->id, 'type' => 'ppmv'])
         ->with('other_registration')->latest()->first();
-        if($isRegistration && $isRegistration->status != 'inspection_approved' || $isRegistration->status != 'facility_no_recommendation'){
-            return redirect()->route('ppmv-facility-application-form');
-        }else if($isRegistration && ($isRegistration->status != 'facility_no_recommendation' || $isRegistration->status != 'inspection_approved')){
+        if(($isRegistration) && ($isRegistration->status != 'inspection_approved' || $isRegistration->status != 'facility_no_recommendation')){
             return redirect()->route('ppmv-facility-application-form');
         }
+        // else if($isRegistration && ($isRegistration->status != 'facility_no_recommendation' || $isRegistration->status != 'inspection_approved')){
+        //     return redirect()->route('ppmv-facility-application-form');
+        // }
         
         $application = Registration::where(['payment' => true, 'user_id' => Auth::user()->id, 'type' => 'ppmv'])
         ->with('ppmv', 'user')
