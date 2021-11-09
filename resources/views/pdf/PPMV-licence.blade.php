@@ -21,7 +21,7 @@
         <div style="text-align: center; font-weight: bold; font-size: 30px;"><span>PHARMACISTS COUNCIL OF NIGERIA</span></div>
         
         <div style="text-align: center; margin-bottom: 25px;"><img src="{{$photo}}" alt="" style="width: 170px; height: 170px; border-radius: 20px;"></div>
-        
+
         <div style="position: absolute; top: 100px;">
             <div style="margin-bottom: 10px; text-align: right;"><span>LICENCE NUMBER</span></div>
             <div style="text-align: right; font-size: 20px; color: #bb1c25;"><span>{{$data['licence']}}</span></div>
@@ -31,10 +31,10 @@
             <div style="margin-bottom: 20px; font-size: 35px; text-align: center;  color: #bb1c25;"><span>Patent and Proprietary MedicinesVendor's Licence</span></div>
             
             <div style="margin-bottom: 20px; font-size: 14px; text-align: center;"><span>Licence is hereby granted to</span></div>
-            <div style="margin-bottom: 20px; font-size: 18px; text-align: center; color: #bb1c25; font-weight: bold;"><span>{{ucwords($data['user']['firstname'])}} {{ucwords($data['user']['lastname'])}}</span></div>
+            <div style="margin-bottom: 20px; font-size: 16px; text-align: center; color: #bb1c25; font-weight: bold;"><span>{{ucwords($data['user']['firstname'])}} {{ucwords($data['user']['lastname'])}}</span></div>
 
             <div style="margin-bottom: 20px; font-size: 14px; text-align: center;"><span>to sell Patent and Proprietary Medicines shown in the approvedlist in premises situated at:</span></div>
-            <div style="margin-bottom: 20px; font-size: 18px; text-align: center; color: #bb1c25; font-weight: bold;"><span>{{ucwords($data['user']['shop_address'])}}, {{ucwords($data['user']['user_lga']['name'])}} LGA, {{ucwords($data['user']['user_state']['name'])}} STATE</span></div>
+            <div style="margin-bottom: 20px; font-size: 16px; text-align: center; color: #bb1c25; font-weight: bold;"><span>{{ucwords($data['user']['shop_address'])}}, {{ucwords($data['user']['user_lga']['name'])}} LGA, {{ucwords($data['user']['user_state']['name'])}} STATE</span></div>
         </div>
         
         <div style="position: absolute; top: 760px;">
