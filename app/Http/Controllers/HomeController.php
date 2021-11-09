@@ -284,8 +284,7 @@ class HomeController extends Controller
         if(Auth::user()->hasRole(['hospital_pharmacy'])){
             $data= [];
 
-            $registration = Registration::where(['payment' => true])
-            ->where('type', 'hospital_pharmacy')
+            $registration = Registration::where('type', 'hospital_pharmacy')
             ->latest()
             ->first();
 
@@ -355,8 +354,7 @@ class HomeController extends Controller
         if(Auth::user()->hasRole(['community_pharmacy'])){
             $data= [];
 
-            $registration = Registration::where(['payment' => true])
-            ->where('type', 'community_pharmacy')
+            $registration = Registration::where('type', 'community_pharmacy')
             ->latest()
             ->first();
 
@@ -449,8 +447,7 @@ class HomeController extends Controller
         if(Auth::user()->hasRole(['distribution_premises'])){
             $data= [];
 
-            $registration = Registration::where(['payment' => true])
-            ->where('type', 'distribution_premises')
+            $registration = Registration::where('type', 'distribution_premises')
             ->latest()
             ->first();
 
@@ -543,8 +540,7 @@ class HomeController extends Controller
         if(Auth::user()->hasRole(['manufacturing_premises'])){
             $data= [];
 
-            $registration = Registration::where(['payment' => false])
-            ->where('type', 'manufacturing_premises')
+            $registration = Registration::where('type', 'manufacturing_premises')
             ->latest()
             ->first();
 
@@ -595,8 +591,7 @@ class HomeController extends Controller
         if(Auth::user()->hasRole(['ppmv'])){
             $data= [];
 
-            $registration = Registration::where(['payment' => true])
-            ->where('type', 'ppmv')
+            $registration = Registration::where('type', 'ppmv')
             ->latest()
             ->first();
 
