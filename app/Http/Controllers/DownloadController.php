@@ -242,11 +242,11 @@ class DownloadController extends Controller
         // $order_id = strtotime(date('m-Y')) . '-' . (0 + 1);
 
         // dd($order_id);
-        // $backgroundURL = env('APP_URL') . '/admin/dist-assets/images/licence-bg.jpg';
-        // $profilePhoto = Auth::user()->photo ? env('APP_URL') . '/images/'. Auth::user()->photo : env('APP_URL') . '/admin/dist-assets/images/avatar.jpg';
+        $backgroundURL = env('APP_URL') . '/admin/dist-assets/images/licence-bg.jpg';
+        $profilePhoto = Auth::user()->photo ? env('APP_URL') . '/images/'. Auth::user()->photo : env('APP_URL') . '/admin/dist-assets/images/avatar.jpg';
 
-        // $pdf = PDF::loadView('pdf.test', ['background' => $backgroundURL, 'photo' => $profilePhoto]);
-        // return $pdf->stream();
+        $pdf = PDF::loadView('pdf.test', ['background' => $backgroundURL, 'photo' => $profilePhoto]);
+        return $pdf->stream();
         
     }
 }
