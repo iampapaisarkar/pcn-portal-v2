@@ -170,7 +170,9 @@ class Checkout
                 // $order_id = strtotime(date('m-Y')) . '-' . $invoiceCount+1;
                 // $today = \Carbon\Carbon::today()->format('m-Y');
                 $today = date('Y-m');
-                $order_id =  ($today) . '-' . $invoiceCount+1;
+                $order_id =  ($today) 
+                . '-' . 
+                $invoiceCount+1;
 
                 $payment = Payment::create([
                     'vendor_id' => Auth::user()->id,
