@@ -152,7 +152,7 @@
 
         $.confirm({
             title: 'APPROVE SELECTED FOR LOCATION INSPECTION',
-            content: 'Are you sure want to approve for seleted registration?',
+            content: 'Are you sure want to approve for SELECTED registration?',
             buttons: {   
                 ok: {
                     text: "YES",

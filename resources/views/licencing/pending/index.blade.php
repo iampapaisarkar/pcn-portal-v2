@@ -173,7 +173,7 @@
 
         $.confirm({
             title: 'Issue Licence',
-            content: 'Are you sure want to issue licence for seleted registration?',
+            content: 'Are you sure want to issue licence for SELECTED registration?',
             buttons: {   
                 ok: {
                     text: "YES",
