@@ -23,6 +23,7 @@
         }
     </style>
 <body style="background-image: url({{$background}}); width: 100%; height: 100%;">
+{{ asset('fonts\OLDENGL.TTF') }}
     <div style="padding-top: 32px;padding-left: 70px;padding-right: 70px;">
         <div style="text-align: center; font-weight: bold; font-size: 30px;"><span>PHARMACISTS COUNCIL OF NIGERIA</span></div>
         
