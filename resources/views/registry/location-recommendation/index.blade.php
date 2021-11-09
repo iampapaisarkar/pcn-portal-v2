@@ -117,7 +117,7 @@
             </table>
             {{$applications->links('pagination')}}
         </div>
-        <button onclick="approveSelected(event)" type="button" class="btn btn-primary mt-5">APPROVE SELETECD FOR LOCATION INSPECTION</button>
+        <button onclick="approveSelected(event)" type="button" class="btn btn-primary mt-5">APPROVE SELECTED FOR LOCATION INSPECTION</button>
     </div>
 </div>
 </form>
@@ -151,7 +151,7 @@
         event.preventDefault();
 
         $.confirm({
-            title: 'APPROVE SELETECD FOR LOCATION INSPECTION',
+            title: 'APPROVE SELECTED FOR LOCATION INSPECTION',
             content: 'Are you sure want to approve for seleted registration?',
             buttons: {   
                 ok: {

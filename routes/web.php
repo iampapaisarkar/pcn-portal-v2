@@ -67,7 +67,7 @@ Route::group(['middleware' => ['auth','verified', 'CheckProfileStatus']], functi
     Route::get('hp-download-licence/{id}', 'App\Http\Controllers\DownloadController@hpDownloadLicence')->name('hp-download-licence');
     Route::get('ppmv-download-licence/{id}', 'App\Http\Controllers\DownloadController@ppmvDownloadLicence')->name('ppmv-download-licence');
 
-    Route::get('test-licence', 'App\Http\Controllers\DownloadController@testLicence')->name('test-licence');
+    // Route::get('test-licence', 'App\Http\Controllers\DownloadController@testLicence')->name('test-licence');
 });
 
 
