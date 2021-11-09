@@ -20,7 +20,9 @@
     <div style="padding-top: 32px;padding-left: 70px;padding-right: 70px;">
         <div style="text-align: center; font-weight: bold; font-size: 30px;"><span>PHARMACISTS COUNCIL OF NIGERIA</span></div>
         
-        <div style="text-align: center; margin-bottom: 25px;"><img src="{{$photo}}" alt="" style="width: 170px; height: 170px; border-radius: 20px;"></div>
+        <div style="position: absolute; top: 75px; left: 45px;">
+            <img src="{{$photo}}" style="width: 170px; height: 170px; border-radius: 20px;" />
+        </div>
         
         <div style="position: absolute; top: 100px;">
             <div style="margin-bottom: 10px; text-align: right;"><span>LICENCE NUMBER</span></div>
