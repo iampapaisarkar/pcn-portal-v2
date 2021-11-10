@@ -24,6 +24,12 @@ class RegistrationController extends Controller
 
     public function registrationSubmit(RegistrationRequest $request){
         
+        $isRegistration = Registration::where(['user_id' => Auth::user()->id, 'type' => 'hospital_pharmacy'])
+        ->latest()->first();
+        if($isRegistration && $isRegistration->status != 'no_recommendation'){
+            return redirect()->route('hospital-registration-form');
+        }
+
         try {
             DB::beginTransaction();
 
@@ -90,6 +96,12 @@ class RegistrationController extends Controller
     }
 
     public function registrationUpdate(RegistrationUpdateRequest $request, $id){
+
+        $isRegistration = Registration::where(['id' => $id, 'user_id' => Auth::user()->id, 'type' => 'hospital_pharmacy'])
+        ->latest()->first();
+        if($isRegistration && $isRegistration->status != 'queried_by_state_office'){
+            return redirect()->route('hospital-registration-status');
+        }
 
         try {
             DB::beginTransaction();

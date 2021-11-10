@@ -119,6 +119,13 @@ class RenewalController extends Controller
     }
 
     public function renewalSubmit(RegistrationUpdateRequest $request){
+
+        $isRenewal = Renewal::where(['user_id' => Auth::user()->id, 'type' => 'hospital_pharmacy_renewal'])
+        ->latest()->first();
+        if($isRenewal && ($isRenewal->status != 'send_to_registry' && $isRenewal->status != 'send_to_registration' && $isRenewal->status != 'no_recommendation')){
+            return redirect()->route('hospital-renew');
+        }
+
         try {
             DB::beginTransaction();
 
@@ -219,6 +226,12 @@ class RenewalController extends Controller
     }
 
     public function renewalUpdate(RegistrationUpdateRequest $request, $id){
+
+        $isRenewal = Renewal::where(['user_id' => Auth::user()->id, 'type' => 'hospital_pharmacy_renewal'])
+        ->latest()->first();
+        if($isRenewal && $isRenewal->status != 'no_recommendation'){
+            return redirect()->route('hospital-renewals');
+        }
 
         try {
             DB::beginTransaction();
