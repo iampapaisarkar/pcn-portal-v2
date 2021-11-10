@@ -117,6 +117,13 @@ class RenewalController extends Controller
     }
 
     public function renewalFormSubmit(Request $request){
+
+        $isRenewal = Renewal::where(['user_id' => Auth::user()->id, 'type' => 'manufacturing_premises_renewal'])
+        ->latest()->first();
+        if($isRenewal && ($isRenewal->status != 'send_to_registry' && $isRenewal->status != 'send_to_registration' && $isRenewal->status != 'no_recommendation')){
+            return redirect()->route('mp-renewal-form');
+        }
+        
         try {
             DB::beginTransaction();
 
@@ -186,6 +193,13 @@ class RenewalController extends Controller
     }
 
     public function renewalFormUpdate(Request $request, $id){
+
+        $isRenewal = Renewal::where(['id' => $id, 'user_id' => Auth::user()->id, 'type' => 'manufacturing_premises_renewal'])
+        ->latest()->first();
+        if($isRenewal && $isRenewal->status != 'no_recommendation'){
+            return redirect()->route('mp-renewals');
+        }
+
         try {
             DB::beginTransaction();
 
