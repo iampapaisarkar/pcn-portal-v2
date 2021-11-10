@@ -110,6 +110,21 @@ class LocationApprovalController extends Controller
 
     public function locationFormUpdate(LocationRequest $request, $id){
 
+        if(Auth::user()->hasRole(['community_pharmacy'])){
+            $type = 'community_pharmacy';
+            $category = 'Community';
+        }else if(Auth::user()->hasRole(['distribution_premises'])){
+            $type = 'distribution_premises';
+            $category = 'Distribution';
+        }
+
+        $isRegistration = Registration::where(['id' => $id, 'user_id' => Auth::user()->id, 'type' => $type])
+        ->with('other_registration')->latest()->first();
+
+        if($isRegistration && $isRegistration->status != 'queried_by_state_office'){
+            return redirect()->route('location-approval-status');
+        }
+
         try {
             DB::beginTransaction();
 

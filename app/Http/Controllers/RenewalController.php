@@ -116,6 +116,20 @@ class RenewalController extends Controller
     }
 
     public function renewalFormSubmit(Request $request){
+
+        if(Auth::user()->hasRole(['community_pharmacy'])){
+            $Ttype = 'community_pharmacy_renewal';
+            $category = 'Community';
+        }else if(Auth::user()->hasRole(['distribution_premises'])){
+            $Ttype = 'distribution_premises_renewal';
+            $category = 'Distribution';
+        }
+        $isRenewal = Renewal::where(['user_id' => Auth::user()->id, 'type' => $Ttype])
+        ->latest()->first();
+        if($isRenewal && ($isRenewal->status != 'send_to_registry' && $isRenewal->status != 'send_to_registration' && $isRenewal->status != 'no_recommendation')){
+            return redirect()->route('cp-dp-renewal-form');
+        }
+
         try {
             DB::beginTransaction();
 
@@ -196,6 +210,20 @@ class RenewalController extends Controller
     }
 
     public function renewalFormUpdate(Request $request, $id){
+
+        if(Auth::user()->hasRole(['community_pharmacy'])){
+            $Ttype = 'community_pharmacy_renewal';
+            $category = 'Community';
+        }else if(Auth::user()->hasRole(['distribution_premises'])){
+            $Ttype = 'distribution_premises_renewal';
+            $category = 'Distribution';
+        }
+        $isRenewal = Renewal::where(['id' =>  $id, 'user_id' => Auth::user()->id, 'type' => $Ttype])
+        ->latest()->first();
+        if($isRenewal && $isRenewal->status != 'no_recommendation'){
+            return redirect()->route('cp-dp-renewals');
+        }
+
         try {
             DB::beginTransaction();
 
