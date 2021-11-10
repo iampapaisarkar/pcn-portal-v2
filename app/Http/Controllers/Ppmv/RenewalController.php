@@ -116,6 +116,13 @@ class RenewalController extends Controller
     }
 
     public function renewalSubmit(Request $request){
+
+        $isRenewal = Renewal::where(['user_id' => Auth::user()->id, 'type' => 'ppmv_renewal'])
+        ->latest()->first();
+        if($isRenewal && ($isRenewal->status != 'send_to_registry' && $isRenewal->status != 'send_to_registration' && $isRenewal->status != 'no_recommendation')){
+            return redirect()->route('ppmv-renew');
+        }
+
         try {
             DB::beginTransaction();
 
@@ -172,6 +179,12 @@ class RenewalController extends Controller
     }
 
     public function renewalUpdate(Request $request, $id){
+
+        $isRenewal = Renewal::where(['id' => $id, 'user_id' => Auth::user()->id, 'type' => 'ppmv_renewal'])
+        ->latest()->first();
+        if($isRenewal && $isRenewal->status != 'no_recommendation'){
+            return redirect()->route('ppmv-renewals');
+        }
 
         try {
             DB::beginTransaction();

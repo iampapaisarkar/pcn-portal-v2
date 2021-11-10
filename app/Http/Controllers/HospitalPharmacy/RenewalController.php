@@ -227,7 +227,7 @@ class RenewalController extends Controller
 
     public function renewalUpdate(RegistrationUpdateRequest $request, $id){
 
-        $isRenewal = Renewal::where(['user_id' => Auth::user()->id, 'type' => 'hospital_pharmacy_renewal'])
+        $isRenewal = Renewal::where(['id' => $id, 'user_id' => Auth::user()->id, 'type' => 'hospital_pharmacy_renewal'])
         ->latest()->first();
         if($isRenewal && $isRenewal->status != 'no_recommendation'){
             return redirect()->route('hospital-renewals');

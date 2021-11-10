@@ -113,6 +113,13 @@ class ApplicationController extends Controller
 
     public function applicationUpdate(PpmvLocationUpdateRequest $request, $id){
 
+        $isRegistration = Registration::where(['id' => $id, 'user_id' => Auth::user()->id, 'type' => 'ppmv'])
+        ->with('other_registration')->latest()->first();
+
+        if($isRegistration && $isRegistration->status != 'queried_by_state_office'){
+            return redirect()->route('ppmv-application-status');
+        }
+
         try {
             DB::beginTransaction();
 
