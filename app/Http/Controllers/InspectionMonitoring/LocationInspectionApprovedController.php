@@ -44,6 +44,8 @@ class LocationInspectionApprovedController extends Controller
 
         $documents = $documents->latest()->paginate($perPage);
 
+        dd($documents);
+
         return view('inspectionmonitoring.location-approved.index', compact('documents'));
     }
 
