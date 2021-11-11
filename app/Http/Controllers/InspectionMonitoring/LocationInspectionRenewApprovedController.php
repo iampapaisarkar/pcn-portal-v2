@@ -23,6 +23,7 @@ class LocationInspectionRenewApprovedController extends Controller
     {
         $documents = Renewal::where(['payment' => true])
         ->with('other_registration', 'registration', 'user')
+        ->whereIn('type', ['community_pharmacy', 'distribution_premises', 'manufacturing_premises'])
         ->where(function($q){
             $q->where('status', 'no_recommendation');
             $q->orWhere('status', 'full_recommendation');

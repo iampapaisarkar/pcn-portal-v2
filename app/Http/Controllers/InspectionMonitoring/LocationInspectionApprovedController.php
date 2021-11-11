@@ -23,6 +23,7 @@ class LocationInspectionApprovedController extends Controller
         $documents = Registration::where(['payment' => true])
         ->with('other_registration.company', 'user')
         ->where('location_approval', true)
+        ->whereIn('type', ['community_pharmacy', 'distribution_premises'])
         ->where(function($q){
             $q->where('status', 'no_recommendation');
             $q->orWhere('status', 'full_recommendation');

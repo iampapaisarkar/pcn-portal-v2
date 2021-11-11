@@ -23,6 +23,7 @@ class FacilityInspectionApprovedController extends Controller
         $documents = Registration::where(['payment' => true])
         ->with('other_registration', 'user')
         ->where('location_approval', false)
+        ->whereIn('type', ['community_pharmacy', 'distribution_premises', 'manufacturing_premises'])
         ->where(function($q){
             $q->where('status', 'facility_no_recommendation');
             $q->orWhere('status', 'facility_full_recommendation');

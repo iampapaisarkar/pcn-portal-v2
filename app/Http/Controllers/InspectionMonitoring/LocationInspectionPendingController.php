@@ -23,6 +23,7 @@ class LocationInspectionPendingController extends Controller
         $documents = Registration::where(['payment' => true])
         ->with('other_registration', 'user')
         ->where('location_approval', true)
+        ->whereIn('type', ['community_pharmacy', 'distribution_premises'])
         ->where('status', 'send_to_inspection_monitoring');
         
         if($request->per_page){
