@@ -168,7 +168,7 @@ class CommunityDistributionInfo
             ){
                 return $response = [
                     'success' => false,
-                    'message' => 'PPMV LOCATION APPROVAL APPLICATION NOT COMPLETE YET',
+                    'message' => 'LOCATION APPROVAL APPLICATION NOT COMPLETE YET',
 
                 ];
             }
@@ -180,14 +180,14 @@ class CommunityDistributionInfo
             }else{
                 return $response = [
                     'success' => false,
-                    'message' => 'PPMV FACILITY INSPECTION APPLICATION ALEARY SUBMITTED',
+                    'message' => 'FACILITY INSPECTION APPLICATION ALEARY SUBMITTED',
 
                 ];
             }
         }else{
             return $response = [
                 'success' => false,
-                'message' => 'PPMV LOCATION APPROVAL APPLICATION NOT COMPLETE YET',
+                'message' => 'LOCATION APPROVAL APPLICATION NOT COMPLETE YET',
             ];
         }
     }

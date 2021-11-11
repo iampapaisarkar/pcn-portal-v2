@@ -21,7 +21,7 @@ class LocationInspectionApprovedController extends Controller
     public function index(Request $request)
     {
         $documents = Registration::where(['payment' => true])
-        ->with('other_registration', 'user')
+        ->with('other_registration.company', 'user')
         ->where('location_approval', true)
         ->where(function($q){
             $q->where('status', 'no_recommendation');

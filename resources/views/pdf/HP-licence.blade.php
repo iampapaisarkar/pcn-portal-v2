@@ -40,7 +40,7 @@
             <div style="margin-bottom: 14px; font-size: 25px; text-align: center;  color: #bb1c25; font-weight: bold;">{{ucwords($data['user']['hospital_name'])}}</div>
             
             <div style="margin-bottom: 14px; font-size: 14px; text-align: center;"><span>Situated at:</span></div>
-            <div style="margin-bottom: 14px; font-size: 18px; text-align: center; color: #bb1c25; font-weight: bold;"><span>{{ucwords($data['hospital_pharmacy']['pharmacist_name'])}}</span></div>
+            <div style="margin-bottom: 14px; font-size: 18px; text-align: center; color: #bb1c25; font-weight: bold;"><span>{{ucwords($data['user']['hospital_address'])}}</span></div>
             
             <div style="margin-bottom: 14px; font-size: 14px; text-align: center;"><span>applied to be registered by</span></div>
             <div style="margin-bottom: 14px; font-size: 18px; text-align: center; color: #bb1c25; font-weight: bold;"><span>Pharm. {{ucwords($data['user']['firstname'])}} {{ucwords($data['user']['lastname'])}}</span></div>
