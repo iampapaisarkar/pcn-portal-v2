@@ -169,13 +169,29 @@ class RenewalController extends Controller
 
                 $previousRenwal = Renewal::where('user_id', Auth::user()->id)->orderBy('renewal_year', 'desc')->first();
                 
-                if($previousRenwal->inspection_year == \Carbon\Carbon::now()->format('Y')){
+                // Remove after this code 
+                if($previousRenwal->recommendation_status == 'partial_recommendation'){
+                    $year = 2;
+                }else if($previousRenwal->recommendation_status == 'full_recommendation'){
+                    $year = 5;
+                }
+                if($previousRenwal->inspection_year == \Carbon\Carbon::now()->addYears($year)->format('Y')){
                     $renewalStatus = 'send_to_registry';
                     $renewalInspection = true;
                 }else{
                     $renewalStatus = 'send_to_registration';
                     $renewalInspection = false;
                 }
+                // Remove after this code 
+
+
+                // if($previousRenwal->inspection_year == \Carbon\Carbon::now()->add->format('Y')){
+                //     $renewalStatus = 'send_to_registry';
+                //     $renewalInspection = true;
+                // }else{
+                //     $renewalStatus = 'send_to_registration';
+                //     $renewalInspection = false;
+                // }
 
                 if($previousRenwal->recommendation_status == 'partial_recommendation'){
                     $inspectionYear = \Carbon\Carbon::now()->addYears(2)->format('Y');
