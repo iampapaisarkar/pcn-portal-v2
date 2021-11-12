@@ -168,7 +168,7 @@ class RenewalController extends Controller
                 ]);
 
                 $previousRenwal = Renewal::where('user_id', Auth::user()->id)->orderBy('renewal_year', 'desc')->first();
-                
+                dd($previousRenwal);
                 // Remove after this code 
                 if($previousRenwal->recommendation_status == 'partial_recommendation'){
                     $year = 2;
