@@ -226,7 +226,7 @@ class RenewalController extends Controller
         $isRenewal = Renewal::where(['id' =>  $id, 'user_id' => Auth::user()->id, 'type' => $Ttype])
         ->latest()->first();
         if($isRenewal && $isRenewal->status != 'no_recommendation'){
-            return redirect()->route('cp-dp-renewals');
+            return redirect()->route('cp-dp-renewals.index')->with('error', 'Renewal application already submitted');
         }
 
         try {

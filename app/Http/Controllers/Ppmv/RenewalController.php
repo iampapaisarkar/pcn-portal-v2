@@ -188,7 +188,7 @@ class RenewalController extends Controller
         $isRenewal = Renewal::where(['id' => $id, 'user_id' => Auth::user()->id, 'type' => 'ppmv_renewal'])
         ->latest()->first();
         if($isRenewal && $isRenewal->status != 'no_recommendation'){
-            return redirect()->route('ppmv-renewals');
+            return redirect()->route('ppmv-renewals.index')->with('error', 'Renewal application already submitted');
         }
 
         try {
