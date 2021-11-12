@@ -167,7 +167,12 @@ class RenewalController extends Controller
                     'residential_address' => $request->residential_address,
                 ]);
 
-                $previousRenwal = Renewal::where('user_id', Auth::user()->id)->orderBy('renewal_year', 'desc')->first();
+                $previousRenwal = Renewal::where('user_id', Auth::user()->id)
+                ->where(function($q){
+                    $q->where('recommendation_status', "partial_recommendation");
+                    $q->orWhere('recommendation_status', "full_recommendation");
+                })
+                ->orderBy('renewal_year', 'desc')->first();
                 dd($previousRenwal);
                 // Remove after this code 
                 if($previousRenwal->recommendation_status == 'partial_recommendation'){
