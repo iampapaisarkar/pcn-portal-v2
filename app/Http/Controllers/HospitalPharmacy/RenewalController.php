@@ -127,7 +127,7 @@ class RenewalController extends Controller
 
         $isRenewal = Renewal::where(['user_id' => Auth::user()->id, 'type' => 'hospital_pharmacy_renewal'])
         ->latest()->first();
-        if($isRenewal && ($isRenewal->status == 'send_to_registry' && $isRenewal->status == 'send_to_registration' && $isRenewal->status == 'no_recommendation')){
+        if($isRenewal && ($isRenewal->status == 'send_to_registry' || $isRenewal->status == 'send_to_registration' || $isRenewal->status == 'no_recommendation')){
             return redirect()->route('hospital-renew');
         }
 
@@ -188,7 +188,7 @@ class RenewalController extends Controller
                     'registration_id' => $request->registration_id,
                     'form_id' => $request->hospital_registration_id,
                     'type' => 'hospital_pharmacy_renewal',
-                    'renewal_year' => date('Y'),
+                    'renewal_year' => \Carbon\Carbon::now()->addYears(1)->format('Y'),
                     // 'expires_at' => \Carbon\Carbon::now()->format('Y') .'-12-31',
                     'expires_at' => \Carbon\Carbon::now()->addDays(1)->format('Y-m-d'),
                     // 'status' => $previousRenwal->inspection == true ? 'send_to_registration' : 'send_to_registry',
