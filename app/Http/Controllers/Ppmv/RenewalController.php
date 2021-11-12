@@ -110,7 +110,7 @@ class RenewalController extends Controller
             // }else{
             //     return abort(404);
             // }
-            if(($registration && $registration->status == 'licence_issued') && (date('Y-m-d') > \Carbon\Carbon::createFromFormat('Y-m-d', $registration->expires_at)->format('Y-m-d'))){
+            if(($registration && $registration->status == 'licence_issued') && (date('Y-m-d') >= \Carbon\Carbon::createFromFormat('Y-m-d', $registration->expires_at)->format('Y-m-d'))){
                 return view('ppmv.renew-form', compact('registration'));
             }else{
                 return abort(404);
