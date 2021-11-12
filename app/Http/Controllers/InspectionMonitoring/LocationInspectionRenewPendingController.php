@@ -23,7 +23,7 @@ class LocationInspectionRenewPendingController extends Controller
     {
         $documents = Renewal::where(['payment' => true])
         ->with('other_registration', 'registration', 'user')
-        ->whereIn('type', ['community_pharmacy', 'distribution_premises', 'manufacturing_premises'])
+        ->whereIn('type', ['community_pharmacy_renewal', 'distribution_premises_renewal', 'manufacturing_premises_renewal'])
         ->where('status', 'send_to_inspection_monitoring');
         
         if($request->per_page){
