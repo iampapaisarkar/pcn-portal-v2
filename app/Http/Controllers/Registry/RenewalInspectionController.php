@@ -159,7 +159,7 @@ class RenewalInspectionController extends Controller
                             Renewal::where(['payment' => true, 'id' => $renewal_id, 'user_id' => $renewal->user_id])
                             ->where('status', 'send_to_registry')
                             ->update([
-                                'status' => 'send_to_pharmacy_practice'
+                                'status' => 'send_to_state_office'
                             ]);
                             
                             $adminName = Auth::user()->firstname .' '. Auth::user()->lastname;
@@ -297,7 +297,7 @@ class RenewalInspectionController extends Controller
                     Renewal::where(['payment' => true, 'id' => $request['renewal_id'], 'user_id' => $request['user_id'], 'type' => 'ppmv_renewal'])
                     ->where('status', 'send_to_registry')
                     ->update([
-                        'status' => 'send_to_pharmacy_practice'
+                        'status' => 'send_to_state_office'
                     ]);
                     
                     $adminName = Auth::user()->firstname .' '. Auth::user()->lastname;

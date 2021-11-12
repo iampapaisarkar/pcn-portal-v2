@@ -78,11 +78,11 @@
                                 <button class="btn btn-success btn-sm" type="button"><i class="nav-icon i-Pen-2"></i></button>
                             </a>
                             @endif
-                            @if($document->registration->type == 'ppmv')
+                            <!-- @if($document->registration->type == 'ppmv')
                             <a href="{{ route('pharmacy-renewal-pending-ppmv-show') }}?renewal_id={{$document->id}}&user_id={{$document->user->id}}">
                                 <button class="btn btn-success btn-sm" type="button"><i class="nav-icon i-Pen-2"></i></button>
                             </a>
-                            @endif
+                            @endif -->
                         </td>
                     </tr>
                     @endforeach

@@ -142,6 +142,18 @@
                         <span class="item-name">Facility Inspection - Reports</span>
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a href="{{route('state-renewal-pending.index')}}">
+                        <i class="nav-icon i-Receipt-4"></i>
+                        <span class="item-name">Renewal Inspection</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{route('state-renewal-reports.index')}}">
+                        <i class="nav-icon i-Receipt-4"></i>
+                        <span class="item-name">Renewal Inspection Recommendation</span>
+                    </a>
+                </li>
                 <!-- <li class="nav-item">
                     <a href="">
                         <i class="nav-icon i-Receipt-4"></i>

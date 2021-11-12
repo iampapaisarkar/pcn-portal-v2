@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-@include('layouts.navbars.breadcrumb', ['page' => 'Facility Inspection Report', 'route' => 'pharmacy-renewal-reports.index'])
+@include('layouts.navbars.breadcrumb', ['page' => 'Facility Inspection Report', 'route' => 'state-renewal-reports.index'])
 <div class="row">
 <div class="col-lg-12 col-md-12">
     <div class="card text-left">
@@ -25,7 +25,7 @@
                 </div>
                 <div class="col-sm-12 col-md-6">
                     <div id="multicolumn_ordering_table_filter" class="dataTables_filter float-right">
-                    <form method="GET" action="{{ route('pharmacy-renewal-reports.index') }}">
+                    <form method="GET" action="{{ route('state-renewal-reports.index') }}">
                     @csrf
                         <label>Search:
                             <input name="search" value="{{Request::get('search')}}" type="text" class="form-control form-control-sm" placeholder="" aria-controls="multicolumn_ordering_table">
@@ -80,16 +80,11 @@
                         @endif
 
                         <td>
-                            @if($document->registration->type == 'hospital_pharmacy')
-                            <a href="{{ route('pharmacy-renewal-reports-show') }}?renewal_id={{$document->id}}&user_id={{$document->user->id}}">
+                            @if($document->registration->type == 'ppmv')
+                            <a href="{{ route('state-renewal-reports-ppmv-show') }}?renewal_id={{$document->id}}&user_id={{$document->user->id}}">
                                 <button class="btn btn-success btn-sm" type="button"><i class="nav-icon i-Eye"></i></button>
                             </a>
                             @endif
-                            <!-- @if($document->registration->type == 'ppmv')
-                            <a href="{{ route('pharmacy-renewal-reports-ppmv-show') }}?renewal_id={{$document->id}}&user_id={{$document->user->id}}">
-                                <button class="btn btn-success btn-sm" type="button"><i class="nav-icon i-Eye"></i></button>
-                            </a>
-                            @endif -->
                         </td>
                     </tr>
                     @endforeach

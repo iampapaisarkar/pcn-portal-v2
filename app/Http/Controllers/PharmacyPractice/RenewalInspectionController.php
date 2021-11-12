@@ -221,101 +221,101 @@ class RenewalInspectionController extends Controller
 
 
 
-    public function ppmvShow(Request $request){
+    // public function ppmvShow(Request $request){
 
-        $registration = Renewal::where(['payment' => true, 'id' => $request['renewal_id'], 'user_id' => $request['user_id'], 'type' => 'ppmv_renewal'])
-        ->with('ppmv', 'registration', 'user')
-        ->where('status', 'send_to_pharmacy_practice')
-        ->first();
+    //     $registration = Renewal::where(['payment' => true, 'id' => $request['renewal_id'], 'user_id' => $request['user_id'], 'type' => 'ppmv_renewal'])
+    //     ->with('ppmv', 'registration', 'user')
+    //     ->where('status', 'send_to_pharmacy_practice')
+    //     ->first();
 
-        if($registration){
-            return view('pharmacypractice.renewal-pending.ppmv-renewal-show', compact('registration'));
-        }else{
-            return abort(404);
-        }
-    }
+    //     if($registration){
+    //         return view('pharmacypractice.renewal-pending.ppmv-renewal-show', compact('registration'));
+    //     }else{
+    //         return abort(404);
+    //     }
+    // }
 
-    public function ppmvInspectionupdate(Request $request){
+    // public function ppmvInspectionupdate(Request $request){
 
-        $this->validate($request, [
-            'recommendation' => ['required'],
-            'report' => ['required']
-        ]);
+    //     $this->validate($request, [
+    //         'recommendation' => ['required'],
+    //         'report' => ['required']
+    //     ]);
 
-        try {
-            DB::beginTransaction();
+    //     try {
+    //         DB::beginTransaction();
 
-            $Registration = Registration::where(['id' => $request->registration_id, 'user_id' => $request->user_id, 'type' => 'ppmv'])
-            ->where('payment', true)
-            ->with('ppmv', 'user')
-            ->first();
+    //         $Registration = Registration::where(['id' => $request->registration_id, 'user_id' => $request->user_id, 'type' => 'ppmv'])
+    //         ->where('payment', true)
+    //         ->with('ppmv', 'user')
+    //         ->first();
 
-            $renewal = Renewal::where(['payment' => true, 'id' => $request['renewal_id'], 'user_id' => $request['user_id'], 'type' => 'ppmv_renewal'])
-            ->where('status', 'send_to_pharmacy_practice')
-            ->first();
+    //         $renewal = Renewal::where(['payment' => true, 'id' => $request['renewal_id'], 'user_id' => $request['user_id'], 'type' => 'ppmv_renewal'])
+    //         ->where('status', 'send_to_pharmacy_practice')
+    //         ->first();
 
-            if($renewal){
+    //         if($renewal){
 
-                $file = $request->file('report');
+    //             $file = $request->file('report');
 
-                $private_storage_path = storage_path(
-                    'app'. DIRECTORY_SEPARATOR . 'private' . DIRECTORY_SEPARATOR . $Registration->user_id . DIRECTORY_SEPARATOR . 'ppmv'
-                );
+    //             $private_storage_path = storage_path(
+    //                 'app'. DIRECTORY_SEPARATOR . 'private' . DIRECTORY_SEPARATOR . $Registration->user_id . DIRECTORY_SEPARATOR . 'ppmv'
+    //             );
 
-                if(!file_exists($private_storage_path)){
-                    \mkdir($private_storage_path, intval('755',8), true);
-                }
-                $file_name = 'user'.$Registration->user_id.'-inspection_report.'.$file->getClientOriginalExtension();
-                $file->move($private_storage_path, $file_name);
+    //             if(!file_exists($private_storage_path)){
+    //                 \mkdir($private_storage_path, intval('755',8), true);
+    //             }
+    //             $file_name = 'user'.$Registration->user_id.'-inspection_report.'.$file->getClientOriginalExtension();
+    //             $file->move($private_storage_path, $file_name);
 
-                Registration::where(['id' => $request->registration_id, 'user_id' => $request->user_id, 'type' => 'ppmv'])
-                ->where('payment', true)
-                ->update([
-                    'inspection_report' => $file_name,
-                ]);
+    //             Registration::where(['id' => $request->registration_id, 'user_id' => $request->user_id, 'type' => 'ppmv'])
+    //             ->where('payment', true)
+    //             ->update([
+    //                 'inspection_report' => $file_name,
+    //             ]);
 
-                Renewal::where(['payment' => true, 'id' => $request['renewal_id'], 'user_id' => $request['user_id'], 'type' => 'ppmv_renewal'])
-                ->where('status', 'send_to_pharmacy_practice')
-                ->update([
-                    'status' => $request->recommendation
-                ]);
+    //             Renewal::where(['payment' => true, 'id' => $request['renewal_id'], 'user_id' => $request['user_id'], 'type' => 'ppmv_renewal'])
+    //             ->where('status', 'send_to_pharmacy_practice')
+    //             ->update([
+    //                 'status' => $request->recommendation
+    //             ]);
 
-                $adminName = Auth::user()->firstname .' '. Auth::user()->lastname;
+    //             $adminName = Auth::user()->firstname .' '. Auth::user()->lastname;
 
-                if($request->recommendation == 'no_recommendation'){
-                    $activity = 'Renewal Inspection Report Uploaded';
-                    $data = [
-                        'user' => $Registration->user,
-                        'registration_type' => 'ppmv_renewal',
-                        'type' => 'pharmacy_recommendation',
-                        'status' => 'no_recommendation',
-                    ];
-                    EmailSendJOB::dispatch($data);
-                }
-                if($request->recommendation == 'full_recommendation'){
-                    $activity = 'Renewal Inspection Report Uploaded';
-                    $data = [
-                        'user' => $Registration->user,
-                        'registration_type' => 'ppmv_renewal',
-                        'type' => 'pharmacy_recommendation',
-                        'status' => 'full_recommendation',
-                    ];
-                    EmailSendJOB::dispatch($data);
-                }
-                AllActivity::storeActivity($Registration->id, $adminName, $activity, 'ppmv');
+    //             if($request->recommendation == 'no_recommendation'){
+    //                 $activity = 'Renewal Inspection Report Uploaded';
+    //                 $data = [
+    //                     'user' => $Registration->user,
+    //                     'registration_type' => 'ppmv_renewal',
+    //                     'type' => 'pharmacy_recommendation',
+    //                     'status' => 'no_recommendation',
+    //                 ];
+    //                 EmailSendJOB::dispatch($data);
+    //             }
+    //             if($request->recommendation == 'full_recommendation'){
+    //                 $activity = 'Renewal Inspection Report Uploaded';
+    //                 $data = [
+    //                     'user' => $Registration->user,
+    //                     'registration_type' => 'ppmv_renewal',
+    //                     'type' => 'pharmacy_recommendation',
+    //                     'status' => 'full_recommendation',
+    //                 ];
+    //                 EmailSendJOB::dispatch($data);
+    //             }
+    //             AllActivity::storeActivity($Registration->id, $adminName, $activity, 'ppmv');
 
-            }else{
-                return abort(404);
-            }
+    //         }else{
+    //             return abort(404);
+    //         }
             
-            DB::commit();
+    //         DB::commit();
 
-            return redirect()->route('pharmacy-renewal-pending.index')
-            ->with('success', 'Inspection Report updated successfully');
+    //         return redirect()->route('pharmacy-renewal-pending.index')
+    //         ->with('success', 'Inspection Report updated successfully');
 
-        }catch(Exception $e) {
-            DB::rollback();
-            return back()->with('error','There is something error, please try after some time');
-        }  
-    }
+    //     }catch(Exception $e) {
+    //         DB::rollback();
+    //         return back()->with('error','There is something error, please try after some time');
+    //     }  
+    // }
 }

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\PharmacyPractice;
+namespace App\Http\Controllers\StateOffice;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -21,7 +21,7 @@ class RenewalReportController extends Controller
     public function index(Request $request)
     {
         $documents = Renewal::where(['payment' => true])
-        ->with('hospital_pharmacy', 'registration', 'user')
+        ->with('ppmv', 'registration', 'user')
         ->where(function($q){
             $q->where('status', 'no_recommendation');
             $q->orWhere('status', 'partial_recommendation');
@@ -44,7 +44,7 @@ class RenewalReportController extends Controller
 
         $documents = $documents->latest()->paginate($perPage);
         
-        return view('pharmacypractice.renewal-report.index', compact('documents'));
+        return view('stateoffice.renewal-report.index', compact('documents'));
     }
 
     /**
@@ -113,14 +113,12 @@ class RenewalReportController extends Controller
         //
     }
 
+    public function ppmvShow(Request $request){
 
-    public function hospitalPharmacyShow(Request $request){
-
-        $registration = Renewal::where(['payment' => true, 'id' => $request['renewal_id'], 'user_id' => $request['user_id'], 'type' => 'hospital_pharmacy_renewal'])
-        ->with('hospital_pharmacy', 'registration', 'user')
+        $registration = Renewal::where(['payment' => true, 'id' => $request['renewal_id'], 'user_id' => $request['user_id'], 'type' => 'ppmv_renewal'])
+        ->with('ppmv', 'registration', 'user')
         ->where(function($q){
             $q->where('status', 'no_recommendation');
-            $q->orWhere('status', 'partial_recommendation');
             $q->orWhere('status', 'full_recommendation');
         })
         ->first();
@@ -132,7 +130,7 @@ class RenewalReportController extends Controller
                     'success' => true,
                     'message' => 'Inspection Report: No Recommendation',
                     'color' => 'danger',
-                    'download-link' => route('hospital-inspection-report-download', $registration->registration->id),
+                    'download-link' => route('ppmv-registration-inspection-report-download', $registration->registration->id),
                 ];
             }
             if($registration->status == 'partial_recommendation'){
@@ -140,7 +138,7 @@ class RenewalReportController extends Controller
                     'success' => true,
                     'message' => 'Inspection Report: Partial Recommendation',
                     'color' => 'success',
-                    'download-link' => route('hospital-inspection-report-download', $registration->registration->id),
+                    'download-link' => route('ppmv-registration-inspection-report-download', $registration->registration->id),
                 ];
             }
             if($registration->status == 'full_recommendation'){
@@ -148,57 +146,13 @@ class RenewalReportController extends Controller
                     'success' => true,
                     'message' => 'Inspection Report: Full Recommendation',
                     'color' => 'success',
-                    'download-link' => route('hospital-inspection-report-download', $registration->registration->id),
+                    'download-link' => route('ppmv-registration-inspection-report-download', $registration->registration->id),
                 ];
             }
 
-            return view('pharmacypractice.renewal-report.hospital-show', compact('registration', 'alert'));
+            return view('stateoffice.renewal-report.ppmv-renewal-show', compact('registration', 'alert'));
         }else{
             return abort(404);
         }
     }
-
-
-    // public function ppmvShow(Request $request){
-
-    //     $registration = Renewal::where(['payment' => true, 'id' => $request['renewal_id'], 'user_id' => $request['user_id'], 'type' => 'ppmv_renewal'])
-    //     ->with('ppmv', 'registration', 'user')
-    //     ->where(function($q){
-    //         $q->where('status', 'no_recommendation');
-    //         $q->orWhere('status', 'full_recommendation');
-    //     })
-    //     ->first();
-
-    //     if($registration){
-    //         $alert = [];
-    //         if($registration->status == 'no_recommendation'){
-    //             $alert = [
-    //                 'success' => true,
-    //                 'message' => 'Inspection Report: No Recommendation',
-    //                 'color' => 'danger',
-    //                 'download-link' => route('ppmv-registration-inspection-report-download', $registration->registration->id),
-    //             ];
-    //         }
-    //         if($registration->status == 'partial_recommendation'){
-    //             $alert = [
-    //                 'success' => true,
-    //                 'message' => 'Inspection Report: Partial Recommendation',
-    //                 'color' => 'success',
-    //                 'download-link' => route('ppmv-registration-inspection-report-download', $registration->registration->id),
-    //             ];
-    //         }
-    //         if($registration->status == 'full_recommendation'){
-    //             $alert = [
-    //                 'success' => true,
-    //                 'message' => 'Inspection Report: Full Recommendation',
-    //                 'color' => 'success',
-    //                 'download-link' => route('ppmv-registration-inspection-report-download', $registration->registration->id),
-    //             ];
-    //         }
-
-    //         return view('pharmacypractice.renewal-report.ppmv-renewal-show', compact('registration', 'alert'));
-    //     }else{
-    //         return abort(404);
-    //     }
-    // }
 }
