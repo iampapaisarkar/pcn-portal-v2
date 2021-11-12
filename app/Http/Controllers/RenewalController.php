@@ -132,7 +132,7 @@ class RenewalController extends Controller
         $isRenewal = Renewal::where(['user_id' => Auth::user()->id, 'type' => $Ttype])
         ->latest()->first();
         if($isRenewal && ($isRenewal->status == 'send_to_registry' || $isRenewal->status == 'send_to_registration' || $isRenewal->status != 'no_recommendation')){
-            return redirect()->route('cp-dp-renewal-form');
+            return redirect()->route('cp-dp-renewals')->with('error', 'Renewal application already submitted');
         }
 
         try {
