@@ -89,5 +89,14 @@
             });
 
         }
+
+        // report on upload preview 
+        inputGroupFile01.onchange = evt => {
+            const [file] = inputGroupFile01.files
+            if (file) {
+                $('#inputGroupFile01preview').attr('src', URL.createObjectURL(file));
+                $('#inputGroupFile01previewLabel').html(file.name);
+            }
+        }
     </script>
 @endsection
