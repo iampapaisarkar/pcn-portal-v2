@@ -142,8 +142,8 @@ class RenewalController extends Controller
                     'registration_id' => $request->registration_id,
                     'form_id' => $previousRenwal->form_id,
                     'type' => 'ppmv_renewal',
-                    'renewal_year' => config('renewal.renewal_year'),
-                    'expires_at' => config('renewal.expires_at'),
+                    'renewal_year' => $this->renewal_year(),
+                    'expires_at' => $this->expires_at(),
                     'status' => $previousRenwal->inspection == true ? 'send_to_registration' : 'send_to_registry',
                     'inspection' => $previousRenwal->inspection == true ? false : true,
                 ]);
