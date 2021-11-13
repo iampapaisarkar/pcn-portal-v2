@@ -5,11 +5,9 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\Registration;
 use App\Models\HospitalRegistration;
 use App\Models\Renewal;
-use App\Traits\RenewalYear;
 
 class HospitalRegistrationInfo
 {
-    use RenewalYear;
 
     public static function canSubmitHospitalRegistration(){
         $HospitalRegistration = Registration::where(['user_id' => Auth::user()->id, 'type' => 'hospital_pharmacy'])
@@ -169,10 +167,16 @@ class HospitalRegistrationInfo
                 'response' => false
             ];
         }
-        if(($renwal && $renwal->status == 'licence_issued') && (date('Y-m-d') < $this->check_renewal_date($renwal->expires_at))){
+        // if(($renwal && $renwal->status == 'licence_issued') && (date('Y-m-d') < \Carbon\Carbon::createFromFormat('Y-m-d', $renwal->expires_at)->addDays(1)->format('Y-m-d'))){
+        //     return [
+        //         'response' => false,
+        //         'renewal_date' => \Carbon\Carbon::createFromFormat('Y-m-d', $renwal->expires_at)->addDays(1)->format('d M, Y')
+        //     ];
+        // }
+        if(($renwal && $renwal->status == 'licence_issued') && (date('Y-m-d') < \Carbon\Carbon::createFromFormat('Y-m-d', $renwal->expires_at)->format('Y-m-d'))){
             return [
                 'response' => false,
-                'renewal_date' => $this->renewal_date($renwal->expires_at)
+                'renewal_date' => \Carbon\Carbon::createFromFormat('Y-m-d', $renwal->expires_at)->format('d M, Y')
             ];
         }
         return [

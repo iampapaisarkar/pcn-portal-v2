@@ -16,11 +16,9 @@ use App\Models\HospitalRegistration;
 use App\Models\Renewal;
 use App\Http\Services\Checkout;
 use App\Http\Services\FileUpload;
-use App\Traits\RenewalYear;
 
 class RenewalController extends Controller
 {
-    use RenewalYear;
     /**
      * Display a listing of the resource.
      *
@@ -211,8 +209,11 @@ class RenewalController extends Controller
                     'registration_id' => $request->registration_id,
                     'form_id' => $request->hospital_registration_id,
                     'type' => 'hospital_pharmacy_renewal',
-                    'renewal_year' => $this->renewal_year(),
-                    'expires_at' => $this->expires_at(),
+                    'renewal_year' => \Carbon\Carbon::now()->addYears(1)->format('Y'),
+                    // 'expires_at' => \Carbon\Carbon::now()->format('Y') .'-12-31',
+                    'expires_at' => \Carbon\Carbon::now()->addDays(1)->format('Y-m-d'),
+                    // 'status' => $previousRenwal->inspection == true ? 'send_to_registration' : 'send_to_registry',
+                    // 'inspection' => $previousRenwal->inspection == true ? false : true,
                     'status' => $renewalStatus,
                     'inspection' => $renewalInspection,
                     'inspection_year' => $inspectionYear,
