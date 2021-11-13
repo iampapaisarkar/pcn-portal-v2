@@ -14,6 +14,7 @@ use App\Models\HospitalRegistration;
 use App\Models\Renewal;
 use App\Http\Services\Checkout;
 use App\Http\Services\FileUpload;
+use App\Http\Services\RenewalDates;
 
 class RenewalController extends Controller
 {
@@ -142,13 +143,10 @@ class RenewalController extends Controller
                     'registration_id' => $request->registration_id,
                     'form_id' => $previousRenwal->form_id,
                     'type' => 'ppmv_renewal',
-                    'renewal_year' => \Carbon\Carbon::now()->addYears(1)->format('Y'),
-                    // 'expires_at' => \Carbon\Carbon::now()->format('Y') .'-12-31',
-                    'expires_at' => \Carbon\Carbon::now()->addDays(1)->format('Y-m-d'),
+                    'renewal_year' => RenewalDates::renewal_year(),
+                    'expires_at' => RenewalDates::expires_at(),
                     'status' => $previousRenwal->inspection == true ? 'send_to_registration' : 'send_to_registry',
-                    // 'renewal' => true,
                     'inspection' => $previousRenwal->inspection == true ? false : true,
-                    // 'payment' => true,
                 ]);
 
                 $response = Checkout::checkoutPPMVRenewal($application = ['id' => $renewal->id], 'ppmv_renewal');
