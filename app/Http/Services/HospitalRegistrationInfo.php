@@ -5,9 +5,11 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\Registration;
 use App\Models\HospitalRegistration;
 use App\Models\Renewal;
+use App\Traits\RenewalYear;
 
 class HospitalRegistrationInfo
 {
+    use RenewalYear;
 
     public static function canSubmitHospitalRegistration(){
         $HospitalRegistration = Registration::where(['user_id' => Auth::user()->id, 'type' => 'hospital_pharmacy'])
@@ -167,10 +169,10 @@ class HospitalRegistrationInfo
                 'response' => false
             ];
         }
-        if(($renwal && $renwal->status == 'licence_issued') && (date('Y-m-d') < config('renewal.check_renewal_date'))){
+        if(($renwal && $renwal->status == 'licence_issued') && (date('Y-m-d') < $this->check_renewal_date($renwal->expires_at))){
             return [
                 'response' => false,
-                'renewal_date' => config('renewal.renewal_date')
+                'renewal_date' => $this->renewal_date($renwal->expires_at)
             ];
         }
         return [
