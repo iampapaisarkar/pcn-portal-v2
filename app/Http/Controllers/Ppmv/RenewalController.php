@@ -146,9 +146,7 @@ class RenewalController extends Controller
                     // 'expires_at' => \Carbon\Carbon::now()->format('Y') .'-12-31',
                     'expires_at' => \Carbon\Carbon::now()->addDays(1)->format('Y-m-d'),
                     'status' => $previousRenwal->inspection == true ? 'send_to_registration' : 'send_to_registry',
-                    // 'renewal' => true,
                     'inspection' => $previousRenwal->inspection == true ? false : true,
-                    // 'payment' => true,
                 ]);
 
                 $response = Checkout::checkoutPPMVRenewal($application = ['id' => $renewal->id], 'ppmv_renewal');
