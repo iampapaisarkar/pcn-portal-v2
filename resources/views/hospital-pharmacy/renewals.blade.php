@@ -43,6 +43,9 @@
                                 @if($renewal->status == 'send_to_registration')
                                     <p><span class="rounded badge w-badge badge-warning">PENDING</span></p>
                                 @endif
+                                @if($renewal->status == 'send_to_pharmacy_practice')
+                                    <p><span class="rounded badge w-badge badge-warning">PENDING</span></p>
+                                @endif
                                 @if($renewal->status == 'no_recommendation')
                                     <p><span class="rounded badge w-badge badge-danger">NOT RECOMMENDATION</span></p>
                                     <a target="_blank" href="{{route('hospital-inspection-report-download', $renewal->registration->id)}}" class="btn btn-sm btn-primary">Download Report</a>
