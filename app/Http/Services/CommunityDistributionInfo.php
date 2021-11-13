@@ -5,9 +5,12 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\Registration;
 use App\Models\OtherRegistration;
 use App\Models\Renewal;
+use App\Traits\RenewalYear;
 
 class CommunityDistributionInfo
 {
+    use RenewalYear;
+    
     public static function canSubmitLocationApplication(){
 
         if(Auth::user()->hasRole(['community_pharmacy'])){

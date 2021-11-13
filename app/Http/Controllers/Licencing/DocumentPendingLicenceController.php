@@ -13,9 +13,11 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Services\AllActivity;
 use DB;
 use App\Jobs\EmailSendJOB;
+use App\Traits\RenewalYear;
 
 class DocumentPendingLicenceController extends Controller
 {
+    use RenewalYear;
     /**
      * Display a listing of the resource.
      *

@@ -5,9 +5,12 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\Registration;
 use App\Models\OtherRegistration;
 use App\Models\Renewal;
+use App\Traits\RenewalYear;
 
 class ManufacturingInfo
 {
+    use RenewalYear;
+    
     public static function canSubmitRegistration(){
 
         $registration = Registration::where(['user_id' => Auth::user()->id, 'type' => 'manufacturing_premises'])

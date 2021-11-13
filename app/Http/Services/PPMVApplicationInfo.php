@@ -5,10 +5,12 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\Registration;
 use App\Models\PpmvLocationApplication;
 use App\Models\Renewal;
+use App\Traits\RenewalYear;
 
 class PPMVApplicationInfo
 {
-
+    use RenewalYear;
+    
     public static function canSubmitPPMVApplication(){
         $ppmv = Registration::where(['user_id' => Auth::user()->id, 'type' => 'ppmv'])
         ->with('ppmv')->latest()->first();

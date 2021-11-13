@@ -16,9 +16,11 @@ use App\Models\HospitalRegistration;
 use App\Models\Renewal;
 use App\Http\Services\Checkout;
 use App\Http\Services\FileUpload;
+use App\Traits\RenewalYear;
 
 class RenewalController extends Controller
 {
+    use RenewalYear;
     /**
      * Display a listing of the resource.
      *
