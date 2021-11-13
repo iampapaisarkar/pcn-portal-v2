@@ -78,7 +78,7 @@ class Checkout
     }
 
 
-    public static function checkoutHospitalPharmacyRenewal($application, $type, $renewalInspection){
+    public static function checkoutHospitalPharmacyRenewal($application, $type){
 
         try {
             DB::beginTransaction();
@@ -100,10 +100,15 @@ class Checkout
                 $extraService = ServiceFeeMeta::where('id', $HospitalRegistration->bed_capacity)->first();
                 $extra_service_id =  $extraService->id;
 
-                if($renewalInspection == true){
-                    $totalAmount += (floatval($extraService->registration_fee) + floatval($extraService->inspection_fee));
-                }else{
+                // if($renewalInspection == true){
+                //     $totalAmount += (floatval($extraService->registration_fee) + floatval($extraService->inspection_fee));
+                // }else{
+                //     $totalAmount += floatval($extraService->registration_fee);
+                // }
+                if($Renewal->inspection == true){
                     $totalAmount += floatval($extraService->registration_fee);
+                }else{
+                    $totalAmount += (floatval($extraService->registration_fee) + floatval($extraService->inspection_fee));
                 }
 
                 $invoiceCount = Payment::count();

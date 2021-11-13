@@ -178,20 +178,20 @@ class RenewalController extends Controller
                 }
                 if($previousRenwal->inspection_year == \Carbon\Carbon::now()->addYears($year)->format('Y')){
                     $renewalStatus = 'send_to_registry';
-                    $renewalInspection = true;
+                    // $renewalInspection = true;
                 }else{
                     $renewalStatus = 'send_to_registration';
-                    $renewalInspection = false;
+                    // $renewalInspection = false;
                 }
                 // Remove after this code 
 
 
                 // if($previousRenwal->inspection_year == \Carbon\Carbon::now()->add->format('Y')){
                 //     $renewalStatus = 'send_to_registry';
-                //     $renewalInspection = true;
+                // //    $renewalInspection = true;
                 // }else{
                 //     $renewalStatus = 'send_to_registration';
-                //     $renewalInspection = false;
+                // //    $renewalInspection = false;
                 // }
 
                 if($previousRenwal->recommendation_status == 'partial_recommendation'){
@@ -208,11 +208,13 @@ class RenewalController extends Controller
                     'renewal_year' => RenewalDates::renewal_year(),
                     'expires_at' => RenewalDates::expires_at(),
                     'status' => $renewalStatus,
-                    'inspection' => $renewalInspection,
+                    // 'inspection' => $renewalInspection,
+                    'inspection' => $previousRenwal->inspection == true ? false : true,
                     'inspection_year' => $inspectionYear,
+                    
                 ]);
 
-                $response = Checkout::checkoutHospitalPharmacyRenewal($application = ['id' => $renewal->id], 'hospital_pharmacy_renewal', $renewalInspection);
+                $response = Checkout::checkoutHospitalPharmacyRenewal($application = ['id' => $renewal->id], 'hospital_pharmacy_renewal');
             }
 
             DB::commit();
