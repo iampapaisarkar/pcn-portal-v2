@@ -141,16 +141,10 @@ class ManufacturingInfo
                 'response' => false
             ];
         }
-        // if(($renwal && $renwal->status == 'licence_issued') && (date('Y-m-d') < \Carbon\Carbon::createFromFormat('Y-m-d', $renwal->expires_at)->addDays(1)->format('Y-m-d'))){
-        //     return [
-        //         'response' => false,
-        //         'renewal_date' => \Carbon\Carbon::createFromFormat('Y-m-d', $renwal->expires_at)->addDays(1)->format('d M, Y')
-        //     ];
-        // }
-        if(($renwal && $renwal->status == 'licence_issued') && (date('Y-m-d') < \Carbon\Carbon::createFromFormat('Y-m-d', $renwal->expires_at)->format('Y-m-d'))){
+        if(($renwal && $renwal->status == 'licence_issued') && (date('Y-m-d') < config('renewal.check_renewal_date'))){
             return [
                 'response' => false,
-                'renewal_date' => \Carbon\Carbon::createFromFormat('Y-m-d', $renwal->expires_at)->format('d M, Y')
+                'renewal_date' => config('renewal.renewal_date')
             ];
         }
         return [
