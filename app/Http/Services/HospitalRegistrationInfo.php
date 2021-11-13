@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\Registration;
 use App\Models\HospitalRegistration;
 use App\Models\Renewal;
+use App\Http\Services\RenewalDates;
 
 class HospitalRegistrationInfo
 {
@@ -167,12 +168,6 @@ class HospitalRegistrationInfo
                 'response' => false
             ];
         }
-        // if(($renwal && $renwal->status == 'licence_issued') && (date('Y-m-d') < \Carbon\Carbon::createFromFormat('Y-m-d', $renwal->expires_at)->addDays(1)->format('Y-m-d'))){
-        //     return [
-        //         'response' => false,
-        //         'renewal_date' => \Carbon\Carbon::createFromFormat('Y-m-d', $renwal->expires_at)->addDays(1)->format('d M, Y')
-        //     ];
-        // }
         if(($renwal && $renwal->status == 'licence_issued') && (date('Y-m-d') < RenewalDates::check_renewal_date($renwal->expires_at))){
             return [
                 'response' => false,

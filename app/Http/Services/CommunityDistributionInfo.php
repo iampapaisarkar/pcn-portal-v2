@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\Registration;
 use App\Models\OtherRegistration;
 use App\Models\Renewal;
+use App\Http\Services\RenewalDates;
 
 class CommunityDistributionInfo
 {
@@ -299,16 +300,10 @@ class CommunityDistributionInfo
                 'response' => false
             ];
         }
-        // if(($renwal && $renwal->status == 'licence_issued') && (date('Y-m-d') < \Carbon\Carbon::createFromFormat('Y-m-d', $renwal->expires_at)->addDays(1)->format('Y-m-d'))){
-        //     return [
-        //         'response' => false,
-        //         'renewal_date' => \Carbon\Carbon::createFromFormat('Y-m-d', $renwal->expires_at)->addDays(1)->format('d M, Y')
-        //     ];
-        // }
-        if(($renwal && $renwal->status == 'licence_issued') && (date('Y-m-d') < \Carbon\Carbon::createFromFormat('Y-m-d', $renwal->expires_at)->format('Y-m-d'))){
+        if(($renwal && $renwal->status == 'licence_issued') && (date('Y-m-d') < RenewalDates::check_renewal_date($renwal->expires_at))){
             return [
                 'response' => false,
-                'renewal_date' => \Carbon\Carbon::createFromFormat('Y-m-d', $renwal->expires_at)->format('d M, Y')
+                'renewal_date' => RenewalDates::renewal_date($renwal->expires_at)
             ];
         }
         return [
