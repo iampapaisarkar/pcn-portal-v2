@@ -76,6 +76,12 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->hasOne(UserRole::class,'user_id', 'id');
     }
 
+    public function registration() {
+        return $this->hasOne(Registration::class,'user_id', 'id')
+        ->where('type', 'hospital_pharmacy')
+        ->latest()->first();
+    }
+
     public function hasRole($roles)
     {
         // dd();
@@ -99,21 +105,21 @@ class User extends Authenticatable implements MustVerifyEmail
         ->select('roles.code', 'roles.role', 'roles.id as role_id', 'user_roles.role_id', 'user_roles.user_id');
     }
 
-    public function active_meptp_application() {
-        return $this->hasOne(MEPTPApplication::class,'vendor_id', 'id')
-        ->where('m_e_p_t_p_applications.status', '!=', 'approved_card_generated')
-        ->orWhere('m_e_p_t_p_applications.status', '!=', 'rejected')
-        ->with('user_state', 'user_lga', 'school', 'batch');
-    }
+    // public function active_meptp_application() {
+    //     return $this->hasOne(MEPTPApplication::class,'vendor_id', 'id')
+    //     ->where('m_e_p_t_p_applications.status', '!=', 'approved_card_generated')
+    //     ->orWhere('m_e_p_t_p_applications.status', '!=', 'rejected')
+    //     ->with('user_state', 'user_lga', 'school', 'batch');
+    // }
 
-    public function passed_meptp_application() {
-        return $this->hasOne(MEPTPApplication::class,'vendor_id', 'id')
-        ->where(function($q){
-            $q->where('m_e_p_t_p_applications.status', 'pass');
-        })
-        ->leftjoin('m_e_p_t_p_results', 'm_e_p_t_p_results.application_id', 'm_e_p_t_p_applications.id')
-        ->where('m_e_p_t_p_results.status', 'pass')
-        ->with('user_state', 'user_lga', 'school', 'batch')
-        ->select('m_e_p_t_p_applications.*', 'm_e_p_t_p_results.application_id', 'm_e_p_t_p_results.status as result_status');
-    }
+    // public function passed_meptp_application() {
+    //     return $this->hasOne(MEPTPApplication::class,'vendor_id', 'id')
+    //     ->where(function($q){
+    //         $q->where('m_e_p_t_p_applications.status', 'pass');
+    //     })
+    //     ->leftjoin('m_e_p_t_p_results', 'm_e_p_t_p_results.application_id', 'm_e_p_t_p_applications.id')
+    //     ->where('m_e_p_t_p_results.status', 'pass')
+    //     ->with('user_state', 'user_lga', 'school', 'batch')
+    //     ->select('m_e_p_t_p_applications.*', 'm_e_p_t_p_results.application_id', 'm_e_p_t_p_results.status as result_status');
+    // }
 }

@@ -18,7 +18,28 @@
         <!-- User avatar dropdown -->
         <div class="dropdown">
             <div class="user col align-self-end">
-                <img src="{{ Auth::user()->photo ? asset('images/' . Auth::user()->photo) : asset('admin/dist-assets/images/avatar.jpg') }}" id="userDropdown" alt="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                @php
+                if (auth()->user()->hasRole(['hospital_pharmacy'])) {
+                    if(Auth::user()->registration() && Auth::user()->registration()->hospital_pharmacy()->first() && Auth::user()->registration()->hospital_pharmacy()->first()->passport){
+                        $image = asset('images/' . Auth::user()->registration()->hospital_pharmacy()->first()->passport);
+                    }else{
+                        $image = asset('admin/dist-assets/images/avatar.jpg');
+                    }
+                }else if(auth()->user()->hasRole(['ppmv'])){
+                    if(Auth::user()->photo){
+                        $image = asset('images/' . Auth::user()->photo);
+                    }else{
+                        $image = asset('admin/dist-assets/images/avatar.jpg');
+                    }
+                }else if(auth()->user()->hasRole(['community_pharmacy', 'distribution_premises', 'manufacturing_premises'])){
+                    if(Auth::user()->company && Auth::user()->company->business && Auth::user()->company->business->passport){
+                        $image = asset('images/' . Auth::user()->company->business->passport);
+                    }else{
+                        $image = asset('admin/dist-assets/images/avatar.jpg');
+                    }
+                }
+                @endphp
+                <img src="{{ $image }}" id="userDropdown" alt="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
                     <div class="dropdown-header">
                         <i class="i-Lock-User mr-1"></i> {{Auth::user()->firstname . ' ' . Auth::user()->lastname}}
