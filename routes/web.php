@@ -105,6 +105,10 @@ Route::group(['middleware' => ['auth','verified', 'can:isSOffice']], function ()
     Route::post('state-office-documents-distribution-approve', 'App\Http\Controllers\StateOffice\DocumentReviewController@distributionApprove')->name('state-office-documents-distribution-approve');
     Route::post('state-office-documents-distribution-reject', 'App\Http\Controllers\StateOffice\DocumentReviewController@distributionReject')->name('state-office-documents-distribution-reject');
 
+    Route::get('state-office-documents-manufacturing-show', 'App\Http\Controllers\StateOffice\DocumentReviewController@manufacturingApprovalShow')->name('state-office-documents-manufacturing-show');
+    Route::post('state-office-documents-manufacturing-approve', 'App\Http\Controllers\StateOffice\DocumentReviewController@manufacturingApprove')->name('state-office-documents-manufacturing-approve');
+    Route::post('state-office-documents-manufacturing-reject', 'App\Http\Controllers\StateOffice\DocumentReviewController@manufacturingReject')->name('state-office-documents-manufacturing-reject');
+
     Route::resource('state-office-locations', 'App\Http\Controllers\StateOffice\LocationInspectionController');
     Route::get('state-office-locations-ppmv-show', 'App\Http\Controllers\StateOffice\LocationInspectionController@ppmvLocationShow')->name('state-office-locations-ppmv-show');
     Route::post('state-office-locations-ppmv-inspection-update', 'App\Http\Controllers\StateOffice\LocationInspectionController@ppmvLocationInspectionupdate')->name('state-office-locations-ppmv-inspection-update');

@@ -38,7 +38,7 @@ class RegistrationController extends Controller
                 'type' => 'manufacturing_premises',
                 'category' => 'Manucaturing',
                 'registration_year' => date('Y'),
-                'status' => 'send_to_registry',
+                'status' => 'send_to_state_office',
                 'location_approval' => false
             ]);
 
@@ -78,5 +78,63 @@ class RegistrationController extends Controller
 
         $registration = Registration::where('user_id', Auth::user()->id)->latest()->first();
         return view('manufacturingpremises.registration-status', compact('registration'));
+    }
+
+    public function registrationEdit($id){
+
+        $application = Registration::where('user_id', Auth::user()->id)
+        ->where('status', 'queried_by_state_office')
+        ->with('other_registration', 'user')
+        ->latest()->first();
+
+        if($application){
+            return view('manufacturingpremises.registration-form-edit', compact('application'));
+        }else{
+            return abort(404);
+        }
+    }
+
+    public function registrationUpdate(LocationRequest $request, $id){
+
+
+        $isRegistration = Registration::where(['id' => $id, 'user_id' => Auth::user()->id, 'type' => 'manufacturing_premises'])
+        ->with('other_registration')->latest()->first();
+
+        if($isRegistration && $isRegistration->status != 'queried_by_state_office'){
+            return redirect()->route('manufacturing-registration-status');
+        }
+
+        try {
+            DB::beginTransaction();
+
+            if(Registration::where(['user_id' => Auth::user()->id, 'id' => $id, 'type' => 'manufacturing_premises', 'status' => 'queried_by_state_office'])->exists()){
+
+                Registration::where(['user_id' => Auth::user()->id, 'id' => $id, 'type' =>  'manufacturing_premises', 'status' => 'queried_by_state_office'])->update([
+                    'status' => 'send_to_state_office',
+                ]);
+
+                OtherRegistration::where(['user_id' => Auth::user()->id, 'registration_id' => $id])->update([
+                    'firstname' =>$request->firstname,
+                    'middlename' => $request->middlename,
+                    'surname' => $request->surname,
+                    'email' => $request->email,
+                    'phone' => $request->phone,
+                    'gender' => $request->gender,
+                    'doq' => $request->doq,
+                    'residental_address' => $request->residental_address,
+                    'annual_licence_no' => $request->annual_licence_no,
+                ]);
+
+            }
+
+            DB::commit();
+
+            return redirect()->route('manufacturing-registration-status')
+            ->with('success', 'Application successfully updated.');
+
+        }catch(Exception $e) {
+            DB::rollback();
+            return back()->with('error','There is something error, please try after some time');
+        }  
     }
 }

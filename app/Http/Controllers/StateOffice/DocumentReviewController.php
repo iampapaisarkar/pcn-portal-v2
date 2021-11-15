@@ -459,4 +459,88 @@ class DocumentReviewController extends Controller
             return abort(404);
         }
     }
+
+
+    public function manufacturingApprovalShow(Request $request){
+
+        $application = Registration::where(['payment' => true, 'id' => $request['application_id'], 'user_id' => $request['user_id'], 'type' => 'manufacturing_premises'])
+        ->with('other_registration.company', 'user')
+        ->whereHas('other_registration.company', function($q){
+            $q->where('state', Auth::user()->state);
+        })
+        ->where('status', 'send_to_state_office')
+        ->first();
+
+        if($application){
+            return view('stateoffice.documents.manufacturing-approval-show', compact('application'));
+        }else{
+            return abort(404);
+        }
+    }
+
+
+    public function manufacturingApprove(Request $request){
+        $registration = Registration::where(['payment' => true, 'id' => $request['application_id'], 'user_id' => $request['user_id'], 'type' => 'manufacturing_premises'])
+        ->with('other_registration.company', 'user')
+        ->whereHas('other_registration.company', function($q){
+            $q->where('state', Auth::user()->state);
+        })
+        ->first();
+
+        if($registration){
+            Registration::where(['payment' => true, 'id' => $request['application_id'], 'user_id' => $request['user_id'], 'type' => 'manufacturing_premises'])
+            ->where('status', 'send_to_state_office')
+            ->update([
+                'token' => md5(uniqid(rand(), true)),
+                'status' => 'send_to_registry'
+            ]);
+
+            $adminName = Auth::user()->firstname .' '. Auth::user()->lastname;
+            $activity = 'State Officer Document Verification Approval';
+            AllActivity::storeActivity($request['application_id'], $adminName, $activity, 'manufacturing_premises');
+
+            return redirect()->route('state-office-documents.index')->with('success', 'Registration Approved successfully done');
+        }else{
+            return abort(404);
+        }
+    }
+
+    public function manufacturingReject(Request $request){
+
+        $registration = Registration::where(['payment' => true, 'id' => $request['application_id'], 'user_id' => $request['user_id'], 'type' => 'manufacturing_premises'])
+        ->with('other_registration.company', 'user')
+        ->whereHas('other_registration.company', function($q){
+            $q->where('state', Auth::user()->state);
+        })
+        ->first();
+
+        if($registration){
+            Registration::where(['payment' => true, 'id' => $request['application_id'], 'user_id' => $request['user_id'], 'type' => 'manufacturing_premises'])
+            ->where('status', 'send_to_state_office')
+            ->with('other_registration.company', 'user')
+            ->whereHas('other_registration.company', function($q){
+                $q->where('state', Auth::user()->state);
+            })
+            ->update([
+                'status' => 'queried_by_state_office',
+                'query' => $request['query'],
+            ]);
+
+            $adminName = Auth::user()->firstname .' '. Auth::user()->lastname;
+            $activity = 'State Officer Document Verification Query';
+            AllActivity::storeActivity($request['application_id'], $adminName, $activity, 'manufacturing_premises');
+
+            $data = [
+                'user' => $registration->user,
+                'registration_type' => 'manufacturing_premises',
+                'type' => 'state_office_query',
+                'query' => $request['query'],
+            ];
+            EmailSendJOB::dispatch($data);
+
+            return redirect()->route('state-office-documents.index')->with('success', 'Registration Queried successfully done');
+        }else{
+            return abort(404);
+        }
+    }
 }

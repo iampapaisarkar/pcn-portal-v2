@@ -45,6 +45,22 @@ class ManufacturingInfo
                     'color' => 'warning',
                 ];
             }
+            if($registration->status == 'send_to_state_office'){
+                return $response = [
+                    'success' => true,
+                    'message' => 'Inspection Pending',
+                    'color' => 'warning',
+                ];
+            }
+            if($registration->status == 'queried_by_state_office'){
+                return $response = [
+                    'success' => true,
+                    'message' => 'Document Verification Queried',
+                    'color' => 'danger',
+                    'reason' => $registration->query,
+                    'link' => route('manufacturing-registration-edit', $registration->id)
+                ];
+            }
             if($registration->status == 'send_to_inspection_monitoring_registration'){
                 return $response = [
                     'success' => true,
