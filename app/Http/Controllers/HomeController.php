@@ -567,6 +567,12 @@ class HomeController extends Controller
                         'status' => 'DOC. REVIEW PENDING',
                     ];
                 }
+                if($registration->status == 'send_to_inspection_monitoring_registration'){
+                    $data = [
+                        'title' => 'REGISTRATION REVIEW',
+                        'status' => 'DOC. REVIEW PENDING',
+                    ];
+                }
                 if($registration->status == 'facility_no_recommendation'){
                     $data = [
                         'title' => 'REGISTRATION REVIEW',
