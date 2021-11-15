@@ -561,6 +561,12 @@ class HomeController extends Controller
                         'status' => 'DOC. REVIEW PENDING',
                     ];
                 }
+                if($registration->status == 'queried_by_state_office'){
+                    $data = [
+                        'title' => 'REGISTRATION REVIEW',
+                        'status' => 'DOC. REVIEW PENDING',
+                    ];
+                }
                 if($registration->status == 'send_to_inspection_monitoring'){
                     $data = [
                         'title' => 'REGISTRATION REVIEW',
