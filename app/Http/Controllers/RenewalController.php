@@ -136,8 +136,10 @@ class RenewalController extends Controller
 
             if(Auth::user()->hasRole(['community_pharmacy'])){
                 $type = 'community_pharmacy';
+                $status = 'send_to_state_office';
             }else if(Auth::user()->hasRole(['distribution_premises'])){
                 $type = 'distribution_premises';
+                $status = 'send_to_registry';
             }
 
             if(Registration::where(['user_id' => Auth::user()->id, 'id' => $request->registration_id, 'type' => $type])->exists()){
@@ -165,7 +167,7 @@ class RenewalController extends Controller
                     'type' => $type.'_renewal',
                     'renewal_year' => RenewalDates::renewal_year(),
                     'expires_at' => RenewalDates::expires_at(),
-                    'status' => $previousRenwal->inspection == true ? 'send_to_registration' : 'send_to_registry',
+                    'status' => $previousRenwal->inspection == true ? 'send_to_registration' : $status,
                     'inspection' => $previousRenwal->inspection == true ? false : true,
                 ]);
 
