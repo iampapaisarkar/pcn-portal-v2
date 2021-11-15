@@ -26,9 +26,11 @@ class LocationApprovalController extends Controller
         if(Auth::user()->hasRole(['community_pharmacy'])){
             $type = 'community_pharmacy';
             $category = 'Community';
+            $status = 'send_to_state_office';
         }else if(Auth::user()->hasRole(['distribution_premises'])){
             $type = 'distribution_premises';
             $category = 'Distribution';
+            $status = 'send_to_registry';
         }
 
         $isRegistration = Registration::where(['user_id' => Auth::user()->id, 'type' => $type])
@@ -46,7 +48,7 @@ class LocationApprovalController extends Controller
                 'type' => $type,
                 'category' => $category,
                 'registration_year' => date('Y'),
-                'status' => 'send_to_state_office',
+                'status' => $status,
                 'location_approval' => true
             ]);
 
