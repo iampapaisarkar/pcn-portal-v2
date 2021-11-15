@@ -37,6 +37,8 @@
                     }else{
                         $image = asset('admin/dist-assets/images/avatar.jpg');
                     }
+                }else{
+                    $image = asset('admin/dist-assets/images/avatar.jpg');
                 }
                 @endphp
                 <img src="{{ $image }}" id="userDropdown" alt="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
