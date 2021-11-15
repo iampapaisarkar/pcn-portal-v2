@@ -30,7 +30,7 @@ class LocationApprovalController extends Controller
         }else if(Auth::user()->hasRole(['distribution_premises'])){
             $type = 'distribution_premises';
             $category = 'Distribution';
-            $status = 'send_to_registry';
+            $status = 'send_to_state_office';
         }
 
         $isRegistration = Registration::where(['user_id' => Auth::user()->id, 'type' => $type])
