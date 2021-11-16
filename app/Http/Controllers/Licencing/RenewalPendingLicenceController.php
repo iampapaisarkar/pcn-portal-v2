@@ -317,7 +317,7 @@ class RenewalPendingLicenceController extends Controller
                 }
 
         DB::commit();
-            return redirect()->route('licence-pending.index')->with('success', 'Licence issued successfully done');
+            return redirect()->route('renewal-pending.index')->with('success', 'Licence issued successfully done');
         }catch(Exception $e) {
             DB::rollback();
             return back()->with('error','There is something error, please try after some time');
@@ -379,7 +379,7 @@ class RenewalPendingLicenceController extends Controller
                 }
 
         DB::commit();
-            return redirect()->route('licence-pending.index')->with('success', 'Licence issued successfully done');
+            return redirect()->route('renewal-pending.index')->with('success', 'Licence issued successfully done');
         }catch(Exception $e) {
             DB::rollback();
             return back()->with('error','There is something error, please try after some time');
@@ -440,7 +440,7 @@ class RenewalPendingLicenceController extends Controller
                 }
 
         DB::commit();
-            return redirect()->route('licence-pending.index')->with('success', 'Licence issued successfully done');
+            return redirect()->route('renewal-pending.index')->with('success', 'Licence issued successfully done');
         }catch(Exception $e) {
             DB::rollback();
             return back()->with('error','There is something error, please try after some time');
@@ -502,7 +502,7 @@ class RenewalPendingLicenceController extends Controller
                 }
 
         DB::commit();
-            return redirect()->route('licence-pending.index')->with('success', 'Licence issued successfully done');
+            return redirect()->route('renewal-pending.index')->with('success', 'Licence issued successfully done');
         }catch(Exception $e) {
             DB::rollback();
             return back()->with('error','There is something error, please try after some time');
@@ -563,7 +563,7 @@ class RenewalPendingLicenceController extends Controller
                 }
 
         DB::commit();
-            return redirect()->route('licence-pending.index')->with('success', 'Licence issued successfully done');
+            return redirect()->route('renewal-pending.index')->with('success', 'Licence issued successfully done');
         }catch(Exception $e) {
             DB::rollback();
             return back()->with('error','There is something error, please try after some time');
