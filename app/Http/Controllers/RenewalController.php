@@ -136,7 +136,7 @@ class RenewalController extends Controller
 
             if(Auth::user()->hasRole(['community_pharmacy'])){
                 $type = 'community_pharmacy';
-                $status = 'send_to_state_office';
+                $status = 'send_to_registry';
             }else if(Auth::user()->hasRole(['distribution_premises'])){
                 $type = 'distribution_premises';
                 $status = 'send_to_registry';
