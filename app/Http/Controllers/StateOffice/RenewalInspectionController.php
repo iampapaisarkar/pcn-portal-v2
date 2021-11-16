@@ -199,7 +199,7 @@ class RenewalInspectionController extends Controller
             
             DB::commit();
 
-            return redirect()->route('pharmacy-renewal-pending.index')
+            return redirect()->route('state-renewal-pending.index')
             ->with('success', 'Inspection Report updated successfully');
 
         }catch(Exception $e) {
