@@ -198,7 +198,7 @@ class RenewalController extends Controller
                 ->where('status', 'no_recommendation')
                 ->with('ppmv', 'registration', 'user')
                 ->update([
-                    'status' => 'send_to_pharmacy_practice',
+                    'status' => 'send_to_state_office',
                     'payment' => false,
                 ]);
 

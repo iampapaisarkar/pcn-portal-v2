@@ -255,7 +255,7 @@ class RenewalController extends Controller
                 Renewal::where(['user_id' => Auth::user()->id, 'id' => $id, 'type' => $type.'_renewal'])
                 ->where('status', 'no_recommendation')
                 ->update([
-                    'status' => 'send_to_registry',
+                    'status' => 'send_to_inspection_monitoring',
                     'payment' => false,
                 ]);
 
