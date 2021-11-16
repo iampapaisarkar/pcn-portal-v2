@@ -68,7 +68,7 @@
                         @if($document->registration->type == 'community_pharmacy')
                         <td>{{$document->other_registration->company->name}}</td>
                         @endif
-                        @if($document->registration->type == 'distribution_premise')
+                        @if($document->registration->type == 'distribution_premises')
                         <td>{{$document->other_registration->company->name}}</td>
                         @endif
                         @if($document->registration->type == 'manufacturing_premises')
@@ -85,7 +85,7 @@
                         @if($document->registration->type == 'community_pharmacy')
                         <td>Community Pharmacy Location Approval Application</td>
                         @endif
-                        @if($document->registration->type == 'distribution_premise')
+                        @if($document->registration->type == 'distribution_premises')
                         <td>Distribution Premises Location Approval Application</td>
                         @endif
                         @if($document->registration->type == 'manufacturing_premises')
