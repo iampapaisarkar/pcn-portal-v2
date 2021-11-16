@@ -106,7 +106,7 @@ class RenewalController extends Controller
 
 
         if($registration){
-            if(RenewalDates::can_access_renewal_form() == true){
+            if(RenewalDates::can_access_renewal_form($registration) == true){
                 return view('ppmv.renew-form', compact('registration'));
             }else{
                 return abort(404);
