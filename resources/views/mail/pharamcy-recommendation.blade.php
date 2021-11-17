@@ -7,7 +7,7 @@
 <div><strong>CONGRATULATIONS</strong></div>
 <div>There is to inform you that your application for the FACILITY INSPECTION at the {{$data['user']['firstname']}} {{$data['user']['lastname']}} has been approved.</div>
 <div>Recommendation Status: <strong>FULL RECOMMENDATION</strong></div>
-<div>Further information concerning the physical inspection will be communicated to you accordingly.</div>
+<div>Kindly login into your profile to begin the Registration process</div>
 <div>Thank you.</div>
 @endif
 @if($data['status'] == 'partial_recommendation')  
@@ -16,7 +16,7 @@
 <div><strong>CONGRATULATIONS</strong></div>
 <div>There is to inform you that your application for the FACILITY INSPECTION at the {{$data['user']['firstname']}} {{$data['user']['lastname']}} has been approved.</div>
 <div>Recommendation Status: <strong>PARTIAL RECOMMENDATION</strong></div>
-<div>Further information concerning the physical inspection will be communicated to you accordingly.</div>
+<div>Kindly login into your profile to begin the Registration process</div>
 <div>Thank you.</div>
 @endif
 @if($data['status'] == 'no_recommendation')  
@@ -36,7 +36,7 @@
 <div><strong>CONGRATULATIONS</strong></div>
 <div>There is to inform you that your application for the FACILITY INSPECTION at the {{$data['user']['firstname']}} {{$data['user']['lastname']}} has been approved.</div>
 <div>Recommendation Status: <strong>FULL RECOMMENDATION</strong></div>
-<div>Further information concerning the physical inspection will be communicated to you accordingly.</div>
+<div>Kindly login into your profile to begin the Registration process</div>
 <div>Thank you.</div>
 @endif
 @if($data['status'] == 'partial_recommendation')  
@@ -45,7 +45,7 @@
 <div><strong>CONGRATULATIONS</strong></div>
 <div>There is to inform you that your application for the FACILITY INSPECTION at the {{$data['user']['firstname']}} {{$data['user']['lastname']}} has been approved.</div>
 <div>Recommendation Status: <strong>PARTIAL RECOMMENDATION</strong></div>
-<div>Further information concerning the physical inspection will be communicated to you accordingly.</div>
+<div>Kindly login into your profile to begin the Registration process</div>
 <div>Thank you.</div>
 @endif
 @if($data['status'] == 'no_recommendation')  
@@ -66,7 +66,7 @@
 <div><strong>CONGRATULATIONS</strong></div>
 <div>There is to inform you that your application for the FACILITY INSPECTION at the {{$data['user']['firstname']}} {{$data['user']['lastname']}} has been approved.</div>
 <div>Recommendation Status: <strong>FULL RECOMMENDATION</strong></div>
-<div>Further information concerning the physical inspection will be communicated to you accordingly.</div>
+<div>Kindly login into your profile to begin the Registration process</div>
 <div>Thank you.</div>
 @endif
 @if($data['status'] == 'no_recommendation')  
@@ -86,7 +86,7 @@
 <div><strong>CONGRATULATIONS</strong></div>
 <div>There is to inform you that your application for the FACILITY INSPECTION at the {{$data['user']['firstname']}} {{$data['user']['lastname']}} has been approved.</div>
 <div>Recommendation Status: <strong>FULL RECOMMENDATION</strong></div>
-<div>Further information concerning the physical inspection will be communicated to you accordingly.</div>
+<div>Kindly login into your profile to begin the Registration process</div>
 <div>Thank you.</div>
 @endif
 @if($data['status'] == 'no_recommendation')  
@@ -106,7 +106,7 @@
 <div><strong>CONGRATULATIONS</strong></div>
 <div>There is to inform you that your application for the FACILITY INSPECTION at the {{$data['user']['firstname']}} {{$data['user']['lastname']}} has been approved.</div>
 <div>Recommendation Status: <strong>FULL RECOMMENDATION</strong></div>
-<div>Further information concerning the physical inspection will be communicated to you accordingly.</div>
+<div>Kindly login into your profile to begin the Registration process</div>
 <div>Thank you.</div>
 @endif
 @if($data['status'] == 'no_recommendation')  
