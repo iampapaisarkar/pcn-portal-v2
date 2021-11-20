@@ -117,6 +117,7 @@ Route::group(['middleware' => ['auth','verified', 'can:isSOffice']], function ()
     Route::get('state-office-location-report-ppmv-show', 'App\Http\Controllers\StateOffice\LocationReportController@ppmvLocationShow')->name('state-office-location-report-ppmv-show');
 
     Route::resource('state-office-banner-paid', 'App\Http\Controllers\StateOffice\LocationBannerPaidController');
+    Route::post('state-office-banner-collect', 'App\Http\Controllers\StateOffice\LocationBannerPaidController@bannerCollect')->name('state-office-banner-collect');
     Route::resource('state-office-banner-collected', 'App\Http\Controllers\StateOffice\LocationBannerCollectedController');
 
 

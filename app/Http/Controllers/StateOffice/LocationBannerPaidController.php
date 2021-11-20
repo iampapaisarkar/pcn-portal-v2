@@ -22,7 +22,8 @@ class LocationBannerPaidController extends Controller
         'registrations.banner_status' => 'paid',
         'registrations.banner_collected' => false
         ])
-        ->with('ppmv', 'other_registration.company', 'user')
+        ->with('ppmv', 'other_registration.company.business', 'other_registration.company.company_state',
+        'other_registration.company.company_lga', 'user', 'user.user_state', 'user.user_lga')
         ->leftjoin('users', 'users.id', 'registrations.user_id')
         ->leftjoin('other_registrations', 'other_registrations.registration_id', 'registrations.id')
         ->leftjoin('companies', 'other_registrations.company_id', 'companies.id')
@@ -48,6 +49,7 @@ class LocationBannerPaidController extends Controller
 
         $documents = $documents->latest()->paginate($perPage);
 
+        // dd($documents);
         return view('stateoffice.banner-paid.index', compact('documents'));
     }
 
@@ -116,4 +118,18 @@ class LocationBannerPaidController extends Controller
     {
         //
     }
+
+    public function bannerCollect(Request $request)
+    {
+        Registration::where(['id' => $request->registration_id])->update([
+            'banner_collected' => true,
+            'banner_recipient_name' => $request->recipient_name,
+            'banner_comment' => $request->comment,
+        ]);
+
+        return back()
+        ->with('success', 'Location Banner Approval Collected');
+    }
+
+    
 }

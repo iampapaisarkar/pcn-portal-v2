@@ -24,6 +24,8 @@ class CreateRegistrationsTable extends Migration
             $table->string('status');
             $table->string('banner_status')->nullable();
             $table->boolean('banner_collected')->default(false);
+            $table->string('banner_recipient_name')->nullable();
+            $table->longtext('banner_comment')->nullable();
             $table->boolean('payment')->default(false);
             $table->boolean('location_approval')->default(false);
             $table->string('recommendation_status')->nullable();

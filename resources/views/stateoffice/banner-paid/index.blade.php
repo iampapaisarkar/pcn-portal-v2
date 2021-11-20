@@ -77,7 +77,8 @@
                         <td>{{$document->registration_year}}</td>
                         <td><span class="badge badge-pill m-1 badge-warning">Pending</span></td>
                         <td>
-                            <button class="btn btn-success btn-sm" type="button">COLLECTION</i></button>
+                            <!-- <button data-toggle="modal" data-target="#verifyModalContent" class="btn btn-success btn-sm" type="button">COLLECTION</i></button> -->
+                            <button onclick="showBannerModal({{$document}})" class="btn btn-success btn-sm" type="button">COLLECTION</i></button>
                         </td>
                     </tr>
                     @endforeach
@@ -97,6 +98,62 @@
             {{$documents->links('pagination')}}
         </div>
     </div>
+
+    <!--  Modal content -->
+    <div class="modal fade" id="verifyModalContent" tabindex="-1" role="dialog" aria-labelledby="verifyModalContent" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <form method="POST" action="{{route('state-office-banner-collect')}}" enctype="multipart/form-data">
+            @csrf
+            <div class="modal-header">
+                <h5 class="modal-title" id="verifyModalContent_title">LOCATION APPROVAL BANNER COLLECTION</h5>
+                <button class="close" type="button" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">x</span></button>
+            </div>
+            <div class="modal-body">
+                <input type="hidden" name="registration_id" id="registrationId">
+                <div class="form-row">
+                <div class="col-lg-6 col-md-6">
+                <label for="inputEmail3" class="ul-form__label"><strong>Category:</strong></label> <span id="category"></span>
+                </div>
+                <div class="col-lg-6 col-md-6">
+                <label for="inputEmail3" class="ul-form__label"><strong>Date Approved:</strong></label> <span id="ApprovedDate"></span>
+                </div>
+                <div class="col-lg-6 col-md-6">
+                <label for="inputEmail3" class="ul-form__label"><strong>Name:</strong></label> <span id="name"></span>
+                </div>
+                
+                <div class="col-lg-6 col-md-6">
+                <label for="inputEmail3" class="ul-form__label"><strong>Address:</strong></label> <span id="address"></span>
+                </div>
+                
+                <div class="col-lg-6 col-md-6">
+                <label for="inputEmail3" class="ul-form__label"><strong>State:</strong></label> <span id="state"></span>
+                </div>
+                
+                <div class="col-lg-6 col-md-6">
+                <label for="inputEmail3" class="ul-form__label"><strong>LGA:</strong></label> <span id="lga"></span>
+                </div>
+                
+                </div>
+                
+                    <div class="form-group">
+                        <label class="col-form-label" for="recipient-name-2">Recipient Name: *</label>
+                        <input name="recipient_name" class="form-control" id="recipient-name-2" type="text" required />
+                    </div>
+                    <div class="form-group">
+                        <label class="col-form-label" for="message-text-1">Additional Comment: (optional)</label>
+                        <textarea name="comment" class="form-control" id="message-text-1"></textarea>
+                    </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" type="button" data-dismiss="modal">CLOSE</button>
+                <button class="btn btn-primary" type="submit">MARK AS COLLECTED</button>
+            </div>
+            </form>
+        </div>
+    </div>
+</div>
+<!--  End Modal content -->    
 </div>
 </div>
 </div>
@@ -122,6 +179,38 @@
             var new_url = location.protocol + '//' + location.host + location.pathname + mParams;
             window.location.href = new_url;
         }
+    }
+
+    function showBannerModal(data){
+        if(data.type == 'community_pharmacy'){
+            $('#registrationId').val(data.id);
+            $('#category').text(data.category); 
+            $('#ApprovedDate').text(data.updated_at); 
+            $('#name').text(data.other_registration.company.name); 
+            $('#address').text(data.other_registration.company.address); 
+            $('#state').text(data.other_registration.company.company_state.name); 
+            $('#lga').text(data.other_registration.company.company_lga.name); 
+        }
+        if(data.type == 'distribution_premises'){
+            $('#registrationId').val(data.id); 
+            $('#category').text(data.category); 
+            $('#ApprovedDate').text(data.updated_at); 
+            $('#name').text(data.other_registration.company.name); 
+            $('#address').text(data.other_registration.company.address); 
+            $('#state').text(data.other_registration.company.company_state.name); 
+            $('#lga').text(data.other_registration.company.company_lga.name); 
+        }
+        if(data.type == 'ppmv'){
+            $('#registrationId').val(data.id); 
+            $('#category').text(data.category); 
+            $('#ApprovedDate').text(data.updated_at); 
+            $('#name').text(data.user.shop_name); 
+            $('#address').text(data.user.shop_address); 
+            $('#state').text(data.user.user_state.name); 
+            $('#lga').text(data.user.user_lg.name); 
+        }
+        
+        $('#verifyModalContent').modal('show'); 
     }
     </script>
 @endsection
