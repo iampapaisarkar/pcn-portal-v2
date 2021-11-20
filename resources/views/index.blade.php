@@ -285,12 +285,30 @@
 
          <!-- Community Pharmacy cards start  -->
          @can('isCPharmacy')
-        <div class="row">
+        <div class="row justify-content-between">
             <div class="col-lg-3 col-md-3 col-sm-6">
                 <div class="card card-icon mb-4">
                     <div class="card-body text-center"><i class="i-Diploma-2"></i>
                         <p class="text-muted mt-2 mb-2">{{$data['title']}}</p>
                         <p class="text-primary text-20 line-height-1 m-0">{{$data['status']}}</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-4 col-md-4 col-sm-6">
+                <div class="card card-icon mb-4">
+                    <div class="card-body text-center"><i class="i-Geo2-"></i>
+                        <p class="text-muted mt-2 mb-2">LOCATION APPROVAL BANNER</p>
+                        <p class="text-primary text-20 line-height-1 m-2">Your desired location has been approved. Please make the necessary payment for your Location Approval Banner.</p>
+                        <button class="btn  btn-success ml-3">PAY NOW</button>
+                    </div>
+                </div>
+    
+                <div class="card card-icon mb-4">
+                    <div class="card-body text-center"><i class="i-Geo2-"></i>
+                        <p class="text-muted mt-2 mb-2">LOCATION APPROVAL BANNER</p>
+                        <p class="text-primary text-20 line-height-1 m-2">PAID</p>
+                        
                     </div>
                 </div>
             </div>
@@ -300,12 +318,30 @@
 
         <!-- Distribution Premises cards start  -->
         @can('isDpremises')
-        <div class="row">
+        <div class="row justify-content-between">
             <div class="col-lg-3 col-md-3 col-sm-6">
                 <div class="card card-icon mb-4">
                     <div class="card-body text-center"><i class="i-Diploma-2"></i>
                         <p class="text-muted mt-2 mb-2">{{$data['title']}}</p>
                         <p class="text-primary text-20 line-height-1 m-0">{{$data['status']}}</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-4 col-md-4 col-sm-6">
+                <div class="card card-icon mb-4">
+                    <div class="card-body text-center"><i class="i-Geo2-"></i>
+                        <p class="text-muted mt-2 mb-2">LOCATION APPROVAL BANNER</p>
+                        <p class="text-primary text-20 line-height-1 m-2">Your desired location has been approved. Please make the necessary payment for your Location Approval Banner.</p>
+                        <button class="btn  btn-success ml-3">PAY NOW</button>
+                    </div>
+                </div>
+    
+                <div class="card card-icon mb-4">
+                    <div class="card-body text-center"><i class="i-Geo2-"></i>
+                        <p class="text-muted mt-2 mb-2">LOCATION APPROVAL BANNER</p>
+                        <p class="text-primary text-20 line-height-1 m-2">PAID</p>
+                        
                     </div>
                 </div>
             </div>
@@ -330,19 +366,37 @@
 
         <!-- PPMV cards start  -->
         @can('isPPMV')
-        <div class="row">
-            <div class="col-lg-8 col-md-8 col-sm-8">
-                <div class="row">
-                    <div class="col-lg-6 col-md-6 col-sm-6">
-                        <div class="card card-icon mb-4">
-                            <div class="card-body text-center"><i class="i-Map2"></i>
-                                <p class="text-muted mt-2 mb-2">{{$data['title']}}</p>
-                                <p class="text-primary text-20 line-height-1 m-0">{{$data['status']}}</p>
-                            </div>
-                        </div>
+        <div class="row justify-content-between">
+            <div class="col-lg-3 col-md-3 col-sm-6">
+                <div class="card card-icon mb-4">
+                    <div class="card-body text-center"><i class="i-Map2"></i>
+                        <p class="text-muted mt-2 mb-2">{{$data['title']}}</p>
+                        <p class="text-primary text-20 line-height-1 m-0">{{$data['status']}}</p>
                     </div>
                 </div>
             </div>
+
+            @if($banner)
+            <div class="col-lg-4 col-md-4 col-sm-6">
+                <div class="card card-icon mb-4">
+                    @if($banner['status'] == 'PENDING')
+                    <div class="card-body text-center"><i class="i-Geo2-"></i>
+                        <p class="text-muted mt-2 mb-2">LOCATION APPROVAL BANNER</p>
+                        <p class="text-primary text-20 line-height-1 m-2">Your desired location has been approved. Please make the necessary payment for your Location Approval Banner.</p>
+                        <a href="{{$banner['pay-url']}}" class="btn  btn-success ml-3">PAY NOW</a>
+                    </div>
+                    @endif
+                </div>
+    
+                <div class="card card-icon mb-4">
+                    <div class="card-body text-center"><i class="i-Geo2-"></i>
+                        <p class="text-muted mt-2 mb-2">LOCATION APPROVAL BANNER</p>
+                        <p class="text-primary text-20 line-height-1 m-2">{{$banner['status']}}</p>
+                        
+                    </div>
+                </div>
+            </div>
+            @endif
         </div>
         @endcan
         <!-- PPMV cards end  -->

@@ -702,6 +702,39 @@ class ServiceFeeMetaSeeder extends Seeder
             'status' => true,
             'updated_at' => now()
             ],
+            [
+            'service_id' => 18,
+            'description' => 'Banner Fees',
+            'amount' => 10000,
+            'registration_fee' => null,
+            'inspection_fee' => null,
+            'location_fee' => null,
+            'renewal_fee' => null,
+            'status' => true,
+            'updated_at' => now()
+            ],
+            [
+            'service_id' => 19,
+            'description' => 'Banner Fees',
+            'amount' => 10000,
+            'registration_fee' => null,
+            'inspection_fee' => null,
+            'location_fee' => null,
+            'renewal_fee' => null,
+            'status' => true,
+            'updated_at' => now()
+            ],
+            [
+            'service_id' => 20,
+            'description' => 'Banner Fees',
+            'amount' => 10000,
+            'registration_fee' => null,
+            'inspection_fee' => null,
+            'location_fee' => null,
+            'renewal_fee' => null,
+            'status' => true,
+            'updated_at' => now()
+            ]
         ];
 
         ServiceFeeMeta::insert($services);

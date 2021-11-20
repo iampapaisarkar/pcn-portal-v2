@@ -19,6 +19,13 @@ This is to acknowledge your application and payment of the sum of N{{$data['amou
 This is to acknowledge your application and payment of the sum of N{{$data['amount']}} being made for LOCATION INSPECTION FEES.
 @endif
 
+@if($data['registration_type'] == 'ppmv_banner')
+# PCN - Inspection Payment Notification - {{env('APP_NAME')}}
+<div>Hello {{$data['user']['firstname']}} {{$data['user']['lastname']}}, <br>
+This is to acknowledge your application and payment of the sum of N{{$data['amount']}} being made for LOCATION BANNER FEES.
+@endif
+
+
 @if($data['registration_type'] == 'ppmv_registration')
 # PCN - Registration & Licence Payment Notification - {{env('APP_NAME')}}
 <div>Hello {{$data['user']['firstname']}} {{$data['user']['lastname']}}, <br>
@@ -38,6 +45,12 @@ This is to acknowledge your application and payment of the sum of N{{$data['amou
 This is to acknowledge your application and payment of the sum of N{{$data['amount']}} being made for LOCATION INSPECTION FEES.
 @endif
 
+@if($data['registration_type'] == 'community_pharmacy_banner')
+# PCN - Inspection Payment Notification - {{env('APP_NAME')}}
+<div>Hello {{$data['user']['firstname']}} {{$data['user']['lastname']}}, <br>
+This is to acknowledge your application and payment of the sum of N{{$data['amount']}} being made for LOCATION BANNER FEES.
+@endif
+
 @if($data['registration_type'] == 'community_pharmacy_registration')
 # PCN - Registration & Licence Payment Notification - {{env('APP_NAME')}}
 <div>Hello {{$data['user']['firstname']}} {{$data['user']['lastname']}}, <br>
@@ -55,6 +68,12 @@ This is to acknowledge your application and payment of the sum of N{{$data['amou
 # PCN - Inspection Payment Notification - {{env('APP_NAME')}}
 <div>Hello {{$data['user']['firstname']}} {{$data['user']['lastname']}}, <br>
 This is to acknowledge your application and payment of the sum of N{{$data['amount']}} being made for LOCATION INSPECTION FEES.
+@endif
+
+@if($data['registration_type'] == 'distribution_premises_banner')
+# PCN - Inspection Payment Notification - {{env('APP_NAME')}}
+<div>Hello {{$data['user']['firstname']}} {{$data['user']['lastname']}}, <br>
+This is to acknowledge your application and payment of the sum of N{{$data['amount']}} being made for LOCATION BANNER FEES.
 @endif
 
 @if($data['registration_type'] == 'distribution_premises_registration')

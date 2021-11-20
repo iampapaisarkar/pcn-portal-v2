@@ -22,7 +22,7 @@ class CreateRegistrationsTable extends Migration
             $table->string('token')->nullable();
             $table->string('inspection_report')->nullable();
             $table->string('status');
-            $table->longtext('query')->nullable();
+            $table->string('banner_status')->nullable();
             $table->boolean('payment')->default(false);
             $table->boolean('location_approval')->default(false);
             $table->string('recommendation_status')->nullable();

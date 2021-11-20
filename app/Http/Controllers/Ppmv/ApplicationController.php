@@ -12,6 +12,7 @@ use PDF;
 use File;
 use Storage;
 use App\Models\Registration;
+use App\Models\Payment;
 use App\Models\PpmvLocationApplication;
 use App\Http\Services\Checkout;
 use App\Http\Services\FileUpload;
@@ -245,5 +246,35 @@ class ApplicationController extends Controller
             DB::rollback();
             return back()->with('error','There is something error, please try after some time');
         }  
+    }
+
+    public function bannerPay($id){
+        if(Payment::where(['application_id' => $id, 'status' => false])->exists()){
+            return redirect()->route('invoices.show', ['id' => Payment::where(['application_id' => $id, 'status' => false])->first()->id])
+            ->with('success', 'Application successfully submitted. Please pay amount for further action');
+        }else{
+            try {
+                DB::beginTransaction();
+
+                    $registration = Registration::where(['payment' => false, 'id' => $id, 'user_id' => Auth::user()->id, 'type' => 'ppmv'])
+                    ->where('banner_status', 'pending')
+                    ->first();
+
+                    $response = Checkout::checkoutPpmvBanner($application = ['id' => $registration->id], 'ppmv');
+
+                DB::commit();
+
+                if($response['success']){
+                    return redirect()->route('invoices.show', ['id' => $response['id']])
+                    ->with('success', 'Application successfully submitted. Please pay amount for further action');
+                }else{
+                    return back()->with('error','There is something error, please try after some time');
+                }
+            }catch(Exception $e) {
+                DB::rollback();
+                return back()->with('error','There is something error, please try after some time');
+            }
+        }
+
     }
 }

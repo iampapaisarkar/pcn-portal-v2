@@ -152,6 +152,8 @@ class LocationApplicationRecommendation extends Controller
     }
 
     public function ApproveAll(Request $request){
+
+        // dd($request->all());
         try {
             DB::beginTransaction();
 
@@ -172,7 +174,9 @@ class LocationApplicationRecommendation extends Controller
                             $q->where('status', 'full_recommendation');
                         })
                         ->update([
-                            'status' => 'inspection_approved'
+                            'status' => 'inspection_approved',
+                            'payment' => false,
+                            'banner_status' => 'pending'
                         ]);
                     }
                     if($Registration->type == 'community_pharmacy'){
@@ -181,7 +185,9 @@ class LocationApplicationRecommendation extends Controller
                             $q->where('status', 'full_recommendation');
                         })
                         ->update([
-                            'status' => 'inspection_approved'
+                            'status' => 'inspection_approved',
+                            'payment' => false,
+                            'banner_status' => 'pending'
                         ]);
                     }
                     if($Registration->type == 'distribution_premises'){
@@ -190,7 +196,9 @@ class LocationApplicationRecommendation extends Controller
                             $q->where('status', 'full_recommendation');
                         })
                         ->update([
-                            'status' => 'inspection_approved'
+                            'status' => 'inspection_approved',
+                            'payment' => false,
+                            'banner_status' => 'pending'
                         ]);
                     }
 
@@ -233,7 +241,9 @@ class LocationApplicationRecommendation extends Controller
                 $q->where('status', 'full_recommendation');
             })
             ->update([
-                'status' => 'inspection_approved'
+                'status' => 'inspection_approved',
+                'payment' => false,
+                'banner_status' => 'pending'
             ]);
 
             $adminName = Auth::user()->firstname .' '. Auth::user()->lastname;
@@ -295,7 +305,9 @@ class LocationApplicationRecommendation extends Controller
                 $q->where('status', 'full_recommendation');
             })
             ->update([
-                'status' => 'inspection_approved'
+                'status' => 'inspection_approved',
+                'payment' => false,
+                'banner_status' => 'pending'
             ]);
 
             $adminName = Auth::user()->firstname .' '. Auth::user()->lastname;
@@ -356,7 +368,9 @@ class LocationApplicationRecommendation extends Controller
                 $q->where('status', 'full_recommendation');
             })
             ->update([
-                'status' => 'inspection_approved'
+                'status' => 'inspection_approved',
+                'payment' => false,
+                'banner_status' => 'pending'
             ]);
 
             $adminName = Auth::user()->firstname .' '. Auth::user()->lastname;

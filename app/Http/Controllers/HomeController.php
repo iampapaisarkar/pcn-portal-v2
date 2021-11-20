@@ -29,6 +29,7 @@ class HomeController extends Controller
         $data= [];
         if(Auth::user()->hasRole(['sadmin'])){
             $data= [];
+            $banner= [];
 
             $adminUsers = User::join('user_roles', 'users.id', 'user_roles.user_id')
             ->join('roles', 'roles.id', 'user_roles.role_id')
@@ -46,6 +47,9 @@ class HomeController extends Controller
             ];
         }
         if(Auth::user()->hasRole(['state_office'])){
+
+            $banner = [];
+
             $pending_document = Registration::where(['payment' => true])
             ->whereHas('user', function($q){
                 $q->where('state', Auth::user()->state);
@@ -130,6 +134,7 @@ class HomeController extends Controller
         }
         if(Auth::user()->hasRole(['registry'])){
             $data= [];
+            $banner= [];
 
             $location_inspection = Registration::where(['payment' => true])
             ->where('location_approval', true)
@@ -177,6 +182,7 @@ class HomeController extends Controller
         }
         if(Auth::user()->hasRole(['pharmacy_practice'])){
             $data= [];
+            $banner= [];
 
             $facility_inspection = Registration::where(['payment' => true])
             ->where('status', 'send_to_pharmacy_practice')
@@ -213,6 +219,7 @@ class HomeController extends Controller
         }
         if(Auth::user()->hasRole(['inspection_monitoring'])){
             $data= [];
+            $banner= [];
 
             $location_inspection = Registration::where(['payment' => true])
             ->where('location_approval', true)
@@ -262,6 +269,7 @@ class HomeController extends Controller
         }
         if(Auth::user()->hasRole(['registration_licencing'])){
             $data= [];
+            $banner= [];
 
             $licence_pending = Renewal::where(['payment' => true])
             ->where(function($q){
@@ -283,6 +291,7 @@ class HomeController extends Controller
         }
         if(Auth::user()->hasRole(['hospital_pharmacy'])){
             $data= [];
+            $banner= [];
 
             $registration = Registration::where('type', 'hospital_pharmacy')
             ->where('user_id', Auth::user()->id)
@@ -354,6 +363,7 @@ class HomeController extends Controller
         }
         if(Auth::user()->hasRole(['community_pharmacy'])){
             $data= [];
+            $banner= [];
 
             $registration = Registration::where('type', 'community_pharmacy')
             ->where('user_id', Auth::user()->id)
@@ -448,6 +458,7 @@ class HomeController extends Controller
         }
         if(Auth::user()->hasRole(['distribution_premises'])){
             $data= [];
+            $banner= [];
 
             $registration = Registration::where('type', 'distribution_premises')
             ->where('user_id', Auth::user()->id)
@@ -542,6 +553,7 @@ class HomeController extends Controller
         }
         if(Auth::user()->hasRole(['manufacturing_premises'])){
             $data= [];
+            $banner= [];
 
             $registration = Registration::where('type', 'manufacturing_premises')
             ->where('user_id', Auth::user()->id)
@@ -612,6 +624,7 @@ class HomeController extends Controller
         }
         if(Auth::user()->hasRole(['ppmv'])){
             $data= [];
+            $banner= [];
 
             $registration = Registration::where('type', 'ppmv')
             ->where('user_id', Auth::user()->id)
@@ -691,6 +704,24 @@ class HomeController extends Controller
                         'status' => 'LICENCE ISSUED',
                     ];
                 }
+
+                if(($registration->banner_status == 'pending' || $registration->banner_status == 'paid')
+                && ($registration->status == 'inspection_approved' || $registration->status == 'send_to_state_office_registration'
+                || $registration->status == 'facility_no_recommendation' || $registration->status == 'facility_full_recommendation'
+                || $registration->status == 'facility_inspection_approved' || $registration->status == 'licence_issued')){
+                    if($registration->banner_status == 'paid'){
+                        $banner = [
+                            'status' => 'PAID',
+                        ];
+                    }else{
+                        $banner = [
+                            'status' => 'PENDING',
+                            'pay-url' => route('ppmv-application-banner-pay', $registration->id)
+                        ];
+                    }
+                }else{
+                    $banner= [];
+                }
             }else{
                 $data = [
                     'title' => 'NO DATA FOUND',
@@ -698,6 +729,6 @@ class HomeController extends Controller
                 ];
             }
         }
-        return view('index', compact('data'));
+        return view('index', compact('data', 'banner'));
     }
 }

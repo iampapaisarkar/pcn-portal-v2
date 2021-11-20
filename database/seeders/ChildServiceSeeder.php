@@ -100,6 +100,21 @@ class ChildServiceSeeder extends Seeder
             'description' => 'Category Fees',
             'updated_at' => now()
             ],
+            [
+            'service_id' => 2,
+            'description' => 'Community Pharmacy Location Approval Banner Fees',
+            'updated_at' => now()
+            ],
+            [
+            'service_id' => 3,
+            'description' => 'Distribution Premises Location Approval Banner Fees',
+            'updated_at' => now()
+            ],
+            [
+            'service_id' => 5,
+            'description' => 'PPMV Location Approval Banner Fees',
+            'updated_at' => now()
+            ]
         ];
 
         ChildService::insert($services);

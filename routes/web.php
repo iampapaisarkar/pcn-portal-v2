@@ -388,6 +388,7 @@ Route::group(['middleware' => ['auth','verified', 'can:isPPMV', 'CheckProfileSta
     Route::post('/ppmv-application-update/{id}', 'App\Http\Controllers\Ppmv\ApplicationController@applicationUpdate')->name('ppmv-application-update');
     
     Route::get('/ppmv-application-status', 'App\Http\Controllers\Ppmv\ApplicationController@status')->name('ppmv-application-status');
+    Route::get('/ppmv-application-banner-pay/{id}', 'App\Http\Controllers\Ppmv\ApplicationController@bannerPay')->name('ppmv-application-banner-pay');
 
     Route::get('/ppmv-facility-application-form', 'App\Http\Controllers\Ppmv\FacilityApplicationController@applicationForm')->name('ppmv-facility-application-form');
     Route::post('/ppmv-facility-application-form-submit', 'App\Http\Controllers\Ppmv\FacilityApplicationController@applicationFormSubmit')->name('ppmv-facility-application-form-submit');

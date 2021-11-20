@@ -208,6 +208,62 @@ class Checkout
         }  
     }
 
+    public static function checkoutPpmvBanner($application, $type){
+
+        try {
+            DB::beginTransaction();
+
+            $Registration = Registration::where(['id' => $application['id'], 'payment' => false, 'type' => $type])->first(); 
+
+            if($Registration){
+                $service = ChildService::where('id', 20)
+                ->with('netFees')
+                ->first();
+
+                $totalAmount = 0;
+                foreach($service->netFees as $fee){
+                    $totalAmount += $fee->amount;
+                }
+
+                $invoiceCount = Payment::count();
+                $token = md5(uniqid(rand(), true));
+                // $order_id = date('m-Y') . '-' . $invoiceCount+1;
+                // $order_id = strtotime(date('m-Y')) . '-' . $invoiceCount+1;
+                // $today = \Carbon\Carbon::today()->format('m-Y');
+                $today = date('m-Y');
+                $order_id =  ($today) . '-' . intval($invoiceCount+1);
+
+                $payment = Payment::create([
+                    'vendor_id' => Auth::user()->id,
+                    'order_id' => $order_id,
+                    'application_id' => $application['id'],
+                    'service_id' => $service->id,
+                    'service_type' => $type . '_banner',
+                    'amount' => $totalAmount,
+                    'token' => $token,
+                ]);
+
+                $response = [
+                    'success' => true,
+                    'order_id' => $order_id,
+                    'token' => $token,
+                    'id' => $payment->id,
+                ];
+
+            }else{
+                $response = ['success' => false];
+            }
+
+            DB::commit();
+
+            return $response;
+
+        }catch(Exception $e) {
+            DB::rollback();
+            return ['success' => false];
+        }  
+    }
+
 
     public static function checkoutPpmvRegistration($application, $type){
 
@@ -459,6 +515,63 @@ class Checkout
     }
 
 
+    public static function checkoutCommunityBanner($application, $type){
+
+        try {
+            DB::beginTransaction();
+
+            $Registration = Registration::where(['id' => $application['id'], 'payment' => false, 'type' => $type])->first(); 
+
+            if($Registration){
+                $service = ChildService::where('id', 18)
+                ->with('netFees')
+                ->first();
+
+                $totalAmount = 0;
+                foreach($service->netFees as $fee){
+                    $totalAmount += $fee->amount;
+                }
+
+                $invoiceCount = Payment::count();
+                $token = md5(uniqid(rand(), true));
+                // $order_id = date('m-Y') . '-' . $invoiceCount+1;
+                // $order_id = strtotime(date('m-Y')) . '-' . $invoiceCount+1;
+                // $today = \Carbon\Carbon::today()->format('m-Y');
+                $today = date('m-Y');
+                $order_id =  ($today) . '-' . intval($invoiceCount+1);
+
+                $payment = Payment::create([
+                    'vendor_id' => Auth::user()->id,
+                    'order_id' => $order_id,
+                    'application_id' => $application['id'],
+                    'service_id' => $service->id,
+                    'service_type' => $type . '_banner',
+                    'amount' => $totalAmount,
+                    'token' => $token,
+                ]);
+
+                $response = [
+                    'success' => true,
+                    'order_id' => $order_id,
+                    'token' => $token,
+                    'id' => $payment->id,
+                ];
+
+            }else{
+                $response = ['success' => false];
+            }
+
+            DB::commit();
+
+            return $response;
+
+        }catch(Exception $e) {
+            DB::rollback();
+            return ['success' => false];
+        }  
+    }
+
+
     public static function checkoutCommunityRegistration($application, $type){
 
         try {
@@ -492,6 +605,62 @@ class Checkout
                     'application_id' => $application['id'],
                     'service_id' => $service->id,
                     'service_type' => $type,
+                    'amount' => $totalAmount,
+                    'token' => $token,
+                ]);
+
+                $response = [
+                    'success' => true,
+                    'order_id' => $order_id,
+                    'token' => $token,
+                    'id' => $payment->id,
+                ];
+
+            }else{
+                $response = ['success' => false];
+            }
+
+            DB::commit();
+
+            return $response;
+
+        }catch(Exception $e) {
+            DB::rollback();
+            return ['success' => false];
+        }  
+    }
+
+    public static function checkoutDistributionBanner($application, $type){
+
+        try {
+            DB::beginTransaction();
+
+            $Registration = Registration::where(['id' => $application['id'], 'payment' => false, 'type' => $type])->first(); 
+
+            if($Registration){
+                $service = ChildService::where('id', 19)
+                ->with('netFees')
+                ->first();
+
+                $totalAmount = 0;
+                foreach($service->netFees as $fee){
+                    $totalAmount += $fee->amount;
+                }
+
+                $invoiceCount = Payment::count();
+                $token = md5(uniqid(rand(), true));
+                // $order_id = date('m-Y') . '-' . $invoiceCount+1;
+                // $order_id = strtotime(date('m-Y')) . '-' . $invoiceCount+1;
+                // $today = \Carbon\Carbon::today()->format('m-Y');
+                $today = date('m-Y');
+                $order_id =  ($today) . '-' . intval($invoiceCount+1);
+
+                $payment = Payment::create([
+                    'vendor_id' => Auth::user()->id,
+                    'order_id' => $order_id,
+                    'application_id' => $application['id'],
+                    'service_id' => $service->id,
+                    'service_type' => $type . '_banner',
                     'amount' => $totalAmount,
                     'token' => $token,
                 ]);

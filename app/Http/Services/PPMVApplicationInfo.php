@@ -177,16 +177,21 @@ class PPMVApplicationInfo
 
                 ];
             }
-            if($ppmv->status == 'inspection_approved' || $ppmv->status == 'facility_no_recommendation'){
+            if(($ppmv->status == 'inspection_approved' && $ppmv->banner_status == 'paid' & $ppmv->payment == true) || $ppmv->status == 'facility_no_recommendation'){
                 return $response = [
                     'success' => true,
 
+                ];
+            }
+            else if(($ppmv->status == 'inspection_approved' && $ppmv->banner_status == 'pending') || $ppmv->status == 'facility_no_recommendation'){
+                return $response = [
+                    'success' => false,
+                    'message' => 'LOCATION BANNER PAYMENT NOT COMPLETE YET',
                 ];
             }else{
                 return $response = [
                     'success' => false,
                     'message' => 'PPMV FACILITY INSPECTION APPLICATION ALEARY SUBMITTED',
-
                 ];
             }
         }else{

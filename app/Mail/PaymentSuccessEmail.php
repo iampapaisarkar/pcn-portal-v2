@@ -37,6 +37,9 @@ class PaymentSuccessEmail extends Mailable
         if($this->newData['registration_type'] == 'ppmv'){
             $subject = 'PCN - Inspection Payment Notification';
         }
+        if($this->newData['registration_type'] == 'ppmv_banner'){
+            $subject = 'PCN - Location Banner Payment Notification';
+        }
         if($this->newData['registration_type'] == 'ppmv_registration'){
             $subject = 'PCN - Registration & Licence Payment Notification';
         }
@@ -46,6 +49,9 @@ class PaymentSuccessEmail extends Mailable
         if($this->newData['registration_type'] == 'community_pharmacy'){
             $subject = 'PCN - Inspection Payment Notification';
         }
+        if($this->newData['registration_type'] == 'community_pharmacy_banner'){
+            $subject = 'PCN - Location Banner Payment Notification';
+        }
         if($this->newData['registration_type'] == 'community_pharmacy_registration'){
             $subject = 'PCN - Registration & Inspection Payment Notification';
         }
@@ -54,6 +60,9 @@ class PaymentSuccessEmail extends Mailable
         }
         if($this->newData['registration_type'] == 'distribution_premises'){
             $subject = 'PCN - Inspection Payment Notification';
+        }
+        if($this->newData['registration_type'] == 'distribution_premises_banner'){
+            $subject = 'PCN - Location Banner Payment Notification';
         }
         if($this->newData['registration_type'] == 'distribution_premises_registration'){
             $subject = 'PCN - Registration & Inspection Payment Notification';

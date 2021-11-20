@@ -94,6 +94,22 @@ class CheckoutController extends Controller
                 EmailSendJOB::dispatch($data);
             }
 
+            if($order->service_type == 'ppmv_banner'){
+                Registration::where(['id' => $order->application_id, 'user_id' => Auth::user()->id, 'type' => 'ppmv'])->update([
+                    'payment' => true,
+                    'banner_status' => 'paid'
+                ]);
+
+                $data = [
+                    'order_id' => $order->order_id,
+                    'amount' => $order->amount,
+                    'user' => Auth::user(),
+                    'registration_type' => 'ppmv_banner',
+                    'type' => 'payment_success',
+                ];
+                EmailSendJOB::dispatch($data);
+            }
+
             if($order->service_type == 'ppmv_registration'){
                 Registration::where(['id' => $order->application_id, 'user_id' => Auth::user()->id, 'type' => 'ppmv'])->update([
                     'payment' => true
@@ -139,6 +155,22 @@ class CheckoutController extends Controller
                 EmailSendJOB::dispatch($data);
             }
 
+            if($order->service_type == 'community_pharmacy_banner'){
+                Registration::where(['id' => $order->application_id, 'user_id' => Auth::user()->id, 'type' => 'community_pharmacy'])->update([
+                    'payment' => true,
+                    'banner_status' => 'paid'
+                ]);
+
+                $data = [
+                    'order_id' => $order->order_id,
+                    'amount' => $order->amount,
+                    'user' => Auth::user(),
+                    'registration_type' => 'community_pharmacy_banner',
+                    'type' => 'payment_success',
+                ];
+                EmailSendJOB::dispatch($data);
+            }
+
             if($order->service_type == 'community_pharmacy_renewal'){
                 Renewal::where(['id' => $order->application_id, 'user_id' => Auth::user()->id, 'type' => 'community_pharmacy_renewal'])->update([
                     'payment' => true
@@ -164,6 +196,22 @@ class CheckoutController extends Controller
                     'amount' => $order->amount,
                     'user' => Auth::user(),
                     'registration_type' => 'distribution_premises',
+                    'type' => 'payment_success',
+                ];
+                EmailSendJOB::dispatch($data);
+            }
+
+            if($order->service_type == 'distribution_premises_banner'){
+                Registration::where(['id' => $order->application_id, 'user_id' => Auth::user()->id, 'type' => 'distribution_premises'])->update([
+                    'payment' => true,
+                    'banner_status' => 'paid'
+                ]);
+
+                $data = [
+                    'order_id' => $order->order_id,
+                    'amount' => $order->amount,
+                    'user' => Auth::user(),
+                    'registration_type' => 'distribution_premises_banner',
                     'type' => 'payment_success',
                 ];
                 EmailSendJOB::dispatch($data);
