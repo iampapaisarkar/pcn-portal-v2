@@ -295,23 +295,27 @@
                 </div>
             </div>
 
+            @if($banner)
             <div class="col-lg-4 col-md-4 col-sm-6">
                 <div class="card card-icon mb-4">
+                    @if($banner['status'] == 'PENDING')
                     <div class="card-body text-center"><i class="i-Geo2-"></i>
                         <p class="text-muted mt-2 mb-2">LOCATION APPROVAL BANNER</p>
                         <p class="text-primary text-20 line-height-1 m-2">Your desired location has been approved. Please make the necessary payment for your Location Approval Banner.</p>
-                        <button class="btn  btn-success ml-3">PAY NOW</button>
+                        <a href="{{$banner['pay-url']}}" class="btn  btn-success ml-3">PAY NOW</a>
                     </div>
+                    @endif
                 </div>
     
                 <div class="card card-icon mb-4">
                     <div class="card-body text-center"><i class="i-Geo2-"></i>
                         <p class="text-muted mt-2 mb-2">LOCATION APPROVAL BANNER</p>
-                        <p class="text-primary text-20 line-height-1 m-2">PAID</p>
+                        <p class="text-primary text-20 line-height-1 m-2">{{$banner['status']}}</p>
                         
                     </div>
                 </div>
             </div>
+            @endif
         </div>
         @endcan
         <!-- Community Pharmacy cards end  -->
@@ -328,23 +332,27 @@
                 </div>
             </div>
 
+            @if($banner)
             <div class="col-lg-4 col-md-4 col-sm-6">
                 <div class="card card-icon mb-4">
+                    @if($banner['status'] == 'PENDING')
                     <div class="card-body text-center"><i class="i-Geo2-"></i>
                         <p class="text-muted mt-2 mb-2">LOCATION APPROVAL BANNER</p>
                         <p class="text-primary text-20 line-height-1 m-2">Your desired location has been approved. Please make the necessary payment for your Location Approval Banner.</p>
-                        <button class="btn  btn-success ml-3">PAY NOW</button>
+                        <a href="{{$banner['pay-url']}}" class="btn  btn-success ml-3">PAY NOW</a>
                     </div>
+                    @endif
                 </div>
     
                 <div class="card card-icon mb-4">
                     <div class="card-body text-center"><i class="i-Geo2-"></i>
                         <p class="text-muted mt-2 mb-2">LOCATION APPROVAL BANNER</p>
-                        <p class="text-primary text-20 line-height-1 m-2">PAID</p>
+                        <p class="text-primary text-20 line-height-1 m-2">{{$banner['status']}}</p>
                         
                     </div>
                 </div>
             </div>
+            @endif
         </div>
         @endcan
         <!-- Distribution Premises cards end  -->

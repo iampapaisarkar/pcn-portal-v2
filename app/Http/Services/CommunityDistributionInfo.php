@@ -170,19 +170,23 @@ class CommunityDistributionInfo
                 return $response = [
                     'success' => false,
                     'message' => 'LOCATION APPROVAL APPLICATION NOT COMPLETE YET',
-
                 ];
             }
-            if($registration->status == 'inspection_approved' || $registration->status == 'facility_no_recommendation'){
+
+            if(($registration->status == 'inspection_approved' && $registration->banner_status == 'paid' && $registration->payment == true) || $registration->status == 'facility_no_recommendation'){
                 return $response = [
                     'success' => true,
-
+                ];
+            }
+            else if(($registration->status == 'inspection_approved' && $registration->banner_status == 'pending') || $registration->status == 'facility_no_recommendation'){
+                return $response = [
+                    'success' => false,
+                    'message' => 'LOCATION BANNER PAYMENT NOT COMPLETE YET',
                 ];
             }else{
                 return $response = [
                     'success' => false,
                     'message' => 'FACILITY INSPECTION APPLICATION ALEARY SUBMITTED',
-
                 ];
             }
         }else{

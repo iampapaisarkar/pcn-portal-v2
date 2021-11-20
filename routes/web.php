@@ -366,6 +366,8 @@ Route::group(['middleware' => ['auth','verified', 'CheckProfileStatus'], ['can:i
     Route::post('/location-approval-form-update/{id}', 'App\Http\Controllers\LocationApprovalController@locationFormUpdate')->name('location-approval-form-update');
     Route::get('/location-approval-status', 'App\Http\Controllers\LocationApprovalController@locationStatus')->name('location-approval-status');
 
+    Route::get('/location-application-banner-pay/{id}', 'App\Http\Controllers\LocationApprovalController@bannerPay')->name('location-application-banner-pay');
+
     Route::get('/facility-registration-form', 'App\Http\Controllers\FacilityRegistrationController@facilityForm')->name('facility-registration-form');
     Route::post('/facility-registration-form-submit/{id}', 'App\Http\Controllers\FacilityRegistrationController@facilityFormSubmit')->name('facility-registration-form-submit');
     Route::get('/facility-registration-form-edit/{id}', 'App\Http\Controllers\FacilityRegistrationController@facilityFormEdit')->name('facility-registration-form-edit');

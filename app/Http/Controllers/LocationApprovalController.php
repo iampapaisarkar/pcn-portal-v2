@@ -11,6 +11,7 @@ use PDF;
 use File;
 use Storage;
 use App\Models\Registration;
+use App\Models\Payment;
 use App\Models\OtherRegistration;
 use App\Http\Services\Checkout;
 use App\Http\Services\FileUpload;
@@ -167,5 +168,47 @@ class LocationApprovalController extends Controller
             DB::rollback();
             return back()->with('error','There is something error, please try after some time');
         }  
+    }
+
+
+    public function bannerPay($id){
+        if(Payment::where(['application_id' => $id, 'status' => false])->exists()){
+            return redirect()->route('invoices.show', ['id' => Payment::where(['application_id' => $id, 'status' => false])->first()->id])
+            ->with('success', 'Application successfully submitted. Please pay amount for further action');
+        }else{
+            try {
+                DB::beginTransaction();
+
+                    if(Auth::user()->hasRole(['community_pharmacy'])){
+                        $type = 'community_pharmacy';
+                    }else if(Auth::user()->hasRole(['distribution_premises'])){
+                        $type = 'distribution_premises';
+                    }
+
+                    $registration = Registration::where(['payment' => false, 'id' => $id, 'user_id' => Auth::user()->id, 'type' => $type])
+                    ->where('banner_status', 'pending')
+                    ->first();
+
+                    if($type == 'community_pharmacy'){
+                        $response = Checkout::checkoutCommunityBanner($application = ['id' => $registration->id], $type);
+                    }
+                    if($type == 'distribution_premises'){
+                        $response = Checkout::checkoutDistributionBanner($application = ['id' => $registration->id], $type);
+                    }
+
+                DB::commit();
+
+                if($response['success']){
+                    return redirect()->route('invoices.show', ['id' => $response['id']])
+                    ->with('success', 'Application successfully submitted. Please pay amount for further action');
+                }else{
+                    return back()->with('error','There is something error, please try after some time');
+                }
+            }catch(Exception $e) {
+                DB::rollback();
+                return back()->with('error','There is something error, please try after some time');
+            }
+        }
+
     }
 }

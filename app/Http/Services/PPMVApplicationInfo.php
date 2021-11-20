@@ -177,7 +177,7 @@ class PPMVApplicationInfo
 
                 ];
             }
-            if(($ppmv->status == 'inspection_approved' && $ppmv->banner_status == 'paid' & $ppmv->payment == true) || $ppmv->status == 'facility_no_recommendation'){
+            if(($ppmv->status == 'inspection_approved' && $ppmv->banner_status == 'paid' && $ppmv->payment == true) || $ppmv->status == 'facility_no_recommendation'){
                 return $response = [
                     'success' => true,
 

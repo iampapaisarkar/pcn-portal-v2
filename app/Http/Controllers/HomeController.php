@@ -449,6 +449,24 @@ class HomeController extends Controller
                         'status' => 'LICENCE ISSUED',
                     ];
                 }
+
+                if(($registration->banner_status == 'pending' || $registration->banner_status == 'paid')
+                && ($registration->status == 'inspection_approved' || $registration->status == 'send_to_inspection_monitoring_registration'
+                || $registration->status == 'facility_no_recommendation' || $registration->status == 'facility_full_recommendation'
+                || $registration->status == 'facility_inspection_approved' || $registration->status == 'licence_issued')){
+                    if($registration->banner_status == 'paid'){
+                        $banner = [
+                            'status' => 'PAID',
+                        ];
+                    }else{
+                        $banner = [
+                            'status' => 'PENDING',
+                            'pay-url' => route('location-application-banner-pay', $registration->id)
+                        ];
+                    }
+                }else{
+                    $banner= [];
+                }
             }else{
                 $data = [
                     'title' => 'NO DATA FOUND',
@@ -543,6 +561,24 @@ class HomeController extends Controller
                         'title' => 'REGISTRATION LICENCING',
                         'status' => 'LICENCE ISSUED',
                     ];
+                }
+
+                if(($registration->banner_status == 'pending' || $registration->banner_status == 'paid')
+                && ($registration->status == 'inspection_approved' || $registration->status == 'send_to_inspection_monitoring_registration'
+                || $registration->status == 'facility_no_recommendation' || $registration->status == 'facility_full_recommendation'
+                || $registration->status == 'facility_inspection_approved' || $registration->status == 'licence_issued')){
+                    if($registration->banner_status == 'paid'){
+                        $banner = [
+                            'status' => 'PAID',
+                        ];
+                    }else{
+                        $banner = [
+                            'status' => 'PENDING',
+                            'pay-url' => route('location-application-banner-pay', $registration->id)
+                        ];
+                    }
+                }else{
+                    $banner= [];
                 }
             }else{
                 $data = [
