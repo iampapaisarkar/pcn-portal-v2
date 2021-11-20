@@ -131,6 +131,18 @@
                     </a>
                 </li>
                 <li class="nav-item">
+                    <a href="{{route('state-office-banner-paid.index')}}">
+                        <i class="nav-icon i-Receipt-4"></i>
+                        <span class="item-name">Location Approval Banner - Paid</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{route('state-office-banner-collected.index')}}">
+                        <i class="nav-icon i-Receipt-4"></i>
+                        <span class="item-name">Location Approval Banner - Collected</span>
+                    </a>
+                </li>
+                <li class="nav-item">
                     <a href="{{route('state-office-registration.index')}}">
                         <i class="nav-icon i-Receipt-4"></i>
                         <span class="item-name">Facility Inspection - Report Upload</span>

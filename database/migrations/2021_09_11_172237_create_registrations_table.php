@@ -23,6 +23,7 @@ class CreateRegistrationsTable extends Migration
             $table->string('inspection_report')->nullable();
             $table->string('status');
             $table->string('banner_status')->nullable();
+            $table->boolean('banner_collected')->default(false);
             $table->boolean('payment')->default(false);
             $table->boolean('location_approval')->default(false);
             $table->string('recommendation_status')->nullable();
