@@ -86,6 +86,16 @@ Route::group(['middleware' => ['auth','verified', 'can:isAdmin']], function () {
 	Route::get('/payments/{id}', 'App\Http\Controllers\InvoiceController@show')->name('payments.show');
 });
 
+// COMMUNITY PHARMACY ROUTES // DISTRIBUTION premises ROUTES
+Route::group(['middleware' => ['auth','verified', 'CheckProfileStatus'], ['can:isAdmin, isSOffice, isRegistry, isPPractice, isIMonitoring, isRLicencing']], function () {
+    Route::get('/generate-application-reports', 'App\Http\Controllers\ApplicationReportsController@report')->name('generate-application-reports');
+    Route::post('/generate-app-reports', 'App\Http\Controllers\ApplicationReportsController@generateReport')->name('generate-app-reports');
+});
+Route::group(['middleware' => ['auth','verified', 'CheckProfileStatus'], ['can:isAdmin, isRegistry']], function () {
+    Route::get('/generate-payment-reports', 'App\Http\Controllers\PaymentReportsController@report')->name('generate-payment-reports');
+    Route::post('/generate-pay-reports', 'App\Http\Controllers\PaymentReportsController@generateReport')->name('generate-pay-reports');
+});
+
 // STATE OFFICE ROUTES 
 Route::group(['middleware' => ['auth','verified', 'can:isSOffice']], function () {
     Route::resource('state-office-documents', 'App\Http\Controllers\StateOffice\DocumentReviewController');

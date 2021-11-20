@@ -107,6 +107,18 @@
                         <span class="item-name">Payments</span>
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a href="{{route('generate-application-reports')}}">
+                        <i class="nav-icon i-Statistic"></i>
+                        <span class="item-name">Generate Reports</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{route('generate-payment-reports')}}">
+                        <i class="nav-icon i-Statistic"></i>
+                        <span class="item-name">Generate Payment Reports</span>
+                    </a>
+                </li>
                 @endcan
                 <!-- Super admin routes end  -->
 
@@ -166,18 +178,12 @@
                         <span class="item-name">Renewal Inspection Recommendation</span>
                     </a>
                 </li>
-                <!-- <li class="nav-item">
-                    <a href="">
-                        <i class="nav-icon i-Receipt-4"></i>
-                        <span class="item-name">Renewal Inspection - Report Upload</span>
+                <li class="nav-item">
+                    <a href="{{route('generate-application-reports')}}">
+                        <i class="nav-icon i-Statistic"></i>
+                        <span class="item-name">Generate Reports</span>
                     </a>
                 </li>
-                <li class="nav-item">
-                    <a href="">
-                        <i class="nav-icon i-Receipt-4"></i>
-                        <span class="item-name">Renewal Inspection - Reports</span>
-                    </a>
-                </li> -->
                 @endcan
                 <!-- State office routes end  -->
 
@@ -219,6 +225,18 @@
                         <span class="item-name">Renewal Inspection Recommendation</span>
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a href="{{route('generate-application-reports')}}">
+                        <i class="nav-icon i-Statistic"></i>
+                        <span class="item-name">Generate Reports</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{route('generate-payment-reports')}}">
+                        <i class="nav-icon i-Statistic"></i>
+                        <span class="item-name">Generate Payment Reports</span>
+                    </a>
+                </li>
                 @endcan
                 <!-- Registry routes end  -->
 
@@ -246,6 +264,12 @@
                     <a href="{{route('pharmacy-renewal-reports.index')}}">
                         <i class="nav-icon i-Receipt-4"></i>
                         <span class="item-name">Renewal Inspection - Reports</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{route('generate-application-reports')}}">
+                        <i class="nav-icon i-Statistic"></i>
+                        <span class="item-name">Generate Reports</span>
                     </a>
                 </li>
                 @endcan
@@ -289,6 +313,12 @@
                         <span class="item-name">Renewal Inspection - Reports</span>
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a href="{{route('generate-application-reports')}}">
+                        <i class="nav-icon i-Statistic"></i>
+                        <span class="item-name">Generate Reports</span>
+                    </a>
+                </li>
                 @endcan
                 <!-- Inspection Monitoring routes end  -->
 
@@ -316,6 +346,12 @@
                     <a href="{{route('renewal-issued.index')}}">
                         <i class="nav-icon i-Receipt-4"></i>
                         <span class="item-name">Facility Renewal Licence Issued</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{route('generate-application-reports')}}">
+                        <i class="nav-icon i-Statistic"></i>
+                        <span class="item-name">Generate Reports</span>
                     </a>
                 </li>
                 @endcan
