@@ -48,8 +48,7 @@ class LocationBannerPaidController extends Controller
         }
 
         $documents = $documents->latest()->paginate($perPage);
-
-        // dd($documents);
+        
         return view('stateoffice.banner-paid.index', compact('documents'));
     }
 

@@ -18,7 +18,39 @@ class LocationBannerCollectedController extends Controller
      */
     public function index(Request $request)
     {
-        //
+        $documents = Registration::where(['registrations.payment' => true, 
+        'registrations.banner_status' => 'paid',
+        'registrations.banner_collected' => true
+        ])
+        ->with('ppmv', 'other_registration.company.business', 'other_registration.company.company_state',
+        'other_registration.company.company_lga', 'user', 'user.user_state', 'user.user_lga')
+        ->leftjoin('users', 'users.id', 'registrations.user_id')
+        ->leftjoin('other_registrations', 'other_registrations.registration_id', 'registrations.id')
+        ->leftjoin('companies', 'other_registrations.company_id', 'companies.id')
+        ->where(function($q){
+            $q->where('users.state', Auth::user()->state);
+            $q->orWhere('companies.state', Auth::user()->state);
+        })
+        ->select('registrations.*');
+
+        if($request->per_page){
+            $perPage = (integer) $request->per_page;
+        }else{
+            $perPage = 10;
+        }
+
+        if(!empty($request->search)){
+            $search = $request->search;
+            $documents = $documents->where(function($q) use ($search){
+                $q->where('registrations.type', 'like', '%' .$search. '%');
+                $q->orWhere('registrations.category', 'like', '%' .$search. '%');
+            });
+        }
+
+        $documents = $documents->latest()->paginate($perPage);
+
+        // dd($documents);
+        return view('stateoffice.banner-collected.index', compact('documents'));
     }
 
     /**
