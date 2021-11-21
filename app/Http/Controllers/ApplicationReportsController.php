@@ -128,7 +128,7 @@ class ApplicationReportsController extends Controller
         ->get();
 
         // dd($request->all());
-        // dd($applications);
+        // dd(config('custom.status-category.status'));
 
         $array = array();
         foreach ($applications as $key => $app) {
@@ -136,9 +136,9 @@ class ApplicationReportsController extends Controller
                 'S/N' => $key+1, 
                 'Applicant name' => $app['user']['firstname'] .' '.$app['user']['lastname'],
                 'Year' => $app['registration_year'], 
-                'Type' => $app['type'],
+                'Type' =>  config('custom.status-category.category')[$app['type']],
                 'Category' => $app['category'],
-                'Status' => $app['status'], 
+                'Status' => config('custom.status-category.status')[$app['status']], 
             ];
             array_push($array, $fields);
         }
