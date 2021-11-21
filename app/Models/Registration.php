@@ -32,6 +32,6 @@ class Registration extends Model
 
     public function renewal() {
         return $this->hasOne(Renewal::class,'registration_id', 'id')
-        ->latest()->first();
+        ->latest();
     }
 }

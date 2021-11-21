@@ -63,109 +63,133 @@ class ApplicationReportsController extends Controller
 
         if($request->activity != 'all'){
             if($request->status == 'document_review'){
-
-                $document_reviewStatuses = ['send_to_state_office', 'queried_by_state_office'];
-                $applications = $applications->whereIn('registrations.status', $document_reviewStatuses);
+                if($request->status != 'all'){
+                    if($request->status == 'pending'){
+                        $applications = $applications->whereIn('registrations.status', ['send_to_state_office', 'queried_by_state_office']);
+                    }else if($request->status == 'approved'){
+                        $applications = $applications->whereIn('registrations.status', ['send_to_registry']);
+                    }
+                }else{
+                    $applications = $applications->whereIn('registrations.status', ['send_to_state_office', 'queried_by_state_office', 'send_to_registry']);
+                }
 
             }else if($request->status == 'location_inspection'){
 
-                $location_inspectionStatuses = [
-                    // 'send_to_state_office', 
-                    // 'queried_by_state_office', 
-                    // 'send_to_registry', 
-                    'send_to_inspection_monitoring', 
-                    'no_recommendation', 
-                    'full_recommendation', 
-                    'partial_recommendation',
-                    'inspection_approved',
-                    // 'send_to_inspection_monitoring_registration',
-                    'facility_no_recommendation',
-                    'facility_full_recommendation',
-                    'facility_inspection_approved',
-                    'send_to_pharmacy_practice',
-                    'send_to_registration',
-                    // 'licence_issued',
-                    // 'facility_send_to_registration',
-                    'send_to_state_office_inspection',
-                    // 'send_to_state_office_registration'
-                ];
-
-                $applications = $applications->whereIn('registrations.status', $location_inspectionStatuses);
+                if($request->status != 'all'){
+                    if($request->status == 'pending'){
+                        $applications = $applications->whereIn('registrations.status', [
+                            'send_to_inspection_monitoring',
+                            'no_recommendation',
+                            'send_to_pharmacy_practice',
+                            'send_to_state_office_inspection',
+                        ]);
+                    }else if($request->status == 'approved'){
+                        $applications = $applications->whereIn('registrations.status', [
+                            'full_recommendation',
+                            'partial_recommendation',
+                            'inspection_approved',
+                            'send_to_registration'
+                        ]);
+                    }
+                }else{
+                    $applications = $applications->whereIn('registrations.status',[
+                        'send_to_inspection_monitoring',
+                        'no_recommendation',
+                        'send_to_pharmacy_practice',
+                        'send_to_state_office_inspection',
+                        'full_recommendation',
+                        'partial_recommendation',
+                        'inspection_approved',
+                        'send_to_registration'
+                    ]);
+                }
 
             }else if($request->status == 'location_approval_banner'){
 
                 $applications = $applications->whereIn('registrations.banner_status', 'pending');
+                if($request->status != 'all'){
+                    if($request->status == 'pending'){
+                        $applications = $applications->where('registrations.banner_status', 'pending');
+                    }else if($request->status == 'approved'){
+                        $applications = $applications->where('registrations.banner_status', 'paid');
+                    }
+                }else{
+                    $applications = $applications->whereIn('registrations.banner_status',[
+                        'pending',
+                        'paid'
+                    ]);
+                }
 
             }else if($request->status == 'facility_inspection'){
 
-                $facility_inspectionStatuses = [
-                    // 'send_to_state_office', 
-                    // 'queried_by_state_office', 
-                    // 'send_to_registry', 
-                    // 'send_to_inspection_monitoring', 
-                    // 'no_recommendation', 
-                    // 'full_recommendation', 
-                    // 'partial_recommendation',
-                    // 'inspection_approved',
-                    'send_to_inspection_monitoring_registration',
-                    'facility_no_recommendation',
-                    'facility_full_recommendation',
-                    'facility_inspection_approved',
-                    // 'licence_issued',
-                    // 'send_to_pharmacy_practice',
-                    // 'send_to_registration',
-                    // 'facility_send_to_registration',
-                    // 'send_to_state_office_inspection',
-                    'send_to_state_office_registration'
-                ];
-                $applications = $applications->whereIn('registrations.status', $facility_inspectionStatuses);
+                if($request->status != 'all'){
+                    if($request->status == 'pending'){
+                        $applications = $applications->whereIn('registrations.status', [
+                            'send_to_inspection_monitoring_registration',
+                            'facility_no_recommendation',
+                            'send_to_state_office_registration',
+                        ]);
+                    }else if($request->status == 'approved'){
+                        $applications = $applications->whereIn('registrations.status', [
+                            'facility_full_recommendation',
+                            'facility_inspection_approved',
+                            'facility_send_to_registration'
+                        ]);
+                    }
+                }else{
+                    $applications = $applications->whereIn('registrations.status',[
+                        'send_to_inspection_monitoring_registration',
+                        'facility_no_recommendation',
+                        'send_to_state_office_registration',
+                        'facility_full_recommendation',
+                        'facility_inspection_approved',
+                        'facility_send_to_registration'
+                    ]);
+                }
 
             }else if($request->status == 'renewal_inspection'){
 
-                $renewal_inspectionStatuses = [
-                    'send_to_state_office', 
-                    // 'queried_by_state_office', 
-                    // 'send_to_registry', 
-                    'send_to_inspection_monitoring', 
-                    'no_recommendation', 
-                    'full_recommendation', 
-                    'partial_recommendation',
-                    // 'inspection_approved',
-                    // 'send_to_inspection_monitoring_registration',
-                    // 'facility_no_recommendation',
-                    // 'facility_full_recommendation',
-                    // 'facility_inspection_approved',
-                    // 'licence_issued',
-                    'send_to_pharmacy_practice',
-                    // 'send_to_registration',
-                    // 'facility_send_to_registration',
-                    'send_to_state_office_inspection',
-                    // 'send_to_state_office_registration'
-                ];
-                $applications = $applications->whereHas('renewal', function($q){
-                    $q->whereIn('renewals.status', $renewal_inspectionStatuses);
-                });
-
-            }
-        } 
-
-        if($request->status != 'all'){
-            if($request->status == 'pending'){
-                $applications = $applications->whereIn('registrations.status', 'send_to_state_office');
-            }else if($request->status == 'approved'){
-                $applications = $applications->where('registrations.status', '!=', 'send_to_state_office');
+                if($request->status != 'all'){
+                    if($request->status == 'pending'){
+                        $applications = $applications->whereHas('renewal', function($q){
+                            $q->whereIn('registrations.status', [
+                                'send_to_state_office',
+                                'send_to_inspection_monitoring',
+                                'send_to_pharmacy_practice',
+                                'send_to_state_office_inspection',
+                                'no_recommendation'
+                            ]);
+                        });
+                    }else if($request->status == 'approved'){
+                        $applications = $applications->whereHas('renewal', function($q){
+                            $q->whereIn('registrations.status', [
+                                'send_to_state_office',
+                                'send_to_inspection_monitoring',
+                                'send_to_pharmacy_practice',
+                                'send_to_state_office_inspection',
+                                'no_recommendation'
+                            ]);
+                        });
+                    }
+                }else{
+                    $applications = $applications->whereHas('renewal', function($q){
+                        $q->whereIn('registrations.status', [
+                            'send_to_state_office',
+                            'send_to_inspection_monitoring',
+                            'send_to_pharmacy_practice',
+                            'send_to_state_office_inspection',
+                            'no_recommendation'
+                        ]);
+                    });
+                }
 
             }
         }
         
         $applications = $applications->whereBetween('registrations.created_at', [\Carbon\Carbon::parse($request->date_from), \Carbon\Carbon::parse($request->date_to)]);
-
         $applications = $applications->select('registrations.*')
         ->latest()
         ->get();
-
-        // dd($request->all());
-        // dd(config('custom.status-category.status'));
 
         $array = array();
         foreach ($applications as $key => $app) {
@@ -183,26 +207,5 @@ class ApplicationReportsController extends Controller
         $results = new ApplicationReportExport($array);
 
         return Excel::download($results, 'application-reports.xlsx');
-
-        // [
-        //     'send_to_state_office', 
-        //     'queried_by_state_office', 
-        //     'send_to_registry', 
-        //     'send_to_inspection_monitoring', 
-        //     'no_recommendation', 
-        //     'full_recommendation', 
-        //     'partial_recommendation',
-        //     'inspection_approved',
-        //     'send_to_inspection_monitoring_registration',
-        //     'facility_no_recommendation',
-        //     'facility_full_recommendation',
-        //     'facility_inspection_approved',
-        //     'licence_issued',
-        //     'send_to_pharmacy_practice',
-        //     'send_to_registration',
-        //     'facility_send_to_registration',
-        //     'send_to_state_office_inspection',
-        //     'send_to_state_office_registration'
-        // ];
     }
 }
