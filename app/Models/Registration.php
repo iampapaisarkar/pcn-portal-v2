@@ -29,4 +29,9 @@ class Registration extends Model
     public function other_registration() {
         return $this->hasOne(OtherRegistration::class,'registration_id', 'id');
     }
+
+    public function renewal() {
+        return $this->hasOne(Renewal::class,'registration_id', 'id')
+        ->latest()->first();
+    }
 }
