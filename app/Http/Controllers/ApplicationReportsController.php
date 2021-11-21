@@ -191,21 +191,27 @@ class ApplicationReportsController extends Controller
         ->latest()
         ->get();
 
-        $array = array();
-        foreach ($applications as $key => $app) {
-            $fields = [
-                'S/N' => $key+1, 
-                'Applicant name' => $app['user']['firstname'] .' '.$app['user']['lastname'],
-                'Year' => $app['registration_year'], 
-                'Type' =>  config('custom.status-category.category')[$app['type']],
-                'Category' => $app['category'],
-                'Status' => config('custom.status-category.status')[$app['status']], 
-            ];
-            array_push($array, $fields);
+        if(!$applications->isEmpty()){
+            $array = array();
+            foreach ($applications as $key => $app) {
+                $fields = [
+                    'S/N' => $key+1, 
+                    'Applicant name' => $app['user']['firstname'] .' '.$app['user']['lastname'],
+                    'Year' => $app['registration_year'], 
+                    'Type' =>  config('custom.status-category.category')[$app['type']],
+                    'Category' => $app['category'],
+                    'Status' => config('custom.status-category.status')[$app['status']], 
+                ];
+                array_push($array, $fields);
+            }
+    
+            $results = new ApplicationReportExport($array);
+    
+            return Excel::download($results, 'application-reports.xlsx');
+        }else{
+            return back()->with('error','No data found!');
         }
 
-        $results = new ApplicationReportExport($array);
-
-        return Excel::download($results, 'application-reports.xlsx');
+        
     }
 }
