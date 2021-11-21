@@ -32,6 +32,7 @@
                     <select id="categoryField" required name="category"
                     class="form-control @error('category') is-invalid @enderror">
                         <option value="">Select Category</option>
+                        <option value="all">All</option>
                         <option value="hospital_pharmacy">Hospital Pharmacy</option>		
                         <option value="community_pharmacy">Community Pharmacy</option>
                         <option value="distribution_premises">Distribution Premises</option>
@@ -50,6 +51,7 @@
                     <select id="activityField" required name="activity"
                     class="form-control @error('activity') is-invalid @enderror">
                         <option value="">Select Activity</option>
+                        <option value="all">All</option>
                         <option value="document_review">Document Review</option>		
                         <option value="location_inspection">Location Inspection</option>
                         <option value="location_approval_banner">Location Approval Banner</option>
@@ -68,6 +70,7 @@
                     <select id="statusField" required name="status"
                     class="form-control @error('status') is-invalid @enderror">
                         <option value="">Select Status</option>
+                        <option value="all">All</option>
                         <option value="pending">Pending</option>		
                         <option value="approved">Approved</option>
                     </select>
