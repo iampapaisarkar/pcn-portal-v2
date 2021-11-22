@@ -111,7 +111,7 @@ class CheckoutController extends Controller
 
                 // Store Report 
                 \App\Http\Services\Reports::storePaymentReport($order->id, 'ppmv', 'location_approval_banner', 'paid', Auth::user()->state);
-                \App\Http\Services\Reports::storeApplicationReport($registration->application_id, 'ppmv', 'location_approval_banner', 'approved', Auth::user()->state);
+                \App\Http\Services\Reports::storeApplicationReport($order->application_id, 'ppmv', 'location_approval_banner', 'approved', Auth::user()->state);
 
                 $data = [
                     'order_id' => $order->order_id,
@@ -185,7 +185,7 @@ class CheckoutController extends Controller
 
                 // Store Report 
                 \App\Http\Services\Reports::storePaymentReport($order->id, 'community_pharmacy', 'location_approval_banner', 'paid', Auth::user()->company()->first()->state);
-                \App\Http\Services\Reports::storeApplicationReport($registration->application_id, 'community_pharmacy', 'location_approval_banner', 'approved', Auth::user()->company()->first()->state);
+                \App\Http\Services\Reports::storeApplicationReport($order->application_id, 'community_pharmacy', 'location_approval_banner', 'approved', Auth::user()->company()->first()->state);
 
                 $data = [
                     'order_id' => $order->order_id,
@@ -241,7 +241,7 @@ class CheckoutController extends Controller
 
                 // Store Report 
                 \App\Http\Services\Reports::storePaymentReport($order->id, 'distribution_premises', 'location_approval_banner', 'paid', Auth::user()->company()->first()->state);
-                \App\Http\Services\Reports::storeApplicationReport($registration->application_id, 'distribution_premises', 'location_approval_banner', 'approved', Auth::user()->company()->first()->state);
+                \App\Http\Services\Reports::storeApplicationReport($order->application_id, 'distribution_premises', 'location_approval_banner', 'approved', Auth::user()->company()->first()->state);
 
                 $data = [
                     'order_id' => $order->order_id,

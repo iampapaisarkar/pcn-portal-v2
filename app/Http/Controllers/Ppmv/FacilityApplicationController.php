@@ -31,7 +31,7 @@ class FacilityApplicationController extends Controller
         //     return redirect()->route('ppmv-facility-application-form');
         // }
         
-        $application = Registration::where(['payment' => true, 'user_id' => Auth::user()->id, 'type' => 'ppmv'])
+        $registration = Registration::where(['payment' => true, 'user_id' => Auth::user()->id, 'type' => 'ppmv'])
         ->with('ppmv', 'user')
         ->where(function($q){
             $q->where('status', 'facility_no_recommendation');
@@ -39,7 +39,7 @@ class FacilityApplicationController extends Controller
         })
         ->first();
 
-        if($application){
+        if($registration){
             Registration::where(['payment' => true, 'user_id' => Auth::user()->id, 'type' => 'ppmv'])
             ->with('ppmv', 'user')
             ->where(function($q){
@@ -52,10 +52,10 @@ class FacilityApplicationController extends Controller
                 'location_approval' => false
             ]);
 
-            $response = Checkout::checkoutPpmvRegistration($application = ['id' => $application->id], 'ppmv');
+            $response = Checkout::checkoutPpmvRegistration($application = ['id' => $registration->id], 'ppmv');
 
             // Store Report 
-            \App\Http\Services\Reports::storeApplicationReport($application->id, 'ppmv', 'facility_inspection', 'pending', $application->user->state);
+            \App\Http\Services\Reports::storeApplicationReport($registration->id, 'ppmv', 'facility_inspection', 'pending', $registration->user->state);
 
             if($response['success']){
                 return redirect()->route('invoices.show', ['id' => $response['id']])

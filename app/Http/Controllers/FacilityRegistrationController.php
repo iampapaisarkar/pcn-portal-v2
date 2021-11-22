@@ -58,7 +58,7 @@ class FacilityRegistrationController extends Controller
         try {
             DB::beginTransaction();
 
-            $application = Registration::where(['user_id' => Auth::user()->id, 'id' => $id, 'type' => $type])
+            $registration = Registration::where(['user_id' => Auth::user()->id, 'id' => $id, 'type' => $type])
             ->where(function($q){
                 $q->where('status', 'facility_no_recommendation');
                 $q->orWhere('status', 'inspection_approved');
@@ -66,7 +66,7 @@ class FacilityRegistrationController extends Controller
             ->with('other_registration.company')
             ->first();
 
-            if($application){
+            if($registration){
 
                 Registration::where(['user_id' => Auth::user()->id, 'id' => $id, 'type' =>  $type])
                 ->where(function($q){
@@ -92,13 +92,12 @@ class FacilityRegistrationController extends Controller
                 ]);
 
                 if(Auth::user()->hasRole(['community_pharmacy'])){
-                    $response = Checkout::checkoutCommunityRegistration($application = ['id' => $application->id], $type);
+                    $response = Checkout::checkoutCommunityRegistration($application = ['id' => $registration->id], $type);
                 }else if(Auth::user()->hasRole(['distribution_premises'])){
-                    $response = Checkout::checkoutDistributionRegistration($application = ['id' => $application->id], $type);
+                    $response = Checkout::checkoutDistributionRegistration($application = ['id' => $registration->id], $type);
                 }
-
                 // Store Report 
-                \App\Http\Services\Reports::storeApplicationReport($application->id, $type, 'facility_inspection', 'pending', $application->other_registration->company->state);
+                \App\Http\Services\Reports::storeApplicationReport($registration->id, $type, 'facility_inspection', 'pending', $registration->other_registration->company->state);
 
             }
 
