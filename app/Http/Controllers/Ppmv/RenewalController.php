@@ -145,6 +145,9 @@ class RenewalController extends Controller
                 ]);
 
                 $response = Checkout::checkoutPPMVRenewal($application = ['id' => $renewal->id], 'ppmv_renewal');
+
+                // Store Report 
+                \App\Http\Services\Reports::storeApplicationReport($renewal->id, 'ppmv', 'renewal_inspection', 'pending', Auth::user()->state);
             }
 
             DB::commit();

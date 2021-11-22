@@ -215,6 +215,11 @@ class RenewalController extends Controller
                 ]);
 
                 $response = Checkout::checkoutHospitalPharmacyRenewal($application = ['id' => $renewal->id], 'hospital_pharmacy_renewal');
+
+                if($renewalStatus == 'send_to_registry'){
+                    // Store Report 
+                    \App\Http\Services\Reports::storeApplicationReport($renewal->id, 'hospital_pharmacy', 'renewal_inspection', 'pending', Auth::user()->state);
+                }
             }
 
             DB::commit();

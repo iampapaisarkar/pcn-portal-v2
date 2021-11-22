@@ -176,6 +176,9 @@ class RenewalController extends Controller
                 }else if(Auth::user()->hasRole(['distribution_premises'])){
                     $response = Checkout::checkoutDistributionRenewal($application = ['id' => $renewal->id], $type.'_renewal');
                 }
+
+                // Store Report 
+                \App\Http\Services\Reports::storeApplicationReport($renewal->id, $type, 'renewal_inspection', 'pending', Auth::user()->company()->first()->state);
             }
 
             DB::commit();

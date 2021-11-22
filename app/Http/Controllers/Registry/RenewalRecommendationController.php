@@ -140,7 +140,7 @@ class RenewalRecommendationController extends Controller
 
 
                     $renewal = Renewal::where(['payment' => true, 'id' => $renewal_id])
-                    ->with('hospital_pharmacy', 'registration', 'user')
+                    ->with('hospital_pharmacy', 'registration.other_registration.company', 'user')
                     ->where(function($q){
                         $q->where('status', 'partial_recommendation');
                         $q->orWhere('status', 'full_recommendation');
@@ -162,30 +162,45 @@ class RenewalRecommendationController extends Controller
                             $adminName = Auth::user()->firstname .' '. Auth::user()->lastname;
                             $activity = 'Registry Document Renewal Inspection Report Approval';
                             AllActivity::storeActivity($renewal_id, $adminName, $activity, 'hospital_pharmacy');
+
+                            // Store Report 
+                            \App\Http\Services\Reports::storeApplicationReport($renewal->id, 'hospital_pharmacy', 'renewal_inspection', 'approved', $renewal->user->state);
                         }
 
                         if($renewal->type == 'ppmv_renewal'){
                             $adminName = Auth::user()->firstname .' '. Auth::user()->lastname;
                             $activity = 'Registry Document Renewal Inspection Report Approval';
                             AllActivity::storeActivity($renewal_id, $adminName, $activity, 'ppmv');
+
+                            // Store Report 
+                            \App\Http\Services\Reports::storeApplicationReport($renewal->id, 'ppmv', 'renewal_inspection', 'approved', $renewal->user->state);
                         }
 
                         if($renewal->type == 'community_pharmacy_renewal'){
                             $adminName = Auth::user()->firstname .' '. Auth::user()->lastname;
                             $activity = 'Registry Document Renewal Inspection Report Approval';
                             AllActivity::storeActivity($renewal_id, $adminName, $activity, 'community_pharmacy');
+
+                            // Store Report 
+                            \App\Http\Services\Reports::storeApplicationReport($renewal->id, 'community_pharmacy', 'renewal_inspection', 'approved', $renewal->registration->other_registration->company->state);
                         }
 
                         if($renewal->type == 'distribution_premises_renewal'){
                             $adminName = Auth::user()->firstname .' '. Auth::user()->lastname;
                             $activity = 'Registry Document Renewal Inspection Report Approval';
                             AllActivity::storeActivity($renewal_id, $adminName, $activity, 'distribution_premises');
+
+                            // Store Report 
+                            \App\Http\Services\Reports::storeApplicationReport($renewal->id, 'distribution_premises', 'renewal_inspection', 'approved', $renewal->registration->other_registration->company->state);
                         }
 
                         if($renewal->type == 'manufacturing_premises_renewal'){
                             $adminName = Auth::user()->firstname .' '. Auth::user()->lastname;
                             $activity = 'Registry Document Renewal Inspection Report Approval';
                             AllActivity::storeActivity($renewal_id, $adminName, $activity, 'manufacturing_premises');
+
+                            // Store Report 
+                            \App\Http\Services\Reports::storeApplicationReport($renewal->id, 'manufacturing_premises', 'renewal_inspection', 'approved', $renewal->registration->other_registration->company->state);
                         }
 
                     }else{
@@ -219,7 +234,7 @@ class RenewalRecommendationController extends Controller
             DB::beginTransaction();
 
                 $renewal = Renewal::where(['payment' => true, 'id' => $request['renewal_id'], 'user_id' => $request['user_id'], 'type' => 'hospital_pharmacy_renewal'])
-                ->with('hospital_pharmacy', 'registration', 'user')
+                ->with('hospital_pharmacy', 'registration.other_registration.company', 'user')
                 ->where(function($q){
                     $q->where('status', 'partial_recommendation');
                     $q->orWhere('status', 'full_recommendation');
@@ -240,6 +255,9 @@ class RenewalRecommendationController extends Controller
                     $adminName = Auth::user()->firstname .' '. Auth::user()->lastname;
                     $activity = 'Registry Document Renewal Inspection Report Approval';
                     AllActivity::storeActivity($request['registration_id'], $adminName, $activity, 'hospital_pharmacy');
+
+                     // Store Report 
+                     \App\Http\Services\Reports::storeApplicationReport($renewal->id, 'hospital_pharmacy', 'renewal_inspection', 'approved', $renewal->user->state);
 
                 }else{
                     return abort(404);
@@ -276,7 +294,7 @@ class RenewalRecommendationController extends Controller
             DB::beginTransaction();
 
                 $renewal = Renewal::where(['payment' => true, 'id' => $request['renewal_id'], 'user_id' => $request['user_id'], 'type' => 'ppmv_renewal'])
-                ->with('ppmv', 'registration', 'user')
+                ->with('ppmv', 'registration.other_registration.company', 'user')
                 ->where(function($q){
                     $q->where('status', 'full_recommendation');
                 })
@@ -295,6 +313,9 @@ class RenewalRecommendationController extends Controller
                     $adminName = Auth::user()->firstname .' '. Auth::user()->lastname;
                     $activity = 'Registry Document Renewal Inspection Report Approval';
                     AllActivity::storeActivity($request['registration_id'], $adminName, $activity, 'ppmv');
+
+                    // Store Report 
+                    \App\Http\Services\Reports::storeApplicationReport($renewal->id, 'ppmv', 'renewal_inspection', 'approved', $renewal->user->state);
 
                 }else{
                     return abort(404);
@@ -331,7 +352,7 @@ class RenewalRecommendationController extends Controller
             DB::beginTransaction();
 
                 $renewal = Renewal::where(['payment' => true, 'id' => $request['renewal_id'], 'user_id' => $request['user_id'], 'type' => 'community_pharmacy_renewal'])
-                ->with('other_registration', 'registration', 'user')
+                ->with('other_registration.company', 'registration', 'user')
                 ->where(function($q){
                     $q->where('status', 'full_recommendation');
                 })
@@ -350,6 +371,9 @@ class RenewalRecommendationController extends Controller
                     $adminName = Auth::user()->firstname .' '. Auth::user()->lastname;
                     $activity = 'Registry Document Renewal Inspection Report Approval';
                     AllActivity::storeActivity($request['registration_id'], $adminName, $activity, 'community_pharmacy');
+
+                    // Store Report 
+                    \App\Http\Services\Reports::storeApplicationReport($renewal->id, 'community_pharmacy', 'renewal_inspection', 'approved', $renewal->other_registration->company->state);
 
                 }else{
                     return abort(404);
@@ -385,7 +409,7 @@ class RenewalRecommendationController extends Controller
             DB::beginTransaction();
 
                 $renewal = Renewal::where(['payment' => true, 'id' => $request['renewal_id'], 'user_id' => $request['user_id'], 'type' => 'distribution_premises_renewal'])
-                ->with('other_registration', 'registration', 'user')
+                ->with('other_registration.company', 'registration', 'user')
                 ->where(function($q){
                     $q->where('status', 'full_recommendation');
                 })
@@ -404,6 +428,9 @@ class RenewalRecommendationController extends Controller
                     $adminName = Auth::user()->firstname .' '. Auth::user()->lastname;
                     $activity = 'Registry Document Renewal Inspection Report Approval';
                     AllActivity::storeActivity($request['registration_id'], $adminName, $activity, 'distribution_premises');
+
+                    // Store Report 
+                    \App\Http\Services\Reports::storeApplicationReport($renewal->id, 'distribution_premises', 'renewal_inspection', 'approved', $renewal->other_registration->company->state);
 
                 }else{
                     return abort(404);
@@ -439,7 +466,7 @@ class RenewalRecommendationController extends Controller
             DB::beginTransaction();
 
                 $renewal = Renewal::where(['payment' => true, 'id' => $request['renewal_id'], 'user_id' => $request['user_id'], 'type' => 'manufacturing_premises_renewal'])
-                ->with('other_registration', 'registration', 'user')
+                ->with('other_registration.company', 'registration', 'user')
                 ->where(function($q){
                     $q->where('status', 'full_recommendation');
                 })
@@ -458,6 +485,9 @@ class RenewalRecommendationController extends Controller
                     $adminName = Auth::user()->firstname .' '. Auth::user()->lastname;
                     $activity = 'Registry Document Renewal Inspection Report Approval';
                     AllActivity::storeActivity($request['registration_id'], $adminName, $activity, 'manufacturing_premises');
+                    
+                    // Store Report 
+                    \App\Http\Services\Reports::storeApplicationReport($renewal->id, 'manufacturing_premises', 'renewal_inspection', 'approved', $renewal->other_registration->company->state);
 
                 }else{
                     return abort(404);

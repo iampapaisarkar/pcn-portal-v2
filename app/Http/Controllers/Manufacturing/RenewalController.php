@@ -158,6 +158,9 @@ class RenewalController extends Controller
                 ]);
 
                 $response = Checkout::checkoutManufacturingRenewal($application = ['id' => $renewal->id], 'manufacturing_premises_renewal');
+
+                // Store Report 
+                \App\Http\Services\Reports::storeApplicationReport($renewal->id, 'manufacturing_premises', 'renewal_inspection', 'pending', Auth::user()->company()->first()->state);
             }
 
             DB::commit();
