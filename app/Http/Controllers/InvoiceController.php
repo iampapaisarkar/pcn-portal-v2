@@ -27,7 +27,7 @@ class InvoiceController extends Controller
             if($request->page){
                 $perPage = (integer) $request->page;
             }else{
-                $perPage = 10;
+                $perPage = 2;
             }
     
             if(!empty($request->search)){
