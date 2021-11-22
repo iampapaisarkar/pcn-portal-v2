@@ -261,9 +261,13 @@ class ApplicationController extends Controller
 
                     $registration = Registration::where(['payment' => false, 'id' => $id, 'user_id' => Auth::user()->id, 'type' => 'ppmv'])
                     ->where('banner_status', 'pending')
+                    ->with('user')
                     ->first();
 
                     $response = Checkout::checkoutPpmvBanner($application = ['id' => $registration->id], 'ppmv');
+
+                    // Store Report 
+                    \App\Http\Services\Reports::storeApplicationReport($registration->id, 'ppmv', 'location_approval_banner', 'pending', $registration->user->state);
 
                 DB::commit();
 

@@ -190,6 +190,7 @@ class LocationApprovalController extends Controller
 
                     $registration = Registration::where(['payment' => false, 'id' => $id, 'user_id' => Auth::user()->id, 'type' => $type])
                     ->where('banner_status', 'pending')
+                    ->with('other_registration.company')
                     ->first();
 
                     if($type == 'community_pharmacy'){
@@ -198,6 +199,9 @@ class LocationApprovalController extends Controller
                     if($type == 'distribution_premises'){
                         $response = Checkout::checkoutDistributionBanner($application = ['id' => $registration->id], $type);
                     }
+
+                    // Store Report 
+                    \App\Http\Services\Reports::storeApplicationReport($registration->id, $type, 'location_approval_banner', 'pending', $registration->other_registration->company->state);
 
                 DB::commit();
 
