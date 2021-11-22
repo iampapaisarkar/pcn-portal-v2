@@ -43,7 +43,7 @@ class UserController extends Controller
         if($request->per_page){
             $perPage = (integer) $request->per_page;
         }else{
-            $perPage = 2;
+            $perPage = 10;
         }
 
         if(!empty($request->search)){
