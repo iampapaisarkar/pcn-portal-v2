@@ -145,7 +145,7 @@ class DocumentInspectionController extends Controller
                         ]);
                         
                         // Store Report 
-                        \App\Http\Services\Reports::storeApplicationReport($Registration->id, 'hospital_pharmacy', 'facility_inspection', 'pending', $registration->user->state);
+                        \App\Http\Services\Reports::storeApplicationReport($Registration->id, 'hospital_pharmacy', 'facility_inspection', 'pending', $registration->user->state, Auth::user()->id);
                     }
                     if($Registration->type == 'manufacturing_premises'){
                         Registration::where(['payment' => true, 'id' => $registration_id])
@@ -156,7 +156,7 @@ class DocumentInspectionController extends Controller
                         ]);
 
                         // Store Report 
-                        \App\Http\Services\Reports::storeApplicationReport($registration->id, 'manufacturing_premises', 'facility_inspection', 'pending', $registration->other_registration->company->state);
+                        \App\Http\Services\Reports::storeApplicationReport($registration->id, 'manufacturing_premises', 'facility_inspection', 'pending', $registration->other_registration->company->state, Auth::user()->id);
                     }
 
                     $adminName = Auth::user()->firstname .' '. Auth::user()->lastname;
@@ -203,7 +203,7 @@ class DocumentInspectionController extends Controller
             AllActivity::storeActivity($request['registration_id'], $adminName, $activity, 'hospital_pharmacy');
 
             // Store Report 
-            \App\Http\Services\Reports::storeApplicationReport($registration->id, 'hospital_pharmacy', 'facility_inspection', 'pending', $registration->user->state);
+            \App\Http\Services\Reports::storeApplicationReport($registration->id, 'hospital_pharmacy', 'facility_inspection', 'pending', $registration->user->state, Auth::user()->id);
 
             return redirect()->route('registry-documents.index')->with('success', 'Registration Approved successfully done');
         }else{
@@ -246,7 +246,7 @@ class DocumentInspectionController extends Controller
             AllActivity::storeActivity($request['registration_id'], $adminName, $activity, 'manufacturing_premises');
 
             // Store Report 
-            \App\Http\Services\Reports::storeApplicationReport($registration->id, 'manufacturing_premises', 'facility_inspection', 'pending', $registration->other_registration->company->state);
+            \App\Http\Services\Reports::storeApplicationReport($registration->id, 'manufacturing_premises', 'facility_inspection', 'pending', $registration->other_registration->company->state, Auth::user()->id);
 
             return redirect()->route('registry-documents.index')->with('success', 'Registration Approved successfully done');
         }else{

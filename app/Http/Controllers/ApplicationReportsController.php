@@ -58,7 +58,8 @@ class ApplicationReportsController extends Controller
             'renewal.registration.user.user_lga',
             'renewal.registration.other_registration.company.company_state',
             'renewal.registration.other_registration.company.company_lga',
-            'state'
+            'state',
+            'approvedBy'
         );
 
         if($request->state != "all"){
@@ -101,11 +102,12 @@ class ApplicationReportsController extends Controller
                 }else{
                     $fields = [
                         'S/N' => $key+1, 
-                        'Applicant name' => $app['application']['user']['firstname'] .' '.$app['application']['user']['lastname'],
-                        'Year' => $app['application']['registration_year'], 
-                        'Activity' =>  config('custom.report-activities.activities')[$app['activity']],
                         'Category' => config('custom.report-activities.category')[$app['application_type']],
+                        'Activity' =>  config('custom.report-activities.activities')[$app['activity']],
+                        'Year' => $app['application']['registration_year'], 
                         'Status' => $app['status'] == 'pending' ? 'Pending' : 'Approved', 
+                        'Name' => $app['application']['user']['firstname'] .' '.$app['application']['user']['lastname'],
+                        'Approved By' => $app['approvedBy'] ? $app['approvedBy']['firstname'] .' '.$app['approvedBy']['lastname'] : null,
                     ];
                     array_push($array, $fields);
                 }

@@ -28,11 +28,12 @@ class ApplicationReportExport implements FromArray, WithHeadings
     {
         return [
             'S/N',
-            'Applicant name',
-            'Year',
-            'Activity',
             'Category',
+            'Activity',
+            'Year',
             'Status',
+            'Name',
+            'Approved By',
         ];
     }
 }

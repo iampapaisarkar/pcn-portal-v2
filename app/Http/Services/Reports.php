@@ -7,7 +7,7 @@ use DB;
 
 class Reports
 {
-    public static function storeApplicationReport($id, $application_type, $activity, $status, $state_id){
+    public static function storeApplicationReport($id, $application_type, $activity, $status, $state_id, $approved_by = null){
 
         try {
             DB::beginTransaction();
@@ -18,7 +18,8 @@ class Reports
                 'application_type' => $application_type,
                 'activity' => $activity,
                 'status' => $status,
-                'state_id' => $state_id
+                'state_id' => $state_id,
+                'approved_by' => $approved_by
             ]);
 
             DB::commit();

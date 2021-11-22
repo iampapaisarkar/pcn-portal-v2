@@ -21,6 +21,7 @@ class CreateReportsTable extends Migration
             $table->string('activity');
             $table->string('status');
             $table->integer('state_id');
+            $table->integer('approved_by')->nullable();
             $table->timestamps();
         });
     }

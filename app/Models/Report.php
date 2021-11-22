@@ -10,7 +10,7 @@ class Report extends Model
     use HasFactory;
 
     protected $fillable = [
-        'type', 'application_id', 'application_type', 'activity', 'status', 'state_id'
+        'type', 'application_id', 'application_type', 'activity', 'status', 'state_id', 'approved_by'
     ];
 
     public function application() {
@@ -23,5 +23,9 @@ class Report extends Model
 
     public function state() {
         return $this->hasOne(State::class,'id', 'state_id');
+    }
+
+    public function approvedBy() {
+        return $this->hasOne(User::class,'id', 'approved_by');
     }
 }

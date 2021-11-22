@@ -162,7 +162,7 @@ class DocumentReviewController extends Controller
             AllActivity::storeActivity($request['registration_id'], $adminName, $activity, 'hospital_pharmacy');
 
             // Store Report 
-            \App\Http\Services\Reports::storeApplicationReport($registration->id, 'hospital_pharmacy', 'document_review', 'approved', $registration->user->state);
+            \App\Http\Services\Reports::storeApplicationReport($registration->id, 'hospital_pharmacy', 'document_review', 'approved', $registration->user->state, Auth::user()->id);
 
             return redirect()->route('state-office-documents.index')->with('success', 'Registration Approved successfully done');
         }else{
@@ -249,7 +249,7 @@ class DocumentReviewController extends Controller
             AllActivity::storeActivity($request['application_id'], $adminName, $activity, 'ppmv');
 
             // Store Report 
-            \App\Http\Services\Reports::storeApplicationReport($registration->id, 'ppmv', 'document_review', 'approved', $registration->user->state);
+            \App\Http\Services\Reports::storeApplicationReport($registration->id, 'ppmv', 'document_review', 'approved', $registration->user->state, Auth::user()->id);
 
             return redirect()->route('state-office-documents.index')->with('success', 'Registration Approved successfully done');
         }else{
@@ -337,7 +337,7 @@ class DocumentReviewController extends Controller
             AllActivity::storeActivity($request['application_id'], $adminName, $activity, 'community_pharmacy');
 
             // Store Report 
-            \App\Http\Services\Reports::storeApplicationReport($registration->id, 'community_pharmacy', 'document_review', 'approved', $registration->other_registration->company->state);
+            \App\Http\Services\Reports::storeApplicationReport($registration->id, 'community_pharmacy', 'document_review', 'approved', $registration->other_registration->company->state, Auth::user()->id);
 
             return redirect()->route('state-office-documents.index')->with('success', 'Registration Approved successfully done');
         }else{
@@ -425,7 +425,7 @@ class DocumentReviewController extends Controller
             AllActivity::storeActivity($request['application_id'], $adminName, $activity, 'distribution_premises');
 
             // Store Report 
-            \App\Http\Services\Reports::storeApplicationReport($registration->id, 'distribution_premises', 'document_review', 'approved', $registration->other_registration->company->state);
+            \App\Http\Services\Reports::storeApplicationReport($registration->id, 'distribution_premises', 'document_review', 'approved', $registration->other_registration->company->state, Auth::user()->id);
 
             return redirect()->route('state-office-documents.index')->with('success', 'Registration Approved successfully done');
         }else{
@@ -512,7 +512,7 @@ class DocumentReviewController extends Controller
             AllActivity::storeActivity($request['application_id'], $adminName, $activity, 'manufacturing_premises');
 
             // Store Report 
-            \App\Http\Services\Reports::storeApplicationReport($registration->id, 'manufacturing_premises', 'document_review', 'approved', $registration->other_registration->company->state);
+            \App\Http\Services\Reports::storeApplicationReport($registration->id, 'manufacturing_premises', 'document_review', 'approved', $registration->other_registration->company->state, Auth::user()->id);
 
             return redirect()->route('state-office-documents.index')->with('success', 'Registration Approved successfully done');
         }else{
