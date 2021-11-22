@@ -13,13 +13,35 @@
                     $states = app('App\Http\Services\BasicInformation')->states();
                     @endphp
                     <label for="picker1">State</label>
-                    <select id="stateField" required name="state"
-                    class="form-control @error('state') is-invalid @enderror">
-                        <option value="">Select State</option>
-                        @foreach($states as $state)
-                        <option value="{{$state->id}}">{{$state->name}}</option>
-                        @endforeach
-                    </select>
+                    @if(Auth::user()->hasRole(['state_office']))
+                        <select disabled id="stateField" required name="state"
+                        class="form-control @error('state') is-invalid @enderror">
+                            <option value="">Select State</option>
+                            <option value="all">All</option>
+                            @foreach($states as $state)
+                                @if(Auth::user()->hasRole(['state_office']))
+                                    @if(Auth::user()->state == $state->id))
+                                    <option selected value="{{$state->id}}">{{$state->name}}</option>
+                                    @endif
+                                @endif
+                            <option value="{{$state->id}}">{{$state->name}}</option>
+                            @endforeach
+                        </select>
+                    @else
+                        <select id="stateField" required name="state"
+                        class="form-control @error('state') is-invalid @enderror">
+                            <option value="">Select State</option>
+                            <option value="all">All</option>
+                            @foreach($states as $state)
+                                @if(Auth::user()->hasRole(['state_office']))
+                                    @if(Auth::user()->state == $state->id))
+                                    <option selected value="{{$state->id}}">{{$state->name}}</option>
+                                    @endif
+                                @endif
+                            <option value="{{$state->id}}">{{$state->name}}</option>
+                            @endforeach
+                        </select>
+                    @endif
                     @error('state')
                     <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>

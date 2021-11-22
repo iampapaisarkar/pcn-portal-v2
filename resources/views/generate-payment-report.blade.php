@@ -16,6 +16,7 @@
                     <select id="stateField" required name="state"
                     class="form-control @error('state') is-invalid @enderror">
                         <option value="">Select State</option>
+                        <option value="all">All</option>
                         @foreach($states as $state)
                         <option value="{{$state->id}}">{{$state->name}}</option>
                         @endforeach
@@ -83,7 +84,7 @@
                 <div class="col-md-4 col-12 form-group mb-3">
                     <label for="picker1">Date From</label>
                     <input name="date_from" class="form-control @error('date_from') is-invalid @enderror"
-                    id="startDate" type="date"/>
+                        id="startDate" type="date"/>
                     @error('date_from')
                     <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>
@@ -94,7 +95,7 @@
                 <div class="col-md-4 col-12 form-group mb-3">
                     <label for="picker1">Date To</label>
                     <input name="date_to" class="form-control @error('date_to') is-invalid @enderror"
-                    id="endDate" type="date"/>
+                        id="endDate" type="date"/>
                     @error('date_to')
                     <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>
