@@ -54,6 +54,9 @@ class FacilityApplicationController extends Controller
 
             $response = Checkout::checkoutPpmvRegistration($application = ['id' => $application->id], 'ppmv');
 
+            // Store Report 
+            \App\Http\Services\Reports::storeApplicationReport($application->id, 'ppmv', 'facility_inspection', 'pending', $application->user->state);
+
             if($response['success']){
                 return redirect()->route('invoices.show', ['id' => $response['id']])
                 ->with('success', 'Registration application successfully submitted. Please pay amount for further action');

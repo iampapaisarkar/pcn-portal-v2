@@ -63,6 +63,7 @@ class FacilityRegistrationController extends Controller
                 $q->where('status', 'facility_no_recommendation');
                 $q->orWhere('status', 'inspection_approved');
             })
+            ->with('other_registration.company')
             ->first();
 
             if($application){
@@ -95,6 +96,9 @@ class FacilityRegistrationController extends Controller
                 }else if(Auth::user()->hasRole(['distribution_premises'])){
                     $response = Checkout::checkoutDistributionRegistration($application = ['id' => $application->id], $type);
                 }
+
+                // Store Report 
+                \App\Http\Services\Reports::storeApplicationReport($application->id, $type, 'facility_inspection', 'pending', $application->other_registration->company->state);
 
             }
 
