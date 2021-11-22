@@ -14,8 +14,11 @@ class Report extends Model
     ];
 
     public function application() {
-        return $this->hasOne(Registration::class,'id', 'application_id')
-        ->where('type', 'application');
+        return $this->hasOne(Registration::class,'id', 'application_id');
+    }
+
+    public function renewal() {
+        return $this->hasOne(Renewal::class,'id', 'application_id');
     }
 
     public function state() {

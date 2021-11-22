@@ -30,7 +30,7 @@ class ApplicationReportExport implements FromArray, WithHeadings
             'S/N',
             'Applicant name',
             'Year',
-            'Type',
+            'Activity',
             'Category',
             'Status',
         ];
