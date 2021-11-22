@@ -129,6 +129,9 @@ class InvoiceController extends Controller
             if($data->service_type == 'ppmv'){
                 $title = 'PPMV Location Approval Fees';
             }
+            if($data->service_type == 'ppmv_banner'){
+                $title = 'PPMV Location Banner Approval Fees';
+            }
             if($data->service_type == 'ppmv_registration'){
                 $title = 'PPMV Facility Inspection Registration Fees';
             }
@@ -138,6 +141,9 @@ class InvoiceController extends Controller
             if($data->service_type == 'community_pharmacy'){
                 $title = 'Community Pharmacy Location Approval Fees';
             }
+            if($data->service_type == 'community_pharmacy_banner'){
+                $title = 'Community Pharmacy Location Banner Approval Fees';
+            }
             if($data->service_type == 'community_pharmacy_registration'){
                 $title = 'Community Pharmacy Facility Inspection Registration Fees';
             }
@@ -146,6 +152,9 @@ class InvoiceController extends Controller
             }
             if($data->service_type == 'distribution_premises'){
                 $title = 'Distribution Premises Location Approval Fees';
+            }
+            if($data->service_type == 'distribution_premises_banner'){
+                $title = 'Distribution Premises Location Banner Approval Fees';
             }
             if($data->service_type == 'distribution_premises_registration'){
                 $title = 'Distribution Premises Facility Inspection Registration Fees';
