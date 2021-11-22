@@ -134,6 +134,7 @@ class LocationApplicationController extends Controller
 
                     $Registration = Registration::where(['payment' => true, 'id' => $registration_id])
                     ->where('status', 'send_to_registry')
+                    ->with('user', 'other_registration.company')
                     ->first();
 
                     if($Registration->type == 'ppmv'){
@@ -142,6 +143,9 @@ class LocationApplicationController extends Controller
                         ->update([
                             'status' => 'send_to_state_office_inspection'
                         ]);
+
+                        // Store Report 
+                        \App\Http\Services\Reports::storeApplicationReport($Registration->id, 'ppmv', 'location_inspection', 'pending', $Registration->user->state);
                     }
                     if($Registration->type == 'community_pharmacy'){
                         Registration::where(['payment' => true, 'id' => $registration_id])
@@ -149,6 +153,9 @@ class LocationApplicationController extends Controller
                         ->update([
                             'status' => 'send_to_inspection_monitoring'
                         ]);
+
+                        // Store Report 
+                        \App\Http\Services\Reports::storeApplicationReport($Registration->id, 'community_pharmacy', 'location_inspection', 'pending', $Registration->other_registration->company->state);
                     }
                     if($Registration->type == 'distribution_premises'){
                         Registration::where(['payment' => true, 'id' => $registration_id])
@@ -156,6 +163,9 @@ class LocationApplicationController extends Controller
                         ->update([
                             'status' => 'send_to_inspection_monitoring'
                         ]);
+
+                        // Store Report 
+                        \App\Http\Services\Reports::storeApplicationReport($Registration->id, 'distribution_premises', 'location_inspection', 'pending', $Registration->other_registration->company->state);
                     }
 
                     $adminName = Auth::user()->firstname .' '. Auth::user()->lastname;

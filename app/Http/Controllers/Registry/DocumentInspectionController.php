@@ -134,6 +134,7 @@ class DocumentInspectionController extends Controller
 
                     $Registration = Registration::where(['payment' => true, 'id' => $registration_id])
                     ->where('status', 'send_to_registry')
+                    ->with('user', 'other_registration.company')
                     ->first();
 
                     if($Registration->type == 'hospital_pharmacy'){
@@ -142,6 +143,9 @@ class DocumentInspectionController extends Controller
                         ->update([
                             'status' => 'send_to_pharmacy_practice'
                         ]);
+                        
+                        // Store Report 
+                        \App\Http\Services\Reports::storeApplicationReport($Registration->id, 'hospital_pharmacy', 'facility_inspection', 'pending', $registration->user->state);
                     }
                     if($Registration->type == 'manufacturing_premises'){
                         Registration::where(['payment' => true, 'id' => $registration_id])
@@ -150,6 +154,9 @@ class DocumentInspectionController extends Controller
                             'token' => md5(uniqid(rand(), true)),
                             'status' => 'send_to_inspection_monitoring_registration'
                         ]);
+
+                        // Store Report 
+                        \App\Http\Services\Reports::storeApplicationReport($registration->id, 'manufacturing_premises', 'facility_inspection', 'pending', $registration->other_registration->company->state);
                     }
 
                     $adminName = Auth::user()->firstname .' '. Auth::user()->lastname;
@@ -181,6 +188,7 @@ class DocumentInspectionController extends Controller
 
         $registration = Registration::where(['payment' => true, 'id' => $request['registration_id'], 'user_id' => $request['user_id'], 'type' => 'hospital_pharmacy'])
         ->where('status', 'send_to_registry')
+        ->with('user')
         ->first();
 
         if($registration){
@@ -193,6 +201,9 @@ class DocumentInspectionController extends Controller
             $adminName = Auth::user()->firstname .' '. Auth::user()->lastname;
             $activity = 'Registry Document Facility Inspection Approval';
             AllActivity::storeActivity($request['registration_id'], $adminName, $activity, 'hospital_pharmacy');
+
+            // Store Report 
+            \App\Http\Services\Reports::storeApplicationReport($registration->id, 'hospital_pharmacy', 'facility_inspection', 'pending', $registration->user->state);
 
             return redirect()->route('registry-documents.index')->with('success', 'Registration Approved successfully done');
         }else{
@@ -219,6 +230,7 @@ class DocumentInspectionController extends Controller
 
         $registration = Registration::where(['payment' => true, 'id' => $request['registration_id'], 'user_id' => $request['user_id'], 'type' => 'manufacturing_premises'])
         ->where('status', 'send_to_registry')
+        ->with('user', 'other_registration.company')
         ->first();
 
         if($registration){
@@ -232,6 +244,9 @@ class DocumentInspectionController extends Controller
             $adminName = Auth::user()->firstname .' '. Auth::user()->lastname;
             $activity = 'Registry Document Facility Inspection Approval';
             AllActivity::storeActivity($request['registration_id'], $adminName, $activity, 'manufacturing_premises');
+
+            // Store Report 
+            \App\Http\Services\Reports::storeApplicationReport($registration->id, 'manufacturing_premises', 'facility_inspection', 'pending', $registration->other_registration->company->state);
 
             return redirect()->route('registry-documents.index')->with('success', 'Registration Approved successfully done');
         }else{

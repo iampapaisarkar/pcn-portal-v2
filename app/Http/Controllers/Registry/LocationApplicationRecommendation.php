@@ -166,6 +166,7 @@ class LocationApplicationRecommendation extends Controller
                     ->where(function($q){
                         $q->where('status', 'full_recommendation');
                     })
+                    ->with('user', 'other_registration.company')
                     ->first();
 
                     if($Registration->type == 'ppmv'){
@@ -178,6 +179,9 @@ class LocationApplicationRecommendation extends Controller
                             'payment' => false,
                             'banner_status' => 'pending'
                         ]);
+
+                        // Store Report 
+                        \App\Http\Services\Reports::storeApplicationReport($Registration->id, 'ppmv', 'location_inspection', 'approved', $Registration->user->state);
                     }
                     if($Registration->type == 'community_pharmacy'){
                         Registration::where(['payment' => true, 'id' => $registration_id])
@@ -189,6 +193,9 @@ class LocationApplicationRecommendation extends Controller
                             'payment' => false,
                             'banner_status' => 'pending'
                         ]);
+
+                        // Store Report 
+                        \App\Http\Services\Reports::storeApplicationReport($Registration->id, 'community_pharmacy', 'location_inspection', 'approved', $Registration->other_registration->company->state);
                     }
                     if($Registration->type == 'distribution_premises'){
                         Registration::where(['payment' => true, 'id' => $registration_id])
@@ -200,6 +207,9 @@ class LocationApplicationRecommendation extends Controller
                             'payment' => false,
                             'banner_status' => 'pending'
                         ]);
+
+                        // Store Report 
+                        \App\Http\Services\Reports::storeApplicationReport($Registration->id, 'distribution_premises', 'location_inspection', 'approved', $Registration->other_registration->company->state);
                     }
 
                     $adminName = Auth::user()->firstname .' '. Auth::user()->lastname;
@@ -233,6 +243,7 @@ class LocationApplicationRecommendation extends Controller
         ->where(function($q){
             $q->where('status', 'full_recommendation');
         })
+        ->with('user')
         ->first();
 
         if($registration){
@@ -249,6 +260,9 @@ class LocationApplicationRecommendation extends Controller
             $adminName = Auth::user()->firstname .' '. Auth::user()->lastname;
             $activity = 'Registry Location Inspection Report Approval';
             AllActivity::storeActivity($request['application_id'], $adminName, $activity, 'ppmv');
+
+            // Store Report 
+                        \App\Http\Services\Reports::storeApplicationReport($registration->id, 'ppmv', 'location_inspection', 'approved', $registration->user->state);
 
             return redirect()->route('registry-location-recommendation.index')->with('success', 'Application Approved successfully done');
         }else{
@@ -297,6 +311,7 @@ class LocationApplicationRecommendation extends Controller
         ->where(function($q){
             $q->where('status', 'full_recommendation');
         })
+        ->with('user', 'other_registration.company')
         ->first();
 
         if($registration){
@@ -313,6 +328,9 @@ class LocationApplicationRecommendation extends Controller
             $adminName = Auth::user()->firstname .' '. Auth::user()->lastname;
             $activity = 'Registry Location Inspection Report Approval';
             AllActivity::storeActivity($request['application_id'], $adminName, $activity, 'community_pharmacy');
+
+            // Store Report 
+            \App\Http\Services\Reports::storeApplicationReport($registration->id, 'community_pharmacy', 'location_inspection', 'approved', $registration->other_registration->company->state);
 
             return redirect()->route('registry-location-recommendation.index')->with('success', 'Application Approved successfully done');
         }else{
@@ -360,6 +378,7 @@ class LocationApplicationRecommendation extends Controller
         ->where(function($q){
             $q->where('status', 'full_recommendation');
         })
+        ->with('user', 'other_registration.company')
         ->first();
 
         if($registration){
@@ -376,6 +395,9 @@ class LocationApplicationRecommendation extends Controller
             $adminName = Auth::user()->firstname .' '. Auth::user()->lastname;
             $activity = 'Registry Location Inspection Report Approval';
             AllActivity::storeActivity($request['application_id'], $adminName, $activity, 'distribution_premises');
+
+            // Store Report 
+            \App\Http\Services\Reports::storeApplicationReport($registration->id, 'distribution_premises', 'location_inspection', 'approved', $registration->other_registration->company->state);
 
             return redirect()->route('registry-location-recommendation.index')->with('success', 'Application Approved successfully done');
         }else{

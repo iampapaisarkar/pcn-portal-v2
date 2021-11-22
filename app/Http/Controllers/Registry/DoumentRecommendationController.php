@@ -165,6 +165,7 @@ class DoumentRecommendationController extends Controller
                 foreach($request->check_box_bulk_action as $registration_id => $registration){
 
                     $Registration = Registration::where(['payment' => true, 'id' => $registration_id])
+                    ->with('user', 'other_registration.company')
                     ->where(function($q){
                         $q->where('status', 'partial_recommendation');
                         $q->orWhere('status', 'full_recommendation');
@@ -181,6 +182,9 @@ class DoumentRecommendationController extends Controller
                         ->update([
                             'status' => 'send_to_registration'
                         ]);
+
+                        // Store Report 
+                        \App\Http\Services\Reports::storeApplicationReport($Registration->id, 'hospital_pharmacy', 'facility_inspection', 'approved', $Registration->user->state);
                     }
                     if($Registration->type == 'ppmv'){
                         Registration::where(['payment' => true, 'id' => $registration_id])
@@ -190,6 +194,9 @@ class DoumentRecommendationController extends Controller
                         ->update([
                             'status' => 'facility_send_to_registration'
                         ]);
+
+                        // Store Report 
+                        \App\Http\Services\Reports::storeApplicationReport($Registration->id, 'ppmv', 'facility_inspection', 'approved', $Registration->user->state);
                     }
                     if($Registration->type == 'community_pharmacy'){
                         Registration::where(['payment' => true, 'id' => $registration_id])
@@ -199,6 +206,9 @@ class DoumentRecommendationController extends Controller
                         ->update([
                             'status' => 'facility_send_to_registration'
                         ]);
+
+                        // Store Report 
+                        \App\Http\Services\Reports::storeApplicationReport($Registration->id, 'community_pharmacy', 'facility_inspection', 'approved', $Registration->other_registration->company->state);
                     }
                     if($Registration->type == 'distribution_premises'){
                         Registration::where(['payment' => true, 'id' => $registration_id])
@@ -208,6 +218,9 @@ class DoumentRecommendationController extends Controller
                         ->update([
                             'status' => 'facility_send_to_registration'
                         ]);
+
+                        // Store Report 
+                        \App\Http\Services\Reports::storeApplicationReport($Registration->id, 'distribution_premises', 'facility_inspection', 'approved', $Registration->other_registration->company->state);
                     }
                     if($Registration->type == 'manufacturing_premises'){
                         Registration::where(['payment' => true, 'id' => $registration_id])
@@ -217,6 +230,9 @@ class DoumentRecommendationController extends Controller
                         ->update([
                             'status' => 'facility_send_to_registration'
                         ]);
+
+                        // Store Report 
+                        \App\Http\Services\Reports::storeApplicationReport($Registration->id, 'manufacturing_premises', 'facility_inspection', 'approved', $Registration->other_registration->company->state);
                     }
 
                     $adminName = Auth::user()->firstname .' '. Auth::user()->lastname;
@@ -251,6 +267,7 @@ class DoumentRecommendationController extends Controller
             $q->where('status', 'partial_recommendation');
             $q->orWhere('status', 'full_recommendation');
         })
+        ->with('user')
         ->first();
 
         if($registration){
@@ -266,6 +283,9 @@ class DoumentRecommendationController extends Controller
             $adminName = Auth::user()->firstname .' '. Auth::user()->lastname;
             $activity = 'Registry Document Facility Inspection Report Approval';
             AllActivity::storeActivity($request['registration_id'], $adminName, $activity, 'hospital_pharmacy');
+
+            // Store Report 
+            \App\Http\Services\Reports::storeApplicationReport($registration->id, 'hospital_pharmacy', 'facility_inspection', 'approved', $registration->user->state);
 
             return redirect()->route('registry-recommendation.index')->with('success', 'Registration Approved successfully done');
         }else{
@@ -313,6 +333,7 @@ class DoumentRecommendationController extends Controller
         ->where(function($q){
             $q->where('status', 'facility_full_recommendation');
         })
+        ->with('user')
         ->first();
 
         if($registration){
@@ -327,6 +348,9 @@ class DoumentRecommendationController extends Controller
             $adminName = Auth::user()->firstname .' '. Auth::user()->lastname;
             $activity = 'Registry Document Facility Inspection Report Approval';
             AllActivity::storeActivity($request['registration_id'], $adminName, $activity, 'ppmv');
+
+            // Store Report 
+            \App\Http\Services\Reports::storeApplicationReport($registration->id, 'ppmv', 'facility_inspection', 'approved', $registration->user->state);
 
             return redirect()->route('registry-recommendation.index')->with('success', 'Registration Approved successfully done');
         }else{
@@ -376,6 +400,7 @@ class DoumentRecommendationController extends Controller
         ->where(function($q){
             $q->where('status', 'facility_full_recommendation');
         })
+        ->with('user', 'other_registration.company')
         ->first();
 
         if($registration){
@@ -390,6 +415,9 @@ class DoumentRecommendationController extends Controller
             $adminName = Auth::user()->firstname .' '. Auth::user()->lastname;
             $activity = 'Registry Document Facility Inspection Report Approval';
             AllActivity::storeActivity($request['registration_id'], $adminName, $activity, 'community_pharmacy');
+
+             // Store Report 
+             \App\Http\Services\Reports::storeApplicationReport($registration->id, 'community_pharmacy', 'facility_inspection', 'approved', $registration->other_registration->company->state);
 
             return redirect()->route('registry-recommendation.index')->with('success', 'Registration Approved successfully done');
         }else{
@@ -438,6 +466,7 @@ class DoumentRecommendationController extends Controller
         ->where(function($q){
             $q->where('status', 'facility_full_recommendation');
         })
+        ->with('user', 'other_registration.company')
         ->first();
 
         if($registration){
@@ -452,6 +481,9 @@ class DoumentRecommendationController extends Controller
             $adminName = Auth::user()->firstname .' '. Auth::user()->lastname;
             $activity = 'Registry Document Facility Inspection Report Approval';
             AllActivity::storeActivity($request['registration_id'], $adminName, $activity, 'distribution_premises');
+
+            // Store Report 
+            \App\Http\Services\Reports::storeApplicationReport($registration->id, 'distribution_premises', 'facility_inspection', 'approved', $registration->other_registration->company->state);
 
             return redirect()->route('registry-recommendation.index')->with('success', 'Registration Approved successfully done');
         }else{
@@ -499,6 +531,7 @@ class DoumentRecommendationController extends Controller
         ->where(function($q){
             $q->where('status', 'facility_full_recommendation');
         })
+        ->with('user', 'other_registration.company')
         ->first();
 
         if($registration){
@@ -513,6 +546,9 @@ class DoumentRecommendationController extends Controller
             $adminName = Auth::user()->firstname .' '. Auth::user()->lastname;
             $activity = 'Registry Document Facility Inspection Report Approval';
             AllActivity::storeActivity($request['registration_id'], $adminName, $activity, 'manufacturing_premises');
+
+            // Store Report 
+            \App\Http\Services\Reports::storeApplicationReport($registration->id, 'manufacturing_premises', 'facility_inspection', 'approved', $registration->other_registration->company->state);
 
             return redirect()->route('registry-recommendation.index')->with('success', 'Registration Approved successfully done');
         }else{
