@@ -24,8 +24,8 @@ class InvoiceController extends Controller
 
         if($authUser->hasRole(['sadmin'])){
             
-            if($request->page){
-                $perPage = (integer) $request->page;
+            if($request->per_page){
+                $perPage = (integer) $request->per_page;
             }else{
                 $perPage = 2;
             }
