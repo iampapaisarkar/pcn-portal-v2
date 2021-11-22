@@ -59,6 +59,9 @@ class RegistrationController extends Controller
 
             $response = Checkout::checkoutManufacturing($application = ['id' => $Registration->id], 'manufacturing_premises');
 
+            // Store Report 
+            \App\Http\Services\Reports::storeApplicationReport($Registration->id, 'manufacturing_premises', 'document_review', 'pending', Auth::user()->company()->first()->state);
+
             DB::commit();
 
             if($response['success']){

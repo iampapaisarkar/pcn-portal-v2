@@ -76,6 +76,9 @@ class ApplicationController extends Controller
 
             $response = Checkout::checkoutPpmvLocation($application = ['id' => $application->id], 'ppmv');
 
+            // Store Report 
+            \App\Http\Services\Reports::storeApplicationReport($Registration->id, 'ppmv', 'document_review', 'pending', Auth::user()->state);
+
             DB::commit();
 
             if($response['success']){

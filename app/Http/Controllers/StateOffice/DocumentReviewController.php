@@ -161,6 +161,9 @@ class DocumentReviewController extends Controller
             $activity = 'State Officer Document Verification Approval';
             AllActivity::storeActivity($request['registration_id'], $adminName, $activity, 'hospital_pharmacy');
 
+            // Store Report 
+            \App\Http\Services\Reports::storeApplicationReport($registration->id, 'hospital_pharmacy', 'document_review', 'approved', $registration->user->state);
+
             return redirect()->route('state-office-documents.index')->with('success', 'Registration Approved successfully done');
         }else{
             return abort(404);
@@ -244,6 +247,9 @@ class DocumentReviewController extends Controller
             $adminName = Auth::user()->firstname .' '. Auth::user()->lastname;
             $activity = 'State Officer Document Verification Approval';
             AllActivity::storeActivity($request['application_id'], $adminName, $activity, 'ppmv');
+
+            // Store Report 
+            \App\Http\Services\Reports::storeApplicationReport($registration->id, 'ppmv', 'document_review', 'approved', $registration->user->state);
 
             return redirect()->route('state-office-documents.index')->with('success', 'Registration Approved successfully done');
         }else{
@@ -330,6 +336,9 @@ class DocumentReviewController extends Controller
             $activity = 'State Officer Document Verification Approval';
             AllActivity::storeActivity($request['application_id'], $adminName, $activity, 'community_pharmacy');
 
+            // Store Report 
+            \App\Http\Services\Reports::storeApplicationReport($registration->id, 'community_pharmacy', 'document_review', 'approved', $registration->other_registration->company->state);
+
             return redirect()->route('state-office-documents.index')->with('success', 'Registration Approved successfully done');
         }else{
             return abort(404);
@@ -415,6 +424,9 @@ class DocumentReviewController extends Controller
             $activity = 'State Officer Document Verification Approval';
             AllActivity::storeActivity($request['application_id'], $adminName, $activity, 'distribution_premises');
 
+            // Store Report 
+            \App\Http\Services\Reports::storeApplicationReport($registration->id, 'distribution_premises', 'document_review', 'approved', $registration->other_registration->company->state);
+
             return redirect()->route('state-office-documents.index')->with('success', 'Registration Approved successfully done');
         }else{
             return abort(404);
@@ -498,6 +510,9 @@ class DocumentReviewController extends Controller
             $adminName = Auth::user()->firstname .' '. Auth::user()->lastname;
             $activity = 'State Officer Document Verification Approval';
             AllActivity::storeActivity($request['application_id'], $adminName, $activity, 'manufacturing_premises');
+
+            // Store Report 
+            \App\Http\Services\Reports::storeApplicationReport($registration->id, 'manufacturing_premises', 'document_review', 'approved', $registration->other_registration->company->state);
 
             return redirect()->route('state-office-documents.index')->with('success', 'Registration Approved successfully done');
         }else{

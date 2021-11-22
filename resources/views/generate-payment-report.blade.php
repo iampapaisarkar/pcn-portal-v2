@@ -71,7 +71,7 @@
                         <option value="">Select Status</option>
                         <option value="all">All</option>
                         <option value="pending">Pending</option>		
-                        <option value="approved">Approved</option>
+                        <option value="paid">Paid</option>
                     </select>
                     @error('status')
                     <span class="invalid-feedback" role="alert">

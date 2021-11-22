@@ -60,6 +60,9 @@ class RegistrationController extends Controller
 
             $response = Checkout::checkoutHospitalPharmacy($application = ['id' => $Registration->id], 'hospital_pharmacy');
 
+            // Store Report 
+            \App\Http\Services\Reports::storeApplicationReport($Registration->id, 'hospital_pharmacy', 'document_review', 'pending', Auth::user()->state);
+
             DB::commit();
 
             if($response['success']){

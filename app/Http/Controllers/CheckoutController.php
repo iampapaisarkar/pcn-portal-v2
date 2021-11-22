@@ -55,7 +55,7 @@ class CheckoutController extends Controller
                 ]);
 
                 // Store Report 
-                \App\Http\Services\Reports::storePaymentReport($order->id, 'hospital_pharmacy', 'facility_inspection', 'approved', Auth::user()->state);
+                \App\Http\Services\Reports::storePaymentReport($order->id, 'hospital_pharmacy', 'facility_inspection', 'paid', Auth::user()->state);
 
                 $data = [
                     'order_id' => $order->order_id,
@@ -73,7 +73,7 @@ class CheckoutController extends Controller
                 ]);
 
                 // Store Report 
-                \App\Http\Services\Reports::storePaymentReport($order->id, 'hospital_pharmacy', 'renewal_inspection', 'approved', Auth::user()->state);
+                \App\Http\Services\Reports::storePaymentReport($order->id, 'hospital_pharmacy', 'renewal_inspection', 'paid', Auth::user()->state);
 
                 $data = [
                     'order_id' => $order->order_id,
@@ -91,7 +91,7 @@ class CheckoutController extends Controller
                 ]);
 
                 // Store Report 
-                \App\Http\Services\Reports::storePaymentReport($order->id, 'ppmv', 'location_inspection', 'approved', Auth::user()->state);
+                \App\Http\Services\Reports::storePaymentReport($order->id, 'ppmv', 'location_inspection', 'paid', Auth::user()->state);
 
                 $data = [
                     'order_id' => $order->order_id,
@@ -110,7 +110,7 @@ class CheckoutController extends Controller
                 ]);
 
                 // Store Report 
-                \App\Http\Services\Reports::storePaymentReport($order->id, 'ppmv', 'location_approval_banner', 'approved', Auth::user()->state);
+                \App\Http\Services\Reports::storePaymentReport($order->id, 'ppmv', 'location_approval_banner', 'paid', Auth::user()->state);
 
                 $data = [
                     'order_id' => $order->order_id,
@@ -128,7 +128,7 @@ class CheckoutController extends Controller
                 ]);
 
                 // Store Report 
-                \App\Http\Services\Reports::storePaymentReport($order->id, 'ppmv', 'facility_inspection', 'approved', Auth::user()->state);
+                \App\Http\Services\Reports::storePaymentReport($order->id, 'ppmv', 'facility_inspection', 'paid', Auth::user()->state);
 
                 $data = [
                     'order_id' => $order->order_id,
@@ -146,7 +146,7 @@ class CheckoutController extends Controller
                 ]);
 
                 // Store Report 
-                \App\Http\Services\Reports::storePaymentReport($order->id, 'ppmv', 'renewal_inspection', 'approved', Auth::user()->state);
+                \App\Http\Services\Reports::storePaymentReport($order->id, 'ppmv', 'renewal_inspection', 'paid', Auth::user()->state);
 
                 $data = [
                     'order_id' => $order->order_id,
@@ -164,7 +164,7 @@ class CheckoutController extends Controller
                 ]);
 
                 // Store Report 
-                \App\Http\Services\Reports::storePaymentReport($order->id, 'community_pharmacy', 'location_inspection', 'approved', Auth::user()->company()->first()->state);
+                \App\Http\Services\Reports::storePaymentReport($order->id, 'community_pharmacy', 'location_inspection', 'paid', Auth::user()->company()->first()->state);
 
                 $data = [
                     'order_id' => $order->order_id,
@@ -183,7 +183,7 @@ class CheckoutController extends Controller
                 ]);
 
                  // Store Report 
-                 \App\Http\Services\Reports::storePaymentReport($order->id, 'community_pharmacy', 'location_approval_banner', 'approved', Auth::user()->company()->first()->state);
+                 \App\Http\Services\Reports::storePaymentReport($order->id, 'community_pharmacy', 'location_approval_banner', 'paid', Auth::user()->company()->first()->state);
 
                 $data = [
                     'order_id' => $order->order_id,
@@ -201,7 +201,7 @@ class CheckoutController extends Controller
                 ]);
 
                 // Store Report 
-                \App\Http\Services\Reports::storePaymentReport($order->id, 'community_pharmacy', 'renewal_inspection', 'approved', Auth::user()->company()->first()->state);
+                \App\Http\Services\Reports::storePaymentReport($order->id, 'community_pharmacy', 'renewal_inspection', 'paid', Auth::user()->company()->first()->state);
 
                 $data = [
                     'order_id' => $order->order_id,
@@ -219,7 +219,7 @@ class CheckoutController extends Controller
                 ]);
 
                 // Store Report 
-                \App\Http\Services\Reports::storePaymentReport($order->id, 'distribution_premises', 'location_inspection', 'approved', Auth::user()->company()->first()->state);
+                \App\Http\Services\Reports::storePaymentReport($order->id, 'distribution_premises', 'location_inspection', 'paid', Auth::user()->company()->first()->state);
 
                 $data = [
                     'order_id' => $order->order_id,
@@ -238,7 +238,7 @@ class CheckoutController extends Controller
                 ]);
 
                 // Store Report 
-                \App\Http\Services\Reports::storePaymentReport($order->id, 'distribution_premises', 'location_approval_banner', 'approved', Auth::user()->company()->first()->state);
+                \App\Http\Services\Reports::storePaymentReport($order->id, 'distribution_premises', 'location_approval_banner', 'paid', Auth::user()->company()->first()->state);
 
                 $data = [
                     'order_id' => $order->order_id,
@@ -256,7 +256,7 @@ class CheckoutController extends Controller
                 ]);
 
                 // Store Report 
-                \App\Http\Services\Reports::storePaymentReport($order->id, 'community_pharmacy', 'facility_inspection', 'approved', Auth::user()->company()->first()->state);
+                \App\Http\Services\Reports::storePaymentReport($order->id, 'community_pharmacy', 'facility_inspection', 'paid', Auth::user()->company()->first()->state);
 
                 $data = [
                     'order_id' => $order->order_id,
@@ -274,7 +274,7 @@ class CheckoutController extends Controller
                 ]);
 
                 // Store Report 
-                \App\Http\Services\Reports::storePaymentReport($order->id, 'distribution_premises', 'facility_inspection', 'approved', Auth::user()->company()->first()->state);
+                \App\Http\Services\Reports::storePaymentReport($order->id, 'distribution_premises', 'facility_inspection', 'paid', Auth::user()->company()->first()->state);
 
                 $data = [
                     'order_id' => $order->order_id,
@@ -292,7 +292,7 @@ class CheckoutController extends Controller
                 ]);
 
                 // Store Report 
-                \App\Http\Services\Reports::storePaymentReport($order->id, 'distribution_premises', 'renewal_inspection', 'approved', Auth::user()->company()->first()->state);
+                \App\Http\Services\Reports::storePaymentReport($order->id, 'distribution_premises', 'renewal_inspection', 'paid', Auth::user()->company()->first()->state);
 
                 $data = [
                     'order_id' => $order->order_id,
@@ -310,7 +310,7 @@ class CheckoutController extends Controller
                 ]);
 
                 // Store Report 
-                \App\Http\Services\Reports::storePaymentReport($order->id, 'manufacturing_premises', 'facility_inspection', 'approved', Auth::user()->company()->first()->state);
+                \App\Http\Services\Reports::storePaymentReport($order->id, 'manufacturing_premises', 'facility_inspection', 'paid', Auth::user()->company()->first()->state);
 
                 $data = [
                     'order_id' => $order->order_id,
@@ -328,7 +328,7 @@ class CheckoutController extends Controller
                 ]);
 
                 // Store Report 
-                \App\Http\Services\Reports::storePaymentReport($order->id, 'manufacturing_premises', 'renewal_inspection', 'approved', Auth::user()->company()->first()->state);
+                \App\Http\Services\Reports::storePaymentReport($order->id, 'manufacturing_premises', 'renewal_inspection', 'paid', Auth::user()->company()->first()->state);
 
                 $data = [
                     'order_id' => $order->order_id,
