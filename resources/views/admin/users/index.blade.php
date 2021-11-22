@@ -45,6 +45,7 @@
                         <th>State</th>
                         <th>Status</th>
                         <th>Action</th>
+                        <th>Delete</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -59,7 +60,16 @@
                         @else
                         <td><span class="badge badge-warning">DISABLED</span></td>
                         @endif
-                        <td><a href="{{route('users.show', $user->id)}}"><button class="btn btn-info" type="button">VIEW</button></a></td>
+                        <td>
+                            <a href="{{route('users.show', $user->id)}}"><button class="btn btn-info" type="button">VIEW</button></a>
+                        </td>
+                        <td>
+                            <form id="delete-form" action="{{ route('users.destroy', $user->id) }}" method="POST">
+                            @csrf
+                            @method('DELETE')
+                                <a onclick="deleteUser(event)" class="btn btn-danger" href="#">DELETE</a>
+                            </form>
+                        </td>
                     </tr>
                     @endforeach
                 </tbody>
@@ -104,4 +114,30 @@
         }
     }
     </script>
+
+    
+<script>
+	function deleteUser(event){
+		event.preventDefault();
+
+		$.confirm({
+			title: 'Delete',
+			content: 'Are you sure want to delete this user?',
+			buttons: {   
+				ok: {
+					text: "YES",
+					btnClass: 'btn-primary',
+					keys: ['enter'],
+					action: function(){
+						document.getElementById('delete-form').submit();
+					}
+				},
+				cancel: function(){
+						console.log('the user clicked cancel');
+				}
+			}
+		});
+
+	}
+</script>
 @endsection

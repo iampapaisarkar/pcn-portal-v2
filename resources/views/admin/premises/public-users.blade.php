@@ -41,6 +41,7 @@
                         <th>Email</th>
                         <th>Type</th>
                         <th>State</th>
+                        <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -50,6 +51,13 @@
                         <td>{{$user->email}}</td>
                         <td>{{$user->role->role}}</td>
                         <td>{{$user->user_state ? $user->user_state->name : '-'}}</td>
+                        <td>
+                            <form id="delete-form" action="{{ route('public-users.destroy', $user->id) }}" method="POST">
+                            @csrf
+                            @method('DELETE')
+                                <a onclick="deleteUser(event)" class="btn btn-danger" href="#">DELETE</a>
+                            </form>
+                        </td>
                     </tr>
                     @endforeach
                 </tbody>
@@ -59,6 +67,7 @@
                         <th>Email</th>
                         <th>Type</th>
                         <th>State</th>
+                        <th>Action</th>
                     </tr>
                 </tfoot>
             </table>
@@ -92,4 +101,29 @@
         }
     }
     </script>
+
+<script>
+	function deleteUser(event){
+		event.preventDefault();
+
+		$.confirm({
+			title: 'Delete',
+			content: 'Are you sure want to delete this user?',
+			buttons: {   
+				ok: {
+					text: "YES",
+					btnClass: 'btn-primary',
+					keys: ['enter'],
+					action: function(){
+						document.getElementById('delete-form').submit();
+					}
+				},
+				cancel: function(){
+						console.log('the user clicked cancel');
+				}
+			}
+		});
+
+	}
+</script>
 @endsection
