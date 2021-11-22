@@ -12,4 +12,13 @@ class Report extends Model
     protected $fillable = [
         'type', 'application_id', 'application_type', 'activity', 'status', 'state_id'
     ];
+
+    public function application() {
+        return $this->hasOne(Registration::class,'id', 'application_id')
+        ->where('type', 'application');
+    }
+
+    public function state() {
+        return $this->hasOne(State::class,'id', 'state_id');
+    }
 }
