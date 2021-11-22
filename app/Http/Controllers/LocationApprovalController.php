@@ -74,6 +74,9 @@ class LocationApprovalController extends Controller
                 $response = Checkout::checkoutDistribution($application = ['id' => $Registration->id], $type);
             }
 
+            // Store Report 
+            \App\Http\Services\Reports::storeApplicationReport($Registration->id, $type, 'document_review', 'pending', Auth::user()->company()->first()->state);
+
             DB::commit();
 
             if($response['success']){

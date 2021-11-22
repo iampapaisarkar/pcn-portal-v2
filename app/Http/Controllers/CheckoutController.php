@@ -54,6 +54,9 @@ class CheckoutController extends Controller
                     'payment' => true
                 ]);
 
+                // Store Report 
+                \App\Http\Services\Reports::storePaymentReport($order->id, 'hospital_pharmacy', 'facility_inspection', 'approved', Auth::user()->state);
+
                 $data = [
                     'order_id' => $order->order_id,
                     'amount' => $order->amount,
@@ -69,6 +72,9 @@ class CheckoutController extends Controller
                     'payment' => true
                 ]);
 
+                // Store Report 
+                \App\Http\Services\Reports::storePaymentReport($order->id, 'hospital_pharmacy', 'renewal_inspection', 'approved', Auth::user()->state);
+
                 $data = [
                     'order_id' => $order->order_id,
                     'amount' => $order->amount,
@@ -83,6 +89,9 @@ class CheckoutController extends Controller
                 Registration::where(['id' => $order->application_id, 'user_id' => Auth::user()->id, 'type' => 'ppmv'])->update([
                     'payment' => true
                 ]);
+
+                // Store Report 
+                \App\Http\Services\Reports::storePaymentReport($order->id, 'ppmv', 'location_inspection', 'approved', Auth::user()->state);
 
                 $data = [
                     'order_id' => $order->order_id,
@@ -100,6 +109,9 @@ class CheckoutController extends Controller
                     'banner_status' => 'paid'
                 ]);
 
+                // Store Report 
+                \App\Http\Services\Reports::storePaymentReport($order->id, 'ppmv', 'location_approval_banner', 'approved', Auth::user()->state);
+
                 $data = [
                     'order_id' => $order->order_id,
                     'amount' => $order->amount,
@@ -114,6 +126,9 @@ class CheckoutController extends Controller
                 Registration::where(['id' => $order->application_id, 'user_id' => Auth::user()->id, 'type' => 'ppmv'])->update([
                     'payment' => true
                 ]);
+
+                // Store Report 
+                \App\Http\Services\Reports::storePaymentReport($order->id, 'ppmv', 'facility_inspection', 'approved', Auth::user()->state);
 
                 $data = [
                     'order_id' => $order->order_id,
@@ -130,6 +145,9 @@ class CheckoutController extends Controller
                     'payment' => true
                 ]);
 
+                // Store Report 
+                \App\Http\Services\Reports::storePaymentReport($order->id, 'ppmv', 'renewal_inspection', 'approved', Auth::user()->state);
+
                 $data = [
                     'order_id' => $order->order_id,
                     'amount' => $order->amount,
@@ -144,6 +162,9 @@ class CheckoutController extends Controller
                 Registration::where(['id' => $order->application_id, 'user_id' => Auth::user()->id, 'type' => 'community_pharmacy'])->update([
                     'payment' => true
                 ]);
+
+                // Store Report 
+                \App\Http\Services\Reports::storePaymentReport($order->id, 'community_pharmacy', 'location_inspection', 'approved', Auth::user()->company()->first()->state);
 
                 $data = [
                     'order_id' => $order->order_id,
@@ -161,6 +182,9 @@ class CheckoutController extends Controller
                     'banner_status' => 'paid'
                 ]);
 
+                 // Store Report 
+                 \App\Http\Services\Reports::storePaymentReport($order->id, 'community_pharmacy', 'location_approval_banner', 'approved', Auth::user()->company()->first()->state);
+
                 $data = [
                     'order_id' => $order->order_id,
                     'amount' => $order->amount,
@@ -176,6 +200,9 @@ class CheckoutController extends Controller
                     'payment' => true
                 ]);
 
+                // Store Report 
+                \App\Http\Services\Reports::storePaymentReport($order->id, 'community_pharmacy', 'renewal_inspection', 'approved', Auth::user()->company()->first()->state);
+
                 $data = [
                     'order_id' => $order->order_id,
                     'amount' => $order->amount,
@@ -190,6 +217,9 @@ class CheckoutController extends Controller
                 Registration::where(['id' => $order->application_id, 'user_id' => Auth::user()->id, 'type' => 'distribution_premises'])->update([
                     'payment' => true
                 ]);
+
+                // Store Report 
+                \App\Http\Services\Reports::storePaymentReport($order->id, 'distribution_premises', 'location_inspection', 'approved', Auth::user()->company()->first()->state);
 
                 $data = [
                     'order_id' => $order->order_id,
@@ -207,6 +237,9 @@ class CheckoutController extends Controller
                     'banner_status' => 'paid'
                 ]);
 
+                // Store Report 
+                \App\Http\Services\Reports::storePaymentReport($order->id, 'distribution_premises', 'location_approval_banner', 'approved', Auth::user()->company()->first()->state);
+
                 $data = [
                     'order_id' => $order->order_id,
                     'amount' => $order->amount,
@@ -221,6 +254,9 @@ class CheckoutController extends Controller
                 Registration::where(['id' => $order->application_id, 'user_id' => Auth::user()->id, 'type' => 'community_pharmacy'])->update([
                     'payment' => true
                 ]);
+
+                // Store Report 
+                \App\Http\Services\Reports::storePaymentReport($order->id, 'community_pharmacy', 'facility_inspection', 'approved', Auth::user()->company()->first()->state);
 
                 $data = [
                     'order_id' => $order->order_id,
@@ -237,6 +273,9 @@ class CheckoutController extends Controller
                     'payment' => true
                 ]);
 
+                // Store Report 
+                \App\Http\Services\Reports::storePaymentReport($order->id, 'distribution_premises', 'facility_inspection', 'approved', Auth::user()->company()->first()->state);
+
                 $data = [
                     'order_id' => $order->order_id,
                     'amount' => $order->amount,
@@ -251,6 +290,9 @@ class CheckoutController extends Controller
                 Renewal::where(['id' => $order->application_id, 'user_id' => Auth::user()->id, 'type' => 'distribution_premises_renewal'])->update([
                     'payment' => true
                 ]);
+
+                // Store Report 
+                \App\Http\Services\Reports::storePaymentReport($order->id, 'distribution_premises', 'renewal_inspection', 'approved', Auth::user()->company()->first()->state);
 
                 $data = [
                     'order_id' => $order->order_id,
@@ -267,6 +309,9 @@ class CheckoutController extends Controller
                     'payment' => true
                 ]);
 
+                // Store Report 
+                \App\Http\Services\Reports::storePaymentReport($order->id, 'manufacturing_premises', 'facility_inspection', 'approved', Auth::user()->company()->first()->state);
+
                 $data = [
                     'order_id' => $order->order_id,
                     'amount' => $order->amount,
@@ -281,6 +326,9 @@ class CheckoutController extends Controller
                 Renewal::where(['id' => $order->application_id, 'user_id' => Auth::user()->id, 'type' => 'manufacturing_premises_renewal'])->update([
                     'payment' => true
                 ]);
+
+                // Store Report 
+                \App\Http\Services\Reports::storePaymentReport($order->id, 'manufacturing_premises', 'renewal_inspection', 'approved', Auth::user()->company()->first()->state);
 
                 $data = [
                     'order_id' => $order->order_id,

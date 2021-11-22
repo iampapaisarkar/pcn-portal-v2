@@ -67,6 +67,9 @@ class Checkout
                 $response = ['success' => false];
             }
 
+            // Store Report 
+            \App\Http\Services\Reports::storePaymentReport($payment->id, 'hospital_pharmacy', 'facility_inspection', 'pending', Auth::user()->state);
+
             DB::commit();
 
             return $response;
@@ -142,6 +145,9 @@ class Checkout
                 $response = ['success' => false];
             }
 
+            // Store Report 
+            \App\Http\Services\Reports::storePaymentReport($payment->id, 'hospital_pharmacy', 'renewal_inspection', 'pending', Auth::user()->state);
+
             DB::commit();
 
             return $response;
@@ -198,6 +204,9 @@ class Checkout
                 $response = ['success' => false];
             }
 
+            // Store Report 
+            \App\Http\Services\Reports::storePaymentReport($payment->id, 'ppmv', 'location_inspection', 'pending', Auth::user()->state);
+
             DB::commit();
 
             return $response;
@@ -253,6 +262,9 @@ class Checkout
             }else{
                 $response = ['success' => false];
             }
+
+            // Store Report 
+            \App\Http\Services\Reports::storePaymentReport($payment->id, 'ppmv', 'location_approval_banner', 'pending', Auth::user()->state);
 
             DB::commit();
 
@@ -319,6 +331,9 @@ class Checkout
                 $response = ['success' => false];
             }
 
+            // Store Report 
+            \App\Http\Services\Reports::storePaymentReport($payment->id, 'ppmv', 'facility_inspection', 'pending', Auth::user()->state);
+
             DB::commit();
 
             return $response;
@@ -382,6 +397,9 @@ class Checkout
                 $response = ['success' => false];
             }
 
+            // Store Report 
+            \App\Http\Services\Reports::storePaymentReport($payment->id, 'ppmv', 'renewal_inspection', 'pending', Auth::user()->state);
+
             DB::commit();
 
             return $response;
@@ -440,6 +458,9 @@ class Checkout
             }else{
                 $response = ['success' => false];
             }
+
+            // Store Report 
+            \App\Http\Services\Reports::storePaymentReport($payment->id, 'community_pharmacy', 'location_inspection', 'pending', Auth::user()->company()->first()->state);
 
             DB::commit();
 
@@ -504,6 +525,9 @@ class Checkout
                 $response = ['success' => false];
             }
 
+            // Store Report 
+            \App\Http\Services\Reports::storePaymentReport($payment->id, 'distribution_premises', 'location_inspection', 'pending', Auth::user()->company()->first()->state);
+
             DB::commit();
 
             return $response;
@@ -560,6 +584,9 @@ class Checkout
             }else{
                 $response = ['success' => false];
             }
+
+            // Store Report 
+            \App\Http\Services\Reports::storePaymentReport($payment->id, 'community_pharmacy', 'location_approval_banner', 'pending', Auth::user()->company()->first()->state);
 
             DB::commit();
 
@@ -620,6 +647,9 @@ class Checkout
                 $response = ['success' => false];
             }
 
+            // Store Report 
+            \App\Http\Services\Reports::storePaymentReport($payment->id, 'community_pharmacy', 'facility_inspection', 'pending', Auth::user()->company()->first()->state);
+
             DB::commit();
 
             return $response;
@@ -675,6 +705,9 @@ class Checkout
             }else{
                 $response = ['success' => false];
             }
+
+            // Store Report 
+            \App\Http\Services\Reports::storePaymentReport($payment->id, 'distribution_premises', 'location_approval_banner', 'pending', Auth::user()->company()->first()->state);
 
             DB::commit();
 
@@ -739,6 +772,9 @@ class Checkout
                 $response = ['success' => false];
             }
 
+            // Store Report 
+            \App\Http\Services\Reports::storePaymentReport($payment->id, 'distribution_premises', 'facility_inspection', 'pending', Auth::user()->company()->first()->state);
+
             DB::commit();
 
             return $response;
@@ -796,6 +832,9 @@ class Checkout
             }else{
                 $response = ['success' => false];
             }
+
+            // Store Report 
+            \App\Http\Services\Reports::storePaymentReport($payment->id, 'community_pharmacy', 'renewal_inspection', 'pending', Auth::user()->company()->first()->state);
 
             DB::commit();
 
@@ -863,6 +902,9 @@ class Checkout
                 $response = ['success' => false];
             }
 
+            // Store Report 
+            \App\Http\Services\Reports::storePaymentReport($payment->id, 'distribution_premises', 'renewal_inspection', 'pending', Auth::user()->company()->first()->state);
+
             DB::commit();
 
             return $response;
@@ -927,6 +969,9 @@ class Checkout
             }else{
                 $response = ['success' => false];
             }
+
+            // Store Report 
+            \App\Http\Services\Reports::storePaymentReport($payment->id, 'manufacturing_premises', 'facility_inspection', 'pending', Auth::user()->company()->first()->state);
 
             DB::commit();
 
@@ -993,6 +1038,9 @@ class Checkout
             }else{
                 $response = ['success' => false];
             }
+
+            // Store Report 
+            \App\Http\Services\Reports::storePaymentReport($payment->id, 'manufacturing_premises', 'renewal_inspection', 'pending', Auth::user()->company()->first()->state);
 
             DB::commit();
 

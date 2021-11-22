@@ -52,7 +52,6 @@
                     class="form-control @error('activity') is-invalid @enderror">
                         <option value="">Select Activity</option>
                         <option value="all">All</option>
-                        <option value="document_review">Document Review</option>		
                         <option value="location_inspection">Location Inspection</option>
                         <option value="location_approval_banner">Location Approval Banner</option>
                         <option value="facility_inspection">Facility Inspection</option>
