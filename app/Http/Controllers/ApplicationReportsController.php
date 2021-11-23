@@ -67,6 +67,9 @@ class ApplicationReportsController extends Controller
             $reports = $reports->where('state_id', $request->state);
         }
 
+        dd($reports->get());
+
+
         if($request->category != "all"){
             $reports = $reports->where('application_type', $request->category);
         }
@@ -82,7 +85,6 @@ class ApplicationReportsController extends Controller
         $reports = $reports->whereBetween('created_at', [\Carbon\Carbon::parse($request->date_from), \Carbon\Carbon::parse($request->date_to)]);
         $reports = $reports->select('reports.*')->get();
 
-        dd($reports);
 
         if(!$reports->isEmpty()){
             $array = array();
