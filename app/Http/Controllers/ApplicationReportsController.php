@@ -62,25 +62,24 @@ class ApplicationReportsController extends Controller
             'approvedBy'
         );
 
-        if($request->state != "all"){
-            $reports = $reports->where('state_id', $request->state);
-        }
+        // if($request->state != "all"){
+        //     $reports = $reports->where('state_id', $request->state);
+        // }
 
-        if($request->category != "all"){
-            $reports = $reports->where('application_type', $request->category);
-        }
+        // if($request->category != "all"){
+        //     $reports = $reports->where('application_type', $request->category);
+        // }
 
-        if($request->activity != "all"){
-            $reports = $reports->where('activity', $request->activity);
-        }
+        // if($request->activity != "all"){
+        //     $reports = $reports->where('activity', $request->activity);
+        // }
 
-        if($request->status != "all"){
-            $reports = $reports->where('status', $request->status);
-        }
+        // if($request->status != "all"){
+        //     $reports = $reports->where('status', $request->status);
+        // }
 
         $reports = $reports->whereBetween('created_at', [\Carbon\Carbon::parse($request->date_from), \Carbon\Carbon::parse($request->date_to)]);
-        $reports = $reports->select('reports.*')
-        ->get();
+        $reports = $reports->select('reports.*')->get();
 
         dd($reports);
 
