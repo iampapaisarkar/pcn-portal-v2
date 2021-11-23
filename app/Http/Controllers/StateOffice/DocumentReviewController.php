@@ -203,6 +203,9 @@ class DocumentReviewController extends Controller
             ];
             EmailSendJOB::dispatch($data);
 
+            // Store Report 
+            \App\Http\Services\Reports::storeApplicationReport($registration->id, 'hospital_pharmacy', 'document_review', 'queried', $registration->user->state, Auth::user()->id);
+
             return redirect()->route('state-office-documents.index')->with('success', 'Registration Queried successfully done');
         }else{
             return abort(404);
@@ -289,6 +292,9 @@ class DocumentReviewController extends Controller
                 'query' => $request['query'],
             ];
             EmailSendJOB::dispatch($data);
+
+            // Store Report 
+            \App\Http\Services\Reports::storeApplicationReport($registration->id, 'ppmv',  'document_review', 'queried', $registration->user->state, Auth::user()->id);
 
             return redirect()->route('state-office-documents.index')->with('success', 'Registration Queried successfully done');
         }else{
@@ -378,6 +384,9 @@ class DocumentReviewController extends Controller
             ];
             EmailSendJOB::dispatch($data);
 
+            // Store Report 
+            \App\Http\Services\Reports::storeApplicationReport($registration->id, 'community_pharmacy', 'document_review', 'queried', $registration->other_registration->company->state, Auth::user()->id);
+
             return redirect()->route('state-office-documents.index')->with('success', 'Registration Queried successfully done');
         }else{
             return abort(404);
@@ -466,6 +475,9 @@ class DocumentReviewController extends Controller
             ];
             EmailSendJOB::dispatch($data);
 
+            // Store Report 
+            \App\Http\Services\Reports::storeApplicationReport($registration->id, 'distribution_premises', 'document_review', 'queried', $registration->other_registration->company->state, Auth::user()->id);
+
             return redirect()->route('state-office-documents.index')->with('success', 'Registration Queried successfully done');
         }else{
             return abort(404);
@@ -552,6 +564,9 @@ class DocumentReviewController extends Controller
                 'query' => $request['query'],
             ];
             EmailSendJOB::dispatch($data);
+
+            // Store Report 
+            \App\Http\Services\Reports::storeApplicationReport($registration->id, 'manufacturing_premises', 'document_review', 'queried', $registration->other_registration->company->state, Auth::user()->id);
 
             return redirect()->route('state-office-documents.index')->with('success', 'Registration Queried successfully done');
         }else{
