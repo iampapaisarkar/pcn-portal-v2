@@ -46,19 +46,9 @@ class Reports
         try {
             DB::beginTransaction();
 
-            // Report::create([
-            //     'type' => 'payment',
-            //     'application_id' => $id,
-            //     'application_type' => $application_type,
-            //     'activity' => $activity,
-            //     'status' => $status,
-            //     'state_id' => $state_id
-            // ]);
-
-            if(Report::where(['application_id' => $id, 'type' => 'payment', 'application_type' => $application_type])->exists()){
-                Report::where(['application_id' => $id, 'type' => 'payment', 'application_type' => $application_type])
+            if(Report::where(['application_id' => $id, 'type' => 'payment', 'application_type' => $application_type, 'activity' => $activity])->exists()){
+                Report::where(['application_id' => $id, 'type' => 'payment', 'application_type' => $application_type, 'activity' => $activity])
                 ->update([
-                    'activity' => $activity,
                     'status' => $status,
                 ]);
             }else{
