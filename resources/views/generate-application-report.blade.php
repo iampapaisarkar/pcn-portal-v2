@@ -14,9 +14,9 @@
                     @endphp
                     <label for="picker1">State</label>
                     @if(Auth::user()->hasRole(['state_office']))
-                        <input type="hidden" name="state" value="{{Auth()->user->state}}">
+                        <input type="hidden" name="state" value="{Auth::user()->state}}">
                         <input disable name="state_name" class="form-control @error('state') is-invalid @enderror"
-                        id="state" type="text"  value="{{Auth()->user->user_state->name}}"/>
+                        id="state" type="text"  value="{{Auth::user()->user_state->name}}"/>
                         @error('state')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
