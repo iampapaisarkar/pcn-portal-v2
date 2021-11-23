@@ -82,8 +82,6 @@ class ApplicationReportsController extends Controller
         $reports = $reports->select('reports.*')
         ->get();
 
-        // dd([$request->date_from.' 00:00:00', $request->date_to.' 23:59:59']);
-
         if(!$reports->isEmpty()){
             $array = array();
             foreach ($reports as $key => $app) {
