@@ -82,7 +82,7 @@ class ApplicationReportsController extends Controller
         $reports = $reports->select('reports.*')
         ->get();
 
-        // dd($reports);
+        dd($reports);
 
         if(!$reports->isEmpty()){
             $array = array();
