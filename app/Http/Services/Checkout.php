@@ -750,7 +750,7 @@ class Checkout
                 $today = date('m-Y');
                 $order_id =  ($today) . '-' . intval($invoiceCount+1);
 
-                dd($totalAmount);
+                // dd($totalAmount);
 
                 $payment = Payment::create([
                     'vendor_id' => Auth::user()->id,

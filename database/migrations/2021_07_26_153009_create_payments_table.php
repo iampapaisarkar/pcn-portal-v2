@@ -22,9 +22,9 @@ class CreatePaymentsTable extends Migration
             $table->integer('service_id');
             $table->integer('extra_service_id')->nullable();
             $table->string('service_type');
-            $table->float('amount');
-            $table->float('service_charge')->nullable();
-            $table->float('total_amount')->nullable();
+            $table->float('amount', 10,2);
+            $table->float('service_charge', 10,2)->nullable();
+            $table->float('total_amount', 10,2)->nullable();
             $table->boolean('status')->default(false);
             $table->longtext('token')->nullable();
             $table->timestamps();
