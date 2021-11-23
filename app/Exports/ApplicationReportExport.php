@@ -27,13 +27,17 @@ class ApplicationReportExport implements FromArray, WithHeadings
     public function headings(): array
     {
         return [
-            'S/N',
+            'Date',
+            'State',
             'Category',
             'Activity',
             'Year',
             'Status',
             'Name',
+            'Adress',
+            'LGA',
             'Approved By',
+            'Approved On',
         ];
     }
 }

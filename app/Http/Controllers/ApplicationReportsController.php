@@ -87,27 +87,80 @@ class ApplicationReportsController extends Controller
         if(!$reports->isEmpty()){
             $array = array();
             foreach ($reports as $key => $app) {
-                // dd($app['application']['user']['firstname']);
-
                 if($app->activity == 'renewal_inspection'){
-                    // $fields = [
-                    //     'S/N' => $key+1, 
-                    //     'Applicant name' => $app['user']['firstname'] .' '.$app['user']['lastname'],
-                    //     'Year' => $app['registration_year'], 
-                    //     'Type' =>  config('custom.status-category.category')[$app['type']],
-                    //     'Category' => $app['category'],
-                    //     'Status' => config('custom.status-category.status')[$app['status']], 
-                    // ];
-                    // array_push($array, $fields);
-                }else{
+                    if($app['application_type'] == 'hospital_pharamcy'){
+
+                        $name = $app['renewal']['registration']['user']['hospital_name'];
+                        $address = $app['renewal']['registration']['user']['hospital_address'];
+                        $state = $app['renewal']['registration']['user']['user_state']['name'];
+                        $lga = $app['renewal']['registration']['user']['user_lga']['name'];
+
+                    }else if($app['application_type'] == 'ppmv'){
+
+                        $name = $app['renewal']['registration']['user']['hospital_name'];
+                        $address = $app['renewal']['registration']['user']['hospital_address'];
+                        $state = $app['renewal']['registration']['user']['user_state']['name'];
+                        $lga = $app['renewal']['registration']['user']['user_lga']['name'];
+
+                    }else if($app['application_type'] == 'community_pharmacy' || $app['application_type'] == 'distribution_premises' || $app['application_type'] == 'manufacturing_premises'){
+
+                        $name = $app['renewal']['registration']['other_registration']['company']['name'];
+                        $address = $app['renewal']['registration']['other_registration']['company']['address'];
+                        $state = $app['renewal']['registration']['other_registration']['company']['company_state']['name'];
+                        $lga = $app['renewal']['registration']['other_registration']['company']['company_lga']['name'];
+
+                    }
+
                     $fields = [
-                        'S/N' => $key+1, 
-                        'Category' => config('custom.report-activities.category')[$app['application_type']],
+                        'Date' => $app['created_at']->format('d M Y'), 
+                        'State' => strtoupper($state),
+                        'Category' => strtoupper(config('custom.report-activities.category')[$app['application_type']]),
+                        'Activity' =>  config('custom.report-activities.activities')[$app['activity']],
+                        'Year' => $app['renewal']['registration']['registration_year'], 
+                        'Status' => $app['status'] == 'pending' ? 'PENDING' : 'APPROVED', 
+                        'Name' => $name,
+                        'Address' => $address,
+                        'LGA' => $lga,
+                        'Approved By' => $app['approvedBy'] ? $app['approvedBy']['firstname'] .' '.$app['approvedBy']['lastname'] : null,
+                        'Approved On' => $app['approvedBy'] ? $app['created_at']->format('d M Y') : null,
+                    ];
+                    array_push($array, $fields);
+                }else{
+                    if($app['application_type'] == 'hospital_pharamcy'){
+
+                        $name = $app['application']['user']['hospital_name'];
+                        $address = $app['application']['user']['hospital_address'];
+                        $state = $app['application']['user']['user_state']['name'];
+                        $lga = $app['application']['user']['user_lga']['name'];
+
+                    }else if($app['application_type'] == 'ppmv'){
+
+                        $name = $app['application']['user']['hospital_name'];
+                        $address = $app['application']['user']['hospital_address'];
+                        $state = $app['application']['user']['user_state']['name'];
+                        $lga = $app['application']['user']['user_lga']['name'];
+
+                    }else if($app['application_type'] == 'community_pharmacy' || $app['application_type'] == 'distribution_premises' || $app['application_type'] == 'manufacturing_premises'){
+
+                        $name = $app['application']['other_registration']['company']['name'];
+                        $address = $app['application']['other_registration']['company']['address'];
+                        $state = $app['application']['other_registration']['company']['company_state']['name'];
+                        $lga = $app['application']['other_registration']['company']['company_lga']['name'];
+
+                    }
+
+                    $fields = [
+                        'Date' => $app['created_at']->format('d M Y'), 
+                        'State' => strtoupper($state),
+                        'Category' => strtoupper(config('custom.report-activities.category')[$app['application_type']]),
                         'Activity' =>  config('custom.report-activities.activities')[$app['activity']],
                         'Year' => $app['application']['registration_year'], 
-                        'Status' => $app['status'] == 'pending' ? 'Pending' : 'Approved', 
-                        'Name' => $app['application']['user']['firstname'] .' '.$app['application']['user']['lastname'],
+                        'Status' => $app['status'] == 'pending' ? 'PENDING' : 'APPROVED', 
+                        'Name' => $name,
+                        'Address' => $address,
+                        'LGA' => $lga,
                         'Approved By' => $app['approvedBy'] ? $app['approvedBy']['firstname'] .' '.$app['approvedBy']['lastname'] : null,
+                        'Approved On' => $app['approvedBy'] ? $app['created_at']->format('d M Y') : null,
                     ];
                     array_push($array, $fields);
                 }
