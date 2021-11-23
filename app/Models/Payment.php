@@ -26,4 +26,8 @@ class Payment extends Model
     public function application() {
         return $this->hasOne(Registration::class,'id', 'application_id');
     }
+
+    public function renewal() {
+        return $this->hasOne(Renewal::class,'id', 'application_id');
+    }
 }

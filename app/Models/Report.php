@@ -21,6 +21,10 @@ class Report extends Model
         return $this->hasOne(Renewal::class,'id', 'application_id');
     }
 
+    public function payment() {
+        return $this->hasOne(Payment::class,'id', 'application_id');
+    }
+
     public function state() {
         return $this->hasOne(State::class,'id', 'state_id');
     }

@@ -12,6 +12,7 @@ use App\Models\Registration;
 use App\Models\HospitalRegistration;
 use App\Models\OtherRegistration;
 use App\Models\Renewal;
+use App\Models\Report;
 use DB;
 use Validator;
 use Excel;
@@ -46,168 +47,97 @@ class PaymentReportsController extends Controller
             ]
         ]);
 
-        // $applications = Registration::where(['registrations.payment' => true])
-        // ->with('renewal', 'hospital_pharmacy', 'ppmv', 'other_registration.company', 'other_registration.company.company_state', 'other_registration.company.company_lga', 'other_registration.company.business', 'user', 'user.user_state', 'user.user_lga')
-        // ->leftjoin('users', 'users.id', 'registrations.user_id')
-        // ->leftjoin('other_registrations', 'other_registrations.registration_id', 'registrations.id')
-        // ->leftjoin('companies', 'other_registrations.company_id', 'companies.id')
-        // ->where(function($q) use($request){
-        //     $q->where('users.state', $request->state);
-        //     $q->orWhere('companies.state', $request->state);
-        // });
-        $applications = Payment::with('application')->get();
+        $this->validate($request, [
+            'state' => [
+                'required'
+            ],
+            'category' => [
+                'required'
+            ],
+            'activity' => [
+                'required'
+            ],
+            'status' => [
+                'required'
+            ],
+            'date_from' => [
+                'required'
+            ],
+            'date_to' => [
+                'required'
+            ]
+        ]);
 
-        dd($applications);
+        $reports = Report::where('type', 'payment')
+        ->with(
+            'payment.application.user.user_state',
+            'payment.application.user.user_lga',
+            'payment.application.other_registration.company.company_state',
+            'payment.application.other_registration.company.company_lga',
+            'payment.renewal.registration.user.user_state',
+            'payment.renewal.registration.user.user_lga',
+            'payment.renewal.registration.other_registration.company.company_state',
+            'payment.renewal.registration.other_registration.company.company_lga',
+            'state',
+            'approvedBy'
+        );
 
-        if($request->category != 'all'){
-            $applications = $applications->where('registrations.type', $request->category);
+        if($request->state != "all"){
+            $reports = $reports->where('state_id', $request->state);
         }
 
-        if($request->activity != 'all'){
-            if($request->status == 'document_review'){
-                if($request->status != 'all'){
-                    if($request->status == 'pending'){
-                        $applications = $applications->whereIn('registrations.status', ['send_to_state_office', 'queried_by_state_office']);
-                    }else if($request->status == 'approved'){
-                        $applications = $applications->whereIn('registrations.status', ['send_to_registry']);
-                    }
-                }else{
-                    $applications = $applications->whereIn('registrations.status', ['send_to_state_office', 'queried_by_state_office', 'send_to_registry']);
-                }
-
-            }else if($request->status == 'location_inspection'){
-
-                if($request->status != 'all'){
-                    if($request->status == 'pending'){
-                        $applications = $applications->whereIn('registrations.status', [
-                            'send_to_inspection_monitoring',
-                            'no_recommendation',
-                            'send_to_pharmacy_practice',
-                            'send_to_state_office_inspection',
-                        ]);
-                    }else if($request->status == 'approved'){
-                        $applications = $applications->whereIn('registrations.status', [
-                            'full_recommendation',
-                            'partial_recommendation',
-                            'inspection_approved',
-                            'send_to_registration'
-                        ]);
-                    }
-                }else{
-                    $applications = $applications->whereIn('registrations.status',[
-                        'send_to_inspection_monitoring',
-                        'no_recommendation',
-                        'send_to_pharmacy_practice',
-                        'send_to_state_office_inspection',
-                        'full_recommendation',
-                        'partial_recommendation',
-                        'inspection_approved',
-                        'send_to_registration'
-                    ]);
-                }
-
-            }else if($request->status == 'location_approval_banner'){
-
-                $applications = $applications->whereIn('registrations.banner_status', 'pending');
-                if($request->status != 'all'){
-                    if($request->status == 'pending'){
-                        $applications = $applications->where('registrations.banner_status', 'pending');
-                    }else if($request->status == 'approved'){
-                        $applications = $applications->where('registrations.banner_status', 'paid');
-                    }
-                }else{
-                    $applications = $applications->whereIn('registrations.banner_status',[
-                        'pending',
-                        'paid'
-                    ]);
-                }
-
-            }else if($request->status == 'facility_inspection'){
-
-                if($request->status != 'all'){
-                    if($request->status == 'pending'){
-                        $applications = $applications->whereIn('registrations.status', [
-                            'send_to_inspection_monitoring_registration',
-                            'facility_no_recommendation',
-                            'send_to_state_office_registration',
-                        ]);
-                    }else if($request->status == 'approved'){
-                        $applications = $applications->whereIn('registrations.status', [
-                            'facility_full_recommendation',
-                            'facility_inspection_approved',
-                            'facility_send_to_registration'
-                        ]);
-                    }
-                }else{
-                    $applications = $applications->whereIn('registrations.status',[
-                        'send_to_inspection_monitoring_registration',
-                        'facility_no_recommendation',
-                        'send_to_state_office_registration',
-                        'facility_full_recommendation',
-                        'facility_inspection_approved',
-                        'facility_send_to_registration'
-                    ]);
-                }
-
-            }else if($request->status == 'renewal_inspection'){
-
-                if($request->status != 'all'){
-                    if($request->status == 'pending'){
-                        $applications = $applications->whereHas('renewal', function($q){
-                            $q->whereIn('registrations.status', [
-                                'send_to_state_office',
-                                'send_to_inspection_monitoring',
-                                'send_to_pharmacy_practice',
-                                'send_to_state_office_inspection',
-                                'no_recommendation'
-                            ]);
-                        });
-                    }else if($request->status == 'approved'){
-                        $applications = $applications->whereHas('renewal', function($q){
-                            $q->whereIn('registrations.status', [
-                                'send_to_state_office',
-                                'send_to_inspection_monitoring',
-                                'send_to_pharmacy_practice',
-                                'send_to_state_office_inspection',
-                                'no_recommendation'
-                            ]);
-                        });
-                    }
-                }else{
-                    $applications = $applications->whereHas('renewal', function($q){
-                        $q->whereIn('registrations.status', [
-                            'send_to_state_office',
-                            'send_to_inspection_monitoring',
-                            'send_to_pharmacy_practice',
-                            'send_to_state_office_inspection',
-                            'no_recommendation'
-                        ]);
-                    });
-                }
-
-            }
+        if($request->category != "all"){
+            $reports = $reports->where('application_type', $request->category);
         }
-        
-        $applications = $applications->whereBetween('registrations.created_at', [\Carbon\Carbon::parse($request->date_from), \Carbon\Carbon::parse($request->date_to)]);
-        $applications = $applications->select('registrations.*')
-        ->latest()
+
+        if($request->activity != "all"){
+            $reports = $reports->where('activity', $request->activity);
+        }
+
+        if($request->status != "all"){
+            $reports = $reports->where('status', $request->status);
+        }
+
+        $reports = $reports->whereBetween('created_at', [\Carbon\Carbon::parse($request->date_from), \Carbon\Carbon::parse($request->date_to)]);
+        $reports = $reports->select('reports.*')
         ->get();
 
-        $array = array();
-        foreach ($applications as $key => $app) {
-            $fields = [
-                'S/N' => $key+1, 
-                'Applicant name' => $app['user']['firstname'] .' '.$app['user']['lastname'],
-                'Year' => $app['registration_year'], 
-                'Type' =>  config('custom.status-category.category')[$app['type']],
-                'Category' => $app['category'],
-                'Status' => config('custom.status-category.status')[$app['status']], 
-            ];
-            array_push($array, $fields);
+        // dd($reports);
+
+        if(!$reports->isEmpty()){
+            $array = array();
+            foreach ($reports as $key => $app) {
+                if($app->activity == 'renewal_inspection'){
+                    $fields = [
+                        'Date' => $app['created_at']->format('d M Y'), 
+                        'State' => strtoupper($app['state']['name']),
+                        'Category' => strtoupper(config('custom.report-activities.category')[$app['application_type']]),
+                        'Activity' =>  config('custom.report-activities.activities')[$app['activity']],
+                        'Year' => $app['payment']['renewal']['application']['registration_year'], 
+                        'Status' => $app['status'] == 'pending' ? 'PENDING' : 'PAID', 
+                        'Amount' => number_format($app['payment']['total_amount']) . '.00',
+                    ];
+                    array_push($array, $fields);
+                }else{
+                    $fields = [
+                        'Date' => $app['created_at']->format('d M Y'), 
+                        'State' => strtoupper($app['state']['name']),
+                        'Category' => strtoupper(config('custom.report-activities.category')[$app['application_type']]),
+                        'Activity' =>  config('custom.report-activities.activities')[$app['activity']],
+                        'Year' => $app['payment']['application']['registration_year'], 
+                        'Status' => $app['status'] == 'pending' ? 'PENDING' : 'PAID', 
+                        'Amount' => number_format($app['payment']['total_amount']) . '.00',
+                    ];
+                    array_push($array, $fields);
+                }
+                
+            }
+    
+            $results = new PaymentReportExport($array);
+    
+            return Excel::download($results, 'payments-reports.xlsx');
+        }else{
+            return back()->with('error','No data found!');
         }
-
-        $results = new PaymentReportExport($array);
-
-        return Excel::download($results, 'payments-reports.xlsx');
     }
 }
