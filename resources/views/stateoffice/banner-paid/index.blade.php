@@ -75,7 +75,12 @@
                         @endif
 
                         <td>{{$document->registration_year}}</td>
+
+                        @if($document->payment == true)
+                        <td><span class="badge badge-pill m-1 badge-success">Paid</span></td>
+                        @else
                         <td><span class="badge badge-pill m-1 badge-warning">Pending</span></td>
+                        @endif
                         <td>
                             <!-- <button data-toggle="modal" data-target="#verifyModalContent" class="btn btn-success btn-sm" type="button">COLLECTION</i></button> -->
                             <button onclick="showBannerModal({{$document}})" class="btn btn-success btn-sm" type="button">COLLECTION</i></button>

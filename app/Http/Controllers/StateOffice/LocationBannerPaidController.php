@@ -18,7 +18,8 @@ class LocationBannerPaidController extends Controller
      */
     public function index(Request $request)
     {
-        $documents = Registration::where(['registrations.payment' => true, 
+        $documents = Registration::where([
+        // 'registrations.payment' => true, 
         'registrations.banner_status' => 'paid',
         'registrations.banner_collected' => false
         ])
