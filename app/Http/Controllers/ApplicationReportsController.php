@@ -82,13 +82,13 @@ class ApplicationReportsController extends Controller
         $reports = $reports->select('reports.*')
         ->get();
 
-        dd($reports);
+        // dd($reports);
 
         if(!$reports->isEmpty()){
             $array = array();
             foreach ($reports as $key => $app) {
                 if($app->activity == 'renewal_inspection'){
-                    if($app['application_type'] == 'hospital_pharamcy'){
+                    if($app['application_type'] == 'hospital_pharmacy'){
 
                         $name = $app['renewal']['registration']['user']['hospital_name'];
                         $address = $app['renewal']['registration']['user']['hospital_address'];
@@ -126,7 +126,7 @@ class ApplicationReportsController extends Controller
                     ];
                     array_push($array, $fields);
                 }else{
-                    if($app['application_type'] == 'hospital_pharamcy'){
+                    if($app['application_type'] == 'hospital_pharmacy'){
 
                         $name = $app['application']['user']['hospital_name'];
                         $address = $app['application']['user']['hospital_address'];
