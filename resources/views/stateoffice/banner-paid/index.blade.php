@@ -212,7 +212,7 @@
             $('#name').text(data.user.shop_name); 
             $('#address').text(data.user.shop_address); 
             $('#state').text(data.user.user_state.name); 
-            $('#lga').text(data.user.user_lg.name); 
+            $('#lga').text(data.user.user_lga.name); 
         }
         
         $('#verifyModalContent').modal('show'); 
