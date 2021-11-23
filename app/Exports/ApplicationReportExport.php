@@ -34,7 +34,7 @@ class ApplicationReportExport implements FromArray, WithHeadings
             'Year',
             'Status',
             'Name',
-            'Adress',
+            'Address',
             'LGA',
             'Approved By',
             'Approved On',
