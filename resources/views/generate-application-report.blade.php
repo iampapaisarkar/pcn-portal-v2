@@ -14,7 +14,7 @@
                     @endphp
                     <label for="picker1">State</label>
                     @if(Auth::user()->hasRole(['state_office']))
-                        <select disabled id="stateField" required name="state"
+                        <select readonly id="stateField" required name="state"
                         class="form-control @error('state') is-invalid @enderror">
                             <option value="">Select State</option>
                             <option value="all">All</option>
@@ -27,6 +27,11 @@
                             <option value="{{$state->id}}">{{$state->name}}</option>
                             @endforeach
                         </select>
+                        @error('state')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                        @enderror
                     @else
                         <select id="stateField" required name="state"
                         class="form-control @error('state') is-invalid @enderror">
@@ -41,12 +46,13 @@
                             <option value="{{$state->id}}">{{$state->name}}</option>
                             @endforeach
                         </select>
+                        @error('state')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                        @enderror
                     @endif
-                    @error('state')
-                    <span class="invalid-feedback" role="alert">
-                        <strong>{{ $message }}</strong>
-                    </span>
-                    @enderror
+                   
                 </div>
 
                 <div class="col-md-4 col-12 form-group mb-3">
