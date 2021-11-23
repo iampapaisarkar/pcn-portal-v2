@@ -140,7 +140,7 @@ class DocumentPendingLicenceController extends Controller
                 foreach($request->check_box_bulk_action as $registration_id => $registration){
 
                     $Registration = Registration::where(['payment' => true, 'id' => $registration_id])
-                    // ->where('status', 'send_to_registration')
+                    ->with('user', 'other_registration.company')
                     ->where(function($q){
                         $q->where('status', 'send_to_registration');
                         $q->orWhere('status', 'facility_send_to_registration');
@@ -193,6 +193,9 @@ class DocumentPendingLicenceController extends Controller
                         ];
                         EmailSendJOB::dispatch($data);
 
+                        // Store Report 
+                        \App\Http\Services\Reports::storeApplicationReport($Registration->id, 'hospital_pharmacy', 'licence_approval', 'approved', $Registration->user->state, Auth::user()->id);
+
                     }
 
                     if($Registration->type == 'ppmv'){
@@ -222,6 +225,9 @@ class DocumentPendingLicenceController extends Controller
                             'type' => 'licencing_issued',
                         ];
                         EmailSendJOB::dispatch($data);
+
+                        // Store Report 
+                        \App\Http\Services\Reports::storeApplicationReport($Registration->id, 'ppmv', 'licence_approval', 'approved', $Registration->user->state, Auth::user()->id);
                     }
 
 
@@ -252,6 +258,9 @@ class DocumentPendingLicenceController extends Controller
                             'type' => 'licencing_issued',
                         ];
                         EmailSendJOB::dispatch($data);
+
+                        // Store Report 
+                        \App\Http\Services\Reports::storeApplicationReport($Registration->id, 'community_pharmacy', 'licence_approval', 'approved', $Registration->other_registration->company->state, Auth::user()->id);
                     }
 
                     if($Registration->type == 'distribution_premises'){
@@ -281,6 +290,9 @@ class DocumentPendingLicenceController extends Controller
                             'type' => 'licencing_issued',
                         ];
                         EmailSendJOB::dispatch($data);
+
+                        // Store Report 
+                        \App\Http\Services\Reports::storeApplicationReport($Registration->id, 'distribution_premises', 'licence_approval', 'approved', $Registration->other_registration->company->state, Auth::user()->id);
                     }
 
                     if($Registration->type == 'manufacturing_premises'){
@@ -310,6 +322,9 @@ class DocumentPendingLicenceController extends Controller
                             'type' => 'licencing_issued',
                         ];
                         EmailSendJOB::dispatch($data);
+
+                        // Store Report 
+                        \App\Http\Services\Reports::storeApplicationReport($Registration->id, 'manufacturing_premises', 'licence_approval', 'approved', $Registration->other_registration->company->state, Auth::user()->id);
                     }
 
                     $adminName = Auth::user()->firstname .' '. Auth::user()->lastname;
@@ -393,6 +408,9 @@ class DocumentPendingLicenceController extends Controller
                     ];
                     EmailSendJOB::dispatch($data);
 
+                    // Store Report 
+                    \App\Http\Services\Reports::storeApplicationReport($registration->id, 'hospital_pharmacy', 'licence_approval', 'approved', $registration->user->state, Auth::user()->id);
+
                 }else{
                     return abort(404);
                 }
@@ -468,6 +486,9 @@ class DocumentPendingLicenceController extends Controller
                         'type' => 'licencing_issued',
                     ];
                     EmailSendJOB::dispatch($data);
+                    
+                    // Store Report 
+                    \App\Http\Services\Reports::storeApplicationReport($registration->id, 'ppmv', 'licence_approval', 'approved', $registration->user->state, Auth::user()->id);
 
                 }else{
                     return abort(404);
@@ -504,6 +525,7 @@ class DocumentPendingLicenceController extends Controller
 
                 $registration = Registration::where(['payment' => true, 'id' => $request['registration_id'], 'user_id' => $request['user_id'], 'type' => 'community_pharmacy'])
                 ->where('status', 'facility_send_to_registration')
+                ->with('user', 'other_registration.company')
                 ->first();
 
                 if($registration){
@@ -545,6 +567,9 @@ class DocumentPendingLicenceController extends Controller
                     ];
                     EmailSendJOB::dispatch($data);
 
+                    // Store Report 
+                    \App\Http\Services\Reports::storeApplicationReport($registration->id, 'community_pharmacy', 'licence_approval', 'approved', $registration->other_registration->company->state, Auth::user()->id);
+
                 }else{
                     return abort(404);
                 }
@@ -580,6 +605,7 @@ class DocumentPendingLicenceController extends Controller
 
                 $registration = Registration::where(['payment' => true, 'id' => $request['registration_id'], 'user_id' => $request['user_id'], 'type' => 'distribution_premises'])
                 ->where('status', 'facility_send_to_registration')
+                ->with('user', 'other_registration.company')
                 ->first();
 
                 if($registration){
@@ -621,6 +647,9 @@ class DocumentPendingLicenceController extends Controller
                     ];
                     EmailSendJOB::dispatch($data);
 
+                    // Store Report 
+                    \App\Http\Services\Reports::storeApplicationReport($registration->id, 'distribution_premises', 'licence_approval', 'approved', $registration->other_registration->company->state, Auth::user()->id);
+
                 }else{
                     return abort(404);
                 }
@@ -656,6 +685,7 @@ class DocumentPendingLicenceController extends Controller
 
                 $registration = Registration::where(['payment' => true, 'id' => $request['registration_id'], 'user_id' => $request['user_id'], 'type' => 'manufacturing_premises'])
                 ->where('status', 'facility_send_to_registration')
+                ->with('user', 'other_registration.company')
                 ->first();
 
                 if($registration){
@@ -696,6 +726,9 @@ class DocumentPendingLicenceController extends Controller
                         'type' => 'licencing_issued',
                     ];
                     EmailSendJOB::dispatch($data);
+
+                    // Store Report 
+                    \App\Http\Services\Reports::storeApplicationReport($registration->id, 'manufacturing_premises', 'licence_approval', 'approved', $registration->other_registration->company->state, Auth::user()->id);
 
                 }else{
                     return abort(404);
