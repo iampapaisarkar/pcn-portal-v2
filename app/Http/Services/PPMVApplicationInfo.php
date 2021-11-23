@@ -191,7 +191,7 @@ class PPMVApplicationInfo
             }else{
                 return $response = [
                     'success' => false,
-                    'message' => 'PPMV FACILITY INSPECTION APPLICATION ALEARY SUBMITTED',
+                    'message' => 'PPMV FACILITY INSPECTION APPLICATION ALREADY SUBMITTED',
                 ];
             }
         }else{

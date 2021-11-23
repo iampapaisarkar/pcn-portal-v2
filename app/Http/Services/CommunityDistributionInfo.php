@@ -186,7 +186,7 @@ class CommunityDistributionInfo
             }else{
                 return $response = [
                     'success' => false,
-                    'message' => 'FACILITY INSPECTION APPLICATION ALEARY SUBMITTED',
+                    'message' => 'FACILITY INSPECTION APPLICATION ALREADY SUBMITTED',
                 ];
             }
         }else{
