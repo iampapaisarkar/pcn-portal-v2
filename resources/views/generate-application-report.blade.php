@@ -14,19 +14,9 @@
                     @endphp
                     <label for="picker1">State</label>
                     @if(Auth::user()->hasRole(['state_office']))
-                        <select readonly id="stateField" required name="state"
-                        class="form-control @error('state') is-invalid @enderror">
-                            <option value="">Select State</option>
-                            <option value="all">All</option>
-                            @foreach($states as $state)
-                                @if(Auth::user()->hasRole(['state_office']))
-                                    @if(Auth::user()->state == $state->id))
-                                    <option selected value="{{$state->id}}">{{$state->name}}</option>
-                                    @endif
-                                @endif
-                            <option value="{{$state->id}}">{{$state->name}}</option>
-                            @endforeach
-                        </select>
+                        <input type="hidden" name="state" value="{{Auth()->user->state}}">
+                        <input disable name="state_name" class="form-control @error('state') is-invalid @enderror"
+                        id="state" type="text"  value="{{Auth()->user->user_state->name}}"/>
                         @error('state')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
@@ -38,11 +28,6 @@
                             <option value="">Select State</option>
                             <option value="all">All</option>
                             @foreach($states as $state)
-                                @if(Auth::user()->hasRole(['state_office']))
-                                    @if(Auth::user()->state == $state->id))
-                                    <option selected value="{{$state->id}}">{{$state->name}}</option>
-                                    @endif
-                                @endif
                             <option value="{{$state->id}}">{{$state->name}}</option>
                             @endforeach
                         </select>
