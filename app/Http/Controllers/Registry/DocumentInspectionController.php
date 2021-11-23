@@ -145,7 +145,7 @@ class DocumentInspectionController extends Controller
                         ]);
                         
                         // Store Report 
-                        \App\Http\Services\Reports::storeApplicationReport($Registration->id, 'hospital_pharmacy', 'facility_inspection', 'pending', $registration->user->state);
+                        \App\Http\Services\Reports::storeApplicationReport($Registration->id, 'hospital_pharmacy', 'facility_inspection', 'pending', $Registration->user->state);
                     }
                     if($Registration->type == 'manufacturing_premises'){
                         Registration::where(['payment' => true, 'id' => $registration_id])
@@ -156,7 +156,7 @@ class DocumentInspectionController extends Controller
                         ]);
 
                         // Store Report 
-                        \App\Http\Services\Reports::storeApplicationReport($registration->id, 'manufacturing_premises', 'facility_inspection', 'pending', $registration->other_registration->company->state);
+                        \App\Http\Services\Reports::storeApplicationReport($Registration->id, 'manufacturing_premises', 'facility_inspection', 'pending', $Registration->other_registration->company->state);
                     }
 
                     $adminName = Auth::user()->firstname .' '. Auth::user()->lastname;
