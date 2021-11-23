@@ -67,7 +67,7 @@ class ApplicationReportsController extends Controller
             $reports = $reports->where('state_id', $request->state);
         }
 
-        dd($reports->get());
+        dd($request->state);
 
 
         if($request->category != "all"){
