@@ -165,7 +165,7 @@ class RenewalRecommendationController extends Controller
 
                             // Store Report 
                             \App\Http\Services\Reports::storeApplicationReport($renewal->id, 'hospital_pharmacy', 'renewal_inspection', 'approved', $renewal->user->state, Auth::user()->id);
-                            \App\Http\Services\Reports::storeApplicationReport($renewal->id, 'hospital_pharmacy', 'licence_renewal', 'pending', $renewal->user->state);
+                            \App\Http\Services\Reports::storeApplicationReport($renewal->id, 'hospital_pharmacy', 'licence_renewal', 'pending', $renewal->user->state, null);
                         }
 
                         if($renewal->type == 'ppmv_renewal'){
@@ -175,7 +175,7 @@ class RenewalRecommendationController extends Controller
 
                             // Store Report 
                             \App\Http\Services\Reports::storeApplicationReport($renewal->id, 'ppmv', 'renewal_inspection', 'approved', $renewal->user->state, Auth::user()->id);
-                            \App\Http\Services\Reports::storeApplicationReport($renewal->id, 'ppmv', 'licence_renewal', 'pending', $renewal->user->state);
+                            \App\Http\Services\Reports::storeApplicationReport($renewal->id, 'ppmv', 'licence_renewal', 'pending', $renewal->user->state, null);
                         }
 
                         if($renewal->type == 'community_pharmacy_renewal'){
@@ -185,7 +185,7 @@ class RenewalRecommendationController extends Controller
 
                             // Store Report 
                             \App\Http\Services\Reports::storeApplicationReport($renewal->id, 'community_pharmacy', 'renewal_inspection', 'approved', $renewal->registration->other_registration->company->state, Auth::user()->id);
-                            \App\Http\Services\Reports::storeApplicationReport($renewal->id, 'community_pharmacy', 'licence_renewal', 'pending', $renewal->registration->other_registration->company->state);
+                            \App\Http\Services\Reports::storeApplicationReport($renewal->id, 'community_pharmacy', 'licence_renewal', 'pending', $renewal->registration->other_registration->company->state, null);
                         }
 
                         if($renewal->type == 'distribution_premises_renewal'){
@@ -195,7 +195,7 @@ class RenewalRecommendationController extends Controller
 
                             // Store Report 
                             \App\Http\Services\Reports::storeApplicationReport($renewal->id, 'distribution_premises', 'renewal_inspection', 'approved', $renewal->registration->other_registration->company->state, Auth::user()->id);
-                            \App\Http\Services\Reports::storeApplicationReport($renewal->id, 'distribution_premises', 'licence_renewal', 'pending', $renewal->registration->other_registration->company->state);
+                            \App\Http\Services\Reports::storeApplicationReport($renewal->id, 'distribution_premises', 'licence_renewal', 'pending', $renewal->registration->other_registration->company->state, null);
                         }
 
                         if($renewal->type == 'manufacturing_premises_renewal'){
@@ -205,7 +205,7 @@ class RenewalRecommendationController extends Controller
 
                             // Store Report 
                             \App\Http\Services\Reports::storeApplicationReport($renewal->id, 'manufacturing_premises', 'renewal_inspection', 'approved', $renewal->registration->other_registration->company->state, Auth::user()->id);
-                            \App\Http\Services\Reports::storeApplicationReport($renewal->id, 'manufacturing_premises', 'licence_renewal', 'pending', $renewal->registration->other_registration->company->state);
+                            \App\Http\Services\Reports::storeApplicationReport($renewal->id, 'manufacturing_premises', 'licence_renewal', 'pending', $renewal->registration->other_registration->company->state, null);
                         }
 
                     }else{
@@ -263,7 +263,7 @@ class RenewalRecommendationController extends Controller
 
                     // Store Report 
                     \App\Http\Services\Reports::storeApplicationReport($renewal->id, 'hospital_pharmacy', 'renewal_inspection', 'approved', $renewal->user->state, Auth::user()->id);
-                    \App\Http\Services\Reports::storeApplicationReport($renewal->id, 'hospital_pharmacy', 'licence_renewal', 'pending', $renewal->user->state);
+                    \App\Http\Services\Reports::storeApplicationReport($renewal->id, 'hospital_pharmacy', 'licence_renewal', 'pending', $renewal->user->state, null);
 
                 }else{
                     return abort(404);
@@ -322,7 +322,7 @@ class RenewalRecommendationController extends Controller
 
                     // Store Report 
                     \App\Http\Services\Reports::storeApplicationReport($renewal->id, 'ppmv', 'renewal_inspection', 'approved', $renewal->user->state, Auth::user()->id);
-                    \App\Http\Services\Reports::storeApplicationReport($renewal->id, 'ppmv', 'licence_renewal', 'pending', $renewal->user->state);
+                    \App\Http\Services\Reports::storeApplicationReport($renewal->id, 'ppmv', 'licence_renewal', 'pending', $renewal->user->state, null);
 
                 }else{
                     return abort(404);
@@ -381,7 +381,7 @@ class RenewalRecommendationController extends Controller
 
                     // Store Report 
                     \App\Http\Services\Reports::storeApplicationReport($renewal->id, 'community_pharmacy', 'renewal_inspection', 'approved', $renewal->other_registration->company->state, Auth::user()->id);
-                    \App\Http\Services\Reports::storeApplicationReport($renewal->id, 'community_pharmacy', 'licence_renewal', 'pending', $renewal->other_registration->company->state);
+                    \App\Http\Services\Reports::storeApplicationReport($renewal->id, 'community_pharmacy', 'licence_renewal', 'pending', $renewal->other_registration->company->state, null);
 
                 }else{
                     return abort(404);
@@ -439,7 +439,7 @@ class RenewalRecommendationController extends Controller
 
                     // Store Report 
                     \App\Http\Services\Reports::storeApplicationReport($renewal->id, 'distribution_premises', 'renewal_inspection', 'approved', $renewal->other_registration->company->state, Auth::user()->id);
-                    \App\Http\Services\Reports::storeApplicationReport($renewal->id, 'distribution_premises', 'licence_renewal', 'pending', $renewal->other_registration->company->state);
+                    \App\Http\Services\Reports::storeApplicationReport($renewal->id, 'distribution_premises', 'licence_renewal', 'pending', $renewal->other_registration->company->state, null);
 
                 }else{
                     return abort(404);
@@ -497,7 +497,7 @@ class RenewalRecommendationController extends Controller
                     
                     // Store Report 
                     \App\Http\Services\Reports::storeApplicationReport($renewal->id, 'manufacturing_premises', 'renewal_inspection', 'approved', $renewal->other_registration->company->state, Auth::user()->id);
-                    \App\Http\Services\Reports::storeApplicationReport($renewal->id, 'manufacturing_premises', 'licence_renewal', 'pending', $renewal->other_registration->company->state);
+                    \App\Http\Services\Reports::storeApplicationReport($renewal->id, 'manufacturing_premises', 'licence_renewal', 'pending', $renewal->other_registration->company->state, null);
 
                 }else{
                     return abort(404);
