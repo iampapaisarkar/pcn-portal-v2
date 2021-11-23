@@ -28,9 +28,9 @@ class ApplicationReportsController extends Controller
     public function generateReport(Request $request){
 
         $this->validate($request, [
-            'state' => [
-                'required'
-            ],
+            // 'state' => [
+            //     'required'
+            // ],
             'category' => [
                 'required'
             ],
