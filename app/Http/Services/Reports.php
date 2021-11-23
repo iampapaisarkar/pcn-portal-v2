@@ -60,7 +60,6 @@ class Reports
                 ->update([
                     'activity' => $activity,
                     'status' => $status,
-                    'approved_by' => $approved_by
                 ]);
             }else{
                 Report::create([
