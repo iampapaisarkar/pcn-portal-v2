@@ -48,7 +48,6 @@ class ApplicationReportsController extends Controller
             ]
         ]);
 
-        dd($request->all());
 
         $reports = Report::where('type', 'application')
         ->with(
@@ -83,6 +82,7 @@ class ApplicationReportsController extends Controller
         $reports = $reports->whereBetween('created_at', [\Carbon\Carbon::parse($request->date_from), \Carbon\Carbon::parse($request->date_to)]);
         $reports = $reports->select('reports.*')->get();
 
+        dd($reports);
 
         if(!$reports->isEmpty()){
             $array = array();
