@@ -102,7 +102,7 @@ class PaymentReportsController extends Controller
         $reports = $reports->select('reports.*')
         ->get();
 
-        // dd($reports);
+        dd([$request->date_from.' 00:00:00', $request->date_to.' 23:59:59']);
 
         if(!$reports->isEmpty()){
             $array = array();
