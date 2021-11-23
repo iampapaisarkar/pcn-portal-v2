@@ -93,6 +93,7 @@
                     class="form-control @error('status') is-invalid @enderror">
                         <option value="">Select Status</option>
                         <option value="all">All</option>
+                        <option value="queried">Queried</option>
                         <option value="pending">Pending</option>		
                         <option value="approved">Approved</option>
                     </select>

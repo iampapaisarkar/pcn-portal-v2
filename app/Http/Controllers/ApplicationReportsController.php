@@ -109,13 +109,21 @@ class ApplicationReportsController extends Controller
 
                     }
 
+                    if($app['status'] == 'pending'){
+                        $status = 'PENDING';
+                    }else if($app['status'] == 'approved'){
+                        $status = 'APPROVED';
+                    }else if($app['status'] == 'queried'){
+                        $status = 'QUERIED';
+                    }
+
                     $fields = [
                         'Date' => $app['created_at']->format('d M Y'), 
                         'State' => strtoupper($state),
                         'Category' => strtoupper(config('custom.report-activities.category')[$app['application_type']]),
                         'Activity' =>  config('custom.report-activities.activities')[$app['activity']],
                         'Year' => $app['renewal']['registration']['registration_year'], 
-                        'Status' => $app['status'] == 'pending' ? 'PENDING' : 'APPROVED', 
+                        'Status' => $status,
                         'Name' => $name,
                         'Address' => $address,
                         'LGA' => $lga,
@@ -147,13 +155,21 @@ class ApplicationReportsController extends Controller
 
                     }
 
+                    if($app['status'] == 'pending'){
+                        $status = 'PENDING';
+                    }else if($app['status'] == 'approved'){
+                        $status = 'APPROVED';
+                    }else if($app['status'] == 'queried'){
+                        $status = 'QUERIED';
+                    }
+
                     $fields = [
                         'Date' => $app['created_at']->format('d M Y'), 
                         'State' => strtoupper($state),
                         'Category' => strtoupper(config('custom.report-activities.category')[$app['application_type']]),
                         'Activity' =>  config('custom.report-activities.activities')[$app['activity']],
                         'Year' => $app['application']['registration_year'], 
-                        'Status' => $app['status'] == 'pending' ? 'PENDING' : 'APPROVED', 
+                        'Status' => $status, 
                         'Name' => $name,
                         'Address' => $address,
                         'LGA' => $lga,
