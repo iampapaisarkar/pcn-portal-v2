@@ -42,7 +42,7 @@ class ApplicationController extends Controller
             $reference_1_letter = FileUpload::upload($request->file('reference_1_letter'), $private = true, 'ppmv', 'reference_1_letter');
             $reference_2_letter = FileUpload::upload($request->file('reference_2_letter'), $private = true, 'ppmv', 'reference_2_letter');
 
-            $application = Registration::create([
+            $registration = Registration::create([
                 'user_id' => Auth::user()->id,
                 'type' => 'ppmv',
                 'category' => 'PPMV',
@@ -53,7 +53,7 @@ class ApplicationController extends Controller
 
             PpmvLocationApplication::create([
                 'user_id' => Auth::user()->id,
-                'registration_id' => $application->id,
+                'registration_id' => $apregistrationplication->id,
 
                 'birth_certificate' => $birth_certificate,
                 'educational_certificate' => $educational_certificate,
@@ -74,10 +74,10 @@ class ApplicationController extends Controller
                 'reference_occupation' => $request->reference_occupation,
             ]);
 
-            $response = Checkout::checkoutPpmvLocation($application = ['id' => $application->id], 'ppmv');
+            $response = Checkout::checkoutPpmvLocation($application = ['id' => $registration->id], 'ppmv');
 
             // Store Report 
-            \App\Http\Services\Reports::storeApplicationReport($application->id, 'ppmv', 'document_review', 'pending', Auth::user()->state);
+            \App\Http\Services\Reports::storeApplicationReport($registration->id, 'ppmv', 'document_review', 'pending', Auth::user()->state);
 
             DB::commit();
 
