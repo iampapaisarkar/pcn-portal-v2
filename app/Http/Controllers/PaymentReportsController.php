@@ -115,7 +115,7 @@ class PaymentReportsController extends Controller
                         'Activity' =>  config('custom.report-activities.activities')[$app['activity']],
                         'Year' => $app['payment']['renewal']['application']['registration_year'], 
                         'Status' => $app['status'] == 'pending' ? 'PENDING' : 'PAID', 
-                        'Amount' => number_format($app['payment']['total_amount']) . '.00',
+                        'Amount' => number_format($app['payment']['amount']) . '.00',
                     ];
                     array_push($array, $fields);
                 }else{
@@ -126,7 +126,7 @@ class PaymentReportsController extends Controller
                         'Activity' =>  config('custom.report-activities.activities')[$app['activity']],
                         'Year' => $app['payment']['application']['registration_year'], 
                         'Status' => $app['status'] == 'pending' ? 'PENDING' : 'PAID', 
-                        'Amount' => number_format($app['payment']['total_amount']) . '.00',
+                        'Amount' => number_format($app['payment']['amount']) . '.00',
                     ];
                     array_push($array, $fields);
                 }
