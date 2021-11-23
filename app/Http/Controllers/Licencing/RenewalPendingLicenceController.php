@@ -163,6 +163,9 @@ class RenewalPendingLicenceController extends Controller
                                 'type' => 'licencing_issued',
                             ];
                             EmailSendJOB::dispatch($data);
+
+                            // Store Report 
+                            \App\Http\Services\Reports::storeApplicationReport($renewal->id, 'hospital_pharmacy', 'licence_renewal', 'approved', $renewal->user->state, Auth::user()->id);
                         }
                         if($renewal->type == 'ppmv_renewal'){
 
@@ -185,6 +188,9 @@ class RenewalPendingLicenceController extends Controller
                                 'type' => 'licencing_issued',
                             ];
                             EmailSendJOB::dispatch($data);
+
+                            // Store Report 
+                            \App\Http\Services\Reports::storeApplicationReport($renewal->id, 'ppmv', 'licence_renewal', 'approved', $renewal->user->state, Auth::user()->id);
                         }
                         if($renewal->type == 'community_pharmacy_renewal'){
 
@@ -207,6 +213,9 @@ class RenewalPendingLicenceController extends Controller
                                 'type' => 'licencing_issued',
                             ];
                             EmailSendJOB::dispatch($data);
+
+                            // Store Report 
+                            \App\Http\Services\Reports::storeApplicationReport($renewal->id, 'community_pharmacy', 'licence_renewal', 'approved', $renewal->other_registration->company->state, Auth::user()->id);
                         }
                         if($renewal->type == 'distribution_premises_renewal'){
 
@@ -229,6 +238,9 @@ class RenewalPendingLicenceController extends Controller
                                 'type' => 'licencing_issued',
                             ];
                             EmailSendJOB::dispatch($data);
+
+                            // Store Report 
+                            \App\Http\Services\Reports::storeApplicationReport($renewal->id, 'distribution_premises', 'licence_renewal', 'approved', $renewal->other_registration->company->state, Auth::user()->id);
                         }
                         if($renewal->type == 'manufacturing_premises_renewal'){
 
@@ -251,6 +263,9 @@ class RenewalPendingLicenceController extends Controller
                                 'type' => 'licencing_issued',
                             ];
                             EmailSendJOB::dispatch($data);
+
+                            // Store Report 
+                            \App\Http\Services\Reports::storeApplicationReport($renewal->id, 'distribution_premises', 'manufacturing_premises', 'approved', $renewal->other_registration->company->state, Auth::user()->id);
                         }
 
                     }else{
@@ -311,6 +326,9 @@ class RenewalPendingLicenceController extends Controller
                         'type' => 'licencing_issued',
                     ];
                     EmailSendJOB::dispatch($data);
+
+                    // Store Report 
+                    \App\Http\Services\Reports::storeApplicationReport($renewal->id, 'hospital_pharmacy', 'licence_renewal', 'approved', $renewal->user->state, Auth::user()->id);
 
                 }else{
                     return abort(404);
@@ -374,6 +392,9 @@ class RenewalPendingLicenceController extends Controller
                     ];
                     EmailSendJOB::dispatch($data);
 
+                    // Store Report 
+                    \App\Http\Services\Reports::storeApplicationReport($renewal->id, 'ppmv', 'licence_renewal', 'approved', $renewal->user->state, Auth::user()->id);
+
                 }else{
                     return abort(404);
                 }
@@ -434,6 +455,9 @@ class RenewalPendingLicenceController extends Controller
                         'type' => 'licencing_issued',
                     ];
                     EmailSendJOB::dispatch($data);
+
+                    // Store Report 
+                    \App\Http\Services\Reports::storeApplicationReport($renewal->id, 'community_pharmacy', 'licence_renewal', 'approved', $renewal->other_registration->company->state, Auth::user()->id);
 
                 }else{
                     return abort(404);
@@ -497,6 +521,9 @@ class RenewalPendingLicenceController extends Controller
                     ];
                     EmailSendJOB::dispatch($data);
 
+                    // Store Report 
+                    \App\Http\Services\Reports::storeApplicationReport($renewal->id, 'distribution_premises', 'licence_renewal', 'approved', $renewal->other_registration->company->state, Auth::user()->id);
+
                 }else{
                     return abort(404);
                 }
@@ -557,6 +584,9 @@ class RenewalPendingLicenceController extends Controller
                         'type' => 'licencing_issued',
                     ];
                     EmailSendJOB::dispatch($data);
+
+                    // Store Report 
+                    \App\Http\Services\Reports::storeApplicationReport($renewal->id, 'manufacturing_premises', 'licence_renewal', 'approved', $renewal->other_registration->company->state, Auth::user()->id);
 
                 }else{
                     return abort(404);

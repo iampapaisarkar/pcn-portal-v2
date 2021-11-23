@@ -69,7 +69,9 @@
                         <option value="location_inspection">Location Inspection</option>
                         <option value="location_approval_banner">Location Approval Banner</option>
                         <option value="facility_inspection">Facility Inspection</option>
+                        <option value="licence_approval">Licence Approval</option>
                         <option value="renewal_inspection">Renewal Inspection</option>
+                        <option value="licence_renewal">Licence Renewal</option>
                     </select>
                     @error('activity')
                     <span class="invalid-feedback" role="alert">

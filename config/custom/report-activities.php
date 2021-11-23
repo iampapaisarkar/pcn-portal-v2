@@ -6,9 +6,9 @@ return [
     'location_inspection' => 'Location Inspection',
     'location_approval_banner' => 'Location Approval Banner',
     'facility_inspection' => 'Facility Inspection',
-    'registration_and_licencing' => 'Registration and Licencing',
+    'licence_approval' => 'Licence Approval',
     'renewal_inspection' => 'Renewal Inspection',
-    'renewal_of_licence' => 'Renewal of Licence',
+    'licence_renewal' => 'Licence Renewal',
   ] ,
   'category' => [
     'hospital_pharmacy' => 'Hospital Pharmacy',
