@@ -97,7 +97,7 @@ class ApplicationReportsController extends Controller
 
                     }else if($app['application_type'] == 'ppmv'){
 
-                        $name = $app['renewal']['registration']['user']['hospital_name'];
+                        $name = $app['renewal']['registration']['user']['shop_name'];
                         $address = $app['renewal']['registration']['user']['hospital_address'];
                         $state = $app['renewal']['registration']['user']['user_state']['name'];
                         $lga = $app['renewal']['registration']['user']['user_lga']['name'];
@@ -143,8 +143,8 @@ class ApplicationReportsController extends Controller
 
                     }else if($app['application_type'] == 'ppmv'){
 
-                        $name = $app['application']['user']['hospital_name'];
-                        $address = $app['application']['user']['hospital_address'];
+                        $name = $app['application']['user']['shop_name'];
+                        $address = $app['application']['user']['shop_address'];
                         $state = $app['application']['user']['user_state']['name'];
                         $lga = $app['application']['user']['user_lga']['name'];
 
