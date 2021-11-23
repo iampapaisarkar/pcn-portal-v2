@@ -98,11 +98,11 @@ class PaymentReportsController extends Controller
             $reports = $reports->where('status', $request->status);
         }
 
-        $reports = $reports->whereBetween('created_at', [$request->date_from.' 00:00:00', $request->date_to.' 23:59:59']);
+        $reports = $reports->whereBetween('created_at', [\Carbon\Carbon::parse($request->date_from), \Carbon\Carbon::parse($request->date_to)]);
         $reports = $reports->select('reports.*')
         ->get();
 
-        dd([$request->date_from.' 00:00:00', $request->date_to.' 23:59:59']);
+        // dd($reports);
 
         if(!$reports->isEmpty()){
             $array = array();
