@@ -190,7 +190,7 @@
         if(data.type == 'community_pharmacy'){
             $('#registrationId').val(data.id);
             $('#category').text(data.category); 
-            $('#ApprovedDate').text(moment(data.updated_at).format("MMM Do YY")); 
+            $('#ApprovedDate').text(moment(data.updated_at).format("DD MMM YYYY")); 
             $('#name').text(data.other_registration.company.name); 
             $('#address').text(data.other_registration.company.address); 
             $('#state').text(data.other_registration.company.company_state.name); 
@@ -199,7 +199,7 @@
         if(data.type == 'distribution_premises'){
             $('#registrationId').val(data.id); 
             $('#category').text(data.category); 
-            $('#ApprovedDate').text(moment(data.updated_at).format("MMM Do YY")); 
+            $('#ApprovedDate').text(moment(data.updated_at).format("DDD MMM YY")); 
             $('#name').text(data.other_registration.company.name); 
             $('#address').text(data.other_registration.company.address); 
             $('#state').text(data.other_registration.company.company_state.name); 
@@ -208,7 +208,7 @@
         if(data.type == 'ppmv'){
             $('#registrationId').val(data.id); 
             $('#category').text(data.category); 
-            $('#ApprovedDate').text(moment(data.updated_at).format("MMM Do YY")); 
+            $('#ApprovedDate').text(moment(data.updated_at).format("DDD MMM YYYY")); 
             $('#name').text(data.user.shop_name); 
             $('#address').text(data.user.shop_address); 
             $('#state').text(data.user.user_state.name); 
