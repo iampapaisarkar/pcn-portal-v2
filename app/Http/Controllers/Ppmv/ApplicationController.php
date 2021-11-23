@@ -53,7 +53,7 @@ class ApplicationController extends Controller
 
             PpmvLocationApplication::create([
                 'user_id' => Auth::user()->id,
-                'registration_id' => $apregistrationplication->id,
+                'registration_id' => $registration->id,
 
                 'birth_certificate' => $birth_certificate,
                 'educational_certificate' => $educational_certificate,
