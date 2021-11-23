@@ -62,12 +62,12 @@ class ApplicationReportsController extends Controller
             'state',
             'approvedBy'
         );
+        dd($reports->get());
 
         if($request->state != "all"){
             $reports = $reports->where('state_id', intval($request->state));
             dd($reports->where('state_id', intval($request->state))->get());
         }else{
-            dd($reports->get());
         }
 
 
