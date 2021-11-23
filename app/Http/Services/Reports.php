@@ -12,15 +12,24 @@ class Reports
         try {
             DB::beginTransaction();
 
-            Report::create([
-                'type' => 'application',
-                'application_id' => $id,
-                'application_type' => $application_type,
-                'activity' => $activity,
-                'status' => $status,
-                'state_id' => $state_id,
-                'approved_by' => $approved_by
-            ]);
+            if(Report::where(['application_id' => $id, 'type' => 'application', 'application_type' => $application_type])->exists()){
+                Report::where(['application_id' => $id, 'type' => 'application', 'application_type' => $application_type])
+                ->update([
+                    'activity' => $activity,
+                    'status' => $status,
+                    'approved_by' => $approved_by
+                ]);
+            }else{
+                Report::create([
+                    'type' => 'application',
+                    'application_id' => $id,
+                    'application_type' => $application_type,
+                    'activity' => $activity,
+                    'status' => $status,
+                    'state_id' => $state_id,
+                    'approved_by' => $approved_by
+                ]);
+            }
 
             DB::commit();
 
@@ -45,6 +54,25 @@ class Reports
                 'status' => $status,
                 'state_id' => $state_id
             ]);
+
+            if(Report::where(['application_id' => $id, 'type' => 'payment', 'application_type' => $application_type])->exists()){
+                Report::where(['application_id' => $id, 'type' => 'payment', 'application_type' => $application_type])
+                ->update([
+                    'activity' => $activity,
+                    'status' => $status,
+                    'approved_by' => $approved_by
+                ]);
+            }else{
+                Report::create([
+                    'type' => 'payment',
+                    'application_id' => $id,
+                    'application_type' => $application_type,
+                    'activity' => $activity,
+                    'status' => $status,
+                    'state_id' => $state_id,
+                    'approved_by' => $approved_by
+                ]);
+            }
 
             DB::commit();
 
