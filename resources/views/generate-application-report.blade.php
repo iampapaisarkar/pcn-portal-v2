@@ -139,7 +139,8 @@
     $('#startDate').on("change", function(e) {
 
         var value = e.target.value;
-        var startDate = new Date(new Date(value).getFullYear(value), new Date(value).getMonth(value), new Date(value).getDate(value) + 2);
+        // var startDate = new Date(new Date(value).getFullYear(value), new Date(value).getMonth(value), new Date(value).getDate(value) + 2);
+        var startDate = new Date(new Date(value).getFullYear(value), new Date(value).getMonth(value), new Date(value).getDate(value));
 
         var month = startDate.getMonth() + 1;
         var day = startDate.getDate();
