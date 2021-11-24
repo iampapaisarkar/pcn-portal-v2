@@ -45,7 +45,7 @@
             <div style="margin-bottom: 14px; font-size: 16px; text-align: center; color: #bb1c25; font-weight: bold;"><span>{{ucwords($data['user']['shop_address'])}}, {{ucwords($data['user']['user_lga']['name'])}} LGA, {{ucwords($data['user']['user_state']['name'])}} STATE</span></div>
         </div>
         
-        <div style="margin-top: 170px;">
+        <div style="margin-top: 200px;">
             <div style="margin-bottom: 20px; font-size: 16px; text-align: center;"><span>REGISTRAR / SECRETARY</span></div>
             <div style="font-size: 10px; text-align: center;"><span>DATED THIS {{strtoupper($data['updated_at']->format('jS'))}} DAY OF  {{strtoupper($data['updated_at']->format('M'))}}, {{$data['updated_at']->format('Y')}} LICENCE EXPIRES ON {{strtoupper(\Carbon\Carbon::parse($data['expires_at'])->format('jS'))}} {{strtoupper(\Carbon\Carbon::parse($data['expires_at'])->format('M'))}}, {{\Carbon\Carbon::parse($data['expires_at'])->format('Y')}}</span></div>
         </div>
