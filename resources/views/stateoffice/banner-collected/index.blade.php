@@ -176,7 +176,7 @@
     function showBannerModal(data){
         if(data.type == 'community_pharmacy'){
             $('#category').text(data.category); 
-            $('#ApprovedDate').text(data.updated_at); 
+            $('#ApprovedDate').text(moment(data.updated_at).format("DD MMM YYYY")); 
             $('#name').text(data.other_registration.company.name); 
             $('#address').text(data.other_registration.company.address); 
             $('#state').text(data.other_registration.company.company_state.name); 
@@ -186,7 +186,7 @@
         }
         if(data.type == 'distribution_premises'){
             $('#category').text(data.category); 
-            $('#ApprovedDate').text(data.updated_at); 
+            $('#ApprovedDate').text(moment(data.updated_at).format("DD MMM YYYY")); 
             $('#name').text(data.other_registration.company.name); 
             $('#address').text(data.other_registration.company.address); 
             $('#state').text(data.other_registration.company.company_state.name); 
@@ -196,7 +196,7 @@
         }
         if(data.type == 'ppmv'){
             $('#category').text(data.category); 
-            $('#ApprovedDate').text(data.updated_at); 
+            $('#ApprovedDate').text(moment(data.updated_at).format("DD MMM YYYY")); 
             $('#name').text(data.user.shop_name); 
             $('#address').text(data.user.shop_address); 
             $('#state').text(data.user.user_state.name); 
