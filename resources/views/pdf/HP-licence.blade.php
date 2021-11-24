@@ -30,7 +30,7 @@
             <img src="{{$photo}}" style="width: 170px; height: 170px; border-radius: 20px;" />
         </div>
         
-        <div style="position: absolute; top: 100px;">
+        <div style="position: absolute; top: 100px; width: 100%;">
             <div style="margin-bottom: 10px; text-align: right;"><span>LICENCE NUMBER</span></div>
             <div style="text-align: right; font-size: 20px; color: #bb1c25;"><span>{{$data['licence']}}</span></div>
         </div>
