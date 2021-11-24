@@ -113,7 +113,7 @@ class PaymentReportsController extends Controller
                         'State' => strtoupper($app['state']['name']),
                         'Category' => strtoupper(config('custom.report-activities.category')[$app['application_type']]),
                         'Activity' =>  config('custom.report-activities.activities')[$app['activity']],
-                        'Year' => $app['payment']['renewal']['application']['registration_year'], 
+                        'Year' => $app['payment']['renewal']['registration']['registration_year'], 
                         'Status' => $app['status'] == 'pending' ? 'PENDING' : 'PAID', 
                         'Amount' => number_format($app['payment']['amount']) . '.00',
                     ];
