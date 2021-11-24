@@ -443,7 +443,7 @@ class Checkout
                     'order_id' => $order_id,
                     'application_id' => $application['id'],
                     'service_id' => $service->id,
-                    'service_type' => $type . '_registration',
+                    'service_type' => $type,
                     'amount' => $totalAmount,
                     'token' => $token,
                 ]);
@@ -509,7 +509,7 @@ class Checkout
                     'application_id' => $application['id'],
                     'service_id' => $service->id,
                     'extra_service_id' => $extra_service_id,
-                    'service_type' => $type . '_registration',
+                    'service_type' => $type,
                     'amount' => $totalAmount,
                     'token' => $token,
                 ]);
@@ -631,7 +631,7 @@ class Checkout
                     'order_id' => $order_id,
                     'application_id' => $application['id'],
                     'service_id' => $service->id,
-                    'service_type' => $type,
+                    'service_type' => $type . '_registration',
                     'amount' => $totalAmount,
                     'token' => $token,
                 ]);
@@ -758,7 +758,7 @@ class Checkout
                     'application_id' => $application['id'],
                     'service_id' => $service->id,
                     'extra_service_id' => $extra_service_id,
-                    'service_type' => $type,
+                    'service_type' => $type . '_registration',
                     'amount' => $totalAmount,
                     'token' => $token,
                 ]);
