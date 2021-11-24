@@ -130,7 +130,7 @@ class ApplicationReportsController extends Controller
                         'Address' => $address,
                         'LGA' => $lga,
                         'Approved By' => $app['approvedBy'] ? $app['approvedBy']['firstname'] .' '.$app['approvedBy']['lastname'] : null,
-                        'Approved On' => $app['approvedBy'] ? $app['created_at']->format('d M Y h:i A') : null,
+                        'Approved On' => $app['approvedBy'] ? $app['updated_at']->format('d M Y h:i A') : null,
                     ];
                     array_push($array, $fields);
                 }else{
@@ -176,7 +176,7 @@ class ApplicationReportsController extends Controller
                         'Address' => $address,
                         'LGA' => $lga,
                         'Approved By' => $app['approvedBy'] ? $app['approvedBy']['firstname'] .' '.$app['approvedBy']['lastname'] : null,
-                        'Approved On' => $app['approvedBy'] ? $app['created_at']->format('d M Y h:i A') : null,
+                        'Approved On' => $app['approvedBy'] ? $app['updated_at']->format('d M Y h:i A') : null,
                     ];
                     array_push($array, $fields);
                 }
