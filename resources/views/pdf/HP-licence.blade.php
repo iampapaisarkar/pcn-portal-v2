@@ -23,7 +23,7 @@
         }
     </style>
 <body style="background-image: url({{$background}}); width: 100%; height: 100%;">
-    <div style="padding-top: 32px;padding-left: 100px;padding-right: 70px;">
+    <div style="padding-top: 32px;padding-left: 70px;padding-right: 70px; position: relative;">
         <div style="text-align: center; font-weight: bold; font-size: 30px;"><span>PHARMACISTS COUNCIL OF NIGERIA</span></div>
         
         <div style="position: absolute; top: 75px; left: 45px;">
