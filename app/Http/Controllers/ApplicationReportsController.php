@@ -150,6 +150,8 @@ class ApplicationReportsController extends Controller
 
                     }else if($app['application_type'] == 'community_pharmacy' || $app['application_type'] == 'distribution_premises' || $app['application_type'] == 'manufacturing_premises'){
 
+                        dd($app);
+
                         $name = $app['application']['other_registration']['company']['name'];
                         $address = $app['application']['other_registration']['company']['address'];
                         $state = $app['application']['other_registration']['company']['company_state']['name'];
