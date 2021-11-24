@@ -141,6 +141,7 @@ class RenewalInspectionController extends Controller
 
             $renewal = Renewal::where(['payment' => true, 'id' => $request['renewal_id'], 'user_id' => $request['user_id'], 'type' => 'hospital_pharmacy_renewal'])
             ->where('status', 'send_to_pharmacy_practice')
+            ->with('hospital_pharmacy', 'user')
             ->first();
 
             if($renewal){
@@ -181,6 +182,9 @@ class RenewalInspectionController extends Controller
                         'status' => 'no_recommendation',
                     ];
                     EmailSendJOB::dispatch($data);
+
+                    // Store Report 
+                    \App\Http\Services\Reports::storeApplicationReport($renewal->id, 'hospital_pharmacy', 'renewal_inspection', 'queried', $renewal->user->state, Auth::user()->id);
                 }
                 if($request->recommendation == 'partial_recommendation'){
                     $activity = 'Renewal Inspection Report Uploaded';

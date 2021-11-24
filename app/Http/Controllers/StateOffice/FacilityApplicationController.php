@@ -187,6 +187,9 @@ class FacilityApplicationController extends Controller
                         'status' => 'no_recommendation',
                     ];
                     EmailSendJOB::dispatch($data);
+
+                    // Store Report 
+                    \App\Http\Services\Reports::storeApplicationReport($Registration->id, 'ppmv', 'facility_inspection', 'queried', $Registration->user->state, Auth::user()->id);
                 }
                 if($request->recommendation == 'facility_full_recommendation'){
                     $activity = 'Facility Inspection Report Uploaded';

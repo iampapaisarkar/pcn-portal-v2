@@ -141,6 +141,7 @@ class RenewalInspectionController extends Controller
 
             $renewal = Renewal::where(['payment' => true, 'id' => $request['renewal_id'], 'user_id' => $request['user_id'], 'type' => 'ppmv_renewal'])
             ->where('status', 'send_to_state_office')
+            ->with('ppmv', 'user')
             ->first();
 
             if($renewal){
@@ -180,6 +181,9 @@ class RenewalInspectionController extends Controller
                         'status' => 'no_recommendation',
                     ];
                     EmailSendJOB::dispatch($data);
+
+                    // Store Report 
+                    \App\Http\Services\Reports::storeApplicationReport($renewal->id, 'ppmv', 'renewal_inspection', 'queried', $renewal->user->state, Auth::user()->id);
                 }
                 if($request->recommendation == 'full_recommendation'){
                     $activity = 'Renewal Inspection Report Uploaded';

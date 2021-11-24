@@ -139,7 +139,7 @@ class LocationInspectionPendingController extends Controller
             $Registration = Registration::where(['id' => $request->registration_id, 'user_id' => $request->user_id, 'type' => 'community_pharmacy'])
             ->where('status', 'send_to_inspection_monitoring')
             ->where('payment', true)
-            ->with('other_registration', 'user')
+            ->with('other_registration.company', 'user')
             ->first();
 
             if($Registration){
@@ -177,6 +177,9 @@ class LocationInspectionPendingController extends Controller
                         'status' => 'no_recommendation',
                     ];
                     EmailSendJOB::dispatch($data);
+
+                    // Store Report 
+                    \App\Http\Services\Reports::storeApplicationReport($Registration->id, 'community_pharmacy', 'location_inspection', 'queried', $Registration->other_registration->company->state, Auth::user()->id);
                 }
                 if($request->recommendation == 'full_recommendation'){
                     $activity = 'Facility Inspection Report Uploaded';
@@ -234,7 +237,7 @@ class LocationInspectionPendingController extends Controller
             $Registration = Registration::where(['id' => $request->registration_id, 'user_id' => $request->user_id, 'type' => 'distribution_premises'])
             ->where('status', 'send_to_inspection_monitoring')
             ->where('payment', true)
-            ->with('other_registration', 'user')
+            ->with('other_registration.company', 'user')
             ->first();
 
             if($Registration){
@@ -272,6 +275,9 @@ class LocationInspectionPendingController extends Controller
                         'status' => 'no_recommendation',
                     ];
                     EmailSendJOB::dispatch($data);
+
+                    // Store Report 
+                    \App\Http\Services\Reports::storeApplicationReport($Registration->id, 'distribution_premises', 'location_inspection', 'queried', $Registration->other_registration->company->state, Auth::user()->id);
                 }
                 if($request->recommendation == 'full_recommendation'){
                     $activity = 'Facility Inspection Report Uploaded';

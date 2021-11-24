@@ -138,11 +138,12 @@ class LocationInspectionRenewPendingController extends Controller
 
             $Registration = Registration::where(['id' => $request->registration_id, 'user_id' => $request->user_id, 'type' => 'community_pharmacy'])
             ->where('payment', true)
-            ->with('other_registration', 'user')
+            ->with('other_registration.company', 'user')
             ->first();
 
             $renewal = Renewal::where(['payment' => true, 'id' => $request['renewal_id'], 'user_id' => $request['user_id'], 'type' => 'community_pharmacy_renewal'])
             ->where('status', 'send_to_inspection_monitoring')
+            ->with('other_registration.company', 'user')
             ->first();
 
 
@@ -183,6 +184,9 @@ class LocationInspectionRenewPendingController extends Controller
                         'status' => 'no_recommendation',
                     ];
                     EmailSendJOB::dispatch($data);
+
+                    // Store Report 
+                    \App\Http\Services\Reports::storeApplicationReport($renewal->id, 'community_pharmacy', 'renewal_inspection', 'queried', $renewal->other_registration->company->state, Auth::user()->id);
                 }
                 if($request->recommendation == 'full_recommendation'){
                     $activity = 'Renewal Inspection Report Uploaded';
@@ -237,11 +241,12 @@ class LocationInspectionRenewPendingController extends Controller
 
             $Registration = Registration::where(['id' => $request->registration_id, 'user_id' => $request->user_id, 'type' => 'distribution_premises'])
             ->where('payment', true)
-            ->with('other_registration', 'user')
+            ->with('other_registration.company', 'user')
             ->first();
 
             $renewal = Renewal::where(['payment' => true, 'id' => $request['renewal_id'], 'user_id' => $request['user_id'], 'type' => 'distribution_premises_renewal'])
             ->where('status', 'send_to_inspection_monitoring')
+            ->with('other_registration.company', 'user')
             ->first();
 
 
@@ -282,6 +287,9 @@ class LocationInspectionRenewPendingController extends Controller
                         'status' => 'no_recommendation',
                     ];
                     EmailSendJOB::dispatch($data);
+
+                    // Store Report 
+                    \App\Http\Services\Reports::storeApplicationReport($renewal->id, 'distribution_premises', 'renewal_inspection', 'queried', $renewal->other_registration->company->state, Auth::user()->id);
                 }
                 if($request->recommendation == 'full_recommendation'){
                     $activity = 'Renewal Inspection Report Uploaded';
@@ -336,11 +344,12 @@ class LocationInspectionRenewPendingController extends Controller
 
             $Registration = Registration::where(['id' => $request->registration_id, 'user_id' => $request->user_id, 'type' => 'manufacturing_premises'])
             ->where('payment', true)
-            ->with('other_registration', 'user')
+            ->with('other_registration.company', 'user')
             ->first();
 
             $renewal = Renewal::where(['payment' => true, 'id' => $request['renewal_id'], 'user_id' => $request['user_id'], 'type' => 'manufacturing_premises_renewal'])
             ->where('status', 'send_to_inspection_monitoring')
+            ->with('other_registration.company', 'user')
             ->first();
 
 
@@ -381,6 +390,9 @@ class LocationInspectionRenewPendingController extends Controller
                         'status' => 'no_recommendation',
                     ];
                     EmailSendJOB::dispatch($data);
+
+                    // Store Report 
+                    \App\Http\Services\Reports::storeApplicationReport($renewal->id, 'manufacturing_premises', 'renewal_inspection', 'queried', $renewal->other_registration->company->state, Auth::user()->id);
                 }
                 if($request->recommendation == 'full_recommendation'){
                     $activity = 'Renewal Inspection Report Uploaded';

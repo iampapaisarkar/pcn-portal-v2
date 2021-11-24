@@ -187,6 +187,9 @@ class LocationInspectionController extends Controller
                         'status' => 'no_recommendation',
                     ];
                     EmailSendJOB::dispatch($data);
+
+                    // Store Report 
+                    \App\Http\Services\Reports::storeApplicationReport($Registration->id, 'ppmv', 'location_inspection', 'queried', $Registration->user->state, Auth::user()->id);
                 }
                 // if($request->recommendation == 'partial_recommendation'){
                 //     $activity = 'Facility Inspection Report Uploaded';

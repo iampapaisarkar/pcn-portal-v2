@@ -139,7 +139,7 @@ class FacilityInspectionPendingController extends Controller
             $Registration = Registration::where(['id' => $request->registration_id, 'user_id' => $request->user_id, 'type' => 'community_pharmacy'])
             ->where('status', 'send_to_inspection_monitoring_registration')
             ->where('payment', true)
-            ->with('other_registration', 'user')
+            ->with('other_registration.company', 'user')
             ->first();
 
             if($Registration){
@@ -177,6 +177,9 @@ class FacilityInspectionPendingController extends Controller
                         'status' => 'no_recommendation',
                     ];
                     EmailSendJOB::dispatch($data);
+
+                    // Store Report 
+                    \App\Http\Services\Reports::storeApplicationReport($Registration->id, 'community_pharmacy', 'facility_inspection', 'queried', $Registration->other_registration->company->state, Auth::user()->id);
                 }
                 if($request->recommendation == 'facility_full_recommendation'){
                     $activity = 'Facility Inspection Report Uploaded';
@@ -234,7 +237,7 @@ class FacilityInspectionPendingController extends Controller
             $Registration = Registration::where(['id' => $request->registration_id, 'user_id' => $request->user_id, 'type' => 'distribution_premises'])
             ->where('status', 'send_to_inspection_monitoring_registration')
             ->where('payment', true)
-            ->with('other_registration', 'user')
+            ->with('other_registration.company', 'user')
             ->first();
 
             if($Registration){
@@ -272,6 +275,9 @@ class FacilityInspectionPendingController extends Controller
                         'status' => 'no_recommendation',
                     ];
                     EmailSendJOB::dispatch($data);
+
+                    // Store Report 
+                    \App\Http\Services\Reports::storeApplicationReport($Registration->id, 'distribution_premises', 'facility_inspection', 'queried', $Registration->other_registration->company->state, Auth::user()->id);
                 }
                 if($request->recommendation == 'facility_full_recommendation'){
                     $activity = 'Facility Inspection Report Uploaded';
@@ -328,7 +334,7 @@ class FacilityInspectionPendingController extends Controller
             $Registration = Registration::where(['id' => $request->registration_id, 'user_id' => $request->user_id, 'type' => 'manufacturing_premises'])
             ->where('status', 'send_to_inspection_monitoring_registration')
             ->where('payment', true)
-            ->with('other_registration', 'user')
+            ->with('other_registration.company', 'user')
             ->first();
 
             if($Registration){
@@ -366,6 +372,9 @@ class FacilityInspectionPendingController extends Controller
                         'status' => 'no_recommendation',
                     ];
                     EmailSendJOB::dispatch($data);
+
+                    // Store Report 
+                    \App\Http\Services\Reports::storeApplicationReport($Registration->id, 'manufacturing_premises', 'facility_inspection', 'queried', $Registration->other_registration->company->state, Auth::user()->id);
                 }
                 if($request->recommendation == 'facility_full_recommendation'){
                     $activity = 'Facility Inspection Report Uploaded';
