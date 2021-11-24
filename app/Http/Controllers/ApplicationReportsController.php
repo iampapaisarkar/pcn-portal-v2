@@ -83,39 +83,6 @@ class ApplicationReportsController extends Controller
         $reports = $reports->select('reports.*')
         ->get();
 
-        foreach ($reports as $key => $app) {
-            if($app->activity == 'renewal_inspection'){
-                if($app['application_type'] == 'community_pharmacy' || $app['application_type'] == 'distribution_premises' || $app['application_type'] == 'manufacturing_premises'){
-
-                    $name = $app['renewal']['registration']['other_registration']['company']['name'];
-                    $address = $app['renewal']['registration']['other_registration']['company']['address'];
-                    $state = $app['renewal']['registration']['other_registration']['company']['company_state']['name'];
-                    $lga = $app['renewal']['registration']['other_registration']['company']['company_lga']['name'];
-
-                }
-
-            }else if($app->activity == 'licence_renewal'){
-                if($app['application_type'] == 'community_pharmacy' || $app['application_type'] == 'distribution_premises' || $app['application_type'] == 'manufacturing_premises'){
-
-                    $name = $app['renewal']['registration']['other_registration']['company']['name'];
-                    $address = $app['renewal']['registration']['other_registration']['company']['address'];
-                    $state = $app['renewal']['registration']['other_registration']['company']['company_state']['name'];
-                    $lga = $app['renewal']['registration']['other_registration']['company']['company_lga']['name'];
-
-                }
-            }else{
-                if($app['application_type'] == 'distribution_premises'){
-
-                    $name = $app['application']['other_registration']['company']['name'];
-                    $address = $app['application']['other_registration']['company']['address'];
-                    $state = $app['application']['other_registration']['company']['company_state']['name'];
-                    $lga = $app['application']['other_registration']['company']['company_lga']['name'];
-
-                }
-               
-            }
-            
-        }
 
         if(!$reports->isEmpty()){
             $array = array();

@@ -265,7 +265,7 @@ class RenewalPendingLicenceController extends Controller
                             EmailSendJOB::dispatch($data);
 
                             // Store Report 
-                            \App\Http\Services\Reports::storeApplicationReport($renewal->id, 'distribution_premises', 'manufacturing_premises', 'approved', $renewal->other_registration->company->state, Auth::user()->id);
+                            \App\Http\Services\Reports::storeApplicationReport($renewal->id, 'distribution_premises', 'licence_renewal', 'approved', $renewal->other_registration->company->state, Auth::user()->id);
                         }
 
                     }else{
