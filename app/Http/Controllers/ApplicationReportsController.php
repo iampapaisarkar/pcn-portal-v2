@@ -62,7 +62,7 @@ class ApplicationReportsController extends Controller
             'approvedBy'
         );
 
-        // dd($request->all());
+        dd($request->all());
 
         if($request->state != "all"){
             $reports = $reports->where('state_id', $request->state);
@@ -149,8 +149,6 @@ class ApplicationReportsController extends Controller
                         $lga = $app['application']['user']['user_lga']['name'];
 
                     }else if($app['application_type'] == 'community_pharmacy' || $app['application_type'] == 'distribution_premises' || $app['application_type'] == 'manufacturing_premises'){
-
-                        dd($app);
 
                         $name = $app['application']['other_registration']['company']['name'];
                         $address = $app['application']['other_registration']['company']['address'];
