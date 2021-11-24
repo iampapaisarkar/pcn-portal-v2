@@ -194,6 +194,9 @@ class RenewalInspectionController extends Controller
                         'status' => 'full_recommendation',
                     ];
                     EmailSendJOB::dispatch($data);
+
+                    // Store Report 
+                    \App\Http\Services\Reports::storeApplicationReport($renewal->id, 'ppmv', 'renewal_inspection', 'approved', $renewal->user->state, Auth::user()->id);
                 }
                 AllActivity::storeActivity($Registration->id, $adminName, $activity, 'ppmv');
 

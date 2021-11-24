@@ -197,6 +197,9 @@ class LocationInspectionRenewPendingController extends Controller
                         'status' => 'full_recommendation',
                     ];
                     EmailSendJOB::dispatch($data);
+
+                     // Store Report 
+                     \App\Http\Services\Reports::storeApplicationReport($renewal->id, 'community_pharmacy', 'renewal_inspection', 'approved', $renewal->other_registration->company->state, Auth::user()->id);
                 }
                 AllActivity::storeActivity($Registration->id, $adminName, $activity, 'community_pharmacy');
 
@@ -300,6 +303,9 @@ class LocationInspectionRenewPendingController extends Controller
                         'status' => 'full_recommendation',
                     ];
                     EmailSendJOB::dispatch($data);
+
+                    // Store Report 
+                    \App\Http\Services\Reports::storeApplicationReport($renewal->id, 'distribution_premises', 'renewal_inspection', 'approved', $renewal->other_registration->company->state, Auth::user()->id);
                 }
                 AllActivity::storeActivity($Registration->id, $adminName, $activity, 'distribution_premises');
 
@@ -403,6 +409,9 @@ class LocationInspectionRenewPendingController extends Controller
                         'status' => 'full_recommendation',
                     ];
                     EmailSendJOB::dispatch($data);
+
+                    // Store Report 
+                    \App\Http\Services\Reports::storeApplicationReport($renewal->id, 'manufacturing_premises', 'renewal_inspection', 'approved', $renewal->other_registration->company->state, Auth::user()->id);
                 }
                 AllActivity::storeActivity($Registration->id, $adminName, $activity, 'manufacturing_premises');
 

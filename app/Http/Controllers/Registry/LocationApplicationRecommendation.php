@@ -180,8 +180,6 @@ class LocationApplicationRecommendation extends Controller
                             'banner_status' => 'pending'
                         ]);
 
-                        // Store Report 
-                        \App\Http\Services\Reports::storeApplicationReport($Registration->id, 'ppmv', 'location_inspection', 'approved', $Registration->user->state, Auth::user()->id);
                     }
                     if($Registration->type == 'community_pharmacy'){
                         Registration::where(['payment' => true, 'id' => $registration_id])
@@ -193,9 +191,7 @@ class LocationApplicationRecommendation extends Controller
                             'payment' => false,
                             'banner_status' => 'pending'
                         ]);
-
-                        // Store Report 
-                        \App\Http\Services\Reports::storeApplicationReport($Registration->id, 'community_pharmacy', 'location_inspection', 'approved', $Registration->other_registration->company->state, Auth::user()->id);
+                        
                     }
                     if($Registration->type == 'distribution_premises'){
                         Registration::where(['payment' => true, 'id' => $registration_id])
@@ -208,8 +204,7 @@ class LocationApplicationRecommendation extends Controller
                             'banner_status' => 'pending'
                         ]);
 
-                        // Store Report 
-                        \App\Http\Services\Reports::storeApplicationReport($Registration->id, 'distribution_premises', 'location_inspection', 'approved', $Registration->other_registration->company->state, Auth::user()->id);
+                        
                     }
 
                     $adminName = Auth::user()->firstname .' '. Auth::user()->lastname;

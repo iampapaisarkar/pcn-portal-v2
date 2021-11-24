@@ -212,6 +212,9 @@ class LocationInspectionController extends Controller
                         'status' => 'full_recommendation',
                     ];
                     EmailSendJOB::dispatch($data);
+
+                    // Store Report 
+                    \App\Http\Services\Reports::storeApplicationReport($Registration->id, 'ppmv', 'location_inspection', 'approved', $Registration->user->state, Auth::user()->id);
                 }
                 AllActivity::storeActivity($Registration->id, $adminName, $activity, 'ppmv');
 

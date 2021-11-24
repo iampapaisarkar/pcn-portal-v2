@@ -191,6 +191,9 @@ class LocationInspectionPendingController extends Controller
                         'status' => 'full_recommendation',
                     ];
                     EmailSendJOB::dispatch($data);
+
+                    // Store Report 
+                    \App\Http\Services\Reports::storeApplicationReport($Registration->id, 'community_pharmacy', 'location_inspection', 'approved', $Registration->other_registration->company->state, Auth::user()->id);
                 }
                 AllActivity::storeActivity($Registration->id, $adminName, $activity, 'community_pharmacy');
 
@@ -289,6 +292,9 @@ class LocationInspectionPendingController extends Controller
                         'status' => 'full_recommendation',
                     ];
                     EmailSendJOB::dispatch($data);
+
+                    // Store Report 
+                    \App\Http\Services\Reports::storeApplicationReport($Registration->id, 'distribution_premises', 'location_inspection', 'approved', $Registration->other_registration->company->state, Auth::user()->id);
                 }
                 AllActivity::storeActivity($Registration->id, $adminName, $activity, 'distribution_premises');
 

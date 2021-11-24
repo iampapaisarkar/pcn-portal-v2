@@ -190,6 +190,9 @@ class DocumentInspectionController extends Controller
                         'status' => 'partial_recommendation',
                     ];
                     EmailSendJOB::dispatch($data);
+
+                    // Store Report 
+                    \App\Http\Services\Reports::storeApplicationReport($Registration->id, 'hospital_pharmacy', 'facility_inspection', 'approved', $Registration->user->state, Auth::user()->id);
                 }
                 if($request->recommendation == 'full_recommendation'){
                     $activity = 'Facility Inspection Report Uploaded';
@@ -201,6 +204,9 @@ class DocumentInspectionController extends Controller
                         'status' => 'full_recommendation',
                     ];
                     EmailSendJOB::dispatch($data);
+
+                    // Store Report 
+                    \App\Http\Services\Reports::storeApplicationReport($Registration->id, 'hospital_pharmacy', 'facility_inspection', 'approved', $Registration->user->state, Auth::user()->id);
                 }
                 AllActivity::storeActivity($Registration->id, $adminName, $activity, 'hospital_pharmacy');
 

@@ -191,6 +191,9 @@ class FacilityInspectionPendingController extends Controller
                         'status' => 'full_recommendation',
                     ];
                     EmailSendJOB::dispatch($data);
+
+                    // Store Report 
+                    \App\Http\Services\Reports::storeApplicationReport($Registration->id, 'community_pharmacy', 'facility_inspection', 'approved', $Registration->other_registration->company->state, Auth::user()->id);
                 }
                 AllActivity::storeActivity($Registration->id, $adminName, $activity, 'community_pharmacy');
 
@@ -289,6 +292,9 @@ class FacilityInspectionPendingController extends Controller
                         'status' => 'full_recommendation',
                     ];
                     EmailSendJOB::dispatch($data);
+
+                    // Store Report 
+                    \App\Http\Services\Reports::storeApplicationReport($Registration->id, 'distribution_premises', 'facility_inspection', 'approved', $Registration->other_registration->company->state, Auth::user()->id);
                 }
                 AllActivity::storeActivity($Registration->id, $adminName, $activity, 'distribution_premises');
 
@@ -386,6 +392,9 @@ class FacilityInspectionPendingController extends Controller
                         'status' => 'full_recommendation',
                     ];
                     EmailSendJOB::dispatch($data);
+
+                    // Store Report 
+                    \App\Http\Services\Reports::storeApplicationReport($Registration->id, 'manufacturing_premises', 'facility_inspection', 'approved', $Registration->other_registration->company->state, Auth::user()->id);
                 }
                 AllActivity::storeActivity($Registration->id, $adminName, $activity, 'manufacturing_premises');
 

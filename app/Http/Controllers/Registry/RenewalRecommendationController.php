@@ -164,7 +164,7 @@ class RenewalRecommendationController extends Controller
                             AllActivity::storeActivity($renewal_id, $adminName, $activity, 'hospital_pharmacy');
 
                             // Store Report 
-                            \App\Http\Services\Reports::storeApplicationReport($renewal->id, 'hospital_pharmacy', 'renewal_inspection', 'approved', $renewal->user->state, Auth::user()->id);
+                            // \App\Http\Services\Reports::storeApplicationReport($renewal->id, 'hospital_pharmacy', 'renewal_inspection', 'approved', $renewal->user->state, Auth::user()->id);
                             \App\Http\Services\Reports::storeApplicationReport($renewal->id, 'hospital_pharmacy', 'licence_renewal', 'pending', $renewal->user->state, null);
                         }
 
@@ -174,7 +174,7 @@ class RenewalRecommendationController extends Controller
                             AllActivity::storeActivity($renewal_id, $adminName, $activity, 'ppmv');
 
                             // Store Report 
-                            \App\Http\Services\Reports::storeApplicationReport($renewal->id, 'ppmv', 'renewal_inspection', 'approved', $renewal->user->state, Auth::user()->id);
+                            // \App\Http\Services\Reports::storeApplicationReport($renewal->id, 'ppmv', 'renewal_inspection', 'approved', $renewal->user->state, Auth::user()->id);
                             \App\Http\Services\Reports::storeApplicationReport($renewal->id, 'ppmv', 'licence_renewal', 'pending', $renewal->user->state, null);
                         }
 
@@ -184,7 +184,7 @@ class RenewalRecommendationController extends Controller
                             AllActivity::storeActivity($renewal_id, $adminName, $activity, 'community_pharmacy');
 
                             // Store Report 
-                            \App\Http\Services\Reports::storeApplicationReport($renewal->id, 'community_pharmacy', 'renewal_inspection', 'approved', $renewal->registration->other_registration->company->state, Auth::user()->id);
+                            // \App\Http\Services\Reports::storeApplicationReport($renewal->id, 'community_pharmacy', 'renewal_inspection', 'approved', $renewal->registration->other_registration->company->state, Auth::user()->id);
                             \App\Http\Services\Reports::storeApplicationReport($renewal->id, 'community_pharmacy', 'licence_renewal', 'pending', $renewal->registration->other_registration->company->state, null);
                         }
 
@@ -194,7 +194,7 @@ class RenewalRecommendationController extends Controller
                             AllActivity::storeActivity($renewal_id, $adminName, $activity, 'distribution_premises');
 
                             // Store Report 
-                            \App\Http\Services\Reports::storeApplicationReport($renewal->id, 'distribution_premises', 'renewal_inspection', 'approved', $renewal->registration->other_registration->company->state, Auth::user()->id);
+                            // \App\Http\Services\Reports::storeApplicationReport($renewal->id, 'distribution_premises', 'renewal_inspection', 'approved', $renewal->registration->other_registration->company->state, Auth::user()->id);
                             \App\Http\Services\Reports::storeApplicationReport($renewal->id, 'distribution_premises', 'licence_renewal', 'pending', $renewal->registration->other_registration->company->state, null);
                         }
 
@@ -204,7 +204,7 @@ class RenewalRecommendationController extends Controller
                             AllActivity::storeActivity($renewal_id, $adminName, $activity, 'manufacturing_premises');
 
                             // Store Report 
-                            \App\Http\Services\Reports::storeApplicationReport($renewal->id, 'manufacturing_premises', 'renewal_inspection', 'approved', $renewal->registration->other_registration->company->state, Auth::user()->id);
+                            // \App\Http\Services\Reports::storeApplicationReport($renewal->id, 'manufacturing_premises', 'renewal_inspection', 'approved', $renewal->registration->other_registration->company->state, Auth::user()->id);
                             \App\Http\Services\Reports::storeApplicationReport($renewal->id, 'manufacturing_premises', 'licence_renewal', 'pending', $renewal->registration->other_registration->company->state, null);
                         }
 
@@ -262,7 +262,7 @@ class RenewalRecommendationController extends Controller
                     AllActivity::storeActivity($request['registration_id'], $adminName, $activity, 'hospital_pharmacy');
 
                     // Store Report 
-                    \App\Http\Services\Reports::storeApplicationReport($renewal->id, 'hospital_pharmacy', 'renewal_inspection', 'approved', $renewal->user->state, Auth::user()->id);
+                    // \App\Http\Services\Reports::storeApplicationReport($renewal->id, 'hospital_pharmacy', 'renewal_inspection', 'approved', $renewal->user->state, Auth::user()->id);
                     \App\Http\Services\Reports::storeApplicationReport($renewal->id, 'hospital_pharmacy', 'licence_renewal', 'pending', $renewal->user->state, null);
 
                 }else{
@@ -321,7 +321,7 @@ class RenewalRecommendationController extends Controller
                     AllActivity::storeActivity($request['registration_id'], $adminName, $activity, 'ppmv');
 
                     // Store Report 
-                    \App\Http\Services\Reports::storeApplicationReport($renewal->id, 'ppmv', 'renewal_inspection', 'approved', $renewal->user->state, Auth::user()->id);
+                    // \App\Http\Services\Reports::storeApplicationReport($renewal->id, 'ppmv', 'renewal_inspection', 'approved', $renewal->user->state, Auth::user()->id);
                     \App\Http\Services\Reports::storeApplicationReport($renewal->id, 'ppmv', 'licence_renewal', 'pending', $renewal->user->state, null);
 
                 }else{
@@ -380,7 +380,7 @@ class RenewalRecommendationController extends Controller
                     AllActivity::storeActivity($request['registration_id'], $adminName, $activity, 'community_pharmacy');
 
                     // Store Report 
-                    \App\Http\Services\Reports::storeApplicationReport($renewal->id, 'community_pharmacy', 'renewal_inspection', 'approved', $renewal->other_registration->company->state, Auth::user()->id);
+                    // \App\Http\Services\Reports::storeApplicationReport($renewal->id, 'community_pharmacy', 'renewal_inspection', 'approved', $renewal->other_registration->company->state, Auth::user()->id);
                     \App\Http\Services\Reports::storeApplicationReport($renewal->id, 'community_pharmacy', 'licence_renewal', 'pending', $renewal->other_registration->company->state, null);
 
                 }else{
@@ -438,7 +438,7 @@ class RenewalRecommendationController extends Controller
                     AllActivity::storeActivity($request['registration_id'], $adminName, $activity, 'distribution_premises');
 
                     // Store Report 
-                    \App\Http\Services\Reports::storeApplicationReport($renewal->id, 'distribution_premises', 'renewal_inspection', 'approved', $renewal->other_registration->company->state, Auth::user()->id);
+                    // \App\Http\Services\Reports::storeApplicationReport($renewal->id, 'distribution_premises', 'renewal_inspection', 'approved', $renewal->other_registration->company->state, Auth::user()->id);
                     \App\Http\Services\Reports::storeApplicationReport($renewal->id, 'distribution_premises', 'licence_renewal', 'pending', $renewal->other_registration->company->state, null);
 
                 }else{
@@ -496,7 +496,7 @@ class RenewalRecommendationController extends Controller
                     AllActivity::storeActivity($request['registration_id'], $adminName, $activity, 'manufacturing_premises');
                     
                     // Store Report 
-                    \App\Http\Services\Reports::storeApplicationReport($renewal->id, 'manufacturing_premises', 'renewal_inspection', 'approved', $renewal->other_registration->company->state, Auth::user()->id);
+                    // \App\Http\Services\Reports::storeApplicationReport($renewal->id, 'manufacturing_premises', 'renewal_inspection', 'approved', $renewal->other_registration->company->state, Auth::user()->id);
                     \App\Http\Services\Reports::storeApplicationReport($renewal->id, 'manufacturing_premises', 'licence_renewal', 'pending', $renewal->other_registration->company->state, null);
 
                 }else{

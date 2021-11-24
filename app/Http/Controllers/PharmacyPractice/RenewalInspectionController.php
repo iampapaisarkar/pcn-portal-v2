@@ -195,6 +195,9 @@ class RenewalInspectionController extends Controller
                         'status' => 'partial_recommendation',
                     ];
                     EmailSendJOB::dispatch($data);
+
+                    // Store Report 
+                    \App\Http\Services\Reports::storeApplicationReport($renewal->id, 'hospital_pharmacy', 'renewal_inspection', 'approved', $renewal->user->state, Auth::user()->id);
                 }
                 if($request->recommendation == 'full_recommendation'){
                     $activity = 'Renewal Inspection Report Uploaded';
@@ -205,6 +208,9 @@ class RenewalInspectionController extends Controller
                         'status' => 'full_recommendation',
                     ];
                     EmailSendJOB::dispatch($data);
+
+                    // Store Report 
+                    \App\Http\Services\Reports::storeApplicationReport($renewal->id, 'hospital_pharmacy', 'renewal_inspection', 'approved', $renewal->user->state, Auth::user()->id);
                 }
                 AllActivity::storeActivity($Registration->id, $adminName, $activity, 'hospital_pharmacy');
 
