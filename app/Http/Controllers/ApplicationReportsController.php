@@ -62,7 +62,6 @@ class ApplicationReportsController extends Controller
             'approvedBy'
         );
 
-        dd($request->all());
 
         if($request->state != "all"){
             $reports = $reports->where('state_id', $request->state);
@@ -83,6 +82,8 @@ class ApplicationReportsController extends Controller
         $reports = $reports->whereBetween('created_at', [$request->date_from.' 00:00:00', $request->date_to.' 23:59:59']);
         $reports = $reports->select('reports.*')
         ->get();
+
+        dd($reports);
 
         if(!$reports->isEmpty()){
             $array = array();
