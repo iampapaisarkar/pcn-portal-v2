@@ -267,10 +267,10 @@
                     <td class="pl-0">{{ $item->title }}</td>
                     @if($invoice->hasItemUnits)
                         <td class="text-center">
-                            @foreach(json_decode($item->units) as $fee)
+                            <!-- @foreach(json_decode($item->units) as $fee)
                             <div>{{ $fee->description }}:N{{ $fee->amount }}</div>
-                            @endforeach
-                           {{json_decode($item->description)}}
+                            @endforeach -->
+                           {{$item->description}}
                         </td>
                     @endif
                     <td class="text-right pr-0">
