@@ -138,13 +138,11 @@
                         <h4 class="text-uppercase">
                             <strong>{{ $invoice->name }}</strong>
 
-                            @foreach($invoice->getCustomData() as $data)
-                                @if($data == true)
-                                <div style="color: #fff; background-color: #4caf50; padding: 2px 7px; width: 100px; text-align: center;">PAID</div>
-                                @else
-                                <div style="color: #fff; background-color: red; padding: 2px 7px; width: 100px; text-align: center;">UNPAID</div>
-                                @endif
-                            @endforeach
+                            @if($invoice->getCustomData()['status'] == true)
+                            <div style="color: #fff; background-color: #4caf50; padding: 2px 7px; width: 100px; text-align: center;">PAID</div>
+                            @else
+                            <div style="color: #fff; background-color: red; padding: 2px 7px; width: 100px; text-align: center;">UNPAID</div>
+                            @endif
                         </h4>
                     </td>
                     <td class="border-0 pl-0">
