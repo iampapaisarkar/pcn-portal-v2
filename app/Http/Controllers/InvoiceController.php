@@ -173,7 +173,7 @@ class InvoiceController extends Controller
             }
 
             $items = [
-                (new InvoiceItem())->title($title)->pricePerUnit($data->amount)->units($data->service->netFees)->description($data->service_type),
+                (new InvoiceItem())->title($title)->pricePerUnit($data->amount)->units($data->service->netFees)->description($data->service_type)->taxByPercent($data->extra_service_id),
             ];
 
             $logoURL = env('APP_URL') . '/admin/dist-assets/images/logo.png';
