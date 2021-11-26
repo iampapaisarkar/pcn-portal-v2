@@ -317,7 +317,7 @@
                                     $extraService = App\Models\ServiceFeeMeta::where('id', $invoice->getCustomData()['service_type'])->first();
                                     $extra_service =  $extraService;
                                 @endphp
-                                <div>{{$extra_service->description}}: Renewal Fee N{{number_format($extra_service->renewal_fee)} : Inspection Fee N{{number_format($extra_service->inspection_fee)}}</div>
+                                <div>{{$extra_service->description}}: Renewal Fee N{{number_format($extra_service->renewal_fee)}} : Inspection Fee N{{number_format($extra_service->inspection_fee)}}</div>
                             @endif
                             @if($invoice->getCustomData()['service_type'] == 'ppmv_registration')
                                     @foreach (config('custom.ppmv-registration-fees') as $key => $extraService)
