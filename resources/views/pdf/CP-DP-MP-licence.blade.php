@@ -66,7 +66,7 @@
             @endif
         </div>
         
-        <div style="margin-top: 90px;">
+        <div style="margin-top: 80px;">
             <div style="margin-bottom: 20px; font-size: 16px; text-align: center;"><span>REGISTRAR / SECRETARY</span></div>
             <div style="font-size: 10px; text-align: center;"><span>DATED THIS {{strtoupper($data['updated_at']->format('jS'))}} DAY OF  {{strtoupper($data['updated_at']->format('M'))}}, {{$data['updated_at']->format('Y')}} LICENCE EXPIRES ON {{strtoupper(\Carbon\Carbon::parse($data['expires_at'])->format('jS'))}} {{strtoupper(\Carbon\Carbon::parse($data['expires_at'])->format('M'))}}, {{\Carbon\Carbon::parse($data['expires_at'])->format('Y')}}</span></div>
         </div>
