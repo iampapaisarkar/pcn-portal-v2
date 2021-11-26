@@ -173,14 +173,16 @@ class InvoiceController extends Controller
             }
 
             $items = [
-                (new InvoiceItem())->title($title)->pricePerUnit($data->amount)->units($data->service->netFees)->description($data->service_type)->taxByPercent($data->extra_service_id),
+                (new InvoiceItem())->title($title)->pricePerUnit($data->amount)->units($data->service->netFees),
             ];
 
             $logoURL = env('APP_URL') . '/admin/dist-assets/images/logo.png';
 
             $invoice = Invoice::make('Invoice')
                 ->setCustomData([
-                    'status' => $data->status
+                    'status' => $data->status,
+                    'service_type' => $data->service_type,
+                    'extra_service_id' => $data->extra_service_id,
                 ])
                 ->series($data->order_id)
                 ->serialNumberFormat('{SERIES}')
