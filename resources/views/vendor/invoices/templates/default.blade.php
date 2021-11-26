@@ -267,10 +267,65 @@
                     <td class="pl-0">{{ $item->title }}</td>
                     @if($invoice->hasItemUnits)
                         <td class="text-center">
-                            <!-- @foreach(json_decode($item->units) as $fee)
+                            @foreach(json_decode($item->units) as $fee)
                             <div>{{ $fee->description }}:N{{ $fee->amount }}</div>
-                            @endforeach -->
-                            {{$invoice->getCustomData()['service_type']}}
+                            @endforeach
+                            @if($invoice->getCustomData()['service_type'] == 'hospital_pharmacy' && $invoice->getCustomData()['extra_service_id'] != null)
+                                @php 
+                                    $extraService = App\Models\ServiceFeeMeta::where('id', $invoice->getCustomData()['extra_service_id'])->first();
+                                    $extra_service =  $extraService;
+                                @endphp
+                                <div>{{$extra_service->description}}: Registration Fee N{{number_format($extra_service->registration_fee)}} : Inspection Fee N{{number_format($extra_service->inspection_fee)}}</div>
+                            @endif
+                            @if($invoice->getCustomData()['service_type'] == 'hospital_pharmacy_renewal' && $invoice->getCustomData()['extra_service_id'] != null)
+                                @php 
+                                    $extraService = App\Models\ServiceFeeMeta::where('id', $invoice->getCustomData()['extra_service_id'])->first();
+                                    $extra_service =  $extraService;
+                                @endphp
+                                <div>{{$extra_service->description}}: Registration Fee N{{number_format($extra_service->registration_fee)}} : Inspection Fee N{{number_format($extra_service->inspection_fee)}}</div>
+                            @endif
+                            @if($invoice->getCustomData()['service_type'] == 'manufacturing_premises' && $invoice->getCustomData()['extra_service_id'] != null)
+                                @php 
+                                    $extraService = App\Models\ServiceFeeMeta::where('id', $invoice->getCustomData()['extra_service_id'])->first();
+                                    $extra_service =  $extraService;
+                                @endphp
+                                <div>{{$extra_service->description}}: Registration Fee N{{number_format($extra_service->registration_fee)}} : Inspection Fee N{{number_format($extra_service->inspection_fee)}}
+                                </div>
+                            @endif
+                            @if($invoice->getCustomData()['service_type'] == 'manufacturing_premises_renewal' && $invoice->getCustomData()['extra_service_id'] != null)
+                                @php 
+                                    $extraService = App\Models\ServiceFeeMeta::where('id', $invoice->getCustomData()['extra_service_id'])->first();
+                                    $extra_service =  $extraService;
+                                @endphp
+                                <div>{{$extra_service->description}}: Inspection Fee N{{number_format($extra_service->inspection_fee)}}
+                                    Renewal Fee N{{number_format($extra_service->renewal_fee)}}</div>
+                            @endif
+                            @if($invoice->getCustomData()['service_type'] == 'distribution_premises_registration' && $invoice->getCustomData()['extra_service_id'] != null)
+                                @php 
+                                    $extraService = App\Models\ServiceFeeMeta::where('id', $invoice->getCustomData()['extra_service_id'])->first();
+                                    $extra_service =  $extraService;
+                                @endphp
+                                <div>{{$extra_service->description}}: Location Fee N{{number_format($extra_service->location_fee)}}</div>
+                            @endif
+                            @if($invoice->getCustomData()['service_type'] == 'distribution_premises' && $invoice->getCustomData()['extra_service_id'] != null)
+                                @php 
+                                    $extraService = App\Models\ServiceFeeMeta::where('id', $invoice->getCustomData()['extra_service_id'])->first();
+                                    $extra_service =  $extraService;
+                                @endphp
+                                <div>{{$extra_service->description}}: Registration Fee N{{number_format($extra_service->registration_fee)}} : Inspection Fee N{{number_format($extra_service->inspection_fee)}}</div>
+                            @endif
+                            @if($invoice->getCustomData()['service_type'] == 'distribution_premises_renewal' && $invoice->getCustomData()['extra_service_id'] != null)
+                                @php 
+                                    $extraService = App\Models\ServiceFeeMeta::where('id', $invoice->getCustomData()['extra_service_id'])->first();
+                                    $extra_service =  $extraService;
+                                @endphp
+                                <div>{{$extra_service->description}}: Renewal Fee N{{number_format($extra_service->renewal_fee)}}</div>
+                            @endif
+                            @if($invoice->getCustomData()['service_type'] == 'ppmv_registration')
+                                    @foreach (config('custom.ppmv-registration-fees') as $key => $extraService)
+                                        <div>{{$extraService['description']}}: N{{number_format($extraService['fee'])}}</div>
+                                    @endforeach
+                            @endif
                         </td>
                     @endif
                     <td class="text-right pr-0">
