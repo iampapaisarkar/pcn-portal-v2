@@ -270,7 +270,7 @@
                             @foreach(json_decode($item->units) as $fee)
                             <div>{{ $fee->description }}:N{{ $fee->amount }}</div>
                             @endforeach
-                            {{$item}}
+                            {{$item->service_type}}
                         </td>
                     @endif
                     <td class="text-right pr-0">
