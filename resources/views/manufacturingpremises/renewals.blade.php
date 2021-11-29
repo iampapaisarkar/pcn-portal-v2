@@ -12,7 +12,7 @@
                 <a href="{{route('mp-renewal-form')}}"><button class="btn btn-primary" type="button">RENEW LICENCE</button></a>
                 @else
                     @if(isset(app('App\Http\Services\ManufacturingInfo')->licenceRenewalYearCheck()['renewal_date']))
-                    <h5>You can renwal on {{app('App\Http\Services\ManufacturingInfo')->licenceRenewalYearCheck()['renewal_date']}}</h5>
+                    <h5>You can renew on {{app('App\Http\Services\ManufacturingInfo')->licenceRenewalYearCheck()['renewal_date']}}</h5>
                     @endif
                 @endif
                 <div class="custom-separator"></div>
