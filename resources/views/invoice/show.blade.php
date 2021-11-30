@@ -123,8 +123,8 @@
                                                 @php
                                                 $extraServices = config('custom.ppmv-registration-fees');
                                                 $extra_service_amount = 0;
-                                                foreach ($extraServices as $key => $extraService) {
-                                                    <div>{{$extraService['description']}}: {{$extraService['fee']}}</div>
+                                                foreach ($extraServices as $key => $service) {
+                                                    <div> {{$service['description']}} : {{$service['fee']}} </div>
                                                 }
                                                 @endphp
                                             @endforeach
@@ -135,8 +135,8 @@
                                                 @php
                                                 $extraServices = config('custom.ppmv-registration-fees');
                                                 $extra_service_amount = 0;
-                                                foreach ($extraServices as $key => $extraService) {
-                                                    <div>{{$extraService['description']}}: {{$extraService['fee']}}</div>
+                                                foreach ($extraServices as $key => $service) {
+                                                    <div>{{$service['description']}}: {{$service['fee']}}</div>
                                                 }
                                                 @endphp
                                             @endforeach
