@@ -120,6 +120,25 @@
                                     @if($invoice->service_type == 'ppmv_registration')
                                             @foreach (config('custom.ppmv-registration-fees') as $key => $extraService)
                                                 <div>{{$extraService['description']}}: N{{number_format($extraService['fee'])}}</div>
+                                                @php
+                                                $extraServices = config('custom.ppmv-registration-fees');
+                                                $extra_service_amount = 0;
+                                                foreach ($extraServices as $key => $extraService) {
+                                                    <div>{{$extraService['description']}}: {{$extraService['fee']}}</div>
+                                                }
+                                                @endphp
+                                            @endforeach
+                                    @endif
+                                    @if($invoice->service_type == 'ppmv_renewal')
+                                            @foreach (config('custom.ppmv-registration-fees') as $key => $extraService)
+                                                <div>{{$extraService['description']}}: N{{number_format($extraService['fee'])}}</div>
+                                                @php
+                                                $extraServices = config('custom.ppmv-registration-fees');
+                                                $extra_service_amount = 0;
+                                                foreach ($extraServices as $key => $extraService) {
+                                                    <div>{{$extraService['description']}}: {{$extraService['fee']}}</div>
+                                                }
+                                                @endphp
                                             @endforeach
                                     @endif
                                 </td>
