@@ -108,7 +108,7 @@ class Checkout
                 // }else{
                 //     $totalAmount += floatval($extraService->registration_fee);
                 // }
-                if($Renewal->inspection == true){
+                if($Renewal->inspection == false){
                     $totalAmount += floatval($extraService->registration_fee);
                 }else{
                     $totalAmount += (floatval($extraService->registration_fee) + floatval($extraService->inspection_fee));
@@ -867,7 +867,7 @@ class Checkout
 
                 $extraService = ServiceFeeMeta::where('id', $Renewal->user->company->sub_category)->first();
                 $extra_service_id =  $extraService->id;
-                if($Renewal->inspection == true){
+                if($Renewal->inspection == false){
                     $totalAmount += floatval($extraService->renewal_fee);
                 }else{
                     $totalAmount += (floatval($extraService->renewal_fee) + floatval($extraService->inspection_fee));
@@ -1004,7 +1004,7 @@ class Checkout
 
                 $extraService = ServiceFeeMeta::where('id', $Renewal->user->company->sub_category)->first();
                 $extra_service_id =  $extraService->id;
-                if($Renewal->inspection == true){
+                if($Renewal->inspection == false){
                     $totalAmount += floatval($extraService->renewal_fee);
                 }else{
                     $totalAmount += (floatval($extraService->renewal_fee) + floatval($extraService->inspection_fee));
