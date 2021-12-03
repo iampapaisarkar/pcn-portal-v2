@@ -178,12 +178,12 @@
                 var param = '?am=' + response.amount + '&ref=' + response.paymentReference;
                 window.location.href = "{{ route('payment-failed', $invoice->token) }}" + param;
             },
-            onClose: function(response) {
-                // console.log('callback Close Response', response);
-                setTimeout(function(){ 
-                    window.location.href = "{{ route('payment-failed', $invoice->token) }}";
-                }, 5000);
-            }
+            // onClose: function(response) {
+            //     // console.log('callback Close Response', response);
+            //     setTimeout(function(){ 
+            //         window.location.href = "{{ route('payment-failed', $invoice->token) }}";
+            //     }, 5000);
+            // }
         });
         paymentEngine.showPaymentWidget();
     }
