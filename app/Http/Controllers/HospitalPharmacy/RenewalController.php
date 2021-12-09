@@ -178,10 +178,10 @@ class RenewalController extends Controller
                 }
                 if($previousRenwal->inspection_year == \Carbon\Carbon::now()->addYears($year)->format('Y')){
                     $renewalStatus = 'send_to_registry';
-                    // $renewalInspection = true;
+                    $renewalInspection = true;
                 }else{
                     $renewalStatus = 'send_to_registration';
-                    // $renewalInspection = false;
+                    $renewalInspection = false;
                 }
                 // Remove after this code 
 
@@ -208,8 +208,7 @@ class RenewalController extends Controller
                     'renewal_year' => RenewalDates::renewal_year(),
                     'expires_at' => RenewalDates::expires_at(),
                     'status' => $renewalStatus,
-                    // 'inspection' => $renewalInspection,
-                    'inspection' => $previousRenwal->inspection == true ? false : true,
+                    'inspection' => $renewalInspection,
                     'inspection_year' => $inspectionYear,
                     
                 ]);
