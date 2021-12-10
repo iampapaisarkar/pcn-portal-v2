@@ -74,11 +74,19 @@
                                         <div>{{$extra_service->description}}: Registration Fee N{{number_format($extra_service->registration_fee)}} : Inspection Fee N{{number_format($extra_service->inspection_fee)}}</div>
                                     @endif
                                     @if($invoice->service_type == 'hospital_pharmacy_renewal' && $invoice->extra_service_id != null)
-                                        @php 
-                                            $extraService = App\Models\ServiceFeeMeta::where('id', $invoice->extra_service_id)->first();
-                                            $extra_service =  $extraService;
-                                        @endphp
-                                        <div>{{$extra_service->description}}: Registration Fee N{{number_format($extra_service->registration_fee)}} : Inspection Fee N{{number_format($extra_service->inspection_fee)}}</div>
+                                        @if($invoice->renewal->inspection == false)
+                                            @php 
+                                                $extraService = App\Models\ServiceFeeMeta::where('id', $invoice->extra_service_id)->first();
+                                                $extra_service =  $extraService;
+                                            @endphp
+                                            <div>{{$extra_service->description}}:  Registration Fee N{{number_format($extra_service->registration_fee)}}</div>
+                                        @else
+                                            @php 
+                                                $extraService = App\Models\ServiceFeeMeta::where('id', $invoice->extra_service_id)->first();
+                                                $extra_service =  $extraService;
+                                            @endphp
+                                            <div>{{$extra_service->description}}: Registration Fee N{{number_format($extra_service->registration_fee)}} : Inspection Fee N{{number_format($extra_service->inspection_fee)}}</div>
+                                        @endif
                                     @endif
                                     @if($invoice->service_type == 'manufacturing_premises' && $invoice->extra_service_id != null)
                                         @php 
@@ -89,12 +97,19 @@
                                         </div>
                                     @endif
                                     @if($invoice->service_type == 'manufacturing_premises_renewal' && $invoice->extra_service_id != null)
-                                        @php 
-                                            $extraService = App\Models\ServiceFeeMeta::where('id', $invoice->extra_service_id)->first();
-                                            $extra_service =  $extraService;
-                                        @endphp
-                                        <div>{{$extra_service->description}}: Inspection Fee N{{number_format($extra_service->inspection_fee)}}
-                                            Renewal Fee N{{number_format($extra_service->renewal_fee)}}</div>
+                                        @if($invoice->renewal->inspection == false)
+                                            @php 
+                                                $extraService = App\Models\ServiceFeeMeta::where('id', $invoice->extra_service_id)->first();
+                                                $extra_service =  $extraService;
+                                            @endphp
+                                            <div>{{$extra_service->description}}: Renewal Fee N{{number_format($extra_service->renewal_fee)}}</div>
+                                        @else
+                                            @php 
+                                                $extraService = App\Models\ServiceFeeMeta::where('id', $invoice->extra_service_id)->first();
+                                                $extra_service =  $extraService;
+                                            @endphp
+                                            <div>{{$extra_service->description}}: Inspection Fee N{{number_format($extra_service->inspection_fee)}} Renewal Fee N{{number_format($extra_service->renewal_fee)}}</div>
+                                        @endif
                                     @endif
                                     @if($invoice->service_type == 'distribution_premises_registration' && $invoice->extra_service_id != null)
                                         @php 
@@ -111,11 +126,19 @@
                                         <div>{{$extra_service->description}}: Location Fee N{{number_format($extra_service->location_fee)}}</div>
                                     @endif
                                     @if($invoice->service_type == 'distribution_premises_renewal' && $invoice->extra_service_id != null)
+                                        @if($invoice->renewal->inspection == false)
                                         @php 
-                                            $extraService = App\Models\ServiceFeeMeta::where('id', $invoice->extra_service_id)->first();
-                                            $extra_service =  $extraService;
-                                        @endphp
-                                        <div>{{$extra_service->description}}: Renewal Fee N{{number_format($extra_service->renewal_fee)}} : Inspection Fee N{{number_format($extra_service->inspection_fee)}}</div>
+                                                $extraService = App\Models\ServiceFeeMeta::where('id', $invoice->extra_service_id)->first();
+                                                $extra_service =  $extraService;
+                                            @endphp
+                                            <div>{{$extra_service->description}}: Renewal Fee N{{number_format($extra_service->renewal_fee)}}</div>
+                                        @else
+                                            @php 
+                                                $extraService = App\Models\ServiceFeeMeta::where('id', $invoice->extra_service_id)->first();
+                                                $extra_service =  $extraService;
+                                            @endphp
+                                            <div>{{$extra_service->description}}: Renewal Fee N{{number_format($extra_service->renewal_fee)}} : Inspection Fee N{{number_format($extra_service->inspection_fee)}}</div>
+                                        @endif
                                     @endif
                                     @if($invoice->service_type == 'ppmv_registration')
                                             @foreach (config('custom.ppmv-registration-fees') as $key => $extraService)

@@ -50,7 +50,7 @@ class InvoiceController extends Controller
     public function show($id){
         $authUser = Auth::user();
 
-        $invoice = Payment::with('user', 'service.netFees')->where('id', $id);
+        $invoice = Payment::with('user', 'service.netFees', 'renewal')->where('id', $id);
 
 
         if($authUser->hasRole(['sadmin'])){
@@ -80,7 +80,7 @@ class InvoiceController extends Controller
     public function downloadInvoice($id){
         $authUser = Auth::user();
 
-        $data = Payment::with('user.user_state', 'user.user_lga', 'service.netFees', 'user.role', 'user.company.company_state', 'user.company.company_lga')->where('id', $id);
+        $data = Payment::with('renewal', 'user.user_state', 'user.user_lga', 'service.netFees', 'user.role', 'user.company.company_state', 'user.company.company_lga')->where('id', $id);
         
         if($authUser->hasRole(['sadmin'])){
             $data = $data->first();
@@ -183,6 +183,7 @@ class InvoiceController extends Controller
                     'status' => $data->status,
                     'service_type' => $data->service_type,
                     'extra_service_id' => $data->extra_service_id,
+                    'is_inspection' => $data->renewal->inspection,
                 ])
                 ->series($data->order_id)
                 ->serialNumberFormat('{SERIES}')
