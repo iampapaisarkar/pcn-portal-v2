@@ -183,7 +183,7 @@ class InvoiceController extends Controller
                     'status' => $data->status,
                     'service_type' => $data->service_type,
                     'extra_service_id' => $data->extra_service_id,
-                    'is_inspection' => $data->renewal->inspection,
+                    'is_inspection' => $data->renewal ? $data->renewal->inspection : null,
                 ])
                 ->series($data->order_id)
                 ->serialNumberFormat('{SERIES}')
