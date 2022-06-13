@@ -140,6 +140,17 @@ class UserSeeder extends Seeder
             'created_at' => now(),
             'updated_at' => now()
             ],
+            [
+            'firstname' => 'Ademola',
+            'lastname' => 'Davies',
+            'phone' => '+919002090020',
+            'email' => 'ademoladavies@avantview.com',
+            'email_verified_at' => now(),
+            'state' => null,
+            'password' => Hash::make('Testing_123456'),
+            'created_at' => now(),
+            'updated_at' => now()
+            ],
         ];
 
         User::insert($users);
